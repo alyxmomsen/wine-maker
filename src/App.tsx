@@ -1,35 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Application } from './classes/class.app'
+import Entity from './components/entity'
+import Room from './components/entity.room'
+
+console.log('app startded')
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [myapp, setMyApp] = useState(new Application())
+    const [roomTitle, setRoomTitle] = useState<string>('')
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(() => {})
+
+    return (
+        <>
+            {myapp.getEntities().map((entity) => {
+                return (
+                    <Entity
+                        fn={(cb: (value: number) => void) =>
+                            entity.onHealthUpdate(cb)
+                        }
+                    />
+                )
+            })}
+
+            <Room
+                fn={(cb: (value: string) => void) => {
+                    myapp.getRooms().forEach((room) => room.onAttack(cb))
+                }}
+            />
+            <button onClick={() => myapp.start()}>start</button>
+            <button onClick={() => myapp.stop()}>stop</button>
+        </>
+    )
 }
 
 export default App
