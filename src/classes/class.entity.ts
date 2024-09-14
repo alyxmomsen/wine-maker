@@ -15,7 +15,7 @@ abstract class Entity implements IEntiy {
 
     hooksExecutor(value: number) {
         this.hooks.forEach((hook) => {
-            console.log('health: ', this.health, value)
+            // console.log('health: ', this.health, value)
             hook(this.health)
         })
     }
@@ -27,7 +27,7 @@ abstract class Entity implements IEntiy {
 
 export class Player extends Entity {
     applyDamage(value: number): number {
-        console.log('apply damage' , value , this.health);
+        // console.log('apply damage' , value , this.health);
         this.health -= value
         this.hooksExecutor(this.health)
         return this.health

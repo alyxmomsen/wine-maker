@@ -5,7 +5,7 @@ const Entity = ({ fn }: { fn: (cb: (value: number) => void) => void }) => {
     useMemo(() => fn((value: number) => setHealth(value)), [fn])
 
     useEffect(() => {
-        console.log('set health')
+        // console.log('set health')
     }, [health])
 
     useEffect(() => {

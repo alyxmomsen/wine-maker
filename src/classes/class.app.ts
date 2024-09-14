@@ -1,4 +1,5 @@
 import { Enemy, IEntiy, Player } from './class.entity'
+import { FiguresManager, linkedList } from './class.figure'
 import { IRoom, RoomHell, RoomNuclear, RoomToxic } from './class.room'
 
 export class TickMachine {
@@ -29,6 +30,8 @@ export class Application {
     private entities: IEntiy[]
     private rooms: IRoom[]
 
+    private figuresManager: FiguresManager;
+
     getReqAnimFrId() {
         return this.requestAnimationFrameId
     }
@@ -40,8 +43,10 @@ export class Application {
                 entities[Math.floor(Math.random() * entities.length)]
             )
 
-            console.log('tick')
+            // console.log('tick')
         }
+
+        this.figuresManager.update();
 
         // console.log('run' /* , this.requestAnimationFrameId */);
         this.requestAnimationFrameId = requestAnimationFrame(() =>
@@ -56,9 +61,7 @@ export class Application {
     start() {
         console.log('getting started')
         window.cancelAnimationFrame(this.requestAnimationFrameId)
-        this.requestAnimationFrameId = window.requestAnimationFrame(() =>
-            this.update()
-        )
+        this.update();
     }
 
     getEntities() {
@@ -74,6 +77,11 @@ export class Application {
         this.entities = [new Enemy()]
         this.player = new Player()
         this.rooms = [new RoomHell(), new RoomNuclear(), new RoomToxic()]
-        this.tickMachine = new TickMachine(666)
+        this.tickMachine = new TickMachine(999);
+
+
+        this.figuresManager = new FiguresManager(linkedList);
+
+        // this.figuresList.
     }
 }
