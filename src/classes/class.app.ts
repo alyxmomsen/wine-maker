@@ -42,8 +42,6 @@ export class Application {
             this.rooms[Math.floor(Math.random() * this.rooms.length)].execute(
                 entities[Math.floor(Math.random() * entities.length)]
             )
-
-            // console.log('tick')
         }
 
         this.figuresManager.update();

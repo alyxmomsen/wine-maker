@@ -1,4 +1,7 @@
 
+const docs = require('@googleapis/docs');
+
+console.log(docs);
 
 export interface IAdapter {
     
