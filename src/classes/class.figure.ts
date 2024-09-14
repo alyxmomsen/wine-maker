@@ -1,5 +1,5 @@
 interface IEntityFigure {
-    
+
     setLink(elem: IEntityFigure|null): void;
     getLink(): IEntityFigure | null;
     addElem(elem: IEntityFigure): void;
@@ -12,7 +12,6 @@ interface ILinkedEntity {
 
     next(): ILinkedEntity|null;
     getElem(): IEntityFigure;
-
 }
 
 export interface ILinkedList {

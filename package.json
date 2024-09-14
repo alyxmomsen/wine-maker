@@ -10,6 +10,8 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@googleapis/docs": "^3.3.0",
+        "googleapis": "^144.0.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
