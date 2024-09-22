@@ -30,9 +30,9 @@ export class Application {
     private entities: IEntiy[]
     private rooms: IRoom[]
 
-    private figuresManager: FiguresManager;
+    private figuresManager: FiguresManager
 
-    getReqAnimFrId() {
+    getReqAnimFrameId() {
         return this.requestAnimationFrameId
     }
 
@@ -44,7 +44,7 @@ export class Application {
             )
         }
 
-        this.figuresManager.update();
+        this.figuresManager.update()
 
         // console.log('run' /* , this.requestAnimationFrameId */);
         this.requestAnimationFrameId = requestAnimationFrame(() =>
@@ -59,7 +59,7 @@ export class Application {
     start() {
         console.log('getting started')
         window.cancelAnimationFrame(this.requestAnimationFrameId)
-        this.update();
+        this.update()
     }
 
     getEntities() {
@@ -72,14 +72,11 @@ export class Application {
 
     constructor() {
         this.requestAnimationFrameId = 0
-        this.entities = [new Enemy()]
+        this.entities = [new Enemy(), new Enemy(), new Enemy()]
         this.player = new Player()
         this.rooms = [new RoomHell(), new RoomNuclear(), new RoomToxic()]
-        this.tickMachine = new TickMachine(999);
+        this.tickMachine = new TickMachine(999)
 
-
-        this.figuresManager = new FiguresManager(linkedList);
-
-        // this.figuresList.
+        this.figuresManager = new FiguresManager(linkedList)
     }
 }

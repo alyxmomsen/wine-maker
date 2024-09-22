@@ -1,17 +1,9 @@
 import React, { useEffect } from 'react'
 
 const EntityFigure = () => {
+    useEffect(() => {}, [])
 
-    
-
-
-    useEffect(() => {
-
-    }, []);
-    
-  return (
-    <div>EntityFigure</div>
-  )
+    return <div>EntityFigure</div>
 }
 
 export default EntityFigure

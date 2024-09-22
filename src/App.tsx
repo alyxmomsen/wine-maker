@@ -5,6 +5,7 @@ import './App.css'
 import { Application } from './classes/class.app'
 import Entity from './components/entity'
 import Room from './components/entity.room'
+import MainWrapper from './components/wrappers/mainWrapper'
 
 console.log('app startded')
 
@@ -16,6 +17,9 @@ function App() {
 
     return (
         <>
+            <MainWrapper foo={() => {}}>
+                <div>hello world</div>
+            </MainWrapper>
             {myapp.getEntities().map((entity) => {
                 return (
                     <Entity
