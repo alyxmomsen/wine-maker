@@ -10,8 +10,8 @@ import MainWrapper from './components/wrappers/mainWrapper'
 console.log('app startded')
 
 function App() {
-    const [myapp, setMyApp] = useState(new Application())
-    const [roomTitle, setRoomTitle] = useState<string>('')
+    const [myapp, setMyApp] = useState(new Application());
+    const [roomTitle, setRoomTitle] = useState<string>('');
 
     useEffect(() => {})
 
