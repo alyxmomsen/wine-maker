@@ -1,21 +1,24 @@
 export interface IDamage {
-    attack(): number
+    attack(): number;
 }
 
 abstract class Damage implements IDamage {
-    protected value: number
-    abstract attack(): number
+
+    protected value: number ;
+    abstract attack(): number ;
     constructor(value: number) {
-        this.value = value
+        this.value = value;
     }
 }
 
 export class DamageFire extends Damage {
+
     attack(): number {
         return this.value
     }
+
     constructor() {
-        super(1)
+        super(1);
     }
 }
 

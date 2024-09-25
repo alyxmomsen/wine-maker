@@ -1,24 +1,36 @@
 export interface IEntiy {
-    applyDamage(value: number): number
-    onHealthUpdate(cb: (value: number) => void): void
+
+    applyDamage(value: number): number;
+    onHealthUpdate(cb: (value:number) => void): void;
+    getHealth(): number;
 }
 
 abstract class Entity implements IEntiy {
+
     protected health: number
+    protected hooks: ((value: number) => void)[];
 
-    protected hooks: ((value: number) => void)[]
-
-    abstract applyDamage(value: number): number
-    onHealthUpdate(cb: (value: number) => void): void {
-        this.hooks.push((value: number) => cb(value))
+    getHealth() {
+        return this.health ;
     }
 
-    hooksExecutor(value: number) {
+    protected update() {
+        this.hooksExecutor();
+    }
+
+    abstract applyDamage(value: number): number;
+
+    onHealthUpdate(cb:(value:number) => void): void {
+        this.hooks.push(cb);
+    }
+
+    hooksExecutor() {
         this.hooks.forEach((hook) => {
             // console.log('health: ', this.health, value)
-            hook(this.health)
+            hook(this.health);
         })
     }
+
     constructor(health: number) {
         this.health = health
         this.hooks = []
@@ -28,8 +40,9 @@ abstract class Entity implements IEntiy {
 export class Player extends Entity {
     applyDamage(value: number): number {
         // console.log('apply damage' , value , this.health);
+        console.log('got damage');
         this.health -= value
-        this.hooksExecutor(this.health)
+        this.hooksExecutor();
         return this.health
     }
 
@@ -40,8 +53,8 @@ export class Player extends Entity {
 
 export class Enemy extends Entity {
     applyDamage(value: number): number {
-        this.health -= value
-        this.hooksExecutor(this.health)
+        this.health -= value;
+        this.hooksExecutor();
         return this.health
     }
 

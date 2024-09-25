@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,37 +6,22 @@ import { Application } from './classes/class.app'
 import Entity from './components/entity'
 import Room from './components/entity.room'
 import MainWrapper from './components/wrappers/mainWrapper'
+import GamePage from './pages/game'
 
 console.log('app startded')
 
-function App() {
-    const [myapp, setMyApp] = useState(new Application());
-    const [roomTitle, setRoomTitle] = useState<string>('');
+const myapp = new Application();
+export const MainContext = createContext<{ application: Application, updated: number , dispatcher:React.Dispatch<React.SetStateAction<number>>|null }>({application:myapp , updated:0 , dispatcher:null})
 
+function App() {
+    const [state , setState] = useState(0);
     useEffect(() => {})
 
     return (
         <>
-            <MainWrapper foo={() => {}}>
-                <div>hello world</div>
-            </MainWrapper>
-            {myapp.getEntities().map((entity) => {
-                return (
-                    <Entity
-                        fn={(cb: (value: number) => void) =>
-                            entity.onHealthUpdate(cb)
-                        }
-                    />
-                )
-            })}
-
-            <Room
-                fn={(cb: (value: string) => void) => {
-                    myapp.getRooms().forEach((room) => room.onAttack(cb))
-                }}
-            />
-            <button onClick={() => myapp.start()}>start</button>
-            <button onClick={() => myapp.stop()}>stop</button>
+            <MainContext.Provider value={{application:myapp , updated:state , dispatcher:setState}}>
+                <GamePage />
+            </MainContext.Provider>
         </>
     )
 }
