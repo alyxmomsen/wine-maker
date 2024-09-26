@@ -1,21 +1,32 @@
-import { createContext, useEffect, useMemo, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Application } from './classes/class.app'
-import Entity from './components/entity'
-import Room from './components/entity.room'
-import MainWrapper from './components/wrappers/mainWrapper'
-import GamePage from './pages/game'
+import { createContext, useEffect, useState } from 'react'
 
-console.log('app startded')
+import './App.css'
+
+import GamePage from './pages/game'
+import { Application } from './classes/Application.class'
 
 const myapp = new Application();
+
 export const MainContext = createContext<{ application: Application, updated: number , dispatcher:React.Dispatch<React.SetStateAction<number>>|null }>({application:myapp , updated:0 , dispatcher:null})
 
+let reqAnimFrameId = 0;
+
 function App() {
+
+    console.log('make app');
     const [state , setState] = useState(0);
-    useEffect(() => {})
+    useEffect(() => {
+
+        window.cancelAnimationFrame(reqAnimFrameId);
+
+        const update = () => {
+            myapp.update();
+            reqAnimFrameId = window.requestAnimationFrame(update);
+        }
+
+        update();
+
+    } ,[])
 
     return (
         <>
@@ -27,3 +38,5 @@ function App() {
 }
 
 export default App
+
+

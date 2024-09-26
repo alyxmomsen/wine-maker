@@ -1,33 +1,38 @@
-import React, { useContext } from 'react'
-import MainWrapper from '../components/wrappers/mainWrapper'
+import React, { useContext, useState } from 'react'
 import { MainContext } from '../App'
-import Entity from '../components/entity'
-import Room from '../components/entity.room'
 
 const GamePage = () => {
 
-    const ctx = useContext(MainContext)
+    const ctx = useContext(MainContext);
+
+    ctx.dispatcher;
+
+    const [countries , setCountries] = useState(ctx.application.getRegions());
+    const [regions , setRegions] = useState(ctx.application.getRegions());
+    const [appellations, setAppellations] = useState(ctx.application.getRegions());
+    const [player , setPlayer] = useState(ctx.application.getPlayer());
 
     return (
         <div>
-            <MainWrapper foo={() => {}}>
-                <div>hello world</div>
-            </MainWrapper>
+            <h2>globals:</h2>
+            <h3>countries:</h3>
             {
-                ctx.application.getEntities().map((entity) => {
-                    entity.onHealthUpdate((value:number) => ctx.dispatcher?.(current => current++));
-                    return (
-                        <Entity value={entity.getHealth()} />
-                    )
-                  })
+            countries.map((country , i) => <li key={i}>{country.getName()}</li>)
             }
-            <Room
-                fn={(cb: (value: string) => void) => {
-                    ctx.application.getRooms().forEach((room) => room.onAttack(cb))
-                }}
-            />
-            <button onClick={() => ctx.application.start()}>start</button>
-            <button onClick={() => ctx.application.stop()}>stop</button>
+            <h3>regions:</h3>
+            {
+                regions.map((region,  i) => <li key={i}>{region.getName()}</li>)
+            }
+            <h3>appellations:</h3>
+            {
+                appellations.map((appellation , i) => <li key={i}>{appellation.getName()}</li>)
+            }
+            <h2>player:</h2>
+            {
+                player.getGrapes().map(grape => <li><span>{grape.name}</span><span>{/* grape.location.getName() */}</span></li>)
+            }
+            <button onClick={() => null}>start</button>
+            <button onClick={() => null}>stop</button>
         </div>
     )
 }
