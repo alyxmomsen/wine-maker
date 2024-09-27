@@ -1,5 +1,4 @@
 import { Grape } from "./Grape.class";
-import { GarganegaGrape } from "./Grape.spicific.class";
 import { Appellation, Country, Location, Region } from "./Location.class";
 
 // Singletone

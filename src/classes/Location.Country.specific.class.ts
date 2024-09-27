@@ -55,3 +55,36 @@ export class ItalyCountry extends Country {
         super('Italy');
     }
 }
+
+// Singletone
+export class PortugalCountry extends Country {
+
+    private static instance: PortugalCountry | null = null;
+
+    getAppelation(): Appellation|null {
+        return null;
+    }
+
+    getCountry(): Country|null {
+        return this;
+    }
+
+    getRegion(): Region|null {
+        return null;
+    }
+
+    static Instance(): PortugalCountry {
+        if (PortugalCountry.instance == null) {
+            PortugalCountry.instance = new PortugalCountry();
+            return PortugalCountry.instance;
+        }
+        else {
+            return PortugalCountry.instance;
+        }
+
+    }
+
+    private constructor() {
+        super('Portugal');
+    }
+}

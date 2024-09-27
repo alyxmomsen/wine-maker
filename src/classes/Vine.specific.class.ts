@@ -1,5 +1,6 @@
+import { Grape } from "./Grape.class";
 import { GarganegaGrape } from "./Grape.spicific.class";
-import { VenettoRegion } from "./Location.specific.class";
+import { MinhoRegion, VenettoRegion } from "./Location.specific.class";
 import { Vine } from "./Vine.class";
 
 export interface IGrapeSingletone {
@@ -37,3 +38,20 @@ export class Muscadet extends Vine implements IGrapeSingletone {
         super("Soave");
     }
 }
+
+export class VinhoVerdeVine extends Vine implements IGrapeSingletone {
+
+    static Instance(venetto: VenettoRegion | null, grape:Grape|null) {
+        if (MinhoRegion && grape) {
+            return new VinhoVerdeVine();
+        }
+        else {
+            return null;
+        }
+    }
+
+    private constructor() {
+        super("Vinho Verde");
+    }
+}
+

@@ -1,5 +1,5 @@
 import { Country, Region } from "./Location.class";
-import { FranceCountry, ItalyCountry } from "./Location.Country.specific.class";
+import { FranceCountry, ItalyCountry, PortugalCountry } from "./Location.Country.specific.class";
 
 // Singletone
 export class VenettoRegion extends Region {
@@ -38,5 +38,26 @@ export class LoireValleyRegion extends Region {
 
     private constructor(france:FranceCountry) {
         super(france, "Loire Valley");
+    }
+}
+
+// Vinho Verde
+// Singletone
+export class MinhoRegion extends Region {
+
+    static instance: MinhoRegion | null = null;
+    static Instance(portugal:PortugalCountry): MinhoRegion {
+    
+        if (MinhoRegion.instance === null) {
+            MinhoRegion.instance = new MinhoRegion(portugal);
+            return MinhoRegion.instance;
+        }
+        else {
+            return MinhoRegion.instance;
+        }
+    }
+
+    private constructor(portugal:PortugalCountry) {
+        super(portugal, "Minho");
     }
 }

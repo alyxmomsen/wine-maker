@@ -57,13 +57,16 @@ export class Region extends Location implements IRegion {
 
     getRegion(): Region | null {
         return this;
-    };
+    }
+
     getCountry(): Country | null {
         return this.country.getCountry();
-    };
+    }
+
     getName(): string {
         return this.name;
     }
+
     constructor(country:Country , name:string){
         super(name);
         this.country = country;

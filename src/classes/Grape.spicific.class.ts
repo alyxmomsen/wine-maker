@@ -1,5 +1,5 @@
 import { Grape } from "./Grape.class";
-import { Location } from "./Location.class";
+import { ILocaction, Location } from "./Location.class";
 
 export class GarganegaGrape extends Grape {
     constructor(location:Location) {
@@ -7,17 +7,17 @@ export class GarganegaGrape extends Grape {
     }
 }
 
-// class GarganegaGrape extends Grape {
-//     constructor() {
-//         super('Garganega');
-//     }
-// }
+class Arinto extends Grape {
+    constructor(location:ILocaction) {
+        super('Garganega' , location);
+    }
+}
 
-// class GarganegaGrape extends Grape {
-//     constructor() {
-//         super('Garganega');
-//     }
-// }
+class Alvarinho extends Grape {
+    constructor(location:Location) {
+        super('Garganega' , location);
+    }
+}
 
 // class GarganegaGrape extends Grape {
 //     constructor() {
