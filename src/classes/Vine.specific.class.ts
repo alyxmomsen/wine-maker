@@ -1,57 +1,54 @@
-import { Grape } from "./Grape.class";
-import { GarganegaGrape } from "./Grape.spicific.class";
-import { MinhoRegion, VenettoRegion } from "./Location.specific.class";
-import { Vine } from "./Vine.class";
+import { Grape } from './Grape.class'
+import { GarganegaGrape } from './Grape.spicific.class'
+import { MinhoRegion, VenettoRegion } from './Location.specific.class'
+import { Vine } from './Vine.class'
 
-export interface IGrapeSingletone {
-
-}
+export interface IGrapeSingletone {}
 
 export class Soave extends Vine implements IGrapeSingletone {
-
-    static Instance(venetto: VenettoRegion | null, garganega:GarganegaGrape|null) {
+    static Instance(
+        venetto: VenettoRegion | null,
+        garganega: GarganegaGrape | null
+    ) {
         if (venetto && garganega) {
-            return new Soave();
-        }
-        else {
-            return null;
+            return new Soave()
+        } else {
+            return null
         }
     }
 
     private constructor() {
-        super("Soave");
+        super('Soave')
     }
 }
 
 export class Muscadet extends Vine implements IGrapeSingletone {
-
-    static Instance(venetto: VenettoRegion | null, garganega:GarganegaGrape|null) {
+    static Instance(
+        venetto: VenettoRegion | null,
+        garganega: GarganegaGrape | null
+    ) {
         if (venetto && garganega) {
-            return new Muscadet();
-        }
-        else {
-            return null;
+            return new Muscadet()
+        } else {
+            return null
         }
     }
 
     private constructor() {
-        super("Soave");
+        super('Soave')
     }
 }
 
 export class VinhoVerdeVine extends Vine implements IGrapeSingletone {
-
-    static Instance(venetto: VenettoRegion | null, grape:Grape|null) {
+    static Instance(venetto: VenettoRegion | null, grape: Grape | null) {
         if (MinhoRegion && grape) {
-            return new VinhoVerdeVine();
-        }
-        else {
-            return null;
+            return new VinhoVerdeVine()
+        } else {
+            return null
         }
     }
 
     private constructor() {
-        super("Vinho Verde");
+        super('Vinho Verde')
     }
 }
-

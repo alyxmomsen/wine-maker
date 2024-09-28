@@ -1,22 +1,15 @@
-
-export interface IVine {
-
-}
+export interface IVine {}
 
 // export interface IVineSingletone extends IVine {
 
 // }
 
 export class Vine implements IVine {
+    name: string
 
-    name: string;
+    make() {}
 
-    make() {
-        
-    }
-
-    constructor(name:string) {
-        this.name = name; 
+    constructor(name: string) {
+        this.name = name
     }
 }
-

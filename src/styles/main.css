@@ -1,11 +1,15 @@
+.btn {
+    padding: 9px;
+    width: max-content;
+    height: max-content;
+}
 
 li {
     list-style: none;
 }
 
-
 .wrapper {
-    padding:9px ;
+    padding: 9px;
     border: 1px solid white;
 }
 
@@ -27,8 +31,6 @@ li {
 
 /*  */
 
-
-
-.list-style--none  {
+.list-style--none {
     list-style: none;
 }

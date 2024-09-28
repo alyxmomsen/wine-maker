@@ -1,193 +1,204 @@
-import { IGrape } from "./Grape.class";
-import { GarganegaGrape } from "./Grape.spicific.class";
-import { MuscadetAppelation } from "./Location.Appelation.Specific.class";
-import { Country, IAppelation, ILocaction, IRegion } from "./Location.class";
-import {FranceCountry, ItalyCountry } from "./Location.Country.specific.class";
-import { LoireValleyRegion, VenettoRegion } from "./Location.specific.class";
-import { Player } from "./Player.class";
+import { Grape } from './Grape.class'
+import { Alvarinho, Arinto, GarganegaGrape } from './Grape.spicific.class'
+import { MuscadetAppelation } from './Location.Appelation.Specific.class'
+import { Country, IAppelation, ILocaction, IRegion } from './Location.class'
+import {
+    FranceCountry,
+    ItalyCountry,
+    PortugalCountry,
+} from './Location.Country.specific.class'
+import { LoireValleyRegion, MinhoRegion, VenettoRegion } from './Location.specific.class'
+import { Player } from './Player.class'
 
-export interface IAmount  {
-    getAmount(): number;
-    setAmount(value:number): number;
+export interface IAmount {
+    getAmount(): number
+    setAmount(value: number): number
 }
 
 export interface IPrice {
-    getPrice(): number;
-    setPrice(value:number): number;
+    getPrice(): number
+    setPrice(value: number): number
 }
 
 export class Application {
+    private grapes: Grape[]
+    private countries: ILocaction[]
+    private regions: IRegion[]
+    private appellations: IAppelation[]
 
-    private grapes: IGrape[];
-    private countries: ILocaction[];
-    private regions: IRegion[];
-    private appellations: IAppelation[];
-
-    private player: Player;
-
-    private timing: Timing;
-    private variativity: Variativity;
+    private player: Player
+    private timing: Timing
+    private variativity: Variativity
 
     update() {
+        /* test */
 
-        
-        
-        if (this.variativity.gen(50)) {
-            
-            const grape = new GarganegaGrape(new Country('Some Country'), 100, null);
-            this.grapes.push(grape);
+        if (this.variativity.gen(10)) {
+            const grape = new GarganegaGrape(
+                100
+            )
 
-            if (this.variativity.gen(10)) {
-                
-                this.player.addGrapeMediator(grape);
-            }
+            this.grapes.push(grape)
 
+            // if (this.variativity.gen()) {
+            //     this.player.addGrapeMediator(grape)
+            // }
         }
-        
+
+        /* --- */
+
         console.log(
-            "player:" , this.player , "grapes:" , this.grapes , "countries:" ,  this.countries , "regions:", this.regions , "appellations:"   ,this.appellations
-        );
+            'player:',
+            this.player,
+            'grapes:',
+            this.grapes,
+            'countries:',
+            this.countries,
+            'regions:',
+            this.regions,
+            'appellations:',
+            this.appellations
+        )
 
         // if (this.timing.tick()) {
 
-            
         // }
     }
 
-    addRegion() {
-        
-    }
+    addRegion() {}
 
-    addAppellation() {
-
-    }
+    addAppellation() {}
 
     getAppellations() {
-        return this.appellations ;
+        return this.appellations
     }
 
     getCountries() {
-        return this.countries ;
+        return this.countries
     }
 
     getRegions() {
-        return this.regions ;
+        return this.regions
     }
 
-    getGrapes() {
-        return this.grapes;
+    getGrapes(): Grape[] {
+        return this.grapes
     }
 
     getPlayer() {
-        return this.player;
+        return this.player
     }
-    
+
     constructor() {
+        this.timing = new Timing(1000)
+        this.variativity = new Variativity(100)
+        this.variativity.setVariativity(50)
 
-        this.timing = new Timing(1000);
-        this.variativity = new Variativity(100);
-        this.variativity.setVariativity(50);
-
-        this.player = Player.Instance();
+        this.player = Player.Instance()
         this.countries = [
-            FranceCountry.Instance() ,
-            ItalyCountry.Instance() ,
-        ];
-        this.regions = [];
-        this.appellations = [];
-        this.grapes = [];
-
+            FranceCountry.Instance(),
+            ItalyCountry.Instance(),
+            PortugalCountry.Instance(),
+        ]
+        this.regions = []
+        this.appellations = []
+        this.grapes = []
+        
         for (const country of this.countries) {
             if (country instanceof ItalyCountry) {
-                this.regions.push(VenettoRegion.Instance(country));
-            }
-            else if(country instanceof FranceCountry) {
-                this.regions.push(LoireValleyRegion.Instance(country));
+                this.regions.push(VenettoRegion.Instance(country))
+            } else if (country instanceof FranceCountry) {
+                this.regions.push(LoireValleyRegion.Instance(country))
+            } else if (country instanceof MinhoRegion) {
+                this.regions.push(MinhoRegion.Instance(country))
             }
         }
 
         for (const region of this.regions) {
             if (region instanceof VenettoRegion) {
-                this.appellations.push(MuscadetAppelation.Instance(region));
-            }
-            else if(region instanceof LoireValleyRegion) {
-                
+                this.appellations.push(MuscadetAppelation.Instance(region))
+            } else if (region instanceof LoireValleyRegion) {
             }
         }
-        
+
+        //  adding Arinto
+        for (const country of this.countries) {
+            if (country instanceof PortugalCountry) {
+                const arintoGrape = new Arinto(100);
+                // const portugalProxy = country.makeCountryProxy();
+                const countryBierer = country.makeCountryProxy(arintoGrape);
+                
+                const alvarinhoGrape = new Alvarinho(100);
+                this.grapes.push(arintoGrape);
+                this.grapes.push(alvarinhoGrape);
+                break;
+            }
+        }
+
+
+        //
+
     }
 }
 
-
 class Variativity {
-
-    variativity: number;
+    variativity: number
 
     setVariativity(value: number) {
-
         if (value > 100) {
-            this.variativity = 100;
-        }
-        else if (value < 0) {
-            this.variativity = 0;
-        }
-        else {
-            this.variativity = value;
+            this.variativity = 100
+        } else if (value < 0) {
+            this.variativity = 0
+        } else {
+            this.variativity = value
         }
     }
 
-    gen(variate:number|undefined = undefined) {
-        
-        const b = this.variativity;
-        
+    gen(variate: number | undefined = undefined) {
+        const b = this.variativity
+
         if (variate !== undefined) {
-            this.variativity = variate;
+            this.variativity = variate
         }
-        const rowValue = Math.random() * 100 ;
-        const value = Math.floor(rowValue) ;
-        console.log("row value: " + rowValue  + " floored value: " + value);
+        const rowValue = Math.random() * 100
+        const value = Math.floor(rowValue)
+        console.log('row value: ' + rowValue + ' floored value: ' + value)
         if (value >= 0 && value <= this.variativity) {
-            return true;
+            return true
         }
 
-        this.variativity = b;
-    
-        return false;
+        this.variativity = b
+
+        return false
     }
 
     constructor(variativity: number) {
-        
         if (variativity > 100) {
-            this.variativity = 100;
-        }
-        else if (variativity < 0) {
-            this.variativity = 0;
-        }
-        else {
-            this.variativity = variativity;
+            this.variativity = 100
+        } else if (variativity < 0) {
+            this.variativity = 0
+        } else {
+            this.variativity = variativity
         }
     }
 }
 
 class Timing {
-
-    private last: number;
-    private interval: number;
+    private last: number
+    private interval: number
 
     tick() {
-
-        const now = Date.now();
+        const now = Date.now()
         if (now - this.last > this.interval) {
-            this.last = now;
-            return true;
-        }
-        else {
-            return false;
+            this.last = now
+            return true
+        } else {
+            return false
         }
     }
 
-    constructor(interval:number) {
-        this.last = 0;
-        this.interval = interval;
+    constructor(interval: number) {
+        this.last = 0
+        this.interval = interval
     }
 }

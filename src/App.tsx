@@ -5,20 +5,26 @@ import './App.css'
 import GamePage from './pages/game'
 import { Application } from './classes/Application.class'
 
-const myapp = new Application();
+const myapp = new Application()
 
-export type TMainContext = { application: Application, updated: number, dispatcher: React.Dispatch<React.SetStateAction<number>> | null };
+export type TMainContext = {
+    application: Application
+    updated: number
+    dispatcher: React.Dispatch<React.SetStateAction<number>> | null
+}
 
-export const MainContext = createContext<TMainContext>({application:myapp , updated:0 , dispatcher:null})
+export const MainContext = createContext<TMainContext>({
+    application: myapp,
+    updated: 0,
+    dispatcher: null,
+})
 
-let reqAnimFrameId = 0;
+let reqAnimFrameId = 0
 
 function App() {
-
-    const [state , setState] = useState(0);
+    const [state, setState] = useState(0)
     useEffect(() => {
-
-        console.log('reactjs updated');
+        console.log('reactjs updated')
         // window.cancelAnimationFrame(reqAnimFrameId);
 
         // const update = () => {
@@ -27,12 +33,17 @@ function App() {
         // }
 
         // update();
-
-    } ,[])
+    }, [])
 
     return (
         <>
-            <MainContext.Provider value={{application:myapp , updated:state , dispatcher:setState}}>
+            <MainContext.Provider
+                value={{
+                    application: myapp,
+                    updated: state,
+                    dispatcher: setState,
+                }}
+            >
                 <GamePage />
             </MainContext.Provider>
         </>
@@ -40,5 +51,3 @@ function App() {
 }
 
 export default App
-
-
