@@ -5,10 +5,9 @@ export interface IVine {}
 // }
 
 export class Vine implements IVine {
-    name: string
 
-    make() {}
-
+    name: string;
+    
     constructor(name: string) {
         this.name = name
     }

@@ -1,7 +1,6 @@
 import { randomId } from '../utils/utils'
-import { IAmount, IPrice } from './Application.class'
 import { Grape } from './Grape.class'
-import { Appellation, Country, Location, Region } from './Location.class'
+import { Appellation, Country, Region } from './Location.class'
 import { GrapeProxy } from './Proxy.class'
 
 // Singletone

@@ -1,5 +1,5 @@
 import { Grape } from './Grape.class'
-import { CountryProxy, IAppellationProxy, ICountryProxy, IRegionProxy, RegionProxy } from './Proxy.class'
+import { AppellationProxy, CountryProxy, IAppellationProxy, ICountryProxy, IRegionProxy, RegionProxy } from './Proxy.class'
 import { Player } from './Player.class'
 import { randomId } from '../utils/utils'
 
@@ -22,7 +22,7 @@ export interface IRegion extends ICountry {
 }
 
 export interface IAppelation extends IRegion {
-    makeAppellationProxy(bearer:Grape): IAppellationProxy | null;
+    makeAppellationProxy(bearer:Grape): AppellationProxy | null;
 }
 
 export abstract class LisenceMediator {
@@ -150,7 +150,7 @@ export class Region extends Location implements IRegion {
 export abstract class Appellation extends Location implements IAppelation {
     region: Region;
 
-    makeAppellationProxy(bearer: Grape): IAppellationProxy | null {
+    makeAppellationProxy(bearer: Grape): AppellationProxy | null {
         return null;
     }
 

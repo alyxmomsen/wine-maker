@@ -1,23 +1,27 @@
 import { Grape } from './Grape.class'
 import { GarganegaGrape } from './Grape.spicific.class'
 import { MinhoRegion, VenettoRegion } from './Location.specific.class'
+import { GrapeProxy, RegionProxy } from './Proxy.class'
 import { Vine } from './Vine.class'
 
 export interface IGrapeSingletone {}
 
 export class Soave extends Vine implements IGrapeSingletone {
+
     static Instance(
-        venetto: VenettoRegion | null,
-        garganega: GarganegaGrape | null
+        grape:Grape,
+        region:RegionProxy,
     ) {
-        if (venetto && garganega) {
+        
+        if (true) {
             return new Soave()
         } else {
-            return null
+            return null;
         }
     }
 
     private constructor() {
+        
         super('Soave')
     }
 }

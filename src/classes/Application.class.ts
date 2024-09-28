@@ -34,11 +34,19 @@ export class Application {
         /* test */
 
         if (this.variativity.gen(10)) {
+
+            if (this.appellations.length) {
+                const grape = new Arinto(100);
+                const appellationBearer = this.appellations[Math.floor(Math.random() * this.appellations.length)].makeAppellationProxy(new Arinto(100));
+                if (appellationBearer) {
+                    grape.setAppellationProxy(appellationBearer);
+                }
+            }
+
+
             const grape = new GarganegaGrape(
                 100
             )
-
-            
 
             this.grapes.push(grape)
 
