@@ -1,0 +1,34 @@
+
+li {
+    list-style: none;
+}
+
+
+.wrapper {
+    padding:9px ;
+    border: 1px solid white;
+}
+
+.flex-box {
+    display: flex;
+}
+
+.gap-9 {
+    gap: 9px;
+}
+
+.flex-dir--col {
+    flex-direction: column;
+}
+
+.flex-dir--r {
+    flex-direction: row;
+}
+
+/*  */
+
+
+
+.list-style--none  {
+    list-style: none;
+}

@@ -1,17 +1,20 @@
-import { IAmount, IPrice } from "./Application.class";
+import { randomId } from "../utils/utils" ;
+import { IAmount, IPrice } from "./Application.class" ;
 import { Grape } from "./Grape.class";
 import { Appellation, Country, Location, Region } from "./Location.class";
+import { GrapeMediator } from "./Mediator.class";
 
 // Singletone
 export class Player {
 
+    private Id: string ;
     private money: number;
 
-    private appellations: Appellation[];
-    private countries: Country[];
-    private regions: Region[];
+    private appellations: Appellation[] ;
+    private countries: Country[] ;
+    private regions: Region[] ;
     /* --- */
-    private grapes: Grape[];
+    private grapeMediators: GrapeMediator[];
 
     addAppellation(newAppellation: Appellation) {
         
@@ -33,13 +36,15 @@ export class Player {
         this.countries.push(country);
     }
 
-    addGrape(grape: Grape) {
-        
-        this.grapes.push(grape);
+    addGrapeMediator(grape: Grape) {
+        const lisence = grape.getLisence();
+        lisence?.setOwner(this);
+        const mediator = grape.createMediator(this);
+        this.grapeMediators.push(mediator);
     }
 
-    getGrapes() {
-        return this.grapes;
+    getGrapeMediators() {
+        return this.grapeMediators;
     }
 
     setMoney(value:number) {
@@ -69,11 +74,12 @@ export class Player {
     private constructor() {
         this.appellations = [] ;
         this.regions = [] ;
-        this.countries = [];
+        this.countries = [] ;
         /* --- */
-        this.grapes = [];
+        this.grapeMediators = [] ;
         /*  */
         this.money = 1_000_000;
+        this.Id = randomId(50);
     }
 }
 

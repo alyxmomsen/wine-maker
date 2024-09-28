@@ -6,8 +6,8 @@ export interface ILocaction {
     getCountry(): Country|null;
     getAppelation(): Appellation|null;
     getRegion(): Region | null;
-    makeLicense(owner:Player|null ,subj:Grape): Lisence;
-    checkLisense(lisence:Lisence ,owner:Player): boolean;
+    makeLicense(owner:Player|null ,subj:Grape): LisenceMediator;
+    checkLisense(lisence:LisenceMediator ,owner:Player): boolean;
 }
 
 export interface ICountry extends ILocaction {
@@ -22,23 +22,32 @@ export interface IAppelation extends IRegion {
 
 }
 
-
-
-export abstract class Lisence  {
+export abstract class LisenceMediator  {
     
-    abstract check(owner:Player): boolean;
+    abstract checkIfOwner(owner:Player): boolean;
+    abstract checkIfEmmiter(emmiter: Location): boolean;
+    abstract setOwner(owner:Player): boolean;
 
     constructor() {}
 }
 
-export class LocationLisence extends Lisence {
+export class LocationPlayerGrapeLisenceMediator extends LisenceMediator {
 
     private location: Location;
     private owner: Player|null;
     private subject: Grape;
 
-    check(owner:Player):boolean {
+    checkIfOwner(owner:Player):boolean {
         return this.owner === owner;
+    }
+
+    checkIfEmmiter(emmiter: Location): boolean {
+        return emmiter === this.location ;
+    }
+
+    setOwner(owner: Player): boolean {
+        this.owner = owner;
+        return true;
     }
 
     constructor(location: Location , owner:Player|null , subj:Grape) {
@@ -50,22 +59,20 @@ export class LocationLisence extends Lisence {
 }
 
 export abstract class Location implements ILocaction {
-    protected lisences: Lisence[];
+    protected lisences: LisenceMediator[];
     protected name: string;
     getName(): string {
         return this.name;
     }
 
-    makeLicense(owner:Player|null ,subj:Grape): Lisence {
-        return new LocationLisence(this , owner , subj );
+    makeLicense(owner:Player|null ,subj:Grape): LisenceMediator {
+        return new LocationPlayerGrapeLisenceMediator(this , owner , subj );
     }
 
-    checkLisense(lisence:Lisence ,owner:Player): boolean {
+    checkLisense(lisence:LisenceMediator ,owner:Player): boolean {
         
-        return lisence.check(owner);
+        return lisence.checkIfOwner(owner);
     }
-
-
 
     abstract getAppelation(): Appellation|null;
     abstract getRegion(): Region|null;
@@ -77,6 +84,7 @@ export abstract class Location implements ILocaction {
 }
 
 export class Country extends Location implements ICountry {
+
     getAppelation(): Appellation | null {
         return null;
     };

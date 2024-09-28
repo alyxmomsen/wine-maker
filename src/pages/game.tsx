@@ -1,29 +1,34 @@
 import React, { useContext, useState } from 'react'
 import { MainContext, TMainContext } from '../App'
 
+import './../styles/main.css';
+
 const GamePage = () => {
 
     const ctx = useContext(MainContext);
 
     const player = ctx.application.getPlayer();
+    const grapes = ctx.application.getGrapes();
 
     return (
-        <div>
+        <div className='wrapper flex-box flex-dir--row'>
             
-            <div>
+            <div  className='wrapper'>
                 user:
                 {
                     player.getMoney()
                 } $
                 {
-                    player.getGrapes().map(grape => <li>{grape.getName()}</li>)
+                    player.getGrapeMediators().map(mediator => <li>{mediator.getGrapeId()}</li>)
                 }
             </div>
-            <div>grapes: </div>
-            <div>countries: </div>
-            <div>regions: </div>
-            <div>appellations: </div>
-            <button onClick={() => upd(ctx)}>update and refresh</button>
+            <div className='wrapper'>grapes: {
+                grapes.map(grape => <li>{grape.getName()}</li>)
+            }</div>
+            <div className='wrapper'>countries: </div>
+            <div className='wrapper'>regions: </div>
+            <div className='wrapper'>appellations: </div>
+            <button className='' onClick={() => upd(ctx)}>update and refresh</button>
         </div>
     )
 }

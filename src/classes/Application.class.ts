@@ -26,15 +26,26 @@ export class Application {
     private player: Player;
 
     private timing: Timing;
+    private variativity: Variativity;
 
     update() {
 
-        const grape = new GarganegaGrape(new Country('Some Country'), 100);
-        this.player.setMoney(this.player.getMoney());
-        this.player.addGrape(grape);
+        
+        
+        if (this.variativity.gen(50)) {
+            
+            const grape = new GarganegaGrape(new Country('Some Country'), 100, null);
+            this.grapes.push(grape);
+
+            if (this.variativity.gen(10)) {
+                
+                this.player.addGrapeMediator(grape);
+            }
+
+        }
         
         console.log(
-            this.player
+            "player:" , this.player , "grapes:" , this.grapes , "countries:" ,  this.countries , "regions:", this.regions , "appellations:"   ,this.appellations
         );
 
         // if (this.timing.tick()) {
@@ -74,6 +85,8 @@ export class Application {
     constructor() {
 
         this.timing = new Timing(1000);
+        this.variativity = new Variativity(100);
+        this.variativity.setVariativity(50);
 
         this.player = Player.Instance();
         this.countries = [
@@ -102,6 +115,57 @@ export class Application {
             }
         }
         
+    }
+}
+
+
+class Variativity {
+
+    variativity: number;
+
+    setVariativity(value: number) {
+
+        if (value > 100) {
+            this.variativity = 100;
+        }
+        else if (value < 0) {
+            this.variativity = 0;
+        }
+        else {
+            this.variativity = value;
+        }
+    }
+
+    gen(variate:number|undefined = undefined) {
+        
+        const b = this.variativity;
+        
+        if (variate !== undefined) {
+            this.variativity = variate;
+        }
+        const rowValue = Math.random() * 100 ;
+        const value = Math.floor(rowValue) ;
+        console.log("row value: " + rowValue  + " floored value: " + value);
+        if (value >= 0 && value <= this.variativity) {
+            return true;
+        }
+
+        this.variativity = b;
+    
+        return false;
+    }
+
+    constructor(variativity: number) {
+        
+        if (variativity > 100) {
+            this.variativity = 100;
+        }
+        else if (variativity < 0) {
+            this.variativity = 0;
+        }
+        else {
+            this.variativity = variativity;
+        }
     }
 }
 
