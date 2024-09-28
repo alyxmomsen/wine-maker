@@ -30,7 +30,7 @@ export interface IAppellationProxy {
 
 export class GrapeProxy implements IGrapeProxy {
     private grape: Grape
-    private bierer: Player
+    private bearer: Player
 
     getGrapeName() {
         return this.grape.getName()
@@ -43,7 +43,7 @@ export class GrapeProxy implements IGrapeProxy {
     }
 
     checkOwner(player:Player):boolean {
-        if (this.bierer === player) {
+        if (this.bearer === player) {
             return true;
         }
         return false;
@@ -51,16 +51,16 @@ export class GrapeProxy implements IGrapeProxy {
 
     constructor(user: Player, grape: Grape) {
         this.grape = grape
-        this.bierer = user
+        this.bearer = user
     }
 }
 
 export class CountryProxy implements ICountryProxy {
     private country: Country;
-    private bierer: Grape;  
+    private bearer: Grape;  
 
     getCountryId(): string {
-        return "";
+        return this.country.getId();
     }
 
     getCountryName(): string {
@@ -72,18 +72,18 @@ export class CountryProxy implements ICountryProxy {
         return this.country===country;
     }
 
-    constructor(country:Country, bierer:Grape) {
+    constructor(country:Country, bearer:Grape) {
         this.country = country ;
-        this.bierer = bierer ;
+        this.bearer = bearer ;
     }
 }
 
 export class RegionProxy implements IRegionProxy {
     private region: Region;
-    private bierer: Grape;  
+    private bearer: Grape;  
 
     getRegionId(): string {
-        return "";
+        return this.region.getId();
     }
 
     getRegionName(): string {
@@ -94,30 +94,30 @@ export class RegionProxy implements IRegionProxy {
         return this.region === region;
     }
 
-    constructor(region:Region, bierer:Grape) {
+    constructor(region:Region, bearer:Grape) {
         this.region = region ;
-        this.bierer = bierer ;
+        this.bearer = bearer ;
     }
 }
 
 export class AppellationProxy implements IAppellationProxy {
     private appellation: Appellation;
-    private bierer: Grape;  
+    private bearer: Grape;  
 
     checkAppellation(appellation: Appellation): boolean {
         return appellation === this.appellation;
     }
 
     getAppellationId(): string {
-        return "";
+        return this.appellation.getId();
     }
 
     getAppellationName(): string {
         return this.appellation.getName();
     }
 
-    constructor(appellation:Appellation, bierer:Grape) {
+    constructor(appellation:Appellation, bearer:Grape) {
         this.appellation = appellation ;
-        this.bierer = bierer ;
+        this.bearer = bearer ;
     }
 }

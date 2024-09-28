@@ -13,7 +13,7 @@ export class Player {
     private countries: Country[]
     private regions: Region[]
     /* --- */
-    private grapeBierers: GrapeProxy[]
+    private grapeBearers: GrapeProxy[]
 
     addAppellation(newAppellation: Appellation) {
         for (const appellation of this.appellations) {
@@ -34,13 +34,13 @@ export class Player {
     }
 
     addGrapeMediator(grape: Grape) {
-        
-        const grapeBierer = grape.createProxy(this);
-        this.grapeBierers.push(grapeBierer)
+
+        const grapeBearer = grape.createProxy(this);
+        this.grapeBearers.push(grapeBearer)
     }
 
-    getGrapeMediators() {
-        return this.grapeBierers
+    getGrapeBearers() {
+        return this.grapeBearers
     }
 
     setMoney(value: number) {
@@ -67,7 +67,7 @@ export class Player {
         this.regions = []
         this.countries = []
         /* --- */
-        this.grapeBierers = []
+        this.grapeBearers = []
         /*  */
         this.money = 1_000_000
         this.Id = randomId(50)

@@ -1,6 +1,7 @@
 import { Grape } from './Grape.class'
 import { CountryProxy, IAppellationProxy, ICountryProxy, IRegionProxy, RegionProxy } from './Proxy.class'
 import { Player } from './Player.class'
+import { randomId } from '../utils/utils'
 
 export interface ILocaction {
     getName(): string
@@ -9,18 +10,19 @@ export interface ILocaction {
     getRegion(): Region | null
     makeLicense(owner: Player | null, subj: Grape): LisenceMediator
     checkLisense(lisence: LisenceMediator, owner: Player): boolean
+    getId(): string;
 }
 
 export interface ICountry extends ILocaction {
-    makeCountryProxy(bierer:Grape): ICountryProxy|null;
+    makeCountryProxy(bearer:Grape): ICountryProxy|null;
 }
 
 export interface IRegion extends ICountry {
-    makeRegionProxy(bierer: Grape): IRegionProxy | null;
+    makeRegionProxy(bearer: Grape): IRegionProxy | null;
 }
 
 export interface IAppelation extends IRegion {
-    makeAppellationProxy(bierer:Grape): IAppellationProxy | null;
+    makeAppellationProxy(bearer:Grape): IAppellationProxy | null;
 }
 
 export abstract class LisenceMediator {
@@ -60,6 +62,12 @@ export class LocationPlayerGrapeLisenceMediator extends LisenceMediator {
 export abstract class Location implements ILocaction {
     protected lisences: LisenceMediator[]
     protected name: string
+    protected Id: string;
+
+    getId(): string {
+        return this.Id;
+    }
+
     getName(): string {
         return this.name
     }
@@ -78,13 +86,14 @@ export abstract class Location implements ILocaction {
     constructor(name: string) {
         this.name = name
         this.lisences = []
+        this.Id = randomId(50);
     }
 }
 
 export class Country extends Location implements ICountry {
 
-    makeCountryProxy(bierer:Grape): ICountryProxy|null {
-        return new CountryProxy(this , bierer);
+    makeCountryProxy(bearer:Grape): CountryProxy {
+        return new CountryProxy(this , bearer);
     }
 
     getAppelation(): Appellation | null {
@@ -107,11 +116,11 @@ export class Country extends Location implements ICountry {
 
 export class Region extends Location implements IRegion {
 
-    makeRegionProxy(bierer: Grape): IRegionProxy | null {
-        return new RegionProxy(this ,bierer);
+    makeRegionProxy(bearer: Grape): IRegionProxy | null {
+        return new RegionProxy(this ,bearer);
     }
 
-    makeCountryProxy(bierer: Grape): ICountryProxy|null {
+    makeCountryProxy(bearer: Grape): ICountryProxy|null {
         return null;
     }
 
@@ -141,15 +150,15 @@ export class Region extends Location implements IRegion {
 export abstract class Appellation extends Location implements IAppelation {
     region: Region;
 
-    makeAppellationProxy(bierer: Grape): IAppellationProxy | null {
+    makeAppellationProxy(bearer: Grape): IAppellationProxy | null {
         return null;
     }
 
-    makeRegionProxy(bierer: Grape): IRegionProxy | null {
+    makeRegionProxy(bearer: Grape): IRegionProxy | null {
         return null;
     }
 
-    makeCountryProxy(bierer: Grape): ICountryProxy | null {
+    makeCountryProxy(bearer: Grape): ICountryProxy | null {
         return null;
     }
 

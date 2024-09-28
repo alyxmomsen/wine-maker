@@ -17,9 +17,9 @@ const GamePage = () => {
             <div className="wrapper flex-box flex-dir--col gap-9">
                 user:
                 {player.getMoney()} $
-                {player.getGrapeMediators().map((mediator) => (
+                {player.getGrapeBearers().map((mediator) => (
                     <div>
-                        <li className="wrapper">{mediator.getGrapeId()}</li>
+                        <li className="wrapper">{mediator.getGrapeName()}</li>
                         <button>hello</button>
                     </div>
                 ))}

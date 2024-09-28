@@ -11,7 +11,10 @@ export interface IGrape {
     getOriginId(): string;
     checkCountry(country:Country): boolean;
     checkRegion(region:Region): boolean;
-    checkAppellation(appellation:Appellation): boolean;
+    checkAppellation(appellation: Appellation): boolean;
+    setCountryProxy(proxy:CountryProxy): boolean;
+    setRegionProxy(proxy:RegionProxy): boolean;
+    setAppellationProxy(proxy:AppellationProxy): boolean;
 }
 
 export class Grape implements IGrape, IAmount {
@@ -19,31 +22,46 @@ export class Grape implements IGrape, IAmount {
     private id: string
     private name: string
     private amount: number
-    private countryBierer: CountryProxy | null;
-    private regionBierer: RegionProxy | null;
-    private appellationBierer: AppellationProxy | null;
+    private countryBearer: CountryProxy | null;
+    private regionBearer: RegionProxy | null;
+    private appellationBearer: AppellationProxy | null;
+
+    setAppellationProxy(proxy: AppellationProxy): boolean {
+        this.appellationBearer = proxy;
+        return true;
+    }
+
+    setCountryProxy(proxy: CountryProxy): boolean {
+        this.countryBearer = proxy;
+        return true;
+    }
+
+    setRegionProxy(proxy: RegionProxy): boolean {
+        this.regionBearer = proxy;
+        return true;
+    }
 
     checkAppellation(appellation: Appellation): boolean {
 
-        if (this.appellationBierer) {
+        if (this.appellationBearer) {
 
-            return this.appellationBierer?.checkAppellation(appellation);
+            return this.appellationBearer?.checkAppellation(appellation);
         }
 
         return false;
     }
 
     checkCountry(country: Country): boolean {
-        if (this.countryBierer) {
-            return this.countryBierer.checkCountry(country);
+        if (this.countryBearer) {
+            return this.countryBearer.checkCountry(country);
         }
 
         return false;
     }
 
     checkRegion(region: Region): boolean {
-        if (this.regionBierer) {
-            return this.regionBierer.checkRegion(region);
+        if (this.regionBearer) {
+            return this.regionBearer.checkRegion(region);
         }
         return false;
     }
@@ -76,16 +94,16 @@ export class Grape implements IGrape, IAmount {
     constructor(
         name: string,
         amount: number,
-        countryBierer:CountryProxy|null,
-        regionBierer:RegionProxy|null,
-        appellationBierer:AppellationProxy|null,
+        countryBearer:CountryProxy|null,
+        regionBearer:RegionProxy|null,
+        appellationBearer:AppellationProxy|null,
     ) {
         this.name = name;
         this.amount = amount;
         this.id = randomId(50)
         Grape.Ids.push(this.id)
-        this.countryBierer = countryBierer;
-        this.regionBierer = regionBierer;
-        this.appellationBierer = appellationBierer;
+        this.countryBearer = countryBearer;
+        this.regionBearer = regionBearer;
+        this.appellationBearer = appellationBearer;
     }
 }

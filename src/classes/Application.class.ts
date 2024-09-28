@@ -38,6 +38,8 @@ export class Application {
                 100
             )
 
+            
+
             this.grapes.push(grape)
 
             // if (this.variativity.gen()) {
@@ -109,7 +111,7 @@ export class Application {
                 this.regions.push(VenettoRegion.Instance(country))
             } else if (country instanceof FranceCountry) {
                 this.regions.push(LoireValleyRegion.Instance(country))
-            } else if (country instanceof MinhoRegion) {
+            } else if (country instanceof PortugalCountry) {
                 this.regions.push(MinhoRegion.Instance(country))
             }
         }
@@ -121,14 +123,15 @@ export class Application {
             }
         }
 
-        //  adding Arinto
+        //  adding Arinto & Alvarinho
         for (const country of this.countries) {
             if (country instanceof PortugalCountry) {
                 const arintoGrape = new Arinto(100);
-                // const portugalProxy = country.makeCountryProxy();
-                const countryBierer = country.makeCountryProxy(arintoGrape);
-                
                 const alvarinhoGrape = new Alvarinho(100);
+                const arintoPortugalBearer = country.makeCountryProxy(arintoGrape);
+                const alvarinhoPortugalBearer = country.makeCountryProxy(alvarinhoGrape);
+                arintoGrape.setCountryProxy(arintoPortugalBearer);
+                alvarinhoGrape.setCountryProxy(alvarinhoPortugalBearer);
                 this.grapes.push(arintoGrape);
                 this.grapes.push(alvarinhoGrape);
                 break;
