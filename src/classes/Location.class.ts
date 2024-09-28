@@ -1,10 +1,13 @@
+import { Grape } from "./Grape.class";
+import { Player } from "./Player.class";
+
 export interface ILocaction {
     getName(): string;
     getCountry(): Country|null;
     getAppelation(): Appellation|null;
     getRegion(): Region | null;
-    makeLicense(): Lisence;
-    checkLisense(lisence:Lisence): boolean;
+    makeLicense(owner:Player|null ,subj:Grape): Lisence;
+    checkLisense(lisence:Lisence ,owner:Player): boolean;
 }
 
 export interface ICountry extends ILocaction {
@@ -21,23 +24,28 @@ export interface IAppelation extends IRegion {
 
 
 
-abstract  class Lisence  {
+export abstract class Lisence  {
     
-    private location: Location;
+    abstract check(owner:Player): boolean;
 
-    check(token:number):boolean {
-        return !!(token % 2);
-    }
-
-    constructor(location:Location) {
-        this.location = location;
-    }
+    constructor() {}
 }
 
 export class LocationLisence extends Lisence {
 
-    constructor(location: Location) {
-        super(location);
+    private location: Location;
+    private owner: Player|null;
+    private subject: Grape;
+
+    check(owner:Player):boolean {
+        return this.owner === owner;
+    }
+
+    constructor(location: Location , owner:Player|null , subj:Grape) {
+        super();
+        this.location = location;
+        this.owner = owner;
+        this.subject = subj;
     }
 }
 
@@ -48,13 +56,13 @@ export abstract class Location implements ILocaction {
         return this.name;
     }
 
-    makeLicense(): Lisence {
-        return new LocationLisence(this);
+    makeLicense(owner:Player|null ,subj:Grape): Lisence {
+        return new LocationLisence(this , owner , subj );
     }
 
-    checkLisense(lisence:Lisence): boolean {
+    checkLisense(lisence:Lisence ,owner:Player): boolean {
         
-        return lisence.check(199);
+        return lisence.check(owner);
     }
 
 
