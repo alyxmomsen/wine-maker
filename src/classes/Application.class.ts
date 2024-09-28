@@ -1,12 +1,20 @@
-import { Grape, IGrape } from "./Grape.class";
+import { IGrape } from "./Grape.class";
 import { GarganegaGrape } from "./Grape.spicific.class";
 import { MuscadetAppelation } from "./Location.Appelation.Specific.class";
-import { IAppelation, ICountry, ILocaction, IRegion } from "./Location.class";
+import { Country, IAppelation, ILocaction, IRegion } from "./Location.class";
 import {FranceCountry, ItalyCountry } from "./Location.Country.specific.class";
 import { LoireValleyRegion, VenettoRegion } from "./Location.specific.class";
 import { Player } from "./Player.class";
 
+export interface IAmount  {
+    getAmount(): number;
+    setAmount(value:number): number;
+}
 
+export interface IPrice {
+    getPrice(): number;
+    setPrice(value:number): number;
+}
 
 export class Application {
 
@@ -17,20 +25,22 @@ export class Application {
 
     private player: Player;
 
-
     private timing: Timing;
 
     update() {
 
-        if (this.timing.tick()) {
-            this.player.makeGrape(new GarganegaGrape(ItalyCountry.Instance()));
+        const grape = new GarganegaGrape(new Country('Some Country'), 100);
+        this.player.setMoney(this.player.getMoney());
+        this.player.addGrape(grape);
+        
+        console.log(
+            this.player
+        );
 
-            if (this.countries.length) {
-                this.player.makeGrape(new Grape("Sovignon Blan" , this.countries[Math.floor(Math.random() * this.countries.length)]));
-            }
+        // if (this.timing.tick()) {
 
-            this.player.makeGrape(new GarganegaGrape(ItalyCountry.Instance()));
-        }
+            
+        // }
     }
 
     addRegion() {
@@ -104,7 +114,6 @@ class Timing {
 
         const now = Date.now();
         if (now - this.last > this.interval) {
-            console.log('--- tick ---');
             this.last = now;
             return true;
         }

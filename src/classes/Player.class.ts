@@ -1,8 +1,11 @@
+import { IAmount, IPrice } from "./Application.class";
 import { Grape } from "./Grape.class";
 import { Appellation, Country, Location, Region } from "./Location.class";
 
 // Singletone
 export class Player {
+
+    private money: number;
 
     private appellations: Appellation[];
     private countries: Country[];
@@ -30,13 +33,26 @@ export class Player {
         this.countries.push(country);
     }
 
-    makeGrape(grape:Grape) {
+    addGrape(grape: Grape) {
+        
         this.grapes.push(grape);
     }
 
     getGrapes() {
         return this.grapes;
     }
+
+    setMoney(value:number) {
+        this.money = value;
+        return this.money;
+    }
+
+    getMoney() {
+        return this.money;
+    }
+
+
+    
 
     static instance: Player | null = null;
     static Instance () : Player {
@@ -55,7 +71,9 @@ export class Player {
         this.regions = [] ;
         this.countries = [];
         /* --- */
-        this.grapes = [] ;
+        this.grapes = [];
+        /*  */
+        this.money = 1_000_000;
     }
 }
 

@@ -2,7 +2,9 @@ export interface ILocaction {
     getName(): string;
     getCountry(): Country|null;
     getAppelation(): Appellation|null;
-    getRegion(): Region|null;
+    getRegion(): Region | null;
+    makeLicense(): Lisence;
+    checkLisense(lisence:Lisence): boolean;
 }
 
 export interface ICountry extends ILocaction {
@@ -17,16 +19,52 @@ export interface IAppelation extends IRegion {
 
 }
 
+
+
+abstract  class Lisence  {
+    
+    private location: Location;
+
+    check(token:number):boolean {
+        return !!(token % 2);
+    }
+
+    constructor(location:Location) {
+        this.location = location;
+    }
+}
+
+export class LocationLisence extends Lisence {
+
+    constructor(location: Location) {
+        super(location);
+    }
+}
+
 export abstract class Location implements ILocaction {
+    protected lisences: Lisence[];
     protected name: string;
     getName(): string {
         return this.name;
     }
+
+    makeLicense(): Lisence {
+        return new LocationLisence(this);
+    }
+
+    checkLisense(lisence:Lisence): boolean {
+        
+        return lisence.check(199);
+    }
+
+
+
     abstract getAppelation(): Appellation|null;
     abstract getRegion(): Region|null;
     abstract getCountry(): Country|null;
     constructor(name:string) {
         this.name = name;
+        this.lisences = [];
     }
 }
 
