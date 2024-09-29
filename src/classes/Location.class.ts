@@ -1,28 +1,31 @@
 import { Grape } from './Grape.class'
-import { AppellationProxy, CountryProxy, IAppellationProxy, ICountryProxy, IRegionProxy, RegionProxy } from './Proxy.class'
+import {
+    AppellationProxy,
+    CountryProxy,
+    ICountryProxy,
+    IRegionProxy,
+    RegionProxy,
+} from './Proxy.class'
 import { Player } from './Player.class'
 import { randomId } from '../utils/utils'
 
 export interface ILocaction {
     getName(): string
-    getCountry(): Country | null
-    getAppelation(): Appellation | null
-    getRegion(): Region | null
     makeLicense(owner: Player | null, subj: Grape): LisenceMediator
     checkLisense(lisence: LisenceMediator, owner: Player): boolean
-    getId(): string;
+    getId(): string
 }
 
 export interface ICountry extends ILocaction {
-    makeCountryProxy(bearer:Grape): ICountryProxy|null;
+    makeCountryProxy(bearer: Grape): ICountryProxy | null
 }
 
 export interface IRegion extends ICountry {
-    makeRegionProxy(bearer: Grape): IRegionProxy | null;
+    makeRegionProxy(bearer: Grape): IRegionProxy | null
 }
 
 export interface IAppelation extends IRegion {
-    makeAppellationProxy(bearer:Grape): AppellationProxy | null;
+    makeAppellationProxy(bearer: Grape): AppellationProxy | null
 }
 
 export abstract class LisenceMediator {
@@ -62,10 +65,10 @@ export class LocationPlayerGrapeLisenceMediator extends LisenceMediator {
 export abstract class Location implements ILocaction {
     protected lisences: LisenceMediator[]
     protected name: string
-    protected Id: string;
+    protected Id: string
 
     getId(): string {
-        return this.Id;
+        return this.Id
     }
 
     getName(): string {
@@ -80,30 +83,19 @@ export abstract class Location implements ILocaction {
         return lisence.checkIfOwner(owner)
     }
 
-    abstract getAppelation(): Appellation | null
-    abstract getRegion(): Region | null
-    abstract getCountry(): Country | null
     constructor(name: string) {
         this.name = name
         this.lisences = []
-        this.Id = randomId(50);
+        this.Id = randomId(50)
     }
 }
 
 export class Country extends Location implements ICountry {
-
-    makeCountryProxy(bearer:Grape): CountryProxy {
-        return new CountryProxy(this , bearer);
+    makeCountryProxy(bearer: Grape): CountryProxy {
+        return new CountryProxy(this, bearer)
     }
 
-    getAppelation(): Appellation | null {
-        return null
-    }
-
-    getRegion(): Region | null {
-        return null
-    }
-    getCountry(): Country | null {
+    getCountry(): Country {
         return this
     }
     getName(): string {
@@ -115,13 +107,12 @@ export class Country extends Location implements ICountry {
 }
 
 export class Region extends Location implements IRegion {
-
     makeRegionProxy(bearer: Grape): IRegionProxy | null {
-        return new RegionProxy(this ,bearer);
+        return new RegionProxy(this, bearer)
     }
 
-    makeCountryProxy(bearer: Grape): ICountryProxy|null {
-        return null;
+    makeCountryProxy(bearer: Grape): ICountryProxy | null {
+        return null
     }
 
     protected country: Country
@@ -129,11 +120,11 @@ export class Region extends Location implements IRegion {
         return null
     }
 
-    getRegion(): Region | null {
+    getRegion(): Region {
         return this
     }
 
-    getCountry(): Country | null {
+    getCountry(): Country {
         return this.country.getCountry()
     }
 
@@ -148,34 +139,23 @@ export class Region extends Location implements IRegion {
 }
 
 export abstract class Appellation extends Location implements IAppelation {
-    region: Region;
+    
+    regionBearer: RegionProxy;
 
     makeAppellationProxy(bearer: Grape): AppellationProxy | null {
-        return null;
+        return null
     }
 
     makeRegionProxy(bearer: Grape): IRegionProxy | null {
-        return null;
+        return null
     }
 
     makeCountryProxy(bearer: Grape): ICountryProxy | null {
-        return null;
+        return null
     }
 
-    getAppelation(): Appellation | null {
-        return this
-    }
-
-    getRegion(): Region | null {
-        return this.region.getRegion()
-    }
-    getCountry(): Country | null {
-        const region: Region | null = this.region.getRegion()
-        return region ? region.getCountry() : region
-    }
-
-    constructor(region: Region, name: string) {
+    constructor(regionBearer: RegionProxy, name: string) {
         super(name)
-        this.region = region
+        this.regionBearer = regionBearer;
     }
 }

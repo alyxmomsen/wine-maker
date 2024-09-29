@@ -7,21 +7,15 @@ import { Vine } from './Vine.class'
 export interface IGrapeSingletone {}
 
 export class Soave extends Vine implements IGrapeSingletone {
-
-    static Instance(
-        grape:Grape,
-        region:RegionProxy,
-    ) {
-        
+    static Instance(grape: Grape, region: RegionProxy) {
         if (true) {
             return new Soave()
         } else {
-            return null;
+            return null
         }
     }
 
     private constructor() {
-        
         super('Soave')
     }
 }

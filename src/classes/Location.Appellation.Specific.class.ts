@@ -7,6 +7,9 @@ export class MuscadetAppelation extends Appellation {
 
     static Instance(loireValley: LoireValleyRegion): MuscadetAppelation {
         if (MuscadetAppelation.instance == null) {
+
+            loireValley.makeRegionProxy();
+
             MuscadetAppelation.instance = new MuscadetAppelation(loireValley)
             return MuscadetAppelation.instance
         } else {

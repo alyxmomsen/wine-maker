@@ -22,16 +22,8 @@ export class FranceCountry extends Country {
 export class ItalyCountry extends Country {
     private static instance: ItalyCountry | null = null
 
-    getAppelation(): Appellation | null {
-        return null
-    }
-
-    getCountry(): Country | null {
+    getCountry(): Country {
         return this
-    }
-
-    getRegion(): Region | null {
-        return null
     }
 
     static Instance(): ItalyCountry {
@@ -52,16 +44,8 @@ export class ItalyCountry extends Country {
 export class PortugalCountry extends Country {
     private static instance: PortugalCountry | null = null
 
-    getAppelation(): Appellation | null {
-        return null
-    }
-
-    getCountry(): Country | null {
+    getCountry(): Country {
         return this
-    }
-
-    getRegion(): Region | null {
-        return null
     }
 
     static Instance(): PortugalCountry {

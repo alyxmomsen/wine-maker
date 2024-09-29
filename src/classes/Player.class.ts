@@ -33,8 +33,7 @@ export class Player {
     }
 
     addGrapeMediator(grape: Grape) {
-
-        const grapeBearer = grape.createProxy(this);
+        const grapeBearer = grape.createProxy(this)
         this.grapeBearers.push(grapeBearer)
     }
 

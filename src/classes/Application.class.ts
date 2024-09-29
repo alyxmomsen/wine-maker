@@ -1,13 +1,17 @@
 import { Grape } from './Grape.class'
 import { Alvarinho, Arinto, GarganegaGrape } from './Grape.spicific.class'
-import { MuscadetAppelation } from './Location.Appelation.Specific.class'
+import { MuscadetAppelation } from './Location.Appellation.Specific.class'
 import { Country, IAppelation, ILocaction, IRegion } from './Location.class'
 import {
     FranceCountry,
     ItalyCountry,
     PortugalCountry,
 } from './Location.Country.specific.class'
-import { LoireValleyRegion, MinhoRegion, VenettoRegion } from './Location.specific.class'
+import {
+    LoireValleyRegion,
+    MinhoRegion,
+    VenettoRegion,
+} from './Location.specific.class'
 import { Player } from './Player.class'
 
 export interface IAmount {
@@ -31,31 +35,7 @@ export class Application {
     private variativity: Variativity
 
     update() {
-        /* test */
-
-        if (this.variativity.gen(10)) {
-
-            if (this.appellations.length) {
-                const grape = new Arinto(100);
-                const appellationBearer = this.appellations[Math.floor(Math.random() * this.appellations.length)].makeAppellationProxy(new Arinto(100));
-                if (appellationBearer) {
-                    grape.setAppellationProxy(appellationBearer);
-                }
-            }
-
-
-            const grape = new GarganegaGrape(
-                100
-            )
-
-            this.grapes.push(grape)
-
-            // if (this.variativity.gen()) {
-            //     this.player.addGrapeMediator(grape)
-            // }
-        }
-
-        /* --- */
+        
 
         console.log(
             'player:',
@@ -110,10 +90,11 @@ export class Application {
             ItalyCountry.Instance(),
             PortugalCountry.Instance(),
         ]
+
         this.regions = []
         this.appellations = []
         this.grapes = []
-        
+
         for (const country of this.countries) {
             if (country instanceof ItalyCountry) {
                 this.regions.push(VenettoRegion.Instance(country))
@@ -128,27 +109,26 @@ export class Application {
             if (region instanceof VenettoRegion) {
                 this.appellations.push(MuscadetAppelation.Instance(region))
             } else if (region instanceof LoireValleyRegion) {
+            } else if (false) {
             }
         }
 
         //  adding Arinto & Alvarinho
         for (const country of this.countries) {
             if (country instanceof PortugalCountry) {
-                const arintoGrape = new Arinto(100);
-                const alvarinhoGrape = new Alvarinho(100);
-                const arintoPortugalBearer = country.makeCountryProxy(arintoGrape);
-                const alvarinhoPortugalBearer = country.makeCountryProxy(alvarinhoGrape);
-                arintoGrape.setCountryProxy(arintoPortugalBearer);
-                alvarinhoGrape.setCountryProxy(alvarinhoPortugalBearer);
-                this.grapes.push(arintoGrape);
-                this.grapes.push(alvarinhoGrape);
-                break;
+                const arintoGrape = new Arinto(100)
+                const alvarinhoGrape = new Alvarinho(100)
+                const arintoPortugalBearer =
+                    country.makeCountryProxy(arintoGrape)
+                const alvarinhoPortugalBearer =
+                    country.makeCountryProxy(alvarinhoGrape)
+                arintoGrape.setCountryProxy(arintoPortugalBearer)
+                alvarinhoGrape.setCountryProxy(alvarinhoPortugalBearer)
+                this.grapes.push(arintoGrape)
+                this.grapes.push(alvarinhoGrape)
+                break
             }
         }
-
-
-        //
-
     }
 }
 

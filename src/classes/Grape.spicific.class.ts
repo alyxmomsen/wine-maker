@@ -6,32 +6,32 @@ import { AppellationProxy, CountryProxy, RegionProxy } from './Proxy.class'
 export class GarganegaGrape extends Grape {
     constructor(
         amount: number,
-        countryProxy:CountryProxy|null=null,
-        regionProxy:RegionProxy|null=null,
-        appellationProxy:AppellationProxy|null=null,
+        countryProxy: CountryProxy | null = null,
+        regionProxy: RegionProxy | null = null,
+        appellationProxy: AppellationProxy | null = null
     ) {
-        super('Garganega', amount, countryProxy, regionProxy, appellationProxy);
+        super('Garganega', amount, countryProxy, regionProxy, appellationProxy)
     }
 }
 
 export class Arinto extends Grape {
     constructor(
         amount: number,
-        countryProxy:CountryProxy|null=null,
-        regionProxy:RegionProxy|null=null,
-        appellationProxy:AppellationProxy|null=null,
+        countryProxy: CountryProxy | null = null,
+        regionProxy: RegionProxy | null = null,
+        appellationProxy: AppellationProxy | null = null
     ) {
-        super('Arinto', amount, countryProxy, regionProxy, appellationProxy);
+        super('Arinto', amount, countryProxy, regionProxy, appellationProxy)
     }
 }
 
 export class Alvarinho extends Grape {
     constructor(
         amount: number,
-        countryProxy:CountryProxy|null=null,
-        regionProxy:RegionProxy|null=null,
-        appellationProxy:AppellationProxy|null=null,
+        countryProxy: CountryProxy | null = null,
+        regionProxy: RegionProxy | null = null,
+        appellationProxy: AppellationProxy | null = null
     ) {
-        super('Alvarinho', amount, countryProxy, regionProxy, appellationProxy);
+        super('Alvarinho', amount, countryProxy, regionProxy, appellationProxy)
     }
 }
