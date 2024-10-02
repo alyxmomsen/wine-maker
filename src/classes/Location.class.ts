@@ -1,161 +1,116 @@
-import { Grape } from './Grape.class'
-import {
-    AppellationProxy,
-    CountryProxy,
-    ICountryProxy,
-    IRegionProxy,
-    RegionProxy,
-} from './Proxy.class'
-import { Player } from './Player.class'
-import { randomId } from '../utils/utils'
 
-export interface ILocaction {
-    getName(): string
-    makeLicense(owner: Player | null, subj: Grape): LisenceMediator
-    checkLisense(lisence: LisenceMediator, owner: Player): boolean
-    getId(): string
+export interface ILocation {
+    getCountry(): Country;
+    getRegion(): Region|null;
+    getAppellation(): Appellation|null;
 }
 
-export interface ICountry extends ILocaction {
-    makeCountryProxy(bearer: Grape): ICountryProxy | null
-}
+export abstract class Location implements ILocation {
 
-export interface IRegion extends ICountry {
-    makeRegionProxy(bearer: Grape): IRegionProxy | null
-}
+    abstract getCountry(): Country;
+    abstract getRegion(): Region | null;
+    abstract getAppellation(): Appellation | null;
 
-export interface IAppelation extends IRegion {
-    makeAppellationProxy(bearer: Grape): AppellationProxy | null
-}
+    constructor() {
 
-export abstract class LisenceMediator {
-    abstract checkIfOwner(owner: Player): boolean
-    abstract checkIfEmmiter(emmiter: Location): boolean
-    abstract setOwner(owner: Player): boolean
-
-    constructor() {}
-}
-
-export class LocationPlayerGrapeLisenceMediator extends LisenceMediator {
-    private location: Location
-    private owner: Player | null
-    private subject: Grape
-
-    checkIfOwner(owner: Player): boolean {
-        return this.owner === owner
-    }
-
-    checkIfEmmiter(emmiter: Location): boolean {
-        return emmiter === this.location
-    }
-
-    setOwner(owner: Player): boolean {
-        this.owner = owner
-        return true
-    }
-
-    constructor(location: Location, owner: Player | null, subj: Grape) {
-        super()
-        this.location = location
-        this.owner = owner
-        this.subject = subj
     }
 }
 
-export abstract class Location implements ILocaction {
-    protected lisences: LisenceMediator[]
-    protected name: string
-    protected Id: string
-
-    getId(): string {
-        return this.Id
+export class Country extends Location {
+    getCountry(): Country {
+        return this;
     }
 
-    getName(): string {
-        return this.name
+    getRegion(): Region | null {
+        return null;
     }
 
-    makeLicense(owner: Player | null, subj: Grape): LisenceMediator {
-        return new LocationPlayerGrapeLisenceMediator(this, owner, subj)
+    getAppellation(): Appellation | null {
+        return null;
     }
 
-    checkLisense(lisence: LisenceMediator, owner: Player): boolean {
-        return lisence.checkIfOwner(owner)
-    }
-
-    constructor(name: string) {
-        this.name = name
-        this.lisences = []
-        this.Id = randomId(50)
+    constructor() {
+        super();
     }
 }
 
-export class Country extends Location implements ICountry {
-    makeCountryProxy(bearer: Grape): CountryProxy {
-        return new CountryProxy(this, bearer)
-    }
+export class Region extends Location {
+
+    protected country: Country;
 
     getCountry(): Country {
-        return this
+        return this.country;
     }
-    getName(): string {
-        return this.name
+
+    getRegion(): Region | null {
+        return this;
     }
-    constructor(name: string) {
-        super(name)
+
+    getAppellation(): Appellation | null {
+        return null;
+    }
+
+    constructor(country: Country) {
+        super();
+        this.country = country;
     }
 }
 
-export class Region extends Location implements IRegion {
-    makeRegionProxy(bearer: Grape): IRegionProxy | null {
-        return new RegionProxy(this, bearer)
-    }
+export class Appellation extends Location {
 
-    makeCountryProxy(bearer: Grape): ICountryProxy | null {
-        return null
-    }
-
-    protected country: Country
-    getAppelation(): Appellation | null {
-        return null
-    }
-
-    getRegion(): Region {
-        return this
-    }
+    protected region: Region|null;
+    protected country: Country;
 
     getCountry(): Country {
-        return this.country.getCountry()
+        return this.country;
     }
 
-    getName(): string {
-        return this.name
+    getRegion(): Region | null {
+        return this.region;
     }
 
-    constructor(country: Country, name: string) {
-        super(name)
-        this.country = country
+    getAppellation(): Appellation | null {
+        return this;
+    }
+
+    constructor(region: Region | null, country: Country) {
+        super();
+        this.region = region;
+        this.country = country;
     }
 }
 
-export abstract class Appellation extends Location implements IAppelation {
-    
-    regionBearer: RegionProxy;
+export class Portugal extends Country {
 
-    makeAppellationProxy(bearer: Grape): AppellationProxy | null {
-        return null
+    private static instance: Portugal|null = null;
+    static Instance(): Portugal {
+
+        if (Portugal.instance === null) {
+            Portugal.instance = new Portugal();
+        }
+        
+        return Portugal.instance;
     }
 
-    makeRegionProxy(bearer: Grape): IRegionProxy | null {
-        return null
+
+    private constructor() {
+        super();
+    }
+}
+
+export class Medok extends Region {
+
+    private static instance: Medok | null = null;
+    static Instance(): Medok {
+
+        if (Medok.instance === null) {
+            Medok.instance = new Medok();
+        }
+        
+        return Medok.instance;
     }
 
-    makeCountryProxy(bearer: Grape): ICountryProxy | null {
-        return null
-    }
-
-    constructor(regionBearer: RegionProxy, name: string) {
-        super(name)
-        this.regionBearer = regionBearer;
+    private constructor() {
+        super(Portugal.Instance());
     }
 }

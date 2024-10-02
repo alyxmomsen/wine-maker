@@ -1,116 +1,52 @@
-import { randomId } from '../utils/utils'
-import { IAmount } from './Application.class'
-import {
-    Appellation,
-    Country,
-    Region,
-} from './Location.class'
-import {
-    AppellationProxy,
-    CountryProxy,
-    GrapeProxy,
-    RegionProxy,
-} from './Proxy.class'
-import { Player } from './Player.class'
+import { Appellation, Country, ILocation, Location, Medok, Portugal, Region } from "./Location.class";
+
 
 export interface IGrape {
-    getName(): string
-    createProxy(owner: Player): GrapeProxy
-    getId(): string
-    getOriginId(): string
-    checkCountry(country: Country): boolean
-    checkRegion(region: Region): boolean
-    checkAppellation(appellation: Appellation): boolean
-    setCountryProxy(proxy: CountryProxy): boolean
-    setRegionProxy(proxy: RegionProxy): boolean
-    setAppellationProxy(proxy: AppellationProxy): boolean
+    getGrapeName(): string;
+    
 }
 
-export class Grape implements IGrape, IAmount {
-    static Ids: string[] = []
-    private id: string
-    private name: string
-    private amount: number
-    private countryBearer: CountryProxy | null
-    private regionBearer: RegionProxy | null
-    private appellationBearer: AppellationProxy | null
+export class Grape implements ILocation {
 
-    setAppellationProxy(proxy: AppellationProxy): boolean {
-        this.appellationBearer = proxy
-        return true
+    protected title: string;
+    protected location: Location;
+
+    getAppellation(): Appellation | null {
+        return this.location.getAppellation();
     }
 
-    setCountryProxy(proxy: CountryProxy): boolean {
-        this.countryBearer = proxy
-        return true
+    getRegion(): Region | null {
+        return this.location.getRegion();
     }
 
-    setRegionProxy(proxy: RegionProxy): boolean {
-        this.regionBearer = proxy
-        return true
+    getCountry(): Country {
+        return this.location.getCountry();
     }
 
-    checkAppellation(appellation: Appellation): boolean {
-        if (this.appellationBearer) {
-            return this.appellationBearer?.checkAppellation(appellation)
-        }
-
-        return false
-    }
-
-    checkCountry(country: Country): boolean {
-        if (this.countryBearer) {
-            return this.countryBearer.checkCountry(country)
-        }
-
-        return false
-    }
-
-    checkRegion(region: Region): boolean {
-        if (this.regionBearer) {
-            return this.regionBearer.checkRegion(region)
-        }
-        return false
-    }
-
-    getOriginId(): string {
-        return ''
-    }
-
-    setAmount(value: number): number {
-        this.amount = value
-        return this.amount
-    }
-
-    getAmount(): number {
-        return this.amount
-    }
-
-    getName(): string {
-        return this.name
-    }
-
-    createProxy(owner: Player): GrapeProxy {
-        return new GrapeProxy(owner, this)
-    }
-
-    getId(): string {
-        return this.id
-    }
-
-    constructor(
-        name: string,
-        amount: number,
-        countryBearer: CountryProxy | null,
-        regionBearer: RegionProxy | null,
-        appellationBearer: AppellationProxy | null
-    ) {
-        this.name = name
-        this.amount = amount
-        this.id = randomId(50)
-        Grape.Ids.push(this.id)
-        this.countryBearer = countryBearer
-        this.regionBearer = regionBearer
-        this.appellationBearer = appellationBearer
+    constructor(title: string , location:Location) {
+        this.location = location;
+        this.title = title;
     }
 }
+
+export class GarganegaGrape extends Grape {
+    constructor() {
+        super('Garganega' , Medok.Instance());
+    }
+}
+
+export class SovingnonBlanGrape extends Grape {
+
+    constructor() {
+        super('Sovignon Blan', Portugal.Instance());
+    }
+}
+
+// const garganega = new GarganegaGrape();
+// const sovignon = new SovingnonBlanGrape();
+
+// const appellation = garganega.getAppellation();
+// const country = garganega.getCountry();
+// const region = garganega.getRegion();
+
+// console.log(appellation , country , region);
