@@ -1,116 +1,82 @@
-
 export interface ILocation {
-    getCountry(): Country;
-    getRegion(): Region|null;
-    getAppellation(): Appellation|null;
+    getCountry(): Country
+    getRegion(): Region | null
+    getAppellation(): Appellation | null
 }
 
 export abstract class Location implements ILocation {
+    protected title: string;
+    abstract getCountry(): Country
+    abstract getRegion(): Region | null
+    abstract getAppellation(): Appellation | null
 
-    abstract getCountry(): Country;
-    abstract getRegion(): Region | null;
-    abstract getAppellation(): Appellation | null;
+    getLocationName() {
+        return this.title;
+    }
 
-    constructor() {
-
+    constructor(title:string) {
+        this.title = title;
     }
 }
 
 export class Country extends Location {
     getCountry(): Country {
-        return this;
+        return this
     }
 
     getRegion(): Region | null {
-        return null;
+        return null
     }
 
     getAppellation(): Appellation | null {
-        return null;
+        return null
     }
 
-    constructor() {
-        super();
+    constructor(title:string) {
+        super(title)
     }
 }
 
 export class Region extends Location {
-
-    protected country: Country;
+    protected country: Country
 
     getCountry(): Country {
-        return this.country;
+        return this.country
     }
 
     getRegion(): Region | null {
-        return this;
+        return this
     }
 
     getAppellation(): Appellation | null {
-        return null;
+        return null
     }
 
-    constructor(country: Country) {
-        super();
-        this.country = country;
+    constructor(country: Country , title:string) {
+        super(title)
+        this.country = country
     }
 }
 
 export class Appellation extends Location {
-
-    protected region: Region|null;
-    protected country: Country;
+    protected region: Region | null
+    protected country: Country
 
     getCountry(): Country {
-        return this.country;
+        return this.country
     }
 
     getRegion(): Region | null {
-        return this.region;
+        return this.region
     }
 
     getAppellation(): Appellation | null {
-        return this;
+        return this
     }
 
-    constructor(region: Region | null, country: Country) {
-        super();
-        this.region = region;
-        this.country = country;
-    }
-}
-
-export class Portugal extends Country {
-
-    private static instance: Portugal|null = null;
-    static Instance(): Portugal {
-
-        if (Portugal.instance === null) {
-            Portugal.instance = new Portugal();
-        }
-        
-        return Portugal.instance;
-    }
-
-
-    private constructor() {
-        super();
-    }
-}
-
-export class Medok extends Region {
-
-    private static instance: Medok | null = null;
-    static Instance(): Medok {
-
-        if (Medok.instance === null) {
-            Medok.instance = new Medok();
-        }
-        
-        return Medok.instance;
-    }
-
-    private constructor() {
-        super(Portugal.Instance());
+    constructor(region: Region | null, country: Country , title:string) {
+        super(title)
+        this.region = region
+        this.country = country
     }
 }

@@ -1,73 +1,36 @@
-import { randomId } from '../utils/utils'
-import { Grape } from './Grape.class'
-import { Appellation, Country, Region } from './Location.class'
-import { GrapeProxy } from './Proxy.class'
+import { Grape } from "./Grape.class";
+import { Location } from "./Location.class";
+import { Wine } from "./Wine.class";
 
-// Singletone
 export class Player {
-    private Id: string
-    private money: number
 
-    private appellations: Appellation[]
-    private countries: Country[]
-    private regions: Region[]
-    /* --- */
-    private grapeBearers: GrapeProxy[]
+    private grapes: Grape[];
+    private locations: Location[];
+    private wine: Wine[];
 
-    addAppellation(newAppellation: Appellation) {
-        for (const appellation of this.appellations) {
-            if (appellation === newAppellation) {
-                return false
-            }
-        }
-
-        this.appellations.push(newAppellation)
+    getGrapes() {
+        return this.grapes;
     }
 
-    addRegion(region: Region) {
-        this.regions.push(region)
+    getLocations() {
+        return this.locations;
     }
 
-    addCountry(country: Country) {
-        this.countries.push(country)
+    addGrape (grape:Grape) {
+        this.grapes.push(grape);
     }
 
-    addGrapeMediator(grape: Grape) {
-        const grapeBearer = grape.createProxy(this)
-        this.grapeBearers.push(grapeBearer)
+    addLocation (location:Location) {
+        this.locations.push(location);
     }
 
-    getGrapeBearers() {
-        return this.grapeBearers
+    addWine(wine:Wine) {
+        this.wine.push(wine);
     }
 
-    setMoney(value: number) {
-        this.money = value
-        return this.money
-    }
-
-    getMoney() {
-        return this.money
-    }
-
-    static instance: Player | null = null
-    static Instance(): Player {
-        if (Player.instance === null) {
-            Player.instance = new Player()
-            return Player.instance
-        } else {
-            return Player.instance
-        }
-    }
-
-    private constructor() {
-        this.appellations = []
-        this.regions = []
-        this.countries = []
-        /* --- */
-        this.grapeBearers = []
-        /*  */
-        this.money = 1_000_000
-        this.Id = randomId(50)
+    constructor() {
+        this.grapes = [];
+        this.locations = [];
+        this.wine = [];
     }
 }
