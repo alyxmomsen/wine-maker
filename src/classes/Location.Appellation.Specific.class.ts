@@ -1,6 +1,7 @@
 import { Appellation } from './Location.class'
 import { LoireValleyRegion } from './Location.specific.class'
 
+
 // Singletone
 export class MuscadetAppelation extends Appellation {
     private static instance: MuscadetAppelation | null = null
@@ -21,3 +22,4 @@ export class MuscadetAppelation extends Appellation {
         super(loireValley, 'Muskadet (appellation)')
     }
 }
+
