@@ -79,7 +79,7 @@ class Appellation extends Location {
 
 class Portugal extends Country {
 
-    static instance: Portugal|null = null;
+    private static instance: Portugal|null = null;
     static Instance(): Portugal {
 
         if (Portugal.instance === null) {
@@ -97,7 +97,7 @@ class Portugal extends Country {
 
 class Medok extends Region {
 
-    static instance: Medok | null;
+    private static instance: Medok | null = null;
     static Instance(): Medok {
 
         if (Medok.instance === null) {
@@ -105,11 +105,10 @@ class Medok extends Region {
         }
         
         return Medok.instance;
-
     }
 
     private constructor() {
-        super(portugal);
+        super(Portugal.Instance());
     }
 }
 
@@ -117,29 +116,24 @@ class Grape {
 
     title: string;
 
-    constructor(title:string) {
+    location: Location;
+
+    constructor(title: string , location:Location) {
+        this.location = location;
         this.title = title;
     }
 }
 
 class GarganegaGrape extends Grape {
     constructor(title:string) {
-        super(title);
+        super(title , Medok.Instance());
     }
 }
 
 class SovingnonBlanGrape extends Grape {
 
     constructor(title:string) {
-        super(title);
+        super(title, Portugal.Instance());
     }
 }
 
-const portugal = Portugal.Instance();
-const medok = Medok.Instance();
-
-const appellation = medok.getAppellation();
-const country = medok.getCountry();
-const region = medok.getRegion();
-
-console.log(appellation , country , region);
