@@ -38,7 +38,7 @@ const GamePage = () => {
                 <span>countries: </span>
                 {countries.map((ctr) => (
                     <ElementWrapper
-                        isMarked={checkIfMarkedCountry(marked , ctr)}
+                        isMarked={checkIfMarkedCountry(marked, ctr)}
                     >
                         <button>{ctr.getTitle()}</button>
                     </ElementWrapper>
@@ -47,13 +47,15 @@ const GamePage = () => {
             <div>
                 <span>regions: </span>
                 {regions.map((region) => (
-                    <ElementWrapper isMarked={checkIfMarkedRegion(marked , region)}>
-                        <button
-                        onMouseOver={() => setMarked(region)}
-                        onMouseLeave={() => setMarked(null)}
+                    <ElementWrapper
+                        isMarked={checkIfMarkedRegion(marked, region)}
                     >
-                        {region.getTitle()}
-                    </button>
+                        <button
+                            onMouseOver={() => setMarked(region)}
+                            onMouseLeave={() => setMarked(null)}
+                        >
+                            {region.getTitle()}
+                        </button>
                     </ElementWrapper>
                 ))}
             </div>
@@ -114,31 +116,30 @@ function actionWrapper(ctx: TMainContext, fn: () => void) {
     }
 }
 
-function checkIfMarkedCountry (isMarked: Location | null , current:Location) {
+function checkIfMarkedCountry(isMarked: Location | null, current: Location) {
     const markedCountry = isMarked?.getCountry()
     const currentCountry = current.getCountry()
     const isEqual = markedCountry === currentCountry
 
     if (isEqual) {
-
-        console.log(markedCountry
+        console.log(
+            markedCountry
+                // .getRegion()
+                .getAppellation(),
+            currentCountry
             // .getRegion()
-            .getAppellation()
-            , currentCountry
-            // .getRegion()
-        );
+        )
     }
 
     return isEqual
 }
 
-function checkIfMarkedRegion (isMarked: Location | null , current:Location) {
+function checkIfMarkedRegion(isMarked: Location | null, current: Location) {
     const markedRegion = isMarked?.getRegion()
     const currentRegion = current.getRegion()
     const isEqual = markedRegion === currentRegion
 
     if (isEqual) {
-
         // console.log(markedRegion
         //     // .getRegion()
         //     .getAppellation()
