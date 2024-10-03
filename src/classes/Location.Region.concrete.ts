@@ -1,5 +1,9 @@
 import { Region } from './Location.class'
-import { France, Italia, PortugalCountry } from './Location.Country.concrete'
+import {
+    FranceCountry,
+    ItaliaCountry,
+    PortugalCountry,
+} from './Location.Country.concrete'
 
 export class Medok extends Region {
     private static instance: Medok | null = null
@@ -27,13 +31,12 @@ export class VenetoRegion extends Region {
     }
 
     private constructor() {
-        super(Italia.Instance(), 'Veneto')
+        super(ItaliaCountry.Instance(), 'Veneto')
     }
 }
 
 export class LoireValleyRegion extends Region {
-
-    private static instance:LoireValleyRegion | null = null
+    private static instance: LoireValleyRegion | null = null
     static Instance(): LoireValleyRegion {
         if (LoireValleyRegion.instance === null) {
             LoireValleyRegion.instance = new LoireValleyRegion()
@@ -43,9 +46,20 @@ export class LoireValleyRegion extends Region {
     }
 
     private constructor() {
-        super(France.Instance(), 'Loire Valley')
+        super(FranceCountry.Instance(), 'Loire Valley')
+    }
+}
+
+export class MinhoRegion extends Region {
+    static instance: MinhoRegion | null = null
+    static Instance(): MinhoRegion {
+        if (MinhoRegion.instance === null) {
+            MinhoRegion.instance = new MinhoRegion()
+        }
+        return MinhoRegion.instance
     }
 
-
-
+    private constructor() {
+        super(PortugalCountry.Instance(), 'Minho')
+    }
 }

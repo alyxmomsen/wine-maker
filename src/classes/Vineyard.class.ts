@@ -1,19 +1,15 @@
-import { Location } from "./Location.class";
+import { Location } from './Location.class'
 
 export class Vineyard {
-
-    protected name: string;
-    protected location: Location;
+    protected name: string
+    protected location: Location
 
     getLocation() {
-        return this.location;
+        return this.location
     }
 
     constructor(name: string, location: Location) {
-        this.name = name; 
-        this.location = location;
+        this.name = name
+        this.location = location
     }
 }
-
-
-

@@ -8,9 +8,8 @@ li {
     list-style: none;
 }
 
-.wrapper {
-    padding: 9px;
-    border: 1px solid white;
+.marked {
+    border: 1px solid yellowgreen;
 }
 
 .flex-box {

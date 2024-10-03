@@ -15,14 +15,14 @@ export class PortugalCountry extends Country {
     }
 }
 
-export class Italia extends Country {
-    private static instance: Italia | null = null
+export class ItaliaCountry extends Country {
+    private static instance: ItaliaCountry | null = null
     static Instance(): PortugalCountry {
-        if (Italia.instance === null) {
-            Italia.instance = new Italia()
+        if (ItaliaCountry.instance === null) {
+            ItaliaCountry.instance = new ItaliaCountry()
         }
 
-        return Italia.instance
+        return ItaliaCountry.instance
     }
 
     private constructor() {
@@ -30,15 +30,14 @@ export class Italia extends Country {
     }
 }
 
-export class France extends Country {
-
-    private static instance: France | null = null
-    static Instance(): France {
-        if (France.instance === null) {
-            France.instance = new France()
+export class FranceCountry extends Country {
+    private static instance: FranceCountry | null = null
+    static Instance(): FranceCountry {
+        if (FranceCountry.instance === null) {
+            FranceCountry.instance = new FranceCountry()
         }
 
-        return France.instance
+        return FranceCountry.instance
     }
 
     private constructor() {
