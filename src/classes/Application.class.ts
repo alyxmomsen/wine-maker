@@ -27,7 +27,6 @@ import { Vineyard } from './Vineyard.class'
 import { Soave } from './Wine.concrete'
 
 export class Application {
-
     countries: Country[]
     regions: Region[]
     appellations: Appellation[]
@@ -35,9 +34,7 @@ export class Application {
     grapes: Grape[]
     vineyards: Vineyard[]
 
-    update() {
-
-    }
+    update() {}
 
     // hello world  , this is my love, and my love is long and as long as i am living  while
     // Hello world, this is my love, and my love will last as long as I live.
@@ -63,8 +60,8 @@ export class Application {
         ]
 
         this.vineyards = [
-            new Vineyard('Deep Six Vineyard' , MuskadetAppellation.Instance()) ,
-            new Vineyard('Tourniket' , VinhoVerdeAppellation.Instance()) ,
+            new Vineyard('Deep Six Vineyard', MuskadetAppellation.Instance()),
+            new Vineyard('Tourniket', VinhoVerdeAppellation.Instance()),
         ]
 
         this.grapes = [

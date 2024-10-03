@@ -24,7 +24,9 @@ const GamePage = () => {
         ctx.application.appellations
     )
 
-    const [vineyard , setVineyard] = useState<Vineyard[]|null>(ctx.application.vineyards);
+    const [vineyard, setVineyard] = useState<Vineyard[] | null>(
+        ctx.application.vineyards
+    )
 
     const [grapes, setGrape] = useState<Grape[]>(ctx.application.grapes)
     const [player, setPlayer] = useState<Player>(ctx.application.player)

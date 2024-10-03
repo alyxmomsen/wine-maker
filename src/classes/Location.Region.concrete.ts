@@ -71,7 +71,7 @@ export class MinhoRegion extends Region {
             MinhoRegion.instance = new MinhoRegion()
         }
 
-        return MinhoRegion.instance;
+        return MinhoRegion.instance
     }
 
     private constructor() {
