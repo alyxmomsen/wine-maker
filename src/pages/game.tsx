@@ -5,28 +5,19 @@ import './../styles/main.css'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
-    
+
     return (
         <div className="wrapper flex-box flex-dir--row">
-            <div className="wrapper flex-box flex-dir--col gap-9">
-                user:
-                
-            </div>
-            <div className="wrapper flex-box flex-dir--col gap-9">
-                grapes:{' '}
-                
-            </div>
+            <div className="wrapper flex-box flex-dir--col gap-9">user:</div>
+            <div className="wrapper flex-box flex-dir--col gap-9">grapes: </div>
             <div className="wrapper flex-box flex-dir--col gap-9">
                 countries:
-                
             </div>
             <div className="wrapper flex-box flex-dir--col gap-9 ">
                 regions:
-                
             </div>
             <div className="wrapper flex-box flex-dir--col gap-9">
                 appellations:
-                
             </div>
             <button className="" onClick={() => upd(ctx)}>
                 update and refresh

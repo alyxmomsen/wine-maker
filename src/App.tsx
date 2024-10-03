@@ -5,7 +5,7 @@ import './App.css'
 import GamePage from './pages/game'
 import { Application } from './classes/Application.class'
 
-const myapp = new Application()
+const myapp = new Application();
 
 export type TMainContext = {
     application: Application

@@ -2,24 +2,33 @@ export interface ILocation {
     getCountry(): Country
     getRegion(): Region | null
     getAppellation(): Appellation | null
+    getTitle(): string
 }
 
 export abstract class Location implements ILocation {
-    protected title: string;
+    protected title: string
     abstract getCountry(): Country
     abstract getRegion(): Region | null
     abstract getAppellation(): Appellation | null
 
-    getLocationName() {
-        return this.title;
+    getTitle() {
+        return this.title
     }
 
-    constructor(title:string) {
-        this.title = title;
+    constructor(title: string) {
+        this.title = title
     }
 }
 
-export class Country extends Location {
+export interface ICountry extends ILocation {
+    getCountryName(): string
+}
+
+export class Country extends Location implements ICountry {
+    getCountryName(): string {
+        return this.getTitle()
+    }
+
     getCountry(): Country {
         return this
     }
@@ -32,13 +41,26 @@ export class Country extends Location {
         return null
     }
 
-    constructor(title:string) {
+    constructor(title: string) {
         super(title)
     }
 }
 
-export class Region extends Location {
+export interface IRegion extends ICountry {
+    getRegionName(): string
+    getCountryName(): string
+}
+
+export class Region extends Location implements IRegion {
     protected country: Country
+
+    getRegionName(): string {
+        return this.title
+    }
+
+    getCountryName(): string {
+        return this.country ? this.country.getCountryName() : ''
+    }
 
     getCountry(): Country {
         return this.country
@@ -52,15 +74,33 @@ export class Region extends Location {
         return null
     }
 
-    constructor(country: Country , title:string) {
+    constructor(country: Country, title: string) {
         super(title)
         this.country = country
     }
 }
 
-export class Appellation extends Location {
+interface IAppellation extends IRegion {
+    getAppellationName(): string
+    getRegionName(): string
+    getCountryName(): string
+}
+
+export class Appellation extends Location implements IAppellation {
     protected region: Region | null
     protected country: Country
+
+    getCountryName(): string {
+        return this.country.getCountryName()
+    }
+
+    getAppellationName(): string {
+        return this.getTitle()
+    }
+
+    getRegionName(): string {
+        return this.region ? this.region.getTitle() : ''
+    }
 
     getCountry(): Country {
         return this.country
@@ -74,7 +114,7 @@ export class Appellation extends Location {
         return this
     }
 
-    constructor(region: Region | null, country: Country , title:string) {
+    constructor(region: Region | null, country: Country, title: string) {
         super(title)
         this.region = region
         this.country = country
