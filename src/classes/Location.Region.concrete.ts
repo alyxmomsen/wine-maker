@@ -16,7 +16,7 @@ export class Medok extends Region {
     }
 
     private constructor() {
-        super(PortugalCountry.Instance(), 'Medok')
+        super(FranceCountry.Instance(), 'Medok')
     }
 }
 
@@ -50,13 +50,28 @@ export class LoireValleyRegion extends Region {
     }
 }
 
+export class BurgundyRegion extends Region {
+    static instance: BurgundyRegion | null = null
+    static Instance(): BurgundyRegion {
+        if (BurgundyRegion.instance === null) {
+            BurgundyRegion.instance = new BurgundyRegion()
+        }
+        return BurgundyRegion.instance
+    }
+
+    private constructor() {
+        super(FranceCountry.Instance(), 'Burgundy')
+    }
+}
+
 export class MinhoRegion extends Region {
     static instance: MinhoRegion | null = null
     static Instance(): MinhoRegion {
         if (MinhoRegion.instance === null) {
             MinhoRegion.instance = new MinhoRegion()
         }
-        return MinhoRegion.instance
+
+        return MinhoRegion.instance;
     }
 
     private constructor() {

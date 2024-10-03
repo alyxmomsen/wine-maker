@@ -11,9 +11,10 @@ export const ElementWrapper = ({
 
     return (
         <div
+            style={{ display: 'inline-block' }}
             //     onMouseOver={() => setMarked(true)}
             //     onMouseLeave={() => setMarked(false)}
-            className={isMarked ? 'marked' : ''}
+            className={(isMarked ? 'marked' : '') + ''}
         >
             {children}
         </div>

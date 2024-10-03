@@ -43,11 +43,8 @@ export class SovingnonBlanGrape extends Grape {
     }
 }
 
-// Melon de Bourgogne
-
-// export class MelonDeBourgogne extends Grape {
-
-//     constructor() {
-//         super("Melon de Bourgogne" , France.);
-//     }
-// }
+export class MelonDeBourgogne extends Grape {
+    constructor(location: Location) {
+        super('Melon de Bourgogne', location)
+    }
+}

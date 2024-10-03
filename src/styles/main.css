@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .btn {
     padding: 9px;
     width: max-content;
@@ -22,6 +26,14 @@ li {
 
 .flex-dir--col {
     flex-direction: column;
+}
+
+.justify--start {
+    justify-content: flex-start;
+}
+
+.flex__align--start {
+    align-items: start;
 }
 
 .flex-dir--r {

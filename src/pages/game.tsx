@@ -11,6 +11,8 @@ import {
 } from '../classes/Location.class'
 import { Player } from '../classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
+import { Grape } from '../classes/Grape.class'
+import { Vineyard } from '../classes/Vineyard.class'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
@@ -21,6 +23,10 @@ const GamePage = () => {
     const [appellations, setAppellations] = useState<Appellation[]>(
         ctx.application.appellations
     )
+
+    const [vineyard , setVineyard] = useState<Vineyard[]|null>(ctx.application.vineyards);
+
+    const [grapes, setGrape] = useState<Grape[]>(ctx.application.grapes)
     const [player, setPlayer] = useState<Player>(ctx.application.player)
     const [marked, setMarked] = useState<Location | null>(null)
 
@@ -33,7 +39,7 @@ const GamePage = () => {
     }, [marked])
 
     return (
-        <div>
+        <div className={'flex-box flex-dir--col flex__align--start'}>
             <div>
                 <span>countries: </span>
                 {countries.map((ctr) => (
@@ -71,6 +77,28 @@ const GamePage = () => {
                 ))}
             </div>
             <div>
+                <span>grape: </span>
+                {grapes.map((grape) => (
+                    <button
+                    // onMouseOver={() => setMarked(grape)}
+                    // onMouseLeave={() => setMarked(null)}
+                    >
+                        {grape.getGrapeName()}
+                    </button>
+                ))}
+            </div>
+            <div>
+                <span>vineyard: </span>
+                {grapes.map((grape) => (
+                    <button
+                    // onMouseOver={() => setMarked(grape)}
+                    // onMouseLeave={() => setMarked(null)}
+                    >
+                        {grape.getGrapeName()}
+                    </button>
+                ))}
+            </div>
+            <div>
                 <button
                     onClick={() =>
                         console.log(
@@ -78,17 +106,8 @@ const GamePage = () => {
                         )
                     }
                 >
-                    make try make italia the country
+                    try make italia the country
                 </button>
-            </div>
-            <div>
-                <span>the factories: </span>
-            </div>
-            <div>
-                <span>the factories: </span>
-            </div>
-            <div>
-                <span>the factories: </span>
             </div>
         </div>
     )
