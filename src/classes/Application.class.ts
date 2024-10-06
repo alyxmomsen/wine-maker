@@ -24,8 +24,9 @@ import {
     MinhoRegion,
 } from './Location.Region.concrete'
 import { Player } from './Player.class'
-import { Vineyard } from './Vineyard.class'
+import { CanCreateVineyardStrategy, Vineyard } from './Vineyard.class'
 import { Soave } from './Wine.concrete'
+import { CanCreateStrategy } from './Strategy.class'
 
 export abstract class CreateWineStrategy {
     title: string;
@@ -70,39 +71,50 @@ export class SoaveCreateWineStrategy extends CreateWineStrategy {
 }
 
 export class Application {
+    private refresher: React.Dispatch<React.SetStateAction<number>> | null;
     countries: Country[]
     regions: Region[]
     appellations: Appellation[]
     player: Player
     grapes: Grape[]
     vineyards: Vineyard[]
-
-    createWineStrategies: CreateWineStrategy[]
+    canCreateStrategies:CanCreateStrategy[]
 
     update() {
-        this.createWineStrategies.forEach(createStrategy => {
-            const canCreate = createStrategy.canCreate(this.player);
-            if (canCreate) {
-                return {
-                    factory: () => createStrategy.factory(), 
-                    title: createStrategy.title,
-                }
-            }
+        this.canCreateStrategies.forEach(strategy => {
+            strategy.canCreate(this.player);
         });
+        this.refresh();
     }
 
-    // hello world  , this is my love, and my love is long and as long as i am living  while
-    // Hello world, this is my love, and my love will last as long as I live.
+    refresh(): void {
+        
+        if (this.refresher) {
+            this.refresher(current => current + 1);
+            console.log('updateted');
+        }
+        else {
+            console.log('not updated');
+        }
+    }
 
-    constructor() {
-        this.createWineStrategies = [new SoaveCreateWineStrategy()]
+    setRefresher(dispatcher:React.Dispatch<React.SetStateAction<number>>) {
+        this.refresher = dispatcher;
+    }
+
+    constructor(dispatcher:React.Dispatch<React.SetStateAction<number>>|null = null) {
+        
+        this.refresher = dispatcher; 
+
+        this.canCreateStrategies = [
+            new CanCreateVineyardStrategy() ,
+        ];
 
         this.countries = [
             FranceCountry.Instance(),
             ItaliaCountry.Instance(),
             PortugalCountry.Instance(),
         ]
-
         this.regions = [
             VenetoRegion.Instance(),
             LoireValleyRegion.Instance(),
@@ -110,12 +122,10 @@ export class Application {
             BurgundyRegion.Instance(),
             MinhoRegion.Instance(),
         ]
-
         this.appellations = [
             MuskadetAppellation.Instance(),
             VinhoVerdeAppellation.Instance(),
         ]
-
         this.vineyards = [
             new Vineyard('Deep Six Vineyard', MuskadetAppellation.Instance()),
             new Vineyard(
@@ -123,31 +133,25 @@ export class Application {
                 VinhoVerdeAppellation.Instance()
             ),
         ]
-
         this.grapes = [
             new GarganegaGrape(VenetoRegion.Instance()),
             new SovingnonBlanGrape(LoireValleyRegion.Instance()),
             new MuscadetGrape(MuskadetAppellation.Instance()),
             new MelonDeBourgogne(MuskadetAppellation.Instance()),
         ]
-
         this.player = new Player()
-
-        // const garganega = new GarganegaGrape(VenetoRegion.Instance())
         const garganega = new GarganegaGrape(LoireValleyRegion.Instance())
+        const muskadeGrape = new MuscadetGrape(LoireValleyRegion.Instance()) ;
         this.player.addGrape(garganega)
+        this.player.addGrape(muskadeGrape);
         this.player.addLocation(ItaliaCountry.Instance())
         this.player.addLocation(VenetoRegion.Instance())
         console.log(this.player)
         const result = Soave.TryInstanceByPlayer(this.player)
-        const vnieyard = new Vineyard('My Vineyard', ItaliaCountry.Instance())
+        const vnineyard = new Vineyard('My Vineyard', ItaliaCountry.Instance())
         console.log({ result })
+
+        this.update();
     }
 }
 
-const str = `
-    3.10.2024
-    Sirens were wailing today.
-    I could hear them muffled. From a distance.
-    Earlier, I received an SMS that there would be a check of the notification systems.
-`

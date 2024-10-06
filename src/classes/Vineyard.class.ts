@@ -1,6 +1,7 @@
 import { Grape } from './Grape.class'
 import { Location } from './Location.class'
 import { Player } from './Player.class'
+import { CanCreateStrategy } from './Strategy.class'
 
 export class Vineyard {
     protected name: string
@@ -27,3 +28,29 @@ export class Vineyard {
         this.owner = owner
     }
 }
+
+/* ************************************************************ */
+
+export class CanCreateVineyardStrategy extends CanCreateStrategy {
+
+    canCreate(player: Player): boolean {
+
+        const amount = player.getGrapes().length;
+        
+        if (amount > 1) {
+            console.log(
+                'approved'
+            );
+        }
+        else {
+            console.log('denied');
+        }
+        
+        return true;
+    };
+
+    constructor() {
+        super();
+    }
+}
+

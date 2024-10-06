@@ -2,7 +2,6 @@ import { Appellation } from './Location.class'
 import { FranceCountry, PortugalCountry } from './Location.Country.concrete'
 import {
     LoireValleyRegion,
-    BurgundyRegion,
     MinhoRegion,
 } from './Location.Region.concrete'
 

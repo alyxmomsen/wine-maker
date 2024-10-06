@@ -5,7 +5,7 @@ import {
     ItaliaCountry,
     PortugalCountry,
 } from './Location.Country.concrete'
-import { MinhoRegion, VenetoRegion } from './Location.Region.concrete'
+import { BurgundyRegion, VenetoRegion } from './Location.Region.concrete'
 import { Player } from './Player.class'
 import { Wine } from './Wine.class'
 
@@ -116,7 +116,7 @@ export class VinhoVerdeWine extends Wine {
     constructor(
         portugalCountry: PortugalCountry,
         minhoRegion: Location,
-        minnoRegion: MinhoRegion,
+        minnoRegion: BurgundyRegion,
         grape: Grape
     ) {
         super('Vinho Verde', grape.getGrapeName(), '', '', '')

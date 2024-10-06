@@ -43,6 +43,7 @@ const GamePage = () => {
     return (
         <div className={'flex-box flex-dir--col flex__align--start'}>
             <div>
+                <button onClick={() => ctx.application.update()}>udpdate</button>
                 <span>countries: </span>
                 {countries.map((ctr) => (
                     <ElementWrapper
@@ -142,16 +143,6 @@ function checkIfMarkedCountry(isMarked: Location | null, current: Location) {
     const currentCountry = current.getCountry()
     const isEqual = markedCountry === currentCountry
 
-    if (isEqual) {
-        console.log(
-            markedCountry
-                // .getRegion()
-                .getAppellation(),
-            currentCountry
-            // .getRegion()
-        )
-    }
-
     return isEqual
 }
 
@@ -159,15 +150,6 @@ function checkIfMarkedRegion(isMarked: Location | null, current: Location) {
     const markedRegion = isMarked?.getRegion()
     const currentRegion = current.getRegion()
     const isEqual = markedRegion === currentRegion
-
-    if (isEqual) {
-        // console.log(markedRegion
-        //     // .getRegion()
-        //     .getAppellation()
-        //     , currentCountry
-        //     // .getRegion()
-        // );
-    }
 
     return isEqual
 }
