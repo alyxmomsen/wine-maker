@@ -81,9 +81,7 @@ export class Application {
     canCreateStrategies:CanCreateStrategy[]
 
     update() {
-        this.canCreateStrategies.forEach(strategy => {
-            strategy.canCreate(this.player);
-        });
+        
         this.refresh();
     }
 

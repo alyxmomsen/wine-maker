@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MainContext, TMainContext } from '../App'
 
 import './../styles/main.css'
-import { ItaliaCountry } from '../classes/Location.Country.concrete'
 import {
     Appellation,
     Country,
@@ -13,6 +12,7 @@ import { Player } from '../classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../classes/Grape.class'
 import { Vineyard } from '../classes/Vineyard.class'
+import { Soave } from '../classes/Wine.concrete'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
@@ -102,15 +102,23 @@ const GamePage = () => {
                 ))}
             </div>
             <div>
-                <button
-                    onClick={() =>
-                        console.log(
-                            'i love Italia becose there have a much of sundays'
-                        )
-                    }
-                >
-                    try make italia the country
-                </button>
+                {
+                    ctx.application.canCreateStrategies.map(elem => {
+
+                        const canCreate = elem.canCreate(ctx.application.player);
+                        
+                        if (canCreate) {
+                            console.log('you can');
+                        }
+                        else {
+                            console.log('you can not');
+                        }
+
+                        const data = elem.getData();
+
+                        return <button onClick={data.factory}>buy {data.title}</button>
+                    })
+                }
             </div>
         </div>
     )

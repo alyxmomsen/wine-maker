@@ -38,12 +38,12 @@ export class Soave extends Wine {
                                 grape
                             )
                         }
-                    } else {
-                        console.log('sorry')
-                    }
+                    } 
                 }
             }
         }
+
+        console.log('sorry, you can not create the Soave');
 
         return null
     }
@@ -90,12 +90,12 @@ export class Muskadet extends Wine {
                                 grape
                             )
                         }
-                    } else {
-                        console.log('sorry')
-                    }
+                    } 
                 }
             }
         }
+
+        console.log('you can not create "Muskadet"');
 
         return null
     }

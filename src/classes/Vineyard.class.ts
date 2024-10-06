@@ -1,5 +1,6 @@
 import { Grape } from './Grape.class'
 import { Location } from './Location.class'
+import { LoireValleyRegion } from './Location.Region.concrete'
 import { Player } from './Player.class'
 import { CanCreateStrategy } from './Strategy.class'
 
@@ -48,6 +49,16 @@ export class CanCreateVineyardStrategy extends CanCreateStrategy {
         
         return true;
     };
+
+    getData(): {title:string  , factory:() => Vineyard} {
+
+        const obj:{title:string  , factory:() => Vineyard} = {
+            title: 'VineYard', 
+            factory:() => new Vineyard('Loire Valley Vineyard' , LoireValleyRegion.Instance()), 
+        }
+
+        return obj;
+    }
 
     constructor() {
         super();
