@@ -24,7 +24,7 @@ const GamePage = () => {
         ctx.application.appellations
     )
 
-    const [vineyard, setVineyard] = useState<Vineyard[] | null>(
+    const [vineyards, setVineyard] = useState<Vineyard[]>(
         ctx.application.vineyards
     )
 
@@ -91,12 +91,12 @@ const GamePage = () => {
             </div>
             <div>
                 <span>vineyard: </span>
-                {grapes.map((grape) => (
+                {vineyards.map((vineyard) => (
                     <button
                     // onMouseOver={() => setMarked(grape)}
                     // onMouseLeave={() => setMarked(null)}
                     >
-                        {grape.getGrapeName()}
+                        {vineyard.getName()}
                     </button>
                 ))}
             </div>

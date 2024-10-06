@@ -1,3 +1,4 @@
+import { title } from 'process'
 import {
     GarganegaGrape,
     Grape,
@@ -26,6 +27,48 @@ import { Player } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 import { Soave } from './Wine.concrete'
 
+export abstract class CreateWineStrategy {
+    title: string;
+    abstract canCreate(player: Player): boolean
+    getTitle() {
+        return this.title;
+    }
+
+    abstract factory(): any;
+
+    constructor(title:string) {
+        this.title = title;
+    }
+}
+
+export class SoaveCreateWineStrategy extends CreateWineStrategy {
+
+    factory() {
+        return (
+            italiaCountry: ItaliaCountry,
+            venettonRegion: VenetoRegion,
+            garganegaGrape: GarganegaGrape
+        ) => new Soave(italiaCountry, venettonRegion, garganegaGrape)
+    }
+
+    canCreate(player: Player): boolean {
+        const grapes = player.getGrapes()
+        let amount = 0
+
+        grapes.forEach((grape) => {
+            if (grape instanceof GarganegaGrape) {
+                amount += grape.getAmount()
+            }
+        })
+
+        return amount >= 100
+    }
+
+    constructor() {
+        super('Soave');
+    }
+}
+
 export class Application {
     countries: Country[]
     regions: Region[]
@@ -34,12 +77,26 @@ export class Application {
     grapes: Grape[]
     vineyards: Vineyard[]
 
-    update() {}
+    createWineStrategies: CreateWineStrategy[]
+
+    update() {
+        this.createWineStrategies.forEach(createStrategy => {
+            const canCreate = createStrategy.canCreate(this.player);
+            if (canCreate) {
+                return {
+                    factory: () => createStrategy.factory(), 
+                    title: createStrategy.title,
+                }
+            }
+        });
+    }
 
     // hello world  , this is my love, and my love is long and as long as i am living  while
     // Hello world, this is my love, and my love will last as long as I live.
 
     constructor() {
+        this.createWineStrategies = [new SoaveCreateWineStrategy()]
+
         this.countries = [
             FranceCountry.Instance(),
             ItaliaCountry.Instance(),
@@ -61,7 +118,10 @@ export class Application {
 
         this.vineyards = [
             new Vineyard('Deep Six Vineyard', MuskadetAppellation.Instance()),
-            new Vineyard('Tourniket', VinhoVerdeAppellation.Instance()),
+            new Vineyard(
+                'Tourniket Vineyard',
+                VinhoVerdeAppellation.Instance()
+            ),
         ]
 
         this.grapes = [
@@ -86,8 +146,8 @@ export class Application {
 }
 
 const str = `
-3.10.2024
-Sirens were wailing today.
-I could hear them muffled. From a distance.
-Earlier, I received an SMS that there would be a check of the notification systems.
+    3.10.2024
+    Sirens were wailing today.
+    I could hear them muffled. From a distance.
+    Earlier, I received an SMS that there would be a check of the notification systems.
 `

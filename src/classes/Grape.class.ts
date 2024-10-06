@@ -1,15 +1,22 @@
 import { Appellation, Country, Location, Region } from './Location.class'
 import { PortugalCountry } from './Location.Country.concrete'
 import { VenetoRegion } from './Location.Region.concrete'
+import { Player } from './Player.class'
 
 export interface IGrape {
     getGrapeName(): string
     getLocation(): Location
+    getAmount(): number
 }
 
 export class Grape implements IGrape {
     protected grapeName: string
     protected location: Location
+    protected amount: number
+
+    getAmount(): number {
+        return this.amount
+    }
 
     getGrapeName() {
         return this.grapeName
@@ -22,6 +29,7 @@ export class Grape implements IGrape {
     constructor(title: string, location: Location) {
         this.location = location
         this.grapeName = title
+        this.amount = 100
     }
 }
 
