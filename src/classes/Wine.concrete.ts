@@ -9,45 +9,7 @@ import { BurgundyRegion, VenetoRegion } from './Location.Region.concrete'
 import { Player } from './Player.class'
 import { Wine } from './Wine.class'
 
-export class Soave extends Wine {
-    static TryInstanceByPlayer(player: Player) {
-        const grapes = player.getGrapes()
-        const locations = player.getLocations()
-
-        if (!grapes.length || !locations.length) {
-            return null
-        }
-
-        for (let i = 0; i < locations.length; i++) {
-            const location = locations[i]
-
-            if (location instanceof ItaliaCountry) {
-                for (let j = 0; j < grapes.length; j++) {
-                    const grape = grapes[j]
-
-                    if (grape instanceof GarganegaGrape) {
-                        const grapeLocation = grape.getLocation()
-                        const grapeRegion = grapeLocation.getRegion()
-
-                        console.log('GRAPE REGION')
-
-                        if (grapeRegion instanceof VenetoRegion) {
-                            return new Soave(
-                                ItaliaCountry.Instance(),
-                                VenetoRegion.Instance(),
-                                grape
-                            )
-                        }
-                    }
-                }
-            }
-        }
-
-        console.log('sorry, you can not create the Soave')
-
-        return null
-    }
-
+export class SoaveWine extends Wine {
     constructor(
         italiaCountry: ItaliaCountry,
         venetoRegion: VenetoRegion,
@@ -61,45 +23,6 @@ export class Soave extends Wine {
 }
 
 export class Muskadet extends Wine {
-    static TryInstanceByPlayer(player: Player) {
-        const grapes = player.getGrapes()
-
-        const locations = player.getLocations()
-
-        if (!grapes.length || !locations.length) {
-            return null
-        }
-
-        for (let i = 0; i < locations.length; i++) {
-            const location = locations[i]
-
-            if (location instanceof FranceCountry) {
-                for (let j = 0; j < grapes.length; j++) {
-                    const grape = grapes[j]
-
-                    if (grape instanceof GarganegaGrape) {
-                        const grapeLocation = grape.getLocation()
-                        const grapeRegion = grapeLocation.getRegion()
-
-                        console.log('GRAPE REGION')
-
-                        if (grapeRegion instanceof VenetoRegion) {
-                            return new Soave(
-                                ItaliaCountry.Instance(),
-                                VenetoRegion.Instance(),
-                                grape
-                            )
-                        }
-                    }
-                }
-            }
-        }
-
-        console.log('you can not create "Muskadet"')
-
-        return null
-    }
-
     constructor(
         italiaCountry: ItaliaCountry,
         venetoRegion: VenetoRegion,
@@ -122,10 +45,6 @@ export class VinhoVerdeWine extends Wine {
     }
 }
 
-export class AstiWine extends Wine {
+export class AstiWine extends Wine {}
 
-}
-
-export class ProseccoWine extends Wine {
-
-}
+export class ProseccoWine extends Wine {}

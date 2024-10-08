@@ -12,17 +12,17 @@ import { Player } from '../classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../classes/Grape.class'
 import { Vineyard } from '../classes/Vineyard.class'
-import { Soave } from '../classes/Wine.concrete'
+import { SoaveWine } from '../classes/Wine.concrete'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
     const [countries, setCountries] = useState<Country[]>(
         ctx.application.countries
     )
-    const [regions, setRegions] = useState<Region[]>(ctx.application.regions)
-    const [appellations, setAppellations] = useState<Appellation[]>(
-        ctx.application.appellations
-    )
+    // const [regions, setRegions] = useState<Region[]>(ctx.application.countries regions)
+    // const [appellations, setAppellations] = useState<Appellation[]>(
+    //     ctx.application.appellations
+    // )
 
     const [vineyards, setVineyard] = useState<Vineyard[]>(
         ctx.application.vineyards
@@ -34,8 +34,8 @@ const GamePage = () => {
 
     useEffect(() => {
         if (marked) {
-            const country = marked.getCountry()
-            const title = country.getTitle()
+            // const country = marked.getCountry()
+            // const title = country.getTitle()
         } else {
         }
     }, [marked])
@@ -49,36 +49,26 @@ const GamePage = () => {
                 <span>countries: </span>
                 {countries.map((ctr) => (
                     <ElementWrapper
-                        isMarked={checkIfMarkedCountry(marked, ctr)}
+                        isMarked={
+                            false
+                            // checkIfMarkedCountry(marked, ctr)
+                        }
                     >
-                        <button>{ctr.getTitle()}</button>
+                        <>
+                            <button>{ctr.getTitle()}</button>
+                            {ctr.getRegions().map((region) => (
+                                <ElementWrapper isMarked={false}>
+                                    <>
+                                        {region
+                                            .getAppellations()
+                                            .map((appellation) => (
+                                                <div></div>
+                                            ))}
+                                    </>
+                                </ElementWrapper>
+                            ))}
+                        </>
                     </ElementWrapper>
-                ))}
-            </div>
-            <div>
-                <span>regions: </span>
-                {regions.map((region) => (
-                    <ElementWrapper
-                        isMarked={checkIfMarkedRegion(marked, region)}
-                    >
-                        <button
-                            onMouseOver={() => setMarked(region)}
-                            onMouseLeave={() => setMarked(null)}
-                        >
-                            {region.getTitle()}
-                        </button>
-                    </ElementWrapper>
-                ))}
-            </div>
-            <div>
-                <span>appellations: </span>
-                {appellations.map((appellation) => (
-                    <button
-                        onMouseOver={() => setMarked(appellation)}
-                        onMouseLeave={() => setMarked(null)}
-                    >
-                        {appellation.getAppellationName()}
-                    </button>
                 ))}
             </div>
             <div>
@@ -103,22 +93,7 @@ const GamePage = () => {
                     </button>
                 ))}
             </div>
-            <div>
-                {ctx.application.canCreateStrategies.map((elem) => {
-                    const canCreate = elem.canCreate(ctx.application.player)
-                    if (canCreate) {
-                        const data = elem.getData()
-                        return (
-                        <button onClick={() => ctx.application.player.addVineVineyard(data.factory())}>
-                            buy an {data.title}
-                        </button>
-                    )
-                    } else {
-                        console.log('you can not')
-                    }
-
-                })}
-            </div>
+            <div></div>
         </div>
     )
 }
@@ -146,17 +121,15 @@ function actionWrapper(ctx: TMainContext, fn: () => void) {
 }
 
 function checkIfMarkedCountry(isMarked: Location | null, current: Location) {
-    const markedCountry = isMarked?.getCountry()
-    const currentCountry = current.getCountry()
-    const isEqual = markedCountry === currentCountry
-
-    return isEqual
+    // const markedCountry = isMarked?.getCountry()
+    // const currentCountry = current.getCountry()
+    // const isEqual = markedCountry === currentCountry
+    // return isEqual
 }
 
 function checkIfMarkedRegion(isMarked: Location | null, current: Location) {
-    const markedRegion = isMarked?.getRegion()
-    const currentRegion = current.getRegion()
-    const isEqual = markedRegion === currentRegion
-
-    return isEqual
+    // const markedRegion = isMarked?.getRegion()
+    // const currentRegion = current.getRegion()
+    // const isEqual = markedRegion === currentRegion
+    // return isEqual
 }

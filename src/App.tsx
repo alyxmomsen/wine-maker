@@ -3,12 +3,12 @@ import { createContext, useEffect, useState } from 'react'
 import './App.css'
 
 import GamePage from './pages/game'
-import { Application } from './classes/Application.class'
+import { GameFacade } from './classes/GameFacade'
 
-const myapp = new Application(null)
+const myapp = new GameFacade(null)
 
 export type TMainContext = {
-    application: Application
+    application: GameFacade
     updated: number
     dispatcher: React.Dispatch<React.SetStateAction<number>> | null
 }

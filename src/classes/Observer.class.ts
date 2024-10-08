@@ -1,26 +1,17 @@
+export interface IObserver {}
 
-export interface IObserver {
-
-}
-
-export interface IObserveable {
-
-}
+export interface IObserveable {}
 
 export class Observer implements IObserver {
-
-    observeables: IObserveable[];
+    observeables: IObserveable[]
 
     watch() {
-
-        this.observeables.forEach(elem => elem);
+        this.observeables.forEach((elem) => elem)
     }
 
     constructor() {
-        this.observeables = [];
+        this.observeables = []
     }
 }
 
-export class Observeable implements IObserveable {
-
-}
+export class Observeable implements IObserveable {}

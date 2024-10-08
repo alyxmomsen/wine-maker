@@ -3,14 +3,11 @@ import { Location } from './Location.class'
 import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 
-interface IPlayer {
-
-}
+interface IPlayer {}
 
 export class Player implements IPlayer {
-
-    private refresher: React.Dispatch<React.SetStateAction<number>> | null;
-    private observer: undefined;
+    private refresher: React.Dispatch<React.SetStateAction<number>> | null
+    private observer: undefined
     private grapes: Grape[]
     private locations: Location[]
     private wine: Wine[]
@@ -37,22 +34,20 @@ export class Player implements IPlayer {
     }
 
     addVineVineyard(vineyard: Vineyard): Vineyard {
-
-        
-        
         this.vineyards.push(vineyard)
         if (this.refresher) {
-            
-            this.refresher(current => current + 1)
+            this.refresher((current) => current + 1)
         }
         return vineyard
     }
 
-    constructor(refresher:React.Dispatch<React.SetStateAction<number>>|null) {
+    constructor(
+        refresher: React.Dispatch<React.SetStateAction<number>> | null
+    ) {
         this.grapes = []
         this.locations = []
         this.wine = []
         this.vineyards = []
-        this.refresher = refresher;
+        this.refresher = refresher
     }
 }

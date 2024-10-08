@@ -25,59 +25,18 @@ import {
 } from './Location.Region.concrete'
 import { Player } from './Player.class'
 import { CanCreateVineyardStrategy, Vineyard } from './Vineyard.class'
-import { Soave } from './Wine.concrete'
+import { SoaveWine } from './Wine.concrete'
 import { CanCreateStrategy } from './Strategy.class'
+import { WineFactory } from './WineFactory'
 
-export abstract class CreateWineStrategy {
-    title: string
-    abstract canCreate(player: Player): boolean
-    getTitle() {
-        return this.title
-    }
-
-    abstract factory(): any
-
-    constructor(title: string) {
-        this.title = title
-    }
-}
-
-export class SoaveCreateWineStrategy extends CreateWineStrategy {
-    factory() {
-        return (
-            italiaCountry: ItaliaCountry,
-            venettonRegion: VenetoRegion,
-            garganegaGrape: GarganegaGrape
-        ) => new Soave(italiaCountry, venettonRegion, garganegaGrape)
-    }
-
-    canCreate(player: Player): boolean {
-        const grapes = player.getGrapes()
-        let amount = 0
-
-        grapes.forEach((grape) => {
-            if (grape instanceof GarganegaGrape) {
-                amount += grape.getAmount()
-            }
-        })
-
-        return amount >= 100
-    }
-
-    constructor() {
-        super('Soave')
-    }
-}
-
-export class Application {
+export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
     countries: Country[]
-    regions: Region[]
-    appellations: Appellation[]
     player: Player
     grapes: Grape[]
     vineyards: Vineyard[]
-    canCreateStrategies: CanCreateStrategy[]
+
+    wineFactories: WineFactory[];
 
     update() {
         this.refresh()
@@ -100,25 +59,22 @@ export class Application {
         dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
     ) {
         this.refresher = dispatcher
-
-        this.canCreateStrategies = [new CanCreateVineyardStrategy()]
-
-        this.countries = [
-            FranceCountry.Instance(),
-            ItaliaCountry.Instance(),
-            PortugalCountry.Instance(),
-        ]
-        this.regions = [
+        const france = FranceCountry.Instance()
+        france.addRegions([Medok.Instance(), BurgundyRegion.Instance()])
+        const italy = ItaliaCountry.Instance()
+        italy.addRegions([
             VenetoRegion.Instance(),
             LoireValleyRegion.Instance(),
-            Medok.Instance(),
-            BurgundyRegion.Instance(),
-            MinhoRegion.Instance(),
-        ]
-        this.appellations = [
-            MuskadetAppellation.Instance(),
-            VinhoVerdeAppellation.Instance(),
-        ]
+        ])
+        italy.addAppellations([
+            MuskadetAppellation.Instance()
+        ])
+        const portugal = PortugalCountry.Instance()
+        portugal.addRegions([MinhoRegion.Instance()])
+        portugal.addAppellations([
+            VinhoVerdeAppellation.Instance()
+        ]);
+        this.countries = [france, italy, portugal]
         this.vineyards = [
             new Vineyard('Deep Six Vineyard', MuskadetAppellation.Instance()),
             new Vineyard(
@@ -133,6 +89,9 @@ export class Application {
             new MelonDeBourgogne(MuskadetAppellation.Instance()),
         ]
         this.player = new Player(this.refresher)
+
+        this.wineFactories = [];
+
         const garganega = new GarganegaGrape(LoireValleyRegion.Instance())
         const muskadeGrape = new MuscadetGrape(LoireValleyRegion.Instance())
         this.player.addGrape(garganega)
@@ -140,10 +99,6 @@ export class Application {
         this.player.addLocation(ItaliaCountry.Instance())
         this.player.addLocation(VenetoRegion.Instance())
         console.log(this.player)
-        const result = Soave.TryInstanceByPlayer(this.player)
-        const vnineyard = new Vineyard('My Vineyard', ItaliaCountry.Instance())
-        console.log({ result })
-
         this.update()
     }
 }
