@@ -1,9 +1,6 @@
 import { Appellation } from './Location.class'
 import { FranceCountry, PortugalCountry } from './Location.Country.concrete'
-import {
-    LoireValleyRegion,
-    MinhoRegion,
-} from './Location.Region.concrete'
+import { LoireValleyRegion, MinhoRegion } from './Location.Region.concrete'
 
 export class MuskadetAppellation extends Appellation {
     private static instance: MuskadetAppellation | null = null

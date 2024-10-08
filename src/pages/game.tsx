@@ -43,7 +43,9 @@ const GamePage = () => {
     return (
         <div className={'flex-box flex-dir--col flex__align--start'}>
             <div>
-                <button onClick={() => ctx.application.update()}>udpdate</button>
+                <button onClick={() => ctx.application.update()}>
+                    udpdate
+                </button>
                 <span>countries: </span>
                 {countries.map((ctr) => (
                     <ElementWrapper
@@ -102,23 +104,20 @@ const GamePage = () => {
                 ))}
             </div>
             <div>
-                {
-                    ctx.application.canCreateStrategies.map(elem => {
+                {ctx.application.canCreateStrategies.map((elem) => {
+                    const canCreate = elem.canCreate(ctx.application.player)
+                    if (canCreate) {
+                        const data = elem.getData()
+                        return (
+                        <button onClick={() => ctx.application.player.addVineVineyard(data.factory())}>
+                            buy an {data.title}
+                        </button>
+                    )
+                    } else {
+                        console.log('you can not')
+                    }
 
-                        const canCreate = elem.canCreate(ctx.application.player);
-                        
-                        if (canCreate) {
-                            console.log('you can');
-                        }
-                        else {
-                            console.log('you can not');
-                        }
-
-                        const data = elem.getData();
-
-                        return <button onClick={data.factory}>buy {data.title}</button>
-                    })
-                }
+                })}
             </div>
         </div>
     )

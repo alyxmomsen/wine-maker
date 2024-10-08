@@ -33,35 +33,32 @@ export class Vineyard {
 /* ************************************************************ */
 
 export class CanCreateVineyardStrategy extends CanCreateStrategy {
-
     canCreate(player: Player): boolean {
+        const amount = player.getGrapes().length
 
-        const amount = player.getGrapes().length;
-        
         if (amount > 1) {
-            console.log(
-                'approved'
-            );
-        }
-        else {
-            console.log('denied');
-        }
-        
-        return true;
-    };
-
-    getData(): {title:string  , factory:() => Vineyard} {
-
-        const obj:{title:string  , factory:() => Vineyard} = {
-            title: 'VineYard', 
-            factory:() => new Vineyard('Loire Valley Vineyard' , LoireValleyRegion.Instance()), 
+            console.log('approved')
+        } else {
+            console.log('denied')
         }
 
-        return obj;
+        return true
+    }
+
+    getData(): { title: string; factory: () => Vineyard } {
+        const obj: { title: string; factory: () => Vineyard } = {
+            title: 'VineYard',
+            factory: () =>
+                new Vineyard(
+                    'Loire Valley Vineyard',
+                    LoireValleyRegion.Instance()
+                ),
+        }
+
+        return obj
     }
 
     constructor() {
-        super();
+        super()
     }
 }
-

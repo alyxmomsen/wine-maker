@@ -22,13 +22,11 @@ export const MainContext = createContext<TMainContext>({
 let reqAnimFrameId = 0
 
 function App() {
-
-    console.log('root updated');
+    console.log('root updated')
 
     const [state, setState] = useState(0)
     useEffect(() => {
-        
-        myapp.setRefresher(setState);
+        myapp.setRefresher(setState)
 
         // window.cancelAnimationFrame(reqAnimFrameId);
 

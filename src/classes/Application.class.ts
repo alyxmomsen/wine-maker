@@ -29,21 +29,20 @@ import { Soave } from './Wine.concrete'
 import { CanCreateStrategy } from './Strategy.class'
 
 export abstract class CreateWineStrategy {
-    title: string;
+    title: string
     abstract canCreate(player: Player): boolean
     getTitle() {
-        return this.title;
+        return this.title
     }
 
-    abstract factory(): any;
+    abstract factory(): any
 
-    constructor(title:string) {
-        this.title = title;
+    constructor(title: string) {
+        this.title = title
     }
 }
 
 export class SoaveCreateWineStrategy extends CreateWineStrategy {
-
     factory() {
         return (
             italiaCountry: ItaliaCountry,
@@ -66,47 +65,43 @@ export class SoaveCreateWineStrategy extends CreateWineStrategy {
     }
 
     constructor() {
-        super('Soave');
+        super('Soave')
     }
 }
 
 export class Application {
-    private refresher: React.Dispatch<React.SetStateAction<number>> | null;
+    private refresher: React.Dispatch<React.SetStateAction<number>> | null
     countries: Country[]
     regions: Region[]
     appellations: Appellation[]
     player: Player
     grapes: Grape[]
     vineyards: Vineyard[]
-    canCreateStrategies:CanCreateStrategy[]
+    canCreateStrategies: CanCreateStrategy[]
 
     update() {
-        
-        this.refresh();
+        this.refresh()
     }
 
     refresh(): void {
-        
         if (this.refresher) {
-            this.refresher(current => current + 1);
-            console.log('updateted');
-        }
-        else {
-            console.log('not updated');
+            this.refresher((current) => current + 1)
+            console.log('updateted')
+        } else {
+            console.log('not updated')
         }
     }
 
-    setRefresher(dispatcher:React.Dispatch<React.SetStateAction<number>>) {
-        this.refresher = dispatcher;
+    setRefresher(dispatcher: React.Dispatch<React.SetStateAction<number>>) {
+        this.refresher = dispatcher
     }
 
-    constructor(dispatcher:React.Dispatch<React.SetStateAction<number>>|null = null) {
-        
-        this.refresher = dispatcher; 
+    constructor(
+        dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
+    ) {
+        this.refresher = dispatcher
 
-        this.canCreateStrategies = [
-            new CanCreateVineyardStrategy() ,
-        ];
+        this.canCreateStrategies = [new CanCreateVineyardStrategy()]
 
         this.countries = [
             FranceCountry.Instance(),
@@ -137,11 +132,11 @@ export class Application {
             new MuscadetGrape(MuskadetAppellation.Instance()),
             new MelonDeBourgogne(MuskadetAppellation.Instance()),
         ]
-        this.player = new Player()
+        this.player = new Player(this.refresher)
         const garganega = new GarganegaGrape(LoireValleyRegion.Instance())
-        const muskadeGrape = new MuscadetGrape(LoireValleyRegion.Instance()) ;
+        const muskadeGrape = new MuscadetGrape(LoireValleyRegion.Instance())
         this.player.addGrape(garganega)
-        this.player.addGrape(muskadeGrape);
+        this.player.addGrape(muskadeGrape)
         this.player.addLocation(ItaliaCountry.Instance())
         this.player.addLocation(VenetoRegion.Instance())
         console.log(this.player)
@@ -149,7 +144,6 @@ export class Application {
         const vnineyard = new Vineyard('My Vineyard', ItaliaCountry.Instance())
         console.log({ result })
 
-        this.update();
+        this.update()
     }
 }
-

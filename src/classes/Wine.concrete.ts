@@ -38,12 +38,12 @@ export class Soave extends Wine {
                                 grape
                             )
                         }
-                    } 
+                    }
                 }
             }
         }
 
-        console.log('sorry, you can not create the Soave');
+        console.log('sorry, you can not create the Soave')
 
         return null
     }
@@ -90,12 +90,12 @@ export class Muskadet extends Wine {
                                 grape
                             )
                         }
-                    } 
+                    }
                 }
             }
         }
 
-        console.log('you can not create "Muskadet"');
+        console.log('you can not create "Muskadet"')
 
         return null
     }
@@ -115,10 +115,17 @@ export class Muskadet extends Wine {
 export class VinhoVerdeWine extends Wine {
     constructor(
         portugalCountry: PortugalCountry,
-        minhoRegion: Location,
         minnoRegion: BurgundyRegion,
         grape: Grape
     ) {
         super('Vinho Verde', grape.getGrapeName(), '', '', '')
     }
+}
+
+export class AstiWine extends Wine {
+
+}
+
+export class ProseccoWine extends Wine {
+
 }
