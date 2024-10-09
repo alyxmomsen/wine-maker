@@ -20,8 +20,10 @@ const GamePage = () => {
         ctx.application.countries
     )
 
-    const [playerMoney ,setPlayerMoney] = useState(ctx.application.player.getMoneyAmount());
-    const [playerMoneyInput ,setPlayerMoneyInput] = useState(0);
+    const [playerMoney, setPlayerMoney] = useState(
+        ctx.application.player.getMoneyAmount()
+    )
+    const [playerMoneyInput, setPlayerMoneyInput] = useState(0)
 
     const [vineyards, setVineyard] = useState<Vineyard[]>(
         ctx.application.vineyards
@@ -29,15 +31,6 @@ const GamePage = () => {
 
     const [grapes, setGrape] = useState<Grape[]>(ctx.application.grapes)
     const [player, setPlayer] = useState<Player>(ctx.application.player)
-    const [marked, setMarked] = useState<Location | null>(null)
-
-    useEffect(() => {
-        if (marked) {
-            // const country = marked.getCountry()
-            // const title = country.getTitle()
-        } else {
-        }
-    }, [marked])
 
     return (
         <div className={'flex-box flex-dir--col flex__align--start'}>
@@ -93,56 +86,46 @@ const GamePage = () => {
                 ))}
             </div>
             <div>
-                <h3>the player:</h3>
-                
+                <h3>Player:</h3>
                 <div>
-                    <input onChange={(e) => setPlayerMoneyInput(Number.parseFloat(e.target.value))} type="number" value={playerMoneyInput} />
-                    <button onClick={() => ctx.application.player.setMoneyAmount(playerMoneyInput)}>increment money</button>
+                    <input
+                        onChange={(e) =>
+                            setPlayerMoneyInput(
+                                Number.parseFloat(e.target.value)
+                            )
+                        }
+                        type="number"
+                        value={playerMoneyInput}
+                    />
+                    <button
+                        onClick={() => {
+                            ctx.application.player.setMoneyAmount(
+                                playerMoneyInput
+                            )
+                            ctx.application.update();
+                        }
+                        }
+                    >
+                        increment money
+                    </button>
                 </div>
-                {
-                    ctx.application.wineFactories.map(factory => {
-                        const canCreate = factory.canCreateVineFor(ctx.application.player);
-                        console.log({can:canCreate});
-                        return <button disabled={!canCreate}>{factory.getWineName()}</button>
-                    })
-                }
+                {ctx.application.wineFactories.map((factory) => {
+                    const canCreate = factory.canCreateVineFor(
+                        player
+                    )
+
+                    return (
+                        <button onClick={() => {
+                            factory.createFor(player);
+                            console.log({player});
+                        }} disabled={!canCreate}>
+                            {factory.getWineName()}
+                        </button>
+                    )
+                })}
             </div>
         </div>
     )
 }
 
 export default GamePage
-
-function upd(ctx: TMainContext) {
-    const dispatcher = ctx.dispatcher
-    const application = ctx.application
-
-    if (dispatcher && application) {
-        application.update()
-        dispatcher((current) => current + 1)
-    }
-}
-
-function actionWrapper(ctx: TMainContext, fn: () => void) {
-    console.log(ctx)
-    fn()
-    ctx.application.update()
-    const dispatcher = ctx.dispatcher
-    if (dispatcher) {
-        dispatcher((current) => current + 1)
-    }
-}
-
-function checkIfMarkedCountry(isMarked: Location | null, current: Location) {
-    // const markedCountry = isMarked?.getCountry()
-    // const currentCountry = current.getCountry()
-    // const isEqual = markedCountry === currentCountry
-    // return isEqual
-}
-
-function checkIfMarkedRegion(isMarked: Location | null, current: Location) {
-    // const markedRegion = isMarked?.getRegion()
-    // const currentRegion = current.getRegion()
-    // const isEqual = markedRegion === currentRegion
-    // return isEqual
-}

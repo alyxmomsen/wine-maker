@@ -6,7 +6,10 @@ export class Observer implements IObserver {
     observeables: IObserveable[]
 
     watch() {
-        this.observeables.forEach((elem) => elem)
+        this.observeables.forEach((elem) => {
+            if (true) {
+            }
+        })
     }
 
     constructor() {

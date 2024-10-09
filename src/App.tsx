@@ -5,7 +5,7 @@ import './App.css'
 import GamePage from './pages/game'
 import { GameFacade } from './classes/GameFacade'
 
-const myapp = new GameFacade(null)
+const gameFacade = new GameFacade(null)
 
 export type TMainContext = {
     application: GameFacade
@@ -14,7 +14,7 @@ export type TMainContext = {
 }
 
 export const MainContext = createContext<TMainContext>({
-    application: myapp,
+    application: gameFacade,
     updated: 0,
     dispatcher: null,
 })
@@ -26,7 +26,7 @@ function App() {
 
     const [state, setState] = useState(0)
     useEffect(() => {
-        myapp.setRefresher(setState)
+        gameFacade.setUIRefresher(setState)
 
         // window.cancelAnimationFrame(reqAnimFrameId);
 
@@ -42,7 +42,7 @@ function App() {
         <>
             <MainContext.Provider
                 value={{
-                    application: myapp,
+                    application: gameFacade,
                     updated: state,
                     dispatcher: setState,
                 }}

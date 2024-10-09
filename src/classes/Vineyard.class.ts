@@ -11,7 +11,7 @@ export class Vineyard {
     getLocation() {
         return this.location
     }
-  
+
     getName() {
         return this.name
     }

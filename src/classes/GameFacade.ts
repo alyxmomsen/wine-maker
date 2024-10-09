@@ -1,4 +1,3 @@
-
 import {
     GarganegaGrape,
     Grape,
@@ -23,6 +22,7 @@ import {
     VenetoRegion,
     MinhoRegion,
 } from './Location.Region.concrete'
+import { Observer } from './Observer.class'
 import { Player } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 import { SoaveWineFactory, WineFactory } from './WineFactory'
@@ -34,28 +34,27 @@ export class GameFacade {
     grapes: Grape[]
     vineyards: Vineyard[]
 
-    wineFactories: WineFactory[];
+    wineFactories: WineFactory[]
 
-    update() {
-        this.refresh()
-    }
+    observer: Observer
 
-    refresh(): void {
-        if (this.refresher) {
-            this.refresher((current) => current + 1)
-            console.log('updateted')
-        } else {
-            console.log('not updated')
+    update() :boolean {
+        const refresher = this.refresher
+        if (refresher) {
+            refresher((current) => current + 1)
         }
+        return true;
     }
 
-    setRefresher(dispatcher: React.Dispatch<React.SetStateAction<number>>) {
-        this.refresher = dispatcher
+    setUIRefresher(fn:React.Dispatch<React.SetStateAction<number>>) {
+        this.refresher = fn;
     }
 
     constructor(
         dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
     ) {
+        this.observer = new Observer()
+
         this.refresher = dispatcher
         const france = FranceCountry.Instance()
         france.addRegions([Medok.Instance(), BurgundyRegion.Instance()])
@@ -64,14 +63,10 @@ export class GameFacade {
             VenetoRegion.Instance(),
             LoireValleyRegion.Instance(),
         ])
-        italy.addAppellations([
-            MuskadetAppellation.Instance()
-        ])
+        italy.addAppellations([MuskadetAppellation.Instance()])
         const portugal = PortugalCountry.Instance()
         portugal.addRegions([MinhoRegion.Instance()])
-        portugal.addAppellations([
-            VinhoVerdeAppellation.Instance()
-        ]);
+        portugal.addAppellations([VinhoVerdeAppellation.Instance()])
 
         this.countries = [france, italy, portugal]
         this.vineyards = [
@@ -87,11 +82,9 @@ export class GameFacade {
             new MuscadetGrape(MuskadetAppellation.Instance()),
             new MelonDeBourgogne(MuskadetAppellation.Instance()),
         ]
-        this.player = new Player(this.refresher)
+        this.player = new Player();
 
-        this.wineFactories = [
-            new SoaveWineFactory()
-        ];
+        this.wineFactories = [new SoaveWineFactory()]
 
         const garganega = new GarganegaGrape(LoireValleyRegion.Instance())
         const muskadeGrape = new MuscadetGrape(LoireValleyRegion.Instance())

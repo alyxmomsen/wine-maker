@@ -1,18 +1,18 @@
 import { Grape } from './Grape.class'
 import { Location } from './Location.class'
+import { Observer } from './Observer.class'
 import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 
 interface IPlayer {}
 
 export class Player implements IPlayer {
-    private refresher: React.Dispatch<React.SetStateAction<number>> | null
-    private observer: undefined
+    
     private grapes: Grape[]
     private locations: Location[]
     private wine: Wine[]
     private vineyards: Vineyard[]
-    private moneyAmount: number;
+    private moneyAmount: number
 
     getGrapes() {
         return this.grapes
@@ -24,50 +24,57 @@ export class Player implements IPlayer {
 
     addGrape(grape: Grape) {
         this.grapes.push(grape)
+
+        // update client
     }
 
     addLocation(location: Location) {
         this.locations.push(location)
+
+        // update client
     }
 
     addWine(wine: Wine) {
         this.wine.push(wine)
+
+        // update client
+
+        this.update(() => {});
     }
 
-    addVineVineyard(vineyard: Vineyard): Vineyard {
+    addVineyard(vineyard: Vineyard): Vineyard {
         this.vineyards.push(vineyard)
-        if (this.refresher) {
-            this.refresher((current) => current + 1)
-        }
+        
         return vineyard
     }
 
     getMoneyAmount() {
-        return this.moneyAmount;
+        return this.moneyAmount
     }
 
-    setMoneyAmount(value:number) {
-        this.moneyAmount = value;
+    setMoneyAmount(value: number) {
+        this.moneyAmount = value
     }
 
-    incrementMoneyAmountByValue(value:number) {
-        const v = Math.abs(value);
-        this.moneyAmount += v;
+    incrementMoneyAmountByValue(value: number) {
+        const v = Math.abs(value)
+        this.moneyAmount += v
     }
 
-    decrementMoneyAmountByValue(value:number) {
-        const v = Math.abs(value);
-        this.moneyAmount -= v;
+    decrementMoneyAmountByValue(value: number) {
+        const v = Math.abs(value)
+        this.moneyAmount -= v
     }
 
-    constructor(
-        refresher: React.Dispatch<React.SetStateAction<number>> | null
-    ) {
-        this.grapes = [] ;
-        this.locations = [] ;
-        this.wine = [] ;
-        this.vineyards = [] ;
-        this.refresher = refresher ;
-        this.moneyAmount = 999999999999999 ;
+    update(cb:() => void) {
+        
+    }
+
+    constructor() {
+        this.grapes = []
+        this.locations = []
+        this.wine = []
+        this.vineyards = []
+        this.moneyAmount = 99
     }
 }
