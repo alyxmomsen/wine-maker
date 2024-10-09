@@ -93,7 +93,13 @@ const GamePage = () => {
                     </button>
                 ))}
             </div>
-            <div></div>
+            <div>
+                {
+                    ctx.application.wineFactories.map(factory => {
+                        return <button>btn</button>
+                    })
+                }
+            </div>
         </div>
     )
 }

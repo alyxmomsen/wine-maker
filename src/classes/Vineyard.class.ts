@@ -1,8 +1,6 @@
 import { Grape } from './Grape.class'
 import { Location } from './Location.class'
-import { LoireValleyRegion } from './Location.Region.concrete'
 import { Player } from './Player.class'
-import { CanCreateStrategy } from './Strategy.class'
 
 export class Vineyard {
     protected name: string
@@ -27,38 +25,5 @@ export class Vineyard {
         this.location = location
         this.grape = []
         this.owner = owner
-    }
-}
-
-/* ************************************************************ */
-
-export class CanCreateVineyardStrategy extends CanCreateStrategy {
-    canCreate(player: Player): boolean {
-        const amount = player.getGrapes().length
-
-        if (amount > 1) {
-            console.log('approved')
-        } else {
-            console.log('denied')
-        }
-
-        return true
-    }
-
-    getData(): { title: string; factory: () => Vineyard } {
-        const obj: { title: string; factory: () => Vineyard } = {
-            title: 'VineYard',
-            factory: () =>
-                new Vineyard(
-                    'Loire Valley Vineyard',
-                    LoireValleyRegion.Instance()
-                ),
-        }
-
-        return obj
-    }
-
-    constructor() {
-        super()
     }
 }

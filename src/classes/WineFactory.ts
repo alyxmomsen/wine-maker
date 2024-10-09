@@ -7,24 +7,26 @@ import { SoaveWine } from './Wine.concrete';
 
 export interface IWineFactory {
     canCreateVineFor(player: Player): boolean;
+    getWineName(): string;
 }
 
 export class WineFactory extends Factory implements IWineFactory {
     canCreateVineFor(player: Player): boolean {
         return false;
     }
+    getWineName(): string {
+        return '';
+    }
 }
 
 export class SoaveWineFactory extends WineFactory {
     canCreateVineFor(player: Player): boolean {
 
-
-
         return true;
     }
 
     getWineName() {
-        
+        return "Soave";
     }
 
     instanceFor(player: Player): SoaveWine | null {
@@ -44,8 +46,6 @@ export class SoaveWineFactory extends WineFactory {
 
             i++;
         }
-
-
 
         if (isItalia) {
             

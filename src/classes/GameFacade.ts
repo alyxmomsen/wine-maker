@@ -1,4 +1,4 @@
-import { title } from 'process'
+
 import {
     GarganegaGrape,
     Grape,
@@ -10,7 +10,7 @@ import {
     MuskadetAppellation,
     VinhoVerdeAppellation,
 } from './Location.Appellation.concrete'
-import { Appellation, Country, Region } from './Location.class'
+import { Country } from './Location.class'
 import {
     FranceCountry as FranceCountry,
     ItaliaCountry as ItaliaCountry,
@@ -24,10 +24,8 @@ import {
     MinhoRegion,
 } from './Location.Region.concrete'
 import { Player } from './Player.class'
-import { CanCreateVineyardStrategy, Vineyard } from './Vineyard.class'
-import { SoaveWine } from './Wine.concrete'
-import { CanCreateStrategy } from './Strategy.class'
-import { WineFactory } from './WineFactory'
+import { Vineyard } from './Vineyard.class'
+import { SoaveWineFactory, WineFactory } from './WineFactory'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
@@ -74,6 +72,7 @@ export class GameFacade {
         portugal.addAppellations([
             VinhoVerdeAppellation.Instance()
         ]);
+
         this.countries = [france, italy, portugal]
         this.vineyards = [
             new Vineyard('Deep Six Vineyard', MuskadetAppellation.Instance()),
@@ -90,7 +89,9 @@ export class GameFacade {
         ]
         this.player = new Player(this.refresher)
 
-        this.wineFactories = [];
+        this.wineFactories = [
+            new SoaveWineFactory()
+        ];
 
         const garganega = new GarganegaGrape(LoireValleyRegion.Instance())
         const muskadeGrape = new MuscadetGrape(LoireValleyRegion.Instance())
