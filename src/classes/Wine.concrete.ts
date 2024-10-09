@@ -22,7 +22,7 @@ export class SoaveWine extends Wine {
     }
 }
 
-export class Muskadet extends Wine {
+export class MuskadetWine extends Wine {
     constructor(
         italiaCountry: ItaliaCountry,
         venetoRegion: VenetoRegion,

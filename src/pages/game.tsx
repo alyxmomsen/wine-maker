@@ -13,13 +13,17 @@ import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../classes/Grape.class'
 import { Vineyard } from '../classes/Vineyard.class'
 import { VineyardFactory } from '../classes/WineyardFactory'
+import { FranceCountry } from '../classes/Location.Country.concrete'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
     const [countries, setCountries] = useState<Country[]>(
         ctx.application.countries
     )
-    const [playerMoneyInput, setPlayerMoneyInput] = useState(0)
+    const moneyInputDefaultValue = 1000
+    const [playerMoneyInput, setPlayerMoneyInput] = useState(
+        moneyInputDefaultValue
+    )
     const [vineyards, setVineyard] = useState<Vineyard[]>(
         ctx.application.vineyards
     )
@@ -99,6 +103,15 @@ const GamePage = () => {
                 <h3>Player:{'name'}</h3>
                 <ul>
                     <li>
+                        <span>grapes: </span>
+                        {player.getGrapes().map((grape) => (
+                            <span>
+                                {grape.getGrapeName()} (
+                                {grape.getLocation().getTitle()}) ,
+                            </span>
+                        ))}
+                    </li>
+                    <li>
                         <span>money: </span>
                         <span>{player.getMoneyAmount()}</span>
                         <input
@@ -133,16 +146,70 @@ const GamePage = () => {
                             {ctx.application.player
                                 .getVineyards()
                                 .map((vrd) => (
-                                    <div><button
-                                        onMouseOver={() => {
-                                            setFocusedCountry(vrd.getLocation())
-                                        }}
-                                        onMouseLeave={() => {
-                                            setFocusedCountry(null)
-                                        }}
-                                    >
-                                        {vrd.getName()}
-                                    </button></div>
+                                    <div>
+                                        <button
+                                            onMouseOver={() => {
+                                                setFocusedCountry(
+                                                    vrd.getLocation()
+                                                )
+                                            }}
+                                            onMouseLeave={() => {
+                                                setFocusedCountry(null)
+                                            }}
+                                        >
+                                            {vrd.getName()}
+                                        </button>
+                                        <div>
+                                            {ctx.application.wineFactories.map(
+                                                (wineFactory) => {
+                                                    const canCreateWine =
+                                                        wineFactory.canCreateWineForPlayer(
+                                                            ctx.application
+                                                                .player,
+                                                            vrd
+                                                        )
+
+                                                    return (
+                                                        <span>
+                                                            {canCreateWine
+                                                                ? '+'
+                                                                : '-'}
+                                                        </span>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+                                        <div>
+                                            {ctx.application.grapeFactories.map(
+                                                (grpFactory) => {
+                                                    const canCreate =
+                                                        grpFactory.canCreateGrape(
+                                                            ctx.application
+                                                                .player,
+                                                            vrd
+                                                        )
+
+                                                    return canCreate ? (
+                                                        <button
+                                                            onClick={() => {
+                                                                grpFactory.create(
+                                                                    ctx
+                                                                        .application
+                                                                        .player,
+                                                                    vrd
+                                                                ),
+                                                                    ctx.application.update()
+                                                            }}
+                                                        >
+                                                            {grpFactory.getTitle()}
+                                                        </button>
+                                                    ) : (
+                                                        '0'
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
                                 ))}
                         </div>
                     </li>
@@ -168,22 +235,6 @@ const GamePage = () => {
                         create vineyard
                     </button>
                 </div>
-                {ctx.application.wineFactories.map((factory) => {
-                    const canCreate = factory.canCreateVineForPlayer(player)
-
-                    return (
-                        <button
-                            onClick={() => {
-                                factory.createFor(player)
-                                ctx.application.update()
-                                console.log({ player })
-                            }}
-                            disabled={!canCreate}
-                        >
-                            {factory.getWineName()}
-                        </button>
-                    )
-                })}
             </div>
         </div>
     )

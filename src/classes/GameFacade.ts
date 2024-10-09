@@ -1,5 +1,10 @@
 import { Grape } from './Grape.class'
 import {
+    GarganegaGrapeFactory,
+    IGrapeFactory,
+    MuscadetGrapeFactory,
+} from './GrapeFactory'
+import {
     MuskadetAppellation,
     VinhoVerdeAppellation,
 } from './Location.Appellation.concrete'
@@ -20,7 +25,11 @@ import {
 import { Observer } from './Observer.class'
 import { Player } from './Player.class'
 import { Vineyard } from './Vineyard.class'
-import { SoaveWineFactory, WineFactory } from './WineFactory'
+import {
+    MuskadetWineFactory,
+    SoaveWineFactory,
+    WineFactory,
+} from './WineFactory'
 import { VineyardFactory } from './WineyardFactory'
 
 export class GameFacade {
@@ -31,6 +40,7 @@ export class GameFacade {
     vineyards: Vineyard[]
     wineFactories: WineFactory[]
     vineyardFactory: VineyardFactory
+    grapeFactories: IGrapeFactory[]
     observer: Observer
     update(): boolean {
         const refresher = this.refresher
@@ -77,7 +87,11 @@ export class GameFacade {
         this.vineyards = []
         this.grapes = []
         this.player = new Player()
-        this.wineFactories = [new SoaveWineFactory()]
+        this.wineFactories = [new SoaveWineFactory(), new MuskadetWineFactory()]
+        this.grapeFactories = [
+            new GarganegaGrapeFactory(),
+            new MuscadetGrapeFactory(),
+        ]
         this.update()
     }
 }
