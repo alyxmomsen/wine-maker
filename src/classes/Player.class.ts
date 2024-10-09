@@ -12,6 +12,7 @@ export class Player implements IPlayer {
     private locations: Location[]
     private wine: Wine[]
     private vineyards: Vineyard[]
+    private moneyAmount: number;
 
     getGrapes() {
         return this.grapes
@@ -41,13 +42,32 @@ export class Player implements IPlayer {
         return vineyard
     }
 
+    getMoneyAmount() {
+        return this.moneyAmount;
+    }
+
+    setMoneyAmount(value:number) {
+        this.moneyAmount = value;
+    }
+
+    incrementMoneyAmountByValue(value:number) {
+        const v = Math.abs(value);
+        this.moneyAmount += v;
+    }
+
+    decrementMoneyAmountByValue(value:number) {
+        const v = Math.abs(value);
+        this.moneyAmount -= v;
+    }
+
     constructor(
         refresher: React.Dispatch<React.SetStateAction<number>> | null
     ) {
-        this.grapes = []
-        this.locations = []
-        this.wine = []
-        this.vineyards = []
-        this.refresher = refresher
+        this.grapes = [] ;
+        this.locations = [] ;
+        this.wine = [] ;
+        this.vineyards = [] ;
+        this.refresher = refresher ;
+        this.moneyAmount = 999999999999999 ;
     }
 }

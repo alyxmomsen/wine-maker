@@ -22,7 +22,7 @@ export class WineFactory extends Factory implements IWineFactory {
 export class SoaveWineFactory extends WineFactory {
     canCreateVineFor(player: Player): boolean {
 
-        return true;
+        return false;
     }
 
     getWineName() {

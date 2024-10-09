@@ -19,10 +19,9 @@ const GamePage = () => {
     const [countries, setCountries] = useState<Country[]>(
         ctx.application.countries
     )
-    // const [regions, setRegions] = useState<Region[]>(ctx.application.countries regions)
-    // const [appellations, setAppellations] = useState<Appellation[]>(
-    //     ctx.application.appellations
-    // )
+
+    const [playerMoney ,setPlayerMoney] = useState(ctx.application.player.getMoneyAmount());
+    const [playerMoneyInput ,setPlayerMoneyInput] = useState(0);
 
     const [vineyards, setVineyard] = useState<Vineyard[]>(
         ctx.application.vineyards
@@ -94,9 +93,17 @@ const GamePage = () => {
                 ))}
             </div>
             <div>
+                <h3>the player:</h3>
+                
+                <div>
+                    <input onChange={(e) => setPlayerMoneyInput(Number.parseFloat(e.target.value))} type="number" value={playerMoneyInput} />
+                    <button onClick={() => ctx.application.player.setMoneyAmount(playerMoneyInput)}>increment money</button>
+                </div>
                 {
                     ctx.application.wineFactories.map(factory => {
-                        return <button>btn</button>
+                        const canCreate = factory.canCreateVineFor(ctx.application.player);
+                        console.log({can:canCreate});
+                        return <button disabled={!canCreate}>{factory.getWineName()}</button>
                     })
                 }
             </div>
