@@ -133,7 +133,7 @@ const GamePage = () => {
                             {ctx.application.player
                                 .getVineyards()
                                 .map((vrd) => (
-                                    <button
+                                    <div><button
                                         onMouseOver={() => {
                                             setFocusedCountry(vrd.getLocation())
                                         }}
@@ -142,7 +142,7 @@ const GamePage = () => {
                                         }}
                                     >
                                         {vrd.getName()}
-                                    </button>
+                                    </button></div>
                                 ))}
                         </div>
                     </li>
