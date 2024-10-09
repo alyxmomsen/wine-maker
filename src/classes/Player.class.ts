@@ -7,19 +7,31 @@ import { Wine } from './Wine.class'
 interface IPlayer {}
 
 export class Player implements IPlayer {
-    
     private grapes: Grape[]
-    private locations: Location[]
+    private availableLocations: Location[]
+    private currentLocation: Location | null
     private wine: Wine[]
     private vineyards: Vineyard[]
     private moneyAmount: number
+
+    getVineyards() {
+        return this.vineyards
+    }
 
     getGrapes() {
         return this.grapes
     }
 
-    getLocations() {
-        return this.locations
+    getAvailableLocations() {
+        return this.availableLocations
+    }
+
+    getCurrentLocation() {
+        return this.currentLocation
+    }
+
+    setCurrentLocation(location: Location) {
+        this.currentLocation = location
     }
 
     addGrape(grape: Grape) {
@@ -29,7 +41,7 @@ export class Player implements IPlayer {
     }
 
     addLocation(location: Location) {
-        this.locations.push(location)
+        this.availableLocations.push(location)
 
         // update client
     }
@@ -39,12 +51,12 @@ export class Player implements IPlayer {
 
         // update client
 
-        this.update(() => {});
+        this.update(() => {})
     }
 
     addVineyard(vineyard: Vineyard): Vineyard {
         this.vineyards.push(vineyard)
-        
+
         return vineyard
     }
 
@@ -66,15 +78,14 @@ export class Player implements IPlayer {
         this.moneyAmount -= v
     }
 
-    update(cb:() => void) {
-        
-    }
+    update(cb: () => void) {}
 
     constructor() {
         this.grapes = []
-        this.locations = []
+        this.availableLocations = []
         this.wine = []
         this.vineyards = []
-        this.moneyAmount = 99
+        this.moneyAmount = 0
+        this.currentLocation = null
     }
 }

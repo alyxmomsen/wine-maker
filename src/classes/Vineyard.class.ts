@@ -16,7 +16,7 @@ export class Vineyard {
         return this.name
     }
 
-    makeGrape(grape: Grape, vallet: null = null) {
+    addGrape(grape: Grape, vallet: null = null) {
         this.grape.push(grape)
     }
 

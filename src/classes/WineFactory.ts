@@ -3,19 +3,20 @@ import { GarganegaGrape } from './Grape.class'
 import { ItaliaCountry } from './Location.Country.concrete'
 import { VenetoRegion } from './Location.Region.concrete'
 import { Player } from './Player.class'
+import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 import { SoaveWine } from './Wine.concrete'
 
 export interface IWineFactory {
-    canCreateVineFor(player: Player): boolean
+    canCreateVineForPlayer(player: Player): boolean
     getWineName(): string
     getTitle(): string
-    createFor(player:Player): Wine;
+    createFor(player: Player): Wine
 }
 
 export class WineFactory extends Factory implements IWineFactory {
-    canCreateVineFor(player: Player): boolean {
-        console.log('hello world');
+    canCreateVineForPlayer(player: Player): boolean {
+        console.log('hello world')
         return false
     }
     getWineName(): string {
@@ -25,47 +26,29 @@ export class WineFactory extends Factory implements IWineFactory {
         return ''
     }
 
-    createFor(player:Player): Wine {
-        return new Wine('','','','','');
+    createFor(player: Player): Wine {
+        return new Wine('', '', '', '', '')
     }
 }
 
 export class SoaveWineFactory extends WineFactory {
-    canCreateVineFor(player: Player): boolean {
-        const locations = player.getLocations()
-        const grapes = player.getGrapes()
-        let italia: boolean = false
-        let garganega: boolean = false
-        let money: number = player.getMoneyAmount();
+    canCreateVineForPlayer(player: Player): boolean {
+        const vineyards = player.getVineyards()
 
-        console.log(
-            'fac', money
-        );
+        let vineyardItaliaLocation: boolean = false
+        let vineyardGarganegaGrape: boolean = false
+        let money: number = player.getMoneyAmount()
 
         if (money < 100) {
-            console.log('money:' , money);
-            return false;
-        }
-
-        if (locations.length <= 0) {
+            console.log('money:', money)
             return false
         }
 
-        for (const location of locations) {
-            if (location instanceof ItaliaCountry) {
-                italia = true
-                break
-            }
+        if (vineyards.length < 1) {
+            return false
         }
 
-        for (const grape of grapes) {
-            if (grape instanceof GarganegaGrape) {
-                garganega = true
-                break
-            }
-        }
-
-        if (garganega && italia) {
+        if (vineyardGarganegaGrape && vineyardItaliaLocation) {
             return true
         } else {
             return false
@@ -76,12 +59,16 @@ export class SoaveWineFactory extends WineFactory {
         return 'Soave'
     }
 
-    createFor(player:Player): SoaveWine {
-        const italy = ItaliaCountry.Instance();
-        const soaveInstance = new SoaveWine(italy, VenetoRegion.Instance(), new GarganegaGrape(italy));
-        player.addWine(soaveInstance);
-        player.decrementMoneyAmountByValue(100);
-        return soaveInstance;
+    createFor(player: Player): SoaveWine {
+        const italy = ItaliaCountry.Instance()
+        const soaveInstance = new SoaveWine(
+            italy,
+            VenetoRegion.Instance(),
+            new GarganegaGrape(italy)
+        )
+        player.addWine(soaveInstance)
+        player.decrementMoneyAmountByValue(100)
+        return soaveInstance
     }
 
     constructor() {

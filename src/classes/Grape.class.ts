@@ -39,7 +39,7 @@ export class GarganegaGrape extends Grape {
     }
 }
 
-export class Muscadet extends Grape {
+export class MuscadetGrape extends Grape {
     constructor(location: Location) {
         super('Muskadet', location)
     }

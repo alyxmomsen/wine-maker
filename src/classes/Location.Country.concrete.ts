@@ -15,6 +15,21 @@ export class PortugalCountry extends Country {
     }
 }
 
+export class GermanyCountry extends Country {
+    private static instance: GermanyCountry | null = null
+    static Instance(): GermanyCountry {
+        if (GermanyCountry.instance === null) {
+            GermanyCountry.instance = new GermanyCountry()
+        }
+
+        return GermanyCountry.instance
+    }
+
+    private constructor() {
+        super('Germany')
+    }
+}
+
 export class ItaliaCountry extends Country {
     private static instance: ItaliaCountry | null = null
     static Instance(): PortugalCountry {

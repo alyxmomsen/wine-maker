@@ -12,25 +12,21 @@ import { Player } from '../classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../classes/Grape.class'
 import { Vineyard } from '../classes/Vineyard.class'
-import { SoaveWine } from '../classes/Wine.concrete'
+import { VineyardFactory } from '../classes/WineyardFactory'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
     const [countries, setCountries] = useState<Country[]>(
         ctx.application.countries
     )
-
-    const [playerMoney, setPlayerMoney] = useState(
-        ctx.application.player.getMoneyAmount()
-    )
     const [playerMoneyInput, setPlayerMoneyInput] = useState(0)
-
     const [vineyards, setVineyard] = useState<Vineyard[]>(
         ctx.application.vineyards
     )
-
     const [grapes, setGrape] = useState<Grape[]>(ctx.application.grapes)
     const [player, setPlayer] = useState<Player>(ctx.application.player)
+
+    const [focusedCountry, setFocusedCountry] = useState<Location | null>(null)
 
     return (
         <div className={'flex-box flex-dir--col flex__align--start'}>
@@ -42,19 +38,33 @@ const GamePage = () => {
                 {countries.map((ctr) => (
                     <ElementWrapper
                         isMarked={
-                            false
+                            ((location: Location | null) => {
+                                if (location?.getTitle() === ctr.getTitle()) {
+                                    return true
+                                }
+                                return false
+                            })(focusedCountry)
                             // checkIfMarkedCountry(marked, ctr)
                         }
                     >
                         <>
-                            <button>{ctr.getTitle()}</button>
+                            <button
+                                onClick={() => {
+                                    ctx.application.player.setCurrentLocation(
+                                        ctr
+                                    )
+                                    ctx.application.update()
+                                }}
+                            >
+                                {ctr.getTitle()}
+                            </button>
                             {ctr.getRegions().map((region) => (
                                 <ElementWrapper isMarked={false}>
                                     <>
                                         {region
                                             .getAppellations()
                                             .map((appellation) => (
-                                                <div></div>
+                                                <div>appelllation</div>
                                             ))}
                                     </>
                                 </ElementWrapper>
@@ -86,39 +96,90 @@ const GamePage = () => {
                 ))}
             </div>
             <div>
-                <h3>Player:</h3>
+                <h3>Player:{'name'}</h3>
+                <ul>
+                    <li>
+                        <span>money: </span>
+                        <span>{player.getMoneyAmount()}</span>
+                        <input
+                            onChange={(e) =>
+                                setPlayerMoneyInput(
+                                    Number.parseFloat(e.target.value)
+                                )
+                            }
+                            step={100}
+                            type="number"
+                            value={playerMoneyInput}
+                        />
+                        <button
+                            onClick={() => {
+                                ctx.application.player.incrementMoneyAmountByValue(
+                                    playerMoneyInput
+                                )
+                                // setPlayerMoneyInput(0)
+                                ctx.application.update()
+                            }}
+                        >
+                            add money
+                        </button>
+                    </li>
+                    <li>
+                        <span>current location: </span>
+                        <span>{player.getCurrentLocation()?.getTitle()}</span>
+                    </li>
+                    <li>
+                        <span>vineyards: </span>
+                        <div className={'flex-box flex-wrap gap-9'}>
+                            {ctx.application.player
+                                .getVineyards()
+                                .map((vrd) => (
+                                    <button
+                                        onMouseOver={() => {
+                                            setFocusedCountry(vrd.getLocation())
+                                        }}
+                                        onMouseLeave={() => {
+                                            setFocusedCountry(null)
+                                        }}
+                                    >
+                                        {vrd.getName()}
+                                    </button>
+                                ))}
+                        </div>
+                    </li>
+                    <li>
+                        <span></span>
+                    </li>
+                </ul>
                 <div>
-                    <input
-                        onChange={(e) =>
-                            setPlayerMoneyInput(
-                                Number.parseFloat(e.target.value)
-                            )
-                        }
-                        type="number"
-                        value={playerMoneyInput}
-                    />
                     <button
-                        onClick={() => {
-                            ctx.application.player.setMoneyAmount(
-                                playerMoneyInput
+                        disabled={
+                            !ctx.application.vineyardFactory.canCreateForPlayer(
+                                ctx.application.player
                             )
-                            ctx.application.update();
                         }
-                        }
+                        onClick={() => {
+                            ctx.application.vineyardFactory.createForPlayer(
+                                ctx.application.player
+                            )
+                            console.log(player)
+                            ctx.application.update()
+                        }}
                     >
-                        increment money
+                        create vineyard
                     </button>
                 </div>
                 {ctx.application.wineFactories.map((factory) => {
-                    const canCreate = factory.canCreateVineFor(
-                        player
-                    )
+                    const canCreate = factory.canCreateVineForPlayer(player)
 
                     return (
-                        <button onClick={() => {
-                            factory.createFor(player);
-                            console.log({player});
-                        }} disabled={!canCreate}>
+                        <button
+                            onClick={() => {
+                                factory.createFor(player)
+                                ctx.application.update()
+                                console.log({ player })
+                            }}
+                            disabled={!canCreate}
+                        >
                             {factory.getWineName()}
                         </button>
                     )
