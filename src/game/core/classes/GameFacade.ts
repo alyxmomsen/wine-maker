@@ -1,4 +1,5 @@
-import { Grape, MelonDeBourgogne } from './Grape.class'
+import { Updating } from '../updating/upd.class'
+import { Grape } from './Grape.class'
 import {
     GarganegaGrapeFactory,
     IGrapeFactory,
@@ -28,10 +29,12 @@ import { Observer } from './Observer.class'
 import { Player } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 import {
+    IWineFactory,
     MuskadetWineFactory,
     SoaveWineFactory,
     WineFactory,
 } from './WineFactory'
+import { IWineryFactory, WineryFactory } from './Winery.factory'
 import { VineyardFactory } from './WineyardFactory'
 
 export class GameFacade {
@@ -40,11 +43,17 @@ export class GameFacade {
     player: Player
     grapes: Grape[]
     vineyards: Vineyard[]
-    wineFactories: WineFactory[]
     vineyardFactory: VineyardFactory
+    wineFactories: WineFactory[]
     grapeFactories: IGrapeFactory[]
+    wineryFactories: IWineryFactory[]
     observer: Observer
+
+    updater: Updating
+
     update(): boolean {
+        this.player.update()
+
         const refresher = this.refresher
         if (refresher) {
             refresher((current) => current + 1)
@@ -96,6 +105,20 @@ export class GameFacade {
             new SovingnonBlanGrapeFactory(),
             new MelonDeBourgogneFactory(),
         ]
+
+        this.wineryFactories = [new WineryFactory()]
+
         this.update()
+        this.updater = new Updating(1000)
+
+        const upd = () => {
+            if (this.updater.try()) {
+                this.update()
+            }
+
+            requestAnimationFrame(upd)
+        }
+
+        window.requestAnimationFrame(() => upd())
     }
 }

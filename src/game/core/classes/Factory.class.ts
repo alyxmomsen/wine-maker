@@ -1,3 +1,8 @@
-export interface IFactory {}
+import { Player } from './Player.class'
 
-export abstract class Factory implements IFactory {}
+// export interface IFactory {
+//     canCreateForPlayer(player: Player, vineyard: Vineyard | null): boolean
+//     getWineName(): string
+//     getTitle(): string
+//     createFor(player: Player): Wine
+// }

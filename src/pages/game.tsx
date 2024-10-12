@@ -12,8 +12,6 @@ import { Player } from '../game/core/classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
-import { VineyardFactory } from '../game/core/classes/WineyardFactory'
-import { FranceCountry } from '../game/core/classes/Location.Country.concrete'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
@@ -60,6 +58,7 @@ const GamePage = () => {
                                     ctx.application.update()
                                 }}
                             >
+                                Go<> </>
                                 {ctr.getTitle()}
                             </button>
                             {ctr.getRegions().map((region) => (
@@ -102,6 +101,22 @@ const GamePage = () => {
             <div>
                 <h3>Player:{'name'}</h3>
                 <ul>
+                    <li>
+                        effir:
+                        {player.getEffirEnergyValue()}
+                    </li>
+                    <li>
+                        health:
+                        {player.getHealth()}
+                        <button
+                            onClick={() => {
+                                player.decrementHealth(5)
+                                ctx.application.update()
+                            }}
+                        >
+                            get damage
+                        </button>
+                    </li>
                     <li>
                         <span>grapes: </span>
                         {player.getGrapes().map((grape) => (
@@ -146,19 +161,16 @@ const GamePage = () => {
                             {ctx.application.player
                                 .getVineyards()
                                 .map((vrd) => (
-                                    <div>
-                                        <button
-                                            onMouseOver={() => {
-                                                setFocusedCountry(
-                                                    vrd.getLocation()
-                                                )
-                                            }}
-                                            onMouseLeave={() => {
-                                                setFocusedCountry(null)
-                                            }}
-                                        >
-                                            {vrd.getName()}
-                                        </button>
+                                    <div
+                                        className="bdr--1 pdg--9"
+                                        onMouseOver={() => {
+                                            setFocusedCountry(vrd.getLocation())
+                                        }}
+                                        onMouseLeave={() => {
+                                            setFocusedCountry(null)
+                                        }}
+                                    >
+                                        <div>{vrd.getName()}</div>
                                         <div>
                                             {ctx.application.wineFactories.map(
                                                 (wineFactory) => {
@@ -179,7 +191,7 @@ const GamePage = () => {
                                                 }
                                             )}
                                         </div>
-                                        <div>
+                                        <div className="flex-box flex-dir--col">
                                             {ctx.application.grapeFactories.map(
                                                 (grpFactory) => {
                                                     const canCreate =
@@ -201,6 +213,7 @@ const GamePage = () => {
                                                                     ctx.application.update()
                                                             }}
                                                         >
+                                                            make<> </>
                                                             {grpFactory.getTitle()}
                                                         </button>
                                                     ) : (

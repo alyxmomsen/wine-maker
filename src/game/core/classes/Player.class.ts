@@ -1,13 +1,19 @@
 import { Grape } from './Grape.class'
 import { Location } from './Location.class'
-import { Observer } from './Observer.class'
 import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 
-interface IPlayer {}
+interface IPlayer {
+    update(): boolean
+    decrementHealth(value: number): number
+    incrementHealthByValue(value: number): number
+    decremenentEffirEnergy(value: number): number
+    // decrementMoneyValue(): number;
+    // incrementMoneyValue(): number;
+}
 
 export class Player implements IPlayer {
-    private potentialHealth: number
+    private effirEnergy: number
     private health: number
     private grapes: Grape[]
     private availableLocations: Location[]
@@ -16,12 +22,37 @@ export class Player implements IPlayer {
     private vineyards: Vineyard[]
     private moneyAmount: number
 
-    decrementPotentialHealth(value: number) {
-        this.potentialHealth -= Math.abs(value)
+    private restoreHealth() {
+        if (this.health < 100) {
+            if (this.getEffirEnergyValue() > 0) {
+                const returnedValue = this.decremenentEffirEnergy(1)
+                console.log({ returnedValue })
+                this.incrementHealthByValue(returnedValue)
+            }
+        }
     }
 
-    getPotentialHealth(): number {
-        return this.potentialHealth
+    incrementHealthByValue(value: number): number {
+        const before = this.health
+        this.health = this.health + Math.abs(value)
+
+        console.log(before, this.health, value)
+        return this.health - before
+    }
+
+    decrementHealth(value: number): number {
+        this.health = this.health - Math.abs(value)
+        return value
+    }
+
+    decremenentEffirEnergy(value: number): number {
+        const before = this.effirEnergy
+        this.effirEnergy -= Math.abs(value)
+        return before - this.effirEnergy
+    }
+
+    getEffirEnergyValue(): number {
+        return this.effirEnergy
     }
 
     getHealth(): number {
@@ -65,7 +96,8 @@ export class Player implements IPlayer {
 
         // update client
 
-        this.update(() => {})
+        // this.update(() => {})
+        this.update()
     }
 
     addVineyard(vineyard: Vineyard): Vineyard {
@@ -92,7 +124,10 @@ export class Player implements IPlayer {
         this.moneyAmount -= v
     }
 
-    update(cb: () => void) {}
+    update() {
+        this.restoreHealth()
+        return true
+    }
 
     constructor() {
         this.grapes = []
@@ -102,6 +137,6 @@ export class Player implements IPlayer {
         this.moneyAmount = 0
         this.currentLocation = null
         this.health = 100
-        this.potentialHealth = 10000
+        this.effirEnergy = 10
     }
 }

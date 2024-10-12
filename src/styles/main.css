@@ -12,6 +12,14 @@ li {
     list-style: none;
 }
 
+.pdg--9 {
+    padding: 9px;
+}
+
+.bdr--1 {
+    border: 1px solid tomato;
+}
+
 .marked {
     border: 1px solid yellowgreen;
 }

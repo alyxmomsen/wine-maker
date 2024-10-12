@@ -1,4 +1,3 @@
-import { Factory, IFactory } from './Factory.class'
 import { GarganegaGrape } from './Grape.class'
 import { ItaliaCountry } from './Location.Country.concrete'
 import { VenetoRegion } from './Location.Region.concrete'
@@ -14,7 +13,7 @@ export interface IWineFactory {
     createFor(player: Player): Wine
 }
 
-export class WineFactory extends Factory implements IWineFactory {
+export class WineFactory implements IWineFactory {
     canCreateWineForPlayer(
         player: Player,
         vineyard: Vineyard | null = null
