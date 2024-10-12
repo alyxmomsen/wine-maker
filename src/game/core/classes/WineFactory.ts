@@ -93,12 +93,16 @@ export class SoaveWineFactory implements IWineFactory {
             return null
         }
 
-        return new SoaveWine(
+
+        const wine = new SoaveWine(
             currentPlayerLocation,
             VenetoRegion.Instance(),
             grapeMatches[0]
-        )
-        // this.canCreateWineForPlayer();
+        );
+
+        player.addWine(wine);
+
+        return wine;
     }
 
     canCreateWineForPlayer(player: Player, winery: Winery): boolean {

@@ -110,6 +110,10 @@ export class Player implements IPlayer {
         this.update()
     }
 
+    getWine():Wine[] {
+        return this.wine;
+    }
+
     addVineyard(vineyard: Vineyard): Vineyard {
         this.vineyards.push(vineyard)
 

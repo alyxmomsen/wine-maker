@@ -127,6 +127,14 @@ const GamePage = () => {
                         ))}
                     </li>
                     <li>
+                        <span>wine:</span>
+                        {
+                            player.getWine().map(wine => {
+                                return <div><span>{'wine'}</span><span>{'wine'}</span></div>
+                            })
+                        }
+                    </li>
+                    <li>
                         <span>money: </span>
                         <span>{player.getMoneyAmount()}</span>
                         <input
