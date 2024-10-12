@@ -5,7 +5,7 @@ import Winery from './Winery.class'
 
 export interface IWineryFactory {
     canCreate(player: Player): boolean
-    try(player: Player): Winery | null
+    tryCreate(player: Player): Winery | null
 }
 
 export class WineryFactory implements IWineryFactory {
@@ -15,14 +15,18 @@ export class WineryFactory implements IWineryFactory {
         const location = player.getCurrentLocation()
         const money = player.getMoneyAmount()
 
-        if (money >= this.price) {
-            return true
+        if (location === null) {
+            return false
         }
 
-        return false
+        if (money < this.price) {
+            return false
+        }
+
+        return true
     }
 
-    try(player: Player): Winery | null {
+    tryCreate(player: Player): Winery | null {
         const location = player.getCurrentLocation()
         const money = player.getMoneyAmount()
 
@@ -34,7 +38,11 @@ export class WineryFactory implements IWineryFactory {
             return null
         }
 
-        return new Winery(location)
+        const winery = new Winery(location)
+        const playerMoneyRest = player.decrementMoneyAmountByValue(this.price)
+        player.addWinery(winery)
+
+        return winery
     }
 
     constructor() {

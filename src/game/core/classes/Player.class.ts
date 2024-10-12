@@ -2,6 +2,7 @@ import { Grape } from './Grape.class'
 import { Location } from './Location.class'
 import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
+import Winery from './Winery.class'
 
 interface IPlayer {
     update(): boolean
@@ -20,6 +21,7 @@ export class Player implements IPlayer {
     private currentLocation: Location | null
     private wine: Wine[]
     private vineyards: Vineyard[]
+    private wineries: Winery[]
     private moneyAmount: number
 
     private restoreHealth() {
@@ -30,6 +32,14 @@ export class Player implements IPlayer {
                 this.incrementHealthByValue(returnedValue)
             }
         }
+    }
+
+    addWinery(winery: Winery) {
+        this.wineries.push(winery)
+    }
+
+    getWineries() {
+        return this.wineries
     }
 
     incrementHealthByValue(value: number): number {
@@ -119,9 +129,11 @@ export class Player implements IPlayer {
         this.moneyAmount += v
     }
 
-    decrementMoneyAmountByValue(value: number) {
+    decrementMoneyAmountByValue(value: number): number {
         const v = Math.abs(value)
-        this.moneyAmount -= v
+        this.moneyAmount = this.moneyAmount - v
+        const moneyRest = this.moneyAmount
+        return moneyRest
     }
 
     update() {
@@ -134,6 +146,7 @@ export class Player implements IPlayer {
         this.availableLocations = []
         this.wine = []
         this.vineyards = []
+        this.wineries = []
         this.moneyAmount = 0
         this.currentLocation = null
         this.health = 100

@@ -1,6 +1,8 @@
 import { Location } from './Location.class'
 
-export interface IWinery {}
+export interface IWinery {
+    getLocationName(): string
+}
 
 export default class Winery {
     private location: Location
@@ -8,6 +10,14 @@ export default class Winery {
 
     exec() {
         alert('fuck you mother fucker')
+    }
+
+    getLocationName(): string {
+        return this.location.getTitle()
+    }
+
+    getLocation(): Location {
+        return this.location
     }
 
     constructor(location: Location) {

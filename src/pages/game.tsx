@@ -171,26 +171,7 @@ const GamePage = () => {
                                         }}
                                     >
                                         <div>{vrd.getName()}</div>
-                                        <div>
-                                            {ctx.application.wineFactories.map(
-                                                (wineFactory) => {
-                                                    const canCreateWine =
-                                                        wineFactory.canCreateWineForPlayer(
-                                                            ctx.application
-                                                                .player,
-                                                            vrd
-                                                        )
-
-                                                    return (
-                                                        <span>
-                                                            {canCreateWine
-                                                                ? '+'
-                                                                : '-'}
-                                                        </span>
-                                                    )
-                                                }
-                                            )}
-                                        </div>
+                                        <div></div>
                                         <div className="flex-box flex-dir--col">
                                             {ctx.application.grapeFactories.map(
                                                 (grpFactory) => {
@@ -227,7 +208,44 @@ const GamePage = () => {
                         </div>
                     </li>
                     <li>
-                        <span></span>
+                        <div>
+                            wineries:
+                            {player.getWineries().map((winery, i) => {
+                                return (
+                                    <div className="bdr--1">
+                                        {'winery' + ' ' + (i + 1)}
+                                        <> </>
+                                        {'location:' +
+                                            ' ' +
+                                            winery.getLocationName()}
+                                        {ctx.application.wineFactories.map(
+                                            (wineFactory, i) => {
+                                                return (
+                                                    <button
+                                                        onClick={() => {
+                                                            wineFactory.tryCreateFor(
+                                                                player,
+                                                                winery
+                                                            )
+                                                            ctx.application.update()
+                                                        }}
+                                                        disabled={
+                                                            !wineFactory.canCreateWineForPlayer(
+                                                                player,
+                                                                winery
+                                                            )
+                                                        }
+                                                    >
+                                                        make{' '}
+                                                        {wineFactory.getWineName()}
+                                                    </button>
+                                                )
+                                            }
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </li>
                 </ul>
                 <div>
@@ -247,6 +265,22 @@ const GamePage = () => {
                     >
                         create vineyard
                     </button>
+                </div>
+                <div>
+                    {ctx.application.wineryFactories.map((wineryFactory) => {
+                        return (
+                            <button
+                                disabled={!wineryFactory.canCreate(player)}
+                                onClick={() => {
+                                    wineryFactory.tryCreate(player)
+                                    ctx.application.update()
+                                }}
+                            >
+                                create winery
+                            </button>
+                        )
+                    })}
+                    {/* <button disabled={ctx.application.wineryFactories}>create winery</button> */}
                 </div>
             </div>
         </div>
