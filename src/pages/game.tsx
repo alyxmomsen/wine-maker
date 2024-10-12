@@ -7,13 +7,13 @@ import {
     Country,
     Location,
     Region,
-} from '../classes/Location.class'
-import { Player } from '../classes/Player.class'
+} from '../game/core/classes/Location.class'
+import { Player } from '../game/core/classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
-import { Grape } from '../classes/Grape.class'
-import { Vineyard } from '../classes/Vineyard.class'
-import { VineyardFactory } from '../classes/WineyardFactory'
-import { FranceCountry } from '../classes/Location.Country.concrete'
+import { Grape } from '../game/core/classes/Grape.class'
+import { Vineyard } from '../game/core/classes/Vineyard.class'
+import { VineyardFactory } from '../game/core/classes/WineyardFactory'
+import { FranceCountry } from '../game/core/classes/Location.Country.concrete'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)

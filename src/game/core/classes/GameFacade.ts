@@ -1,8 +1,10 @@
-import { Grape } from './Grape.class'
+import { Grape, MelonDeBourgogne } from './Grape.class'
 import {
     GarganegaGrapeFactory,
     IGrapeFactory,
+    MelonDeBourgogneFactory,
     MuscadetGrapeFactory,
+    SovingnonBlanGrapeFactory,
 } from './GrapeFactory'
 import {
     MuskadetAppellation,
@@ -91,6 +93,8 @@ export class GameFacade {
         this.grapeFactories = [
             new GarganegaGrapeFactory(),
             new MuscadetGrapeFactory(),
+            new SovingnonBlanGrapeFactory(),
+            new MelonDeBourgogneFactory(),
         ]
         this.update()
     }

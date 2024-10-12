@@ -1,7 +1,4 @@
-import { Appellation, Country, Location, Region } from './Location.class'
-import { PortugalCountry } from './Location.Country.concrete'
-import { VenetoRegion } from './Location.Region.concrete'
-import { Player } from './Player.class'
+import { Location } from './Location.class'
 
 export interface IGrape {
     getGrapeName(): string

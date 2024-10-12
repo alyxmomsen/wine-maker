@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from 'react'
 import './App.css'
 
 import GamePage from './pages/game'
-import { GameFacade } from './classes/GameFacade'
+import { GameFacade } from './game/core/classes/GameFacade'
 
 const gameFacade = new GameFacade(null)
 
