@@ -3,10 +3,8 @@ import { MainContext, TMainContext } from '../App'
 
 import './../styles/main.css'
 import {
-    Appellation,
     Country,
     Location,
-    Region,
 } from '../game/core/classes/Location.class'
 import { Player } from '../game/core/classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
