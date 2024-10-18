@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { MainContext, TMainContext } from '../App'
+import { useContext, useState } from 'react'
+import { MainContext } from '../App'
 
 import './../styles/main.css'
 import {
