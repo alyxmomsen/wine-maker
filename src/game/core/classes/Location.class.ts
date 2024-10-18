@@ -139,7 +139,11 @@ export class Appellation extends Location implements IAppellation {
         return this
     }
 
-    constructor(region: RegionLocation | null, country: Country, title: string) {
+    constructor(
+        region: RegionLocation | null,
+        country: Country,
+        title: string
+    ) {
         super(title)
         this.region = region
         this.country = country

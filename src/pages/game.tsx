@@ -127,7 +127,10 @@ const GamePage = () => {
                             return (
                                 <div>
                                     <span>{wine.title}</span>
-                                    <span><> </>{'wine'}</span>
+                                    <span>
+                                        <> </>
+                                        {'wine'}
+                                    </span>
                                 </div>
                             )
                         })}
@@ -226,7 +229,13 @@ const GamePage = () => {
                                             winery.getLocationName()}
                                         {ctx.application.wineFactories.map(
                                             (wineFactory, i) => {
-                                                return (
+                                                const canCreate =
+                                                    wineFactory.canCreateWineForPlayer(
+                                                        player,
+                                                        winery
+                                                    )
+
+                                                return canCreate ? (
                                                     <button
                                                         onClick={() => {
                                                             wineFactory.tryCreateFor(
@@ -245,6 +254,8 @@ const GamePage = () => {
                                                         make{' '}
                                                         {wineFactory.getWineName()}
                                                     </button>
+                                                ) : (
+                                                    <></>
                                                 )
                                             }
                                         )}

@@ -160,7 +160,7 @@ export class Player implements IPlayer {
         this.vineyards = []
         this.wineries = []
         this.moneyAmount = 0
-        this.currentLocation = null;
+        this.currentLocation = null; 
         this.health = 100;
         this.effirEnergy = 1000000;
     }
