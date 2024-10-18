@@ -1,10 +1,3 @@
-import { GarganegaGrape } from './Grape.class'
-import {
-    FranceCountry,
-    ItaliaCountry as ItaliaCountry,
-} from './Location.Country.concrete'
-import { VenetoRegion as VenetoRegion } from './Location.Region.concrete'
-import { Player } from './Player.class'
 
 export class Wine {
     title: string
