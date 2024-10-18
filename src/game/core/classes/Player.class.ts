@@ -133,11 +133,19 @@ export class Player implements IPlayer {
         this.moneyAmount += v
     }
 
+
+
+    /**
+     * 
+     * @param value 
+     * @returns difference between before and after
+     */
     decrementMoneyAmountByValue(value: number): number {
-        const v = Math.abs(value)
-        this.moneyAmount = this.moneyAmount - v
-        const moneyRest = this.moneyAmount
-        return moneyRest
+        const decrementValue = Math.abs(value)
+        const moneyBeforeDecrement = this.moneyAmount;
+        this.moneyAmount = this.moneyAmount - decrementValue
+        const moneyAfterDecrement = this.moneyAmount;
+        return moneyBeforeDecrement - moneyAfterDecrement;
     }
 
     update() {
@@ -152,8 +160,8 @@ export class Player implements IPlayer {
         this.vineyards = []
         this.wineries = []
         this.moneyAmount = 0
-        this.currentLocation = null
-        this.health = 100
-        this.effirEnergy = 10
+        this.currentLocation = null;
+        this.health = 100;
+        this.effirEnergy = 1000000;
     }
 }

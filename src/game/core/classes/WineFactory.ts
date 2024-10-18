@@ -105,7 +105,6 @@ export class SoaveWineFactory implements IWineFactory {
     }
 
     canCreateWineForPlayer(player: Player, winery: Winery): boolean {
-        console.log('can that')
 
         const playerCurrentLocation = player.getCurrentLocation()
         const wineryLocation = winery.getLocation()
@@ -118,12 +117,14 @@ export class SoaveWineFactory implements IWineFactory {
         }
 
         if (ifPlayerWineryEqual === false) {
-            console.log('not')
             return false
         }
 
+        if (!(wineryLocation instanceof ItaliaCountry)) {
+            return false;
+        }
+
         if (playerCurrentLocation !== wineryLocation) {
-            console.log('not')
             return false
         }
 
@@ -149,14 +150,43 @@ export class SoaveWineFactory implements IWineFactory {
 }
 
 export class VinhoVerdeWineFactory implements IWineFactory {
+
+    private price: number;
+    private name: string;
+
     calculateCostPrice(): number {
-        return 299
+        return this.price;
     }
 
     canCreateWineForPlayer(player: Player, winery: Winery): boolean {
 
 
-        const playerGrapes = player.getGrapes();
+        const playerGrapes = player.getGrapes() ;
+        const playerCurrentLocation = player.getCurrentLocation() ;
+        const wineryLocation = winery.getLocation() ;
+        const playerWineries = player.getWineries() ;
+            
+        let grapeINeed: MelonDeBourgogneGrape|null = null;
+
+        if (!(playerCurrentLocation instanceof PortugalCountry)) {
+            return false;
+        }
+
+        if (!(wineryLocation instanceof PortugalCountry)) {
+            return false;
+        }
+
+        let isOwnerOfTheWinery: boolean = false;
+        for (const playerWinery of playerWineries) {
+            if (playerWinery === winery) {
+                isOwnerOfTheWinery = true;
+                break;
+            }
+        }
+
+        if (!isOwnerOfTheWinery) {
+            return false;
+        }
 
         if (playerGrapes.length === 0) {
             return false;
@@ -164,11 +194,17 @@ export class VinhoVerdeWineFactory implements IWineFactory {
 
         for (const grape of playerGrapes) {
             if (grape instanceof MelonDeBourgogneGrape) {
-                
-            }
 
+                const location = grape.getLocation();
+                if ((location instanceof PortugalCountry)) {
+                    grapeINeed = grape;
+                }
+            }
         }
 
+        if (grapeINeed === null) {
+            return false;
+        }
 
         return true
     }
@@ -178,13 +214,12 @@ export class VinhoVerdeWineFactory implements IWineFactory {
     }
 
     getWineName(): string {
-        return 'Vinho Verde'
+        return this.name;
     }
 
     tryCreateFor(player: Player, winery: Winery): Wine | null {
 
-
-
+        const decrementedValue = player.decrementMoneyAmountByValue(299);
 
         const wine = new VinhoVerdeWine(
             PortugalCountry.Instance(),
@@ -195,5 +230,10 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         player.addWine(wine) ;
 
         return wine;
+    }
+
+    constructor() {
+        this.price = 299;
+        this.name = 'Vinho Verde';
     }
 }
