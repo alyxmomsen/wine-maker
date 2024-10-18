@@ -1,11 +1,11 @@
-import { Region } from './Location.class'
+import { RegionLocation } from './Location.class'
 import {
     FranceCountry,
     ItaliaCountry,
     PortugalCountry,
 } from './Location.Country.concrete'
 
-export class Medok extends Region {
+export class Medok extends RegionLocation {
     private static instance: Medok | null = null
     static Instance(): Medok {
         if (Medok.instance === null) {
@@ -20,7 +20,7 @@ export class Medok extends Region {
     }
 }
 
-export class VenetoRegion extends Region {
+export class VenetoRegion extends RegionLocation {
     private static instance: VenetoRegion | null = null
     static Instance(): VenetoRegion {
         if (VenetoRegion.instance === null) {
@@ -35,7 +35,7 @@ export class VenetoRegion extends Region {
     }
 }
 
-export class LoireValleyRegion extends Region {
+export class LoireValleyRegion extends RegionLocation {
     private static instance: LoireValleyRegion | null = null
     static Instance(): LoireValleyRegion {
         if (LoireValleyRegion.instance === null) {
@@ -50,7 +50,7 @@ export class LoireValleyRegion extends Region {
     }
 }
 
-export class BurgundyRegion extends Region {
+export class BurgundyRegion extends RegionLocation {
     static instance: BurgundyRegion | null = null
     static Instance(): BurgundyRegion {
         if (BurgundyRegion.instance === null) {
@@ -64,7 +64,7 @@ export class BurgundyRegion extends Region {
     }
 }
 
-export class MinhoRegion extends Region {
+export class MinhoRegion extends RegionLocation {
     static instance: MinhoRegion | null = null
     static Instance(): MinhoRegion {
         if (MinhoRegion.instance === null) {

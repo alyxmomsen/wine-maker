@@ -28,7 +28,12 @@ import {
 import { Observer } from './Observer.class'
 import { Player } from './Player.class'
 import { Vineyard } from './Vineyard.class'
-import { SoaveWineFactory, CraftWineFactory, IWineFactory } from './WineFactory'
+import {
+    SoaveWineFactory,
+    CraftWineFactory,
+    IWineFactory,
+    VinhoVerdeWineFactory,
+} from './WineFactory'
 import { IWineryFactory, WineryFactory } from './Winery.factory'
 import { VineyardFactory } from './WineyardFactory'
 
@@ -95,7 +100,7 @@ export class GameFacade {
         this.player = new Player()
         this.wineFactories = [
             new SoaveWineFactory(),
-            // new MuskadetWineFactory()
+            new VinhoVerdeWineFactory(),
         ]
         this.grapeFactories = [
             new GarganegaGrapeFactory(),

@@ -1,7 +1,7 @@
 import {
     GarganegaGrape,
     Grape,
-    MelonDeBourgogne,
+    MelonDeBourgogneGrape,
     MuscadetGrape,
     SovingnonBlanGrape,
 } from './Grape.class'
@@ -168,7 +168,7 @@ export class MelonDeBourgogneFactory implements IGrapeFactory {
         }
 
         if (isEqual) {
-            const grape = new MelonDeBourgogne(vineyard.getLocation())
+            const grape = new MelonDeBourgogneGrape(vineyard.getLocation())
             player.addGrape(grape)
             player.decrementMoneyAmountByValue(100)
             return grape

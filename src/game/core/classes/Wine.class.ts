@@ -1,4 +1,3 @@
-
 export class Wine {
     title: string
     countryOrigin: string

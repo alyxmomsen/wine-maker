@@ -2,10 +2,7 @@ import { useContext, useState } from 'react'
 import { MainContext } from '../App'
 
 import './../styles/main.css'
-import {
-    Country,
-    Location,
-} from '../game/core/classes/Location.class'
+import { Country, Location } from '../game/core/classes/Location.class'
 import { Player } from '../game/core/classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../game/core/classes/Grape.class'
@@ -126,11 +123,14 @@ const GamePage = () => {
                     </li>
                     <li>
                         <span>wine:</span>
-                        {
-                            player.getWine().map(wine => {
-                                return <div><span>{'wine'}</span><span>{'wine'}</span></div>
-                            })
-                        }
+                        {player.getWine().map((wine) => {
+                            return (
+                                <div>
+                                    <span>{wine.title}</span>
+                                    <span><> </>{'wine'}</span>
+                                </div>
+                            )
+                        })}
                     </li>
                     <li>
                         <span>money: </span>

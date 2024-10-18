@@ -1,9 +1,9 @@
-import { GarganegaGrape } from './Grape.class'
-import { ItaliaCountry } from './Location.Country.concrete'
-import { VenetoRegion } from './Location.Region.concrete'
+import { GarganegaGrape, Grape, MelonDeBourgogneGrape } from './Grape.class'
+import { ItaliaCountry, PortugalCountry } from './Location.Country.concrete'
+import { MinhoRegion, VenetoRegion } from './Location.Region.concrete'
 import { Player } from './Player.class'
 import { Wine } from './Wine.class'
-import { SoaveWine } from './Wine.concrete'
+import { SoaveWine, VinhoVerdeWine } from './Wine.concrete'
 import Winery from './Winery.class'
 
 export interface IWineFactory {
@@ -93,16 +93,15 @@ export class SoaveWineFactory implements IWineFactory {
             return null
         }
 
-
         const wine = new SoaveWine(
             currentPlayerLocation,
             VenetoRegion.Instance(),
             grapeMatches[0]
-        );
+        )
 
-        player.addWine(wine);
+        player.addWine(wine)
 
-        return wine;
+        return wine
     }
 
     canCreateWineForPlayer(player: Player, winery: Winery): boolean {
@@ -147,4 +146,54 @@ export class SoaveWineFactory implements IWineFactory {
     }
 
     constructor() {}
+}
+
+export class VinhoVerdeWineFactory implements IWineFactory {
+    calculateCostPrice(): number {
+        return 299
+    }
+
+    canCreateWineForPlayer(player: Player, winery: Winery): boolean {
+
+
+        const playerGrapes = player.getGrapes();
+
+        if (playerGrapes.length === 0) {
+            return false;
+        }
+
+        for (const grape of playerGrapes) {
+            if (grape instanceof MelonDeBourgogneGrape) {
+                
+            }
+
+        }
+
+
+        return true
+    }
+
+    getTitle(): string {
+        return 'Vinho Verde title'
+    }
+
+    getWineName(): string {
+        return 'Vinho Verde'
+    }
+
+    tryCreateFor(player: Player, winery: Winery): Wine | null {
+
+
+
+
+        const wine = new VinhoVerdeWine(
+            PortugalCountry.Instance(),
+            MinhoRegion.Instance(),
+            new Grape('The Grape', PortugalCountry.Instance())
+        )
+
+        player.addWine(wine) ;
+
+        return wine;
+    }
 }

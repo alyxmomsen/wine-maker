@@ -48,7 +48,7 @@ export class SovingnonBlanGrape extends Grape {
     }
 }
 
-export class MelonDeBourgogne extends Grape {
+export class MelonDeBourgogneGrape extends Grape {
     constructor(location: Location) {
         super('Melon de Bourgogne', location)
     }

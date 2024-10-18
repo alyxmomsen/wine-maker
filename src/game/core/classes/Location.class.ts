@@ -19,12 +19,12 @@ export interface ICountry extends ILocation {
     getCountryName(): string
     getAppellations(): Appellation[]
     addAppellations(appellations: Appellation[]): Appellation[]
-    getRegions(): Region[]
-    addRegions(regions: Region[]): Region[]
+    getRegions(): RegionLocation[]
+    addRegions(regions: RegionLocation[]): RegionLocation[]
 }
 
 export class Country extends Location implements ICountry {
-    reginons: Region[]
+    reginons: RegionLocation[]
     appellations: Appellation[]
 
     getAppellations(): Appellation[] {
@@ -35,11 +35,11 @@ export class Country extends Location implements ICountry {
         return []
     }
 
-    getRegions(): Region[] {
+    getRegions(): RegionLocation[] {
         return []
     }
 
-    addRegions(regions: Region[]): Region[] {
+    addRegions(regions: RegionLocation[]): RegionLocation[] {
         return []
     }
 
@@ -51,7 +51,7 @@ export class Country extends Location implements ICountry {
         return this
     }
 
-    getRegion(): Region | null {
+    getRegion(): RegionLocation | null {
         return null
     }
 
@@ -68,11 +68,11 @@ export class Country extends Location implements ICountry {
 
 export interface IRegion extends ILocation {
     getRegionName(): string
-    getRegion(): Region
+    getRegion(): RegionLocation
 }
 
-export class Region extends Location implements IRegion {
-    getRegion(): Region {
+export class RegionLocation extends Location implements IRegion {
+    getRegion(): RegionLocation {
         return this
     }
 
@@ -108,11 +108,11 @@ export class Region extends Location implements IRegion {
 
 interface IAppellation extends ILocation {
     getAppellationName(): string
-    getRegion(): Region | null
+    getRegion(): RegionLocation | null
 }
 
 export class Appellation extends Location implements IAppellation {
-    protected region: Region | null
+    protected region: RegionLocation | null
     protected country: Country
 
     getCountryName(): string {
@@ -131,7 +131,7 @@ export class Appellation extends Location implements IAppellation {
         return this.country
     }
 
-    getRegion(): Region | null {
+    getRegion(): RegionLocation | null {
         return this.region
     }
 
@@ -139,7 +139,7 @@ export class Appellation extends Location implements IAppellation {
         return this
     }
 
-    constructor(region: Region | null, country: Country, title: string) {
+    constructor(region: RegionLocation | null, country: Country, title: string) {
         super(title)
         this.region = region
         this.country = country
