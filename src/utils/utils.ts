@@ -9,3 +9,17 @@ export function randomId(amount: number): string {
 
     return str
 }
+
+export function randomName(length: number) {
+    let str = ''
+    const lettersA = 'eyuioa'
+    const lettersB = 'qwrtpsdfghjklzxcvbnm'.toUpperCase()
+
+    for (let i = 0; i < length; i++) {
+        let part = lettersB[Math.floor(Math.random() * lettersB.length)]
+        part += lettersA[Math.floor(Math.random() * lettersA.length)]
+        str += part
+    }
+
+    return str
+}

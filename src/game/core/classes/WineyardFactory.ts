@@ -1,3 +1,4 @@
+import { randomName } from '../../../utils/utils'
 import { PlayerPerson } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 
@@ -21,7 +22,7 @@ export class VineyardFactory {
         }
 
         player.addVineyard(
-            new Vineyard('vineyard' + Date.now(), playerCurrentLocation, player)
+            new Vineyard(randomName(4), playerCurrentLocation, player)
         )
         player.decrementMoneyAmountByValue(1000)
         return true

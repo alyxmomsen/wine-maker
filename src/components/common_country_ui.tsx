@@ -25,8 +25,14 @@ const CommonCountryUI = ({ country }: { country: Location }) => {
             <h2>{country.getTitle()}</h2>
             <button
                 onClick={() => {
-                    ctx.application.setTransition(new LocationTransition(ctx.application.player , country , 5000));
-                    // ctx.application.player.setCurrentLocation(country)
+                    ctx.application.player.addTransition(
+                        LocationTransition.Instance(
+                            ctx.application.player,
+                            country,
+                            5000
+                        )
+                    )
+
                     ctx.application.update()
                 }}
             >

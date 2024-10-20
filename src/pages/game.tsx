@@ -34,18 +34,18 @@ const GamePage = () => {
     return (
         <div className={'flex-box gap bdr pdg width-max'}>
             <Player />
-            <div>
+            <div className={'flex-item'}>
                 <button onClick={() => ctx.application.update()}>
                     upd --force
                 </button>
             </div>
-            <div>
+            <div className={'flex-item'}>
                 <span>countries: </span>
                 {countries.map((ctr) => (
                     <CommonCountryUI country={ctr} />
                 ))}
             </div>
-            <div>
+            <div className={'flex-item'}>
                 <div>
                     <button
                         disabled={

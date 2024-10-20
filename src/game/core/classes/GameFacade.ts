@@ -50,36 +50,20 @@ export class GameFacade {
     wineryFactories: IWineryFactory[]
     observer: Observer
 
-    private transitions: ITransition[];
+    // private transitions: ITransition[];
 
     updater: Updating
 
-    setTransition(transition:ITransition) {
-        
-        this.transitions.push(transition);
-    }
+    // setTransition(transition:ITransition) {
 
-    getTransitions() {
+    //     this.transitions.push(transition);
+    // }
 
-    }
+    // getTransitions() {
+
+    // }
 
     update(): boolean {
-
-        /* ----- */
-
-        this.transitions.forEach(transition => {
-
-            transition.update();
-
-        });
-
-        // clear finished transition
-
-        this.transitions = this.transitions.filter(transition => !transition.isDone());
-
-        /* ---- */
-
-
         this.player.decrementHealth(1)
         this.player.decrementMoneyAmountByValue(1)
         this.player.update()
@@ -99,8 +83,7 @@ export class GameFacade {
     constructor(
         dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
     ) {
-
-        this.transitions = [];
+        // this.transitions = [];
 
         this.vineyardFactory = new VineyardFactory()
         this.observer = new Observer()

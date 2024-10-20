@@ -1,5 +1,6 @@
 import { Grape } from './Grape.class'
 import { Location } from './Location.class'
+import { ITransition } from './Transition.class'
 import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 import Winery from './Winery.class'
@@ -23,6 +24,8 @@ export class PlayerPerson implements IPlayerPerson {
     private vineyards: Vineyard[]
     private wineries: Winery[]
     private moneyAmount: number
+    private transitions: ITransition[]
+    private name: string
 
     private restoreHealth() {
         if (this.health < 100) {
@@ -32,6 +35,28 @@ export class PlayerPerson implements IPlayerPerson {
                 this.incrementHealthByValue(returnedValue)
             }
         }
+    }
+
+    setName(value: string) {
+        this.name = value
+    }
+
+    getName() {
+        return this.name
+    }
+
+    addTransition(transition: ITransition | null): boolean {
+        if (transition) {
+            this.transitions.push(transition)
+            return true
+        }
+
+        return false
+    }
+
+    getTransitions(): ITransition[] {
+        this.transitions
+        return this.transitions
     }
 
     addWinery(winery: Winery) {
@@ -85,7 +110,7 @@ export class PlayerPerson implements IPlayerPerson {
         return this.currentLocation
     }
 
-    setCurrentLocation(location: Location|null) {
+    setCurrentLocation(location: Location | null) {
         this.currentLocation = location
     }
 
@@ -147,11 +172,24 @@ export class PlayerPerson implements IPlayerPerson {
     }
 
     update() {
+        /* ----- */
+
+        this.transitions.forEach((transition) => {
+            transition.update()
+        })
+
+        // clear finished transition
+
+        this.transitions = this.transitions.filter(
+            (transition) => !transition.isDone()
+        )
+
+        /* ---- */
         this.restoreHealth()
         return true
     }
 
-    constructor() {
+    constructor(name: string = 'no name') {
         this.grapes = []
         this.availableLocations = []
         this.wine = []
@@ -161,5 +199,7 @@ export class PlayerPerson implements IPlayerPerson {
         this.currentLocation = null
         this.health = 100
         this.effirEnergy = 1000000
+        this.transitions = []
+        this.name = name
     }
 }

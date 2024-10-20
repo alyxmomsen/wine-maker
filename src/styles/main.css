@@ -39,6 +39,7 @@ li {
 
 .flex-box {
     display: flex;
+    justify-content: space-between;
 }
 
 .flex-wrap {
@@ -63,6 +64,10 @@ li {
 
 .flex-dir--r {
     flex-direction: row;
+}
+
+.flex-item {
+    flex-basis: 1fr;
 }
 
 /*  */
