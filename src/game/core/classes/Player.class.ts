@@ -4,7 +4,7 @@ import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 import Winery from './Winery.class'
 
-interface IPlayer {
+interface IPlayerPerson {
     update(): boolean
     decrementHealth(value: number): number
     incrementHealthByValue(value: number): number
@@ -13,7 +13,7 @@ interface IPlayer {
     // incrementMoneyValue(): number;
 }
 
-export class Player implements IPlayer {
+export class PlayerPerson implements IPlayerPerson {
     private effirEnergy: number
     private health: number
     private grapes: Grape[]

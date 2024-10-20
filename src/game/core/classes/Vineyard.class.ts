@@ -1,12 +1,12 @@
 import { Grape } from './Grape.class'
 import { Location } from './Location.class'
-import { Player } from './Player.class'
+import { PlayerPerson } from './Player.class'
 
 export class Vineyard {
     protected name: string
     protected location: Location
     protected grape: Grape[]
-    protected owner: Player | null
+    protected owner: PlayerPerson | null
 
     getLocation() {
         return this.location
@@ -20,7 +20,7 @@ export class Vineyard {
         this.grape.push(grape)
     }
 
-    constructor(name: string, location: Location, owner: Player | null = null) {
+    constructor(name: string, location: Location, owner: PlayerPerson | null = null) {
         this.name = name
         this.location = location
         this.grape = []

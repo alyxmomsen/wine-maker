@@ -1,8 +1,8 @@
-import { Player } from './Player.class'
+import { PlayerPerson } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 
 export class VineyardFactory {
-    canCreateForPlayer(player: Player): boolean {
+    canCreateForPlayer(player: PlayerPerson): boolean {
         if (player.getMoneyAmount() < 100) {
             return false
         }
@@ -14,7 +14,7 @@ export class VineyardFactory {
         return true
     }
 
-    createForPlayer(player: Player): boolean {
+    createForPlayer(player: PlayerPerson): boolean {
         const playerCurrentLocation = player.getCurrentLocation()
         if (!playerCurrentLocation) {
             return false

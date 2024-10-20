@@ -1,4 +1,4 @@
-import { Player } from './Player.class'
+import { PlayerPerson } from './Player.class'
 
 // export interface IFactory {
 //     canCreateForPlayer(player: Player, vineyard: Vineyard | null): boolean

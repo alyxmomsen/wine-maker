@@ -1,16 +1,16 @@
 import { GarganegaGrape, Grape, MelonDeBourgogneGrape } from './Grape.class'
 import { ItaliaCountry, PortugalCountry } from './Location.Country.concrete'
 import { MinhoRegion, VenetoRegion } from './Location.Region.concrete'
-import { Player } from './Player.class'
+import { PlayerPerson } from './Player.class'
 import { Wine } from './Wine.class'
 import { SoaveWine, VinhoVerdeWine } from './Wine.concrete'
 import Winery from './Winery.class'
 
 export interface IWineFactory {
-    canCreateWineForPlayer(player: Player, winery: Winery): boolean
+    canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean
     getWineName(): string
     getTitle(): string
-    tryCreateFor(player: Player, winery: Winery): Wine | null
+    tryCreateFor(player: PlayerPerson, winery: Winery): Wine | null
     calculateCostPrice(): number
 }
 
@@ -22,12 +22,12 @@ export class CraftWineFactory implements IWineFactory {
         return 0
     }
 
-    canCreateWineForPlayer(player: Player, winery: Winery): boolean {
+    canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean {
         const playerWineries = player.getWineries()
         return false
     }
 
-    tryCreateFor(player: Player): Wine | null {
+    tryCreateFor(player: PlayerPerson): Wine | null {
         return null
     }
 
@@ -58,7 +58,7 @@ export class SoaveWineFactory implements IWineFactory {
         return 199
     }
 
-    tryCreateFor(player: Player, winery: Winery): Wine | null {
+    tryCreateFor(player: PlayerPerson, winery: Winery): Wine | null {
         const playerMoney = player.getMoneyAmount()
         const wineCostPrice = this.calculateCostPrice()
         if (playerMoney < wineCostPrice) {
@@ -104,7 +104,7 @@ export class SoaveWineFactory implements IWineFactory {
         return wine
     }
 
-    canCreateWineForPlayer(player: Player, winery: Winery): boolean {
+    canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean {
         const playerCurrentLocation = player.getCurrentLocation()
         const wineryLocation = winery.getLocation()
         const playerGrapes = player.getGrapes()
@@ -156,7 +156,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         return this.price
     }
 
-    canCreateWineForPlayer(player: Player, winery: Winery): boolean {
+    canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean {
         const playerGrapes = player.getGrapes()
         const playerCurrentLocation = player.getCurrentLocation()
         const wineryLocation = winery.getLocation()
@@ -212,7 +212,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         return this.name
     }
 
-    tryCreateFor(player: Player, winery: Winery): Wine | null {
+    tryCreateFor(player: PlayerPerson, winery: Winery): Wine | null {
         const decrementedValue = player.decrementMoneyAmountByValue(299)
 
         const wine = new VinhoVerdeWine(

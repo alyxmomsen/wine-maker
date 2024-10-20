@@ -26,7 +26,7 @@ import {
     MinhoRegion,
 } from './Location.Region.concrete'
 import { Observer } from './Observer.class'
-import { Player } from './Player.class'
+import { PlayerPerson } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 import {
     SoaveWineFactory,
@@ -40,7 +40,7 @@ import { VineyardFactory } from './WineyardFactory'
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
     countries: Country[]
-    player: Player
+    player: PlayerPerson
     grapes: Grape[]
     vineyards: Vineyard[]
     vineyardFactory: VineyardFactory
@@ -97,7 +97,7 @@ export class GameFacade {
         ]
         this.vineyards = []
         this.grapes = []
-        this.player = new Player()
+        this.player = new PlayerPerson()
         this.wineFactories = [
             new SoaveWineFactory(),
             new VinhoVerdeWineFactory(),

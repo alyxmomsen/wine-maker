@@ -1,12 +1,13 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { MainContext } from '../App'
 
 import './../styles/main.css'
 import { Country, Location } from '../game/core/classes/Location.class'
-import { Player } from '../game/core/classes/Player.class'
+import { PlayerPerson } from '../game/core/classes/Player.class'
 import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
+import Player from '../components/player'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
@@ -21,12 +22,17 @@ const GamePage = () => {
         ctx.application.vineyards
     )
     const [grapes, setGrape] = useState<Grape[]>(ctx.application.grapes)
-    const [player, setPlayer] = useState<Player>(ctx.application.player)
+    const [player, setPlayer] = useState<PlayerPerson>(ctx.application.player)
 
     const [focusedCountry, setFocusedCountry] = useState<Location | null>(null)
 
+    useEffect(() => {
+        ctx.setPlayerFocusedCountry = (location: Location | null) => setFocusedCountry(location);
+    }, []);
+
     return (
-        <div className={'flex-box flex-dir--col flex__align--start'}>
+        <div className={''}>
+            <Player />
             <div>
                 <button onClick={() => ctx.application.update()}>
                     udpdate
@@ -94,177 +100,7 @@ const GamePage = () => {
                 ))}
             </div>
             <div>
-                <h3>Player:{'name'}</h3>
-                <ul>
-                    <li>
-                        effir:
-                        {player.getEffirEnergyValue()}
-                    </li>
-                    <li>
-                        health:
-                        {player.getHealth()}
-                        <button
-                            onClick={() => {
-                                player.decrementHealth(5)
-                                ctx.application.update()
-                            }}
-                        >
-                            get damage
-                        </button>
-                    </li>
-                    <li>
-                        <span>grapes: </span>
-                        {player.getGrapes().map((grape) => (
-                            <span>
-                                {grape.getGrapeName()} (
-                                {grape.getLocation().getTitle()}) ,
-                            </span>
-                        ))}
-                    </li>
-                    <li>
-                        <span>wine:</span>
-                        {player.getWine().map((wine) => {
-                            return (
-                                <div>
-                                    <span>{wine.title}</span>
-                                    <span>
-                                        <> </>
-                                        {'wine'}
-                                    </span>
-                                </div>
-                            )
-                        })}
-                    </li>
-                    <li>
-                        <span>money: </span>
-                        <span>{player.getMoneyAmount()}</span>
-                        <input
-                            onChange={(e) =>
-                                setPlayerMoneyInput(
-                                    Number.parseFloat(e.target.value)
-                                )
-                            }
-                            step={100}
-                            type="number"
-                            value={playerMoneyInput}
-                        />
-                        <button
-                            onClick={() => {
-                                ctx.application.player.incrementMoneyAmountByValue(
-                                    playerMoneyInput
-                                )
-                                // setPlayerMoneyInput(0)
-                                ctx.application.update()
-                            }}
-                        >
-                            add money
-                        </button>
-                    </li>
-                    <li>
-                        <span>current location: </span>
-                        <span>{player.getCurrentLocation()?.getTitle()}</span>
-                    </li>
-                    <li>
-                        <span>vineyards: </span>
-                        <div className={'flex-box flex-wrap gap-9'}>
-                            {ctx.application.player
-                                .getVineyards()
-                                .map((vrd) => (
-                                    <div
-                                        className="bdr--1 pdg--9"
-                                        onMouseOver={() => {
-                                            setFocusedCountry(vrd.getLocation())
-                                        }}
-                                        onMouseLeave={() => {
-                                            setFocusedCountry(null)
-                                        }}
-                                    >
-                                        <div>{vrd.getName()}</div>
-                                        <div></div>
-                                        <div className="flex-box flex-dir--col">
-                                            {ctx.application.grapeFactories.map(
-                                                (grpFactory) => {
-                                                    const canCreate =
-                                                        grpFactory.canCreateGrape(
-                                                            ctx.application
-                                                                .player,
-                                                            vrd
-                                                        )
-
-                                                    return canCreate ? (
-                                                        <button
-                                                            onClick={() => {
-                                                                grpFactory.create(
-                                                                    ctx
-                                                                        .application
-                                                                        .player,
-                                                                    vrd
-                                                                ),
-                                                                    ctx.application.update()
-                                                            }}
-                                                        >
-                                                            make<> </>
-                                                            {grpFactory.getTitle()}
-                                                        </button>
-                                                    ) : (
-                                                        '0'
-                                                    )
-                                                }
-                                            )}
-                                        </div>
-                                    </div>
-                                ))}
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            wineries:
-                            {player.getWineries().map((winery, i) => {
-                                return (
-                                    <div className="bdr--1">
-                                        {'winery' + ' ' + (i + 1)}
-                                        <> </>
-                                        {'location:' +
-                                            ' ' +
-                                            winery.getLocationName()}
-                                        {ctx.application.wineFactories.map(
-                                            (wineFactory, i) => {
-                                                const canCreate =
-                                                    wineFactory.canCreateWineForPlayer(
-                                                        player,
-                                                        winery
-                                                    )
-
-                                                return canCreate ? (
-                                                    <button
-                                                        onClick={() => {
-                                                            wineFactory.tryCreateFor(
-                                                                player,
-                                                                winery
-                                                            )
-                                                            ctx.application.update()
-                                                        }}
-                                                        disabled={
-                                                            !wineFactory.canCreateWineForPlayer(
-                                                                player,
-                                                                winery
-                                                            )
-                                                        }
-                                                    >
-                                                        make{' '}
-                                                        {wineFactory.getWineName()}
-                                                    </button>
-                                                ) : (
-                                                    <></>
-                                                )
-                                            }
-                                        )}
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </li>
-                </ul>
+                
                 <div>
                     <button
                         disabled={

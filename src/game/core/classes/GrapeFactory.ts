@@ -6,17 +6,17 @@ import {
     SovingnonBlanGrape,
 } from './Grape.class'
 import { ItaliaCountry } from './Location.Country.concrete'
-import { Player } from './Player.class'
+import { PlayerPerson } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 
 export interface IGrapeFactory {
-    canCreateGrape(player: Player, vineyard: Vineyard): boolean
-    create(player: Player, vineyard: Vineyard): Grape | null
+    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean
+    create(player: PlayerPerson, vineyard: Vineyard): Grape | null
     getTitle(): string
 }
 
 export class GarganegaGrapeFactory implements IGrapeFactory {
-    canCreateGrape(player: Player, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -28,7 +28,7 @@ export class GarganegaGrapeFactory implements IGrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: Player, vineyard: Vineyard): Grape | null {
+    create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
@@ -59,7 +59,7 @@ export class GarganegaGrapeFactory implements IGrapeFactory {
 }
 
 export class MuscadetGrapeFactory implements IGrapeFactory {
-    canCreateGrape(player: Player, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -71,7 +71,7 @@ export class MuscadetGrapeFactory implements IGrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: Player, vineyard: Vineyard): Grape | null {
+    create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
@@ -101,7 +101,7 @@ export class MuscadetGrapeFactory implements IGrapeFactory {
 }
 
 export class SovingnonBlanGrapeFactory implements IGrapeFactory {
-    canCreateGrape(player: Player, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -113,7 +113,7 @@ export class SovingnonBlanGrapeFactory implements IGrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: Player, vineyard: Vineyard): Grape | null {
+    create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
@@ -143,7 +143,7 @@ export class SovingnonBlanGrapeFactory implements IGrapeFactory {
 }
 
 export class MelonDeBourgogneFactory implements IGrapeFactory {
-    canCreateGrape(player: Player, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -155,7 +155,7 @@ export class MelonDeBourgogneFactory implements IGrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: Player, vineyard: Vineyard): Grape | null {
+    create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
