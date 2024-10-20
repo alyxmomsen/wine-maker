@@ -6,6 +6,7 @@ export interface ITransition {
     update(/* gameUpdaterCallBack:() => void */): boolean
     isDone(): boolean
     getTo(): Location
+    getSubj(): PlayerPerson
 }
 
 export class LocationTransition implements ITransition {
@@ -36,10 +37,15 @@ export class LocationTransition implements ITransition {
         return this.to
     }
 
+    getSubj(): PlayerPerson {
+        return this.subject
+    }
+
     // factory method
     static Instance(
         subject: PlayerPerson,
         location: Location,
+        allTransitions: ITransition[],
         time: number
     ): ITransition | null {
         const playerCurrentLocation = subject.getCurrentLocation()
@@ -48,7 +54,9 @@ export class LocationTransition implements ITransition {
             return null
         }
 
-        const subjTransitions = subject.getTransitions()
+        const subjTransitions = allTransitions.filter(
+            (transition) => transition.getSubj() === subject
+        )
 
         if (playerCurrentLocation === null && subjTransitions.length === 0) {
             return new LocationTransition(subject, location, 0)

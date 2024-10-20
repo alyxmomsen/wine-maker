@@ -5,11 +5,22 @@ import {
     LocationTransition,
 } from '../game/core/classes/Transition.class'
 
-const PlayerCountry = ({ player }: { player: PlayerPerson }) => {
+const PlayerCountry = ({
+    player,
+    transitions,
+}: {
+    player: PlayerPerson
+    transitions: ITransition[]
+}) => {
     const currentLocation = player.getCurrentLocation()
-    const locationTransitions: ITransition[] = player
-        .getTransitions()
-        .filter((transition) => transition instanceof LocationTransition)
+    const locationTransitions: ITransition[] = transitions.filter(
+        (transition) => {
+            return (
+                transition instanceof LocationTransition &&
+                transition.getSubj() === player
+            )
+        }
+    )
 
     return (
         <div className={'pdg bdr'}>

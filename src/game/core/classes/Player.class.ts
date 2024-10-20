@@ -24,7 +24,7 @@ export class PlayerPerson implements IPlayerPerson {
     private vineyards: Vineyard[]
     private wineries: Winery[]
     private moneyAmount: number
-    private transitions: ITransition[]
+    // private transitions: ITransition[]
     private name: string
 
     private restoreHealth() {
@@ -45,19 +45,19 @@ export class PlayerPerson implements IPlayerPerson {
         return this.name
     }
 
-    addTransition(transition: ITransition | null): boolean {
-        if (transition) {
-            this.transitions.push(transition)
-            return true
-        }
+    // addTransition(transition: ITransition | null): boolean {
+    //     if (transition) {
+    //         this.transitions.push(transition)
+    //         return true
+    //     }
 
-        return false
-    }
+    //     return false
+    // }
 
-    getTransitions(): ITransition[] {
-        this.transitions
-        return this.transitions
-    }
+    // getTransitions(): ITransition[] {
+    //     this.transitions
+    //     return this.transitions
+    // }
 
     addWinery(winery: Winery) {
         this.wineries.push(winery)
@@ -172,19 +172,19 @@ export class PlayerPerson implements IPlayerPerson {
     }
 
     update() {
-        /* ----- */
+        // /* ----- */
 
-        this.transitions.forEach((transition) => {
-            transition.update()
-        })
+        // this.transitions.forEach((transition) => {
+        //     transition.update()
+        // })
 
-        // clear finished transition
+        // // clear finished transition
 
-        this.transitions = this.transitions.filter(
-            (transition) => !transition.isDone()
-        )
+        // this.transitions = this.transitions.filter(
+        //     (transition) => !transition.isDone()
+        // )
 
-        /* ---- */
+        // /* ---- */
         this.restoreHealth()
         return true
     }
@@ -199,7 +199,7 @@ export class PlayerPerson implements IPlayerPerson {
         this.currentLocation = null
         this.health = 100
         this.effirEnergy = 1000000
-        this.transitions = []
+        // this.transitions = []
         this.name = name
     }
 }

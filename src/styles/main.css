@@ -67,7 +67,7 @@ li {
 }
 
 .flex-item {
-    flex-basis: 1fr;
+    flex-basis: 100%;
 }
 
 /*  */

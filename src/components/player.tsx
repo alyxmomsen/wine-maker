@@ -12,7 +12,7 @@ const Player = () => {
     const [isMoneyInputVisible, setIsMoneyInputVisible] = useState(false)
 
     return (
-        <div className="bdr pdg flex-box flex-dir--col gap">
+        <div className="bdr pdg flex-box flex-dir--col gap flex-item">
             <h3>Player:{'  ' + ctx.application.player.getName()}</h3>
             <div className={'bdr pdg'}>
                 <span>effir: </span>
@@ -69,11 +69,11 @@ const Player = () => {
             </div>
             <div className={'bdr pdg'}>
                 <div>grapes: </div>
-                {ctx.application.player.getGrapes().map((grape) => (
+                {ctx.application.player.getGrapes().map((grape, i) => (
                     <div>
-                        <span>{grape.getGrapeName()}</span>
+                        <span>{i + 1 + '. ' + grape.getGrapeName()}</span>
                         <span>
-                            {' (' + grape.getLocation().getTitle() + ')'} ,
+                            {' (' + grape.getLocation().getTitle() + ')'}
                         </span>
                     </div>
                 ))}
@@ -93,7 +93,10 @@ const Player = () => {
                 })}
             </div>
 
-            <PlayerCountry player={ctx.application.player} />
+            <PlayerCountry
+                player={ctx.application.player}
+                transitions={ctx.application.getTransitions()}
+            />
             <div className={'flex-box'}>
                 {ctx.application.player.getVineyards().length ? (
                     <div className={'bdr'}>
@@ -116,9 +119,9 @@ const Player = () => {
                             .getWineries()
                             .map((winery, i) => {
                                 return (
-                                    <div className="bdr--1">
-                                        {i + 1 + '. winery' + ' '}
-                                        <> </>
+                                    <div className="bdr">
+                                        {i + 1 + '. '}
+
                                         {'location:' +
                                             ' ' +
                                             winery.getLocationName()}
