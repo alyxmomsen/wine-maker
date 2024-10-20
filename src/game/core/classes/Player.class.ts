@@ -85,7 +85,7 @@ export class PlayerPerson implements IPlayerPerson {
         return this.currentLocation
     }
 
-    setCurrentLocation(location: Location) {
+    setCurrentLocation(location: Location|null) {
         this.currentLocation = location
     }
 

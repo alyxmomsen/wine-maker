@@ -27,6 +27,7 @@ import {
 } from './Location.Region.concrete'
 import { Observer } from './Observer.class'
 import { PlayerPerson } from './Player.class'
+import { ITransition } from './Transition.class'
 import { Vineyard } from './Vineyard.class'
 import {
     SoaveWineFactory,
@@ -49,9 +50,36 @@ export class GameFacade {
     wineryFactories: IWineryFactory[]
     observer: Observer
 
+    private transitions: ITransition[];
+
     updater: Updating
 
+    setTransition(transition:ITransition) {
+        
+        this.transitions.push(transition);
+    }
+
+    getTransitions() {
+
+    }
+
     update(): boolean {
+
+        /* ----- */
+
+        this.transitions.forEach(transition => {
+
+            transition.update();
+
+        });
+
+        // clear finished transition
+
+        this.transitions = this.transitions.filter(transition => !transition.isDone());
+
+        /* ---- */
+
+
         this.player.decrementHealth(1)
         this.player.decrementMoneyAmountByValue(1)
         this.player.update()
@@ -60,6 +88,7 @@ export class GameFacade {
         if (refresher) {
             refresher((current) => current + 1)
         }
+
         return true
     }
 
@@ -70,6 +99,9 @@ export class GameFacade {
     constructor(
         dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
     ) {
+
+        this.transitions = [];
+
         this.vineyardFactory = new VineyardFactory()
         this.observer = new Observer()
         this.refresher = dispatcher

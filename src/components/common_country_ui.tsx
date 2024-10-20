@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { MainContext } from '../App'
 import { Location } from '../game/core/classes/Location.class'
+import { LocationTransition } from '../game/core/classes/Transition.class'
 
 const CommonCountryUI = ({ country }: { country: Location }) => {
     const ctx = useContext(MainContext)
@@ -24,7 +25,8 @@ const CommonCountryUI = ({ country }: { country: Location }) => {
             <h2>{country.getTitle()}</h2>
             <button
                 onClick={() => {
-                    ctx.application.player.setCurrentLocation(country)
+                    ctx.application.setTransition(new LocationTransition(ctx.application.player , country , 5000));
+                    // ctx.application.player.setCurrentLocation(country)
                     ctx.application.update()
                 }}
             >
