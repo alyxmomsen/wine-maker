@@ -12,16 +12,29 @@ li {
     list-style: none;
 }
 
-.pdg--9 {
+.pdg {
     padding: 9px;
 }
 
-.bdr--1 {
+.bdr {
     border: 1px solid tomato;
+    border-color: gray;
 }
 
-.marked {
+.bdr-red {
+    border-color: red;
+}
+
+.width-max {
+    width: 100%;
+}
+
+.mrk-bdr-1 {
     border: 1px solid yellowgreen;
+}
+
+.mrk-bkg-1 {
+    background-color: #2d866036;
 }
 
 .flex-box {
@@ -32,7 +45,7 @@ li {
     flex-wrap: wrap;
 }
 
-.gap-9 {
+.gap {
     gap: 9px;
 }
 

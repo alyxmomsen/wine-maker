@@ -20,7 +20,11 @@ export class Vineyard {
         this.grape.push(grape)
     }
 
-    constructor(name: string, location: Location, owner: PlayerPerson | null = null) {
+    constructor(
+        name: string,
+        location: Location,
+        owner: PlayerPerson | null = null
+    ) {
         this.name = name
         this.location = location
         this.grape = []

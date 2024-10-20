@@ -4,10 +4,10 @@ import { MainContext } from '../App'
 import './../styles/main.css'
 import { Country, Location } from '../game/core/classes/Location.class'
 import { PlayerPerson } from '../game/core/classes/Player.class'
-import { ElementWrapper } from '../components/wrappers/elementWrapper'
 import { Grape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
 import Player from '../components/player'
+import CommonCountryUI from '../components/common_country_ui'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
@@ -27,80 +27,25 @@ const GamePage = () => {
     const [focusedCountry, setFocusedCountry] = useState<Location | null>(null)
 
     useEffect(() => {
-        ctx.setPlayerFocusedCountry = (location: Location | null) => setFocusedCountry(location);
-    }, []);
+        ctx.setPlayerFocusedCountry = (location: Location | null) =>
+            setFocusedCountry(location)
+    }, [])
 
     return (
-        <div className={''}>
+        <div className={'flex-box gap bdr pdg width-max'}>
             <Player />
             <div>
                 <button onClick={() => ctx.application.update()}>
-                    udpdate
+                    upd --force
                 </button>
+            </div>
+            <div>
                 <span>countries: </span>
                 {countries.map((ctr) => (
-                    <ElementWrapper
-                        isMarked={
-                            ((location: Location | null) => {
-                                if (location?.getTitle() === ctr.getTitle()) {
-                                    return true
-                                }
-                                return false
-                            })(focusedCountry)
-                            // checkIfMarkedCountry(marked, ctr)
-                        }
-                    >
-                        <>
-                            <button
-                                onClick={() => {
-                                    ctx.application.player.setCurrentLocation(
-                                        ctr
-                                    )
-                                    ctx.application.update()
-                                }}
-                            >
-                                Go<> </>
-                                {ctr.getTitle()}
-                            </button>
-                            {ctr.getRegions().map((region) => (
-                                <ElementWrapper isMarked={false}>
-                                    <>
-                                        {region
-                                            .getAppellations()
-                                            .map((appellation) => (
-                                                <div>appelllation</div>
-                                            ))}
-                                    </>
-                                </ElementWrapper>
-                            ))}
-                        </>
-                    </ElementWrapper>
+                    <CommonCountryUI country={ctr} />
                 ))}
             </div>
             <div>
-                <span>grape: </span>
-                {grapes.map((grape) => (
-                    <button
-                    // onMouseOver={() => setMarked(grape)}
-                    // onMouseLeave={() => setMarked(null)}
-                    >
-                        {grape.getGrapeName()}
-                    </button>
-                ))}
-            </div>
-            <div>
-                <span>vineyard: </span>
-                {vineyards.map((vineyard) => (
-                    <button
-                    // onMouseOver={() => setMarked(grape)}
-                    // onMouseLeave={() => setMarked(null)}
-                    >
-                        {vineyard.getName()}
-                    </button>
-                ))}
-            </div>
-            <div>
-                
                 <div>
                     <button
                         disabled={

@@ -52,6 +52,8 @@ export class GameFacade {
     updater: Updating
 
     update(): boolean {
+        this.player.decrementHealth(1)
+        this.player.decrementMoneyAmountByValue(1)
         this.player.update()
 
         const refresher = this.refresher

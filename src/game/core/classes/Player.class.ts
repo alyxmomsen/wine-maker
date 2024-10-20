@@ -27,7 +27,7 @@ export class PlayerPerson implements IPlayerPerson {
     private restoreHealth() {
         if (this.health < 100) {
             if (this.getEffirEnergyValue() > 0) {
-                const returnedValue = this.decremenentEffirEnergy(1)
+                const returnedValue = this.decremenentEffirEnergy(2)
                 console.log({ returnedValue })
                 this.incrementHealthByValue(returnedValue)
             }
@@ -133,19 +133,17 @@ export class PlayerPerson implements IPlayerPerson {
         this.moneyAmount += v
     }
 
-
-
     /**
-     * 
-     * @param value 
+     *
+     * @param value
      * @returns difference between before and after
      */
     decrementMoneyAmountByValue(value: number): number {
         const decrementValue = Math.abs(value)
-        const moneyBeforeDecrement = this.moneyAmount;
+        const moneyBeforeDecrement = this.moneyAmount
         this.moneyAmount = this.moneyAmount - decrementValue
-        const moneyAfterDecrement = this.moneyAmount;
-        return moneyBeforeDecrement - moneyAfterDecrement;
+        const moneyAfterDecrement = this.moneyAmount
+        return moneyBeforeDecrement - moneyAfterDecrement
     }
 
     update() {
@@ -160,8 +158,8 @@ export class PlayerPerson implements IPlayerPerson {
         this.vineyards = []
         this.wineries = []
         this.moneyAmount = 0
-        this.currentLocation = null; 
-        this.health = 100;
-        this.effirEnergy = 1000000;
+        this.currentLocation = null
+        this.health = 100
+        this.effirEnergy = 1000000
     }
 }

@@ -12,8 +12,8 @@ export type TMainContext = {
     application: GameFacade
     updated: number
     dispatcher: React.Dispatch<React.SetStateAction<number>> | null
-    playerFocusedCountry: Location | null;
-    setPlayerFocusedCountry: (location: Location | null) => void;
+    playerFocusedCountry: Location | null
+    setPlayerFocusedCountry: (location: Location | null) => void
 }
 
 export const MainContext = createContext<TMainContext>({
@@ -51,7 +51,7 @@ function App() {
                     updated: state,
                     dispatcher: setState,
                     playerFocusedCountry: null,
-                    setPlayerFocusedCountry: () => { },
+                    setPlayerFocusedCountry: () => {},
                 }}
             >
                 <GamePage />
