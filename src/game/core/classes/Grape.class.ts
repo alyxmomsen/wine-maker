@@ -54,6 +54,24 @@ export class GarganegaGrape extends Grape {
     }
 }
 
+export class TrebbianoGrape extends Grape {
+    constructor(location:Location) {
+        super('Trebbiano' , location);
+    }
+}
+
+export class ChardonnayGrape extends Grape {
+    constructor(location:Location) {
+        super('Chardonnay' , location);
+    }
+}
+
+export class PinotBlancGrape extends Grape {
+    constructor(location:Location) {
+        super('Pinot blanc' , location);
+    }
+}
+
 export class MuscadetGrape extends Grape {
     constructor(location: Location) {
         super('Muskadet', location)
