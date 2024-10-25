@@ -13,7 +13,7 @@ export class SoaveWine extends Wine {
         const countryOriginName = italiaCountry.getTitle()
         const grapeName = garganegaGrape.getGrapeName()
         const regionName = venetoRegion.getTitle()
-        super('Soave', grapeName, countryOriginName, regionName, '')
+        super('Soave', garganegaGrape,[garganegaGrape] , countryOriginName, regionName, '')
     }
 }
 
@@ -26,7 +26,7 @@ export class MuskadetWine extends Wine {
         const countryOriginName = italiaCountry.getTitle()
         const grapeName = garganegaGrape.getGrapeName()
         const regionName = venetoRegion.getTitle()
-        super('Soave', grapeName, countryOriginName, regionName, '')
+        super('Soave', garganegaGrape,[garganegaGrape], countryOriginName, regionName, '')
     }
 }
 
@@ -36,7 +36,7 @@ export class VinhoVerdeWine extends Wine {
         minnoRegion: BurgundyRegion,
         grape: MelonDeBourgogneGrape
     ) {
-        super('Vinho Verde', grape.getGrapeName(), '', '', '')
+        super('Vinho Verde', grape,[grape], '', '', '')
     }
 }
 

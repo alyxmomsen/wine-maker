@@ -5,12 +5,13 @@ export class Wine {
     countryOrigin: string
     regionOrigin: string
     appellationOrigin: string
-    grape: string
+    grape: Grape;
     grapes: Grape[];
 
     constructor(
         title: string,
-        grape: string,
+        grape: Grape,
+        grapes:Grape[],
         countryOrigin: string,
         regionOrigin: string,
         appellationOrigin: string
@@ -20,8 +21,7 @@ export class Wine {
         this.regionOrigin = regionOrigin
         this.appellationOrigin = appellationOrigin
         this.grape = grape
-        this.grapes = [
-            
-        ];
+        this.grapes = grapes;
+        
     }
 }

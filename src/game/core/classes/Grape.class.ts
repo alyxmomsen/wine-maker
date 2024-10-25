@@ -4,6 +4,7 @@ export interface IGrape {
     getGrapeName(): string
     getOrigin(): Location
     getAmount(): number
+    rejectAmount(value:number): number;
 }
 
 export class Grape implements IGrape {
@@ -23,10 +24,27 @@ export class Grape implements IGrape {
         return this.origin
     }
 
+    /**
+     * 
+     * @param value 
+     * @returns value that is >= this.amount
+     */
+    rejectAmount(value:number): number {
+        const result = this.amount - value;
+        if (result >= 0) {
+            this.amount -= value;
+            return value;
+        }
+        else {
+            this.amount = 0;
+            return value - this.amount;
+        }
+    }
+
     constructor(title: string, location: Location) {
         this.origin = location
         this.grapeName = title
-        this.amount = 100
+        this.amount = 1000;
     }
 }
 
