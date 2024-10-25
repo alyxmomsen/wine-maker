@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
-import { MainContext } from '../App'
-import { Location } from '../game/core/classes/Location.class'
-import { LocationTransition } from '../game/core/classes/Transition.class'
+import { MainContext } from '../../App'
+import { Location } from '../../game/core/classes/Location.class'
+import { LocationTransition } from '../../game/core/classes/Transition.class'
+import { PlayerPerson } from '../../game/core/classes/Player.class'
 
-const CommonCountryUI = ({ country }: { country: Location }) => {
+const CommonCountryPeviewUI = ({ country , player }: { country: Location, player:PlayerPerson }) => {
     const ctx = useContext(MainContext)
 
     const currentUserLocation = ctx.application.player.getCurrentLocation()
@@ -24,7 +25,9 @@ const CommonCountryUI = ({ country }: { country: Location }) => {
         >
             <h2>{country.getTitle()}</h2>
             <button
-                onClick={() => {
+                onClick={country === currentUserLocation ? () => {
+                    alert();
+                } : () => {
                     ctx.application.addTransition(
                         LocationTransition.Instance(
                             ctx.application.player,
@@ -37,10 +40,10 @@ const CommonCountryUI = ({ country }: { country: Location }) => {
                     ctx.application.update()
                 }}
             >
-                Go Here
+                {country === currentUserLocation ? "Open" : "Go Here"}
             </button>
         </div>
     )
 }
 
-export default CommonCountryUI
+export default CommonCountryPeviewUI

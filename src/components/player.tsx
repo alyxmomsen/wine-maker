@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
 import { MainContext } from '../App'
-import PlayerCountry from './player_country'
+import PlayerCountry from './country/player_country_preview_ui'
 import PlayerVineyardPreview from './player_vineyard_preview'
-import PlayerGrapePreview from './player_grape_preview'
+// import PlayerGrapePreview from './player_grape_preview'
 
 const Player = () => {
     const ctx = useContext(MainContext)

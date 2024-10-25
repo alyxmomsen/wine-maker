@@ -7,7 +7,7 @@ import { PlayerPerson } from '../game/core/classes/Player.class'
 import { Grape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
 import Player from '../components/player'
-import CommonCountryUI from '../components/common_country_ui'
+import CommonCountryPeviewUI from '../components/country/common_country_preview_ui'
 
 const GamePage = () => {
     const ctx = useContext(MainContext)
@@ -42,7 +42,7 @@ const GamePage = () => {
             <div className={'flex-item'}>
                 <span>countries: </span>
                 {countries.map((ctr) => (
-                    <CommonCountryUI country={ctr} />
+                    <CommonCountryPeviewUI country={ctr} player={ctx.application.player} />
                 ))}
             </div>
             <div className={'flex-item'}>
