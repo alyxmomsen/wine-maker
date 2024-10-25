@@ -25,30 +25,29 @@ export class CraftWineFactory implements IWineFactory {
     canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean {
         const playerWineries = player.getWineries()
 
-        const playerGrapes = player.getGrapes();
+        const playerGrapes = player.getGrapes()
 
         if (playerGrapes.length <= 0) {
-            return false;
+            return false
         }
 
         // for (const grape ) {
-            
+
         // }
 
-        let isWineryEqual = false;
+        let isWineryEqual = false
         for (const playerWinery of playerWineries) {
-
             if (playerWinery === winery) {
-                isWineryEqual = true;
-                break;
+                isWineryEqual = true
+                break
             }
         }
 
-        return isWineryEqual;
+        return isWineryEqual
     }
 
     tryCreateFor(player: PlayerPerson): Wine | null {
-        return null;
+        return null
     }
 
     getTitle(): string {

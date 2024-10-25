@@ -27,45 +27,47 @@ const Player = () => {
                         ctx.application.update()
                     }}
                 >
-                    get damage ({-5})
+                    apply damage ({5})
                 </button>
             </div>
             <div className={'bdr pdg'}>
                 <span>money: </span>
                 <span>{ctx.application.player.getMoneyAmount()}</span>
                 {isAddMoneyYouWant && (
-                    <>
-                        <input
-                            onChange={(e) =>
-                                setPlayerMoneyInput(
-                                    Number.parseFloat(e.target.value)
-                                )
-                            }
-                            step={100}
-                            type="number"
-                            value={playerMoneyInput}
-                        />
-                        <button
-                            onClick={() => {
-                                ctx.application.player.incrementMoneyAmountByValue(
-                                    playerMoneyInput === 0
-                                        ? 10000
-                                        : playerMoneyInput
-                                )
-                                // setPlayerMoneyInput(0)
-                                ctx.application.update()
-                            }}
-                        >
-                            add
-                        </button>
-                    </>
+                    <input
+                        onChange={(e) =>
+                            setPlayerMoneyInput(
+                                Number.parseFloat(e.target.value)
+                            )
+                        }
+                        step={100}
+                        type="number"
+                        value={playerMoneyInput}
+                    />
                 )}
-
-                <button
-                    onClick={() => setIsAddMoneyYouWant((current) => !current)}
-                >
-                    {(isAddMoneyYouWant ? 'hide' : 'input').toUpperCase()}
-                </button>
+                <div>
+                    <button
+                        onClick={() => {
+                            ctx.application.player.incrementMoneyAmountByValue(
+                                playerMoneyInput === 0
+                                    ? 10000
+                                    : playerMoneyInput
+                            )
+                            // setPlayerMoneyInput(0)
+                            ctx.application.update()
+                        }}
+                    >
+                        add money
+                    </button>
+                    <button
+                        onClick={() =>
+                            setIsAddMoneyYouWant((current) => !current)
+                        }
+                    >
+                        {(isAddMoneyYouWant ? 'hide ' : 'open ').toUpperCase()}
+                        input
+                    </button>
+                </div>
             </div>
             <div className={'bdr pdg'}>
                 <div>grapes: </div>
@@ -102,11 +104,7 @@ const Player = () => {
                     <div className={'bdr'}>
                         <h2>Vineyards</h2>
                         <div className={'flex-box flex-dir--col gap'}>
-                            {ctx.application.player
-                                .getVineyards()
-                                .map((vrd) => (
-                                    <PlayerVineyardPreview vrd={vrd} />
-                                ))}
+                            {ctx.application.player.getVineyards().length}
                         </div>
                     </div>
                 ) : (
@@ -115,53 +113,7 @@ const Player = () => {
                 {ctx.application.player.getWineries().length > 0 && (
                     <div className={'bdr'}>
                         <h2>Wineries</h2>
-                        {ctx.application.player
-                            .getWineries()
-                            .map((winery, i) => {
-                                return (
-                                    <div className="bdr">
-                                        {i + 1 + '. '}
-
-                                        {'location:' +
-                                            ' ' +
-                                            winery.getLocationName()}
-                                        {ctx.application.wineFactories.map(
-                                            (wineFactory, i) => {
-                                                const canCreate =
-                                                    wineFactory.canCreateWineForPlayer(
-                                                        ctx.application.player,
-                                                        winery
-                                                    )
-
-                                                return canCreate ? (
-                                                    <button
-                                                        onClick={() => {
-                                                            wineFactory.tryCreateFor(
-                                                                ctx.application
-                                                                    .player,
-                                                                winery
-                                                            )
-                                                            ctx.application.update()
-                                                        }}
-                                                        disabled={
-                                                            !wineFactory.canCreateWineForPlayer(
-                                                                ctx.application
-                                                                    .player,
-                                                                winery
-                                                            )
-                                                        }
-                                                    >
-                                                        make{' '}
-                                                        {wineFactory.getWineName()}
-                                                    </button>
-                                                ) : (
-                                                    <></>
-                                                )
-                                            }
-                                        )}
-                                    </div>
-                                )
-                            })}
+                        {ctx.application.player.getWineries().length}
                     </div>
                 )}
             </div>

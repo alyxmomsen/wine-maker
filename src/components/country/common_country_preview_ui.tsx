@@ -1,13 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { MainContext } from '../../App'
 import { Location } from '../../game/core/classes/Location.class'
 import { LocationTransition } from '../../game/core/classes/Transition.class'
 import { PlayerPerson } from '../../game/core/classes/Player.class'
 
-const CommonCountryPeviewUI = ({ country , player }: { country: Location, player:PlayerPerson }) => {
+const CommonCountryPeviewUI = ({
+    country,
+    player,
+}: {
+    country: Location
+    player: PlayerPerson
+}) => {
     const ctx = useContext(MainContext)
 
     const currentUserLocation = ctx.application.player.getCurrentLocation()
+
+    useEffect(() => {
+        console.log('country', ctx.modal)
+    })
 
     console.log(
         'current',
@@ -25,22 +35,28 @@ const CommonCountryPeviewUI = ({ country , player }: { country: Location, player
         >
             <h2>{country.getTitle()}</h2>
             <button
-                onClick={country === currentUserLocation ? () => {
-                    alert();
-                } : () => {
-                    ctx.application.addTransition(
-                        LocationTransition.Instance(
-                            ctx.application.player,
-                            country,
-                            ctx.application.getTransitions(),
-                            5000
-                        )
-                    )
+                onClick={
+                    country === currentUserLocation
+                        ? () => {
+                              ctx.modal.location = country
+                              ctx.modal.isOpen = true
+                              ctx.application.update()
+                          }
+                        : () => {
+                              ctx.application.addTransition(
+                                  LocationTransition.Instance(
+                                      ctx.application.player,
+                                      country,
+                                      ctx.application.getTransitions(),
+                                      5000
+                                  )
+                              )
 
-                    ctx.application.update()
-                }}
+                              ctx.application.update()
+                          }
+                }
             >
-                {country === currentUserLocation ? "Open" : "Go Here"}
+                {country === currentUserLocation ? 'Open' : 'Go Here'}
             </button>
         </div>
     )

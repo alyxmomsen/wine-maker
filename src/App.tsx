@@ -14,6 +14,10 @@ export type TMainContext = {
     dispatcher: React.Dispatch<React.SetStateAction<number>> | null
     playerFocusedCountry: Location | null
     setPlayerFocusedCountry: (location: Location | null) => void
+    modal: {
+        location: Location | null
+        isOpen: boolean
+    }
 }
 
 export const MainContext = createContext<TMainContext>({
@@ -22,36 +26,30 @@ export const MainContext = createContext<TMainContext>({
     dispatcher: null,
     playerFocusedCountry: null,
     setPlayerFocusedCountry: () => {},
+    modal: {
+        location: null,
+        isOpen: false,
+    },
 })
-
-let reqAnimFrameId = 0
 
 function App() {
     console.log('root updated')
 
-    const [state, setState] = useState(0)
-    useEffect(() => {
-        gameFacade.setUIRefresher(setState)
-
-        // window.cancelAnimationFrame(reqAnimFrameId);
-
-        // const update = () => {
-        //     myapp.update();
-        //     reqAnimFrameId = window.requestAnimationFrame(update);
-        // }
-
-        // update();
-    }, [])
+    // const [state, setState] = useState(0)
+    // useEffect(() => {
+    //     gameFacade.setUIRefresher(setState)
+    // }, [])
 
     return (
         <>
             <MainContext.Provider
                 value={{
                     application: gameFacade,
-                    updated: state,
-                    dispatcher: setState,
+                    updated: 0,
+                    dispatcher: null,
                     playerFocusedCountry: null,
                     setPlayerFocusedCountry: () => {},
+                    modal: { location: null, isOpen: false },
                 }}
             >
                 <GamePage />

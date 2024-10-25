@@ -136,7 +136,7 @@ export class GameFacade {
         this.wineFactories = [
             new SoaveWineFactory(),
             new VinhoVerdeWineFactory(),
-            new CraftWineFactory('Craft Wine') ,
+            new CraftWineFactory('Craft Wine'),
         ]
         this.grapeFactories = [
             new GarganegaGrapeFactory(),

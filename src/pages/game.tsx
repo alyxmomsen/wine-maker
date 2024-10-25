@@ -8,8 +8,11 @@ import { Grape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
 import Player from '../components/player'
 import CommonCountryPeviewUI from '../components/country/common_country_preview_ui'
+import CountryUI from '../components/country/country_ui'
 
 const GamePage = () => {
+    const [globalState, setGlobalState] = useState(0)
+
     const ctx = useContext(MainContext)
     const [countries, setCountries] = useState<Country[]>(
         ctx.application.countries
@@ -29,7 +32,13 @@ const GamePage = () => {
     useEffect(() => {
         ctx.setPlayerFocusedCountry = (location: Location | null) =>
             setFocusedCountry(location)
+
+        ctx.application.setUIRefresher(setGlobalState)
     }, [])
+
+    useEffect(() => {
+        console.log({ modal: ctx.modal })
+    })
 
     return (
         <div className={'flex-box gap bdr pdg width-max'}>
@@ -42,45 +51,18 @@ const GamePage = () => {
             <div className={'flex-item'}>
                 <span>countries: </span>
                 {countries.map((ctr) => (
-                    <CommonCountryPeviewUI country={ctr} player={ctx.application.player} />
+                    <CommonCountryPeviewUI
+                        country={ctr}
+                        player={ctx.application.player}
+                    />
                 ))}
             </div>
-            <div className={'flex-item'}>
-                <div>
-                    <button
-                        disabled={
-                            !ctx.application.vineyardFactory.canCreateForPlayer(
-                                ctx.application.player
-                            )
-                        }
-                        onClick={() => {
-                            ctx.application.vineyardFactory.createForPlayer(
-                                ctx.application.player
-                            )
-                            console.log(player)
-                            ctx.application.update()
-                        }}
-                    >
-                        create vineyard
-                    </button>
-                </div>
-                <div>
-                    {ctx.application.wineryFactories.map((wineryFactory) => {
-                        return (
-                            <button
-                                disabled={!wineryFactory.canCreate(player)}
-                                onClick={() => {
-                                    wineryFactory.tryCreate(player)
-                                    ctx.application.update()
-                                }}
-                            >
-                                create winery
-                            </button>
-                        )
-                    })}
-                    {/* <button disabled={ctx.application.wineryFactories}>create winery</button> */}
-                </div>
-            </div>
+            {ctx.modal.isOpen &&
+            ctx.modal.location &&
+            ctx.application.player.getCurrentLocation() ===
+                ctx.modal.location ? (
+                <CountryUI player={ctx.application.player} />
+            ) : null}
         </div>
     )
 }
