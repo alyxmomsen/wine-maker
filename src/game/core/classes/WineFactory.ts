@@ -149,7 +149,7 @@ export class SoaveWineFactory implements IWineFactory {
         const matchedGrapes: GarganegaGrape[] = []
 
         for (const playerGrape of playerGrapes) {
-            const grapeLocation = playerGrape.getLocation()
+            const grapeLocation = playerGrape.getOrigin()
             if (grapeLocation instanceof ItaliaCountry) {
                 matchedGrapes.push(playerGrape)
             }
@@ -209,7 +209,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
 
         for (const grape of playerGrapes) {
             if (grape instanceof MelonDeBourgogneGrape) {
-                const location = grape.getLocation()
+                const location = grape.getOrigin()
                 if (location instanceof PortugalCountry) {
                     grapeINeed = grape
                 }

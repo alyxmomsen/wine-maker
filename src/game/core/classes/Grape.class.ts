@@ -2,13 +2,13 @@ import { Location } from './Location.class'
 
 export interface IGrape {
     getGrapeName(): string
-    getLocation(): Location
+    getOrigin(): Location
     getAmount(): number
 }
 
 export class Grape implements IGrape {
     protected grapeName: string
-    protected location: Location
+    protected origin: Location
     protected amount: number
 
     getAmount(): number {
@@ -19,12 +19,12 @@ export class Grape implements IGrape {
         return this.grapeName
     }
 
-    getLocation() {
-        return this.location
+    getOrigin() {
+        return this.origin
     }
 
     constructor(title: string, location: Location) {
-        this.location = location
+        this.origin = location
         this.grapeName = title
         this.amount = 100
     }

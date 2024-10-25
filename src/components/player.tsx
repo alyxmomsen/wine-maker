@@ -75,7 +75,7 @@ const Player = () => {
                     <div>
                         <span>{i + 1 + '. ' + grape.getGrapeName()}</span>
                         <span>
-                            {' (' + grape.getLocation().getTitle() + ')'}
+                            {' (' + grape.getOrigin().getTitle() + ')'}
                         </span>
                     </div>
                 ))}

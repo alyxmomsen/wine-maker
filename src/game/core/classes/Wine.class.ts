@@ -1,9 +1,12 @@
+import { Grape } from "./Grape.class"
+
 export class Wine {
     title: string
     countryOrigin: string
     regionOrigin: string
     appellationOrigin: string
     grape: string
+    grapes: Grape[];
 
     constructor(
         title: string,
@@ -17,5 +20,8 @@ export class Wine {
         this.regionOrigin = regionOrigin
         this.appellationOrigin = appellationOrigin
         this.grape = grape
+        this.grapes = [
+            
+        ];
     }
 }
