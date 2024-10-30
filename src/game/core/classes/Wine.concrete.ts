@@ -11,7 +11,6 @@ export class SoaveWine extends Wine {
         trebbianoGrape: TrebbianoGrape|null = null,
         chardonnay: ChardonnayGrape | null = null,
         pinoBlanc:PinotBlancGrape |null = null ,
-        
     ) {
         const countryOriginName = italiaCountry.getTitle()
         const regionName = venetoRegion.getTitle()
