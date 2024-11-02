@@ -11,7 +11,7 @@ const Winery_UI_prerview = ({
     const ctx = useContext(MainContext)
 
     return (
-        <div className="flex-box gap flex-dir--col">
+        <div className="flex-box gap flex-dir--col bdr pdg">
             <div>
                 <div>{playerWinery.getName()}</div>
                 <div></div>

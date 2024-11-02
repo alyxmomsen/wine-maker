@@ -38,6 +38,8 @@ import { VineyardFactory } from './factories/WineyardFactory'
 import { SoaveWineFactory } from './factories/wine_factories/Soave.wine.factory'
 import { VinhoVerdeWineFactory } from './factories/wine_factories/VinhoVerde.Wine.Factory'
 import { ChiantyWineFactory } from './factories/wine_factories/Chianty.wine.factory'
+import { SangioveseGrape } from './Grape_concrete/Sangiovese.grape'
+import { SangioveseGrapeFactory } from './factories/grape_factories/Sangiovese.grape.factory'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
@@ -145,6 +147,7 @@ export class GameFacade {
             new MuscadetGrapeFactory(),
             new SovingnonBlanGrapeFactory(),
             new MelonDeBourgogneFactory(),
+            new SangioveseGrapeFactory(),
         ]
 
         this.wineryFactories = [new WineryFactory()]
