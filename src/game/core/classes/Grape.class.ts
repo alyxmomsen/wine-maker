@@ -8,6 +8,9 @@ export interface IGrape {
 }
 
 export class Grape implements IGrape {
+    // protected originId: string;
+    protected originLocationId: string;
+    protected id:string
     protected grapeName: string
     protected origin: Location
     protected amount: number
@@ -42,9 +45,12 @@ export class Grape implements IGrape {
     }
 
     constructor(title: string, location: Location) {
+        this.id = '';
         this.origin = location
         this.grapeName = title
         this.amount = 1000;
+        // this.locationName = 'no location';
+        this.originLocationId = '';
     }
 }
 

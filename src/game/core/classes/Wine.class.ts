@@ -1,6 +1,7 @@
 import { Grape } from "./Grape.class"
 
 export class Wine {
+    id: string;
     title: string
     countryOrigin: string
     regionOrigin: string
@@ -16,6 +17,8 @@ export class Wine {
         regionOrigin: string,
         appellationOrigin: string
     ) {
+
+        this.id = 'no ID';
         this.title = title
         this.countryOrigin = countryOrigin
         this.regionOrigin = regionOrigin
