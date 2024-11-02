@@ -1,10 +1,10 @@
-import { GarganegaGrape, Grape, MelonDeBourgogneGrape } from './Grape.class'
-import { ItaliaCountry, PortugalCountry } from './Location.Country.concrete'
-import { MinhoRegion, VenetoRegion } from './Location.Region.concrete'
-import { PlayerPerson } from './Player.class'
-import { Wine } from './Wine.class'
-import { SoaveWine, VinhoVerdeWine } from './Wine.concrete'
-import Winery, { IWinery } from './Winery.class'
+import { GarganegaGrape, Grape, MelonDeBourgogneGrape } from '../../Grape.class'
+import { ItaliaCountry, PortugalCountry } from '../../Location.Country.concrete'
+import { MinhoRegion, VenetoRegion } from '../../Location.Region.concrete'
+import { PlayerPerson } from '../../Player.class'
+import { Wine } from '../../Wine.class'
+import { VinhoVerdeWine } from '../../wine_concrete/Wine.concrete'
+import Winery, { IWinery } from '../../Winery.class'
 
 export interface IWineFactory {
     canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean

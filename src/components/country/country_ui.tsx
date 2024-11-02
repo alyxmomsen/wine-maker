@@ -28,6 +28,7 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                 </div>
                 <div className="flex-box">
                     <div className="bdr pdg">
+                        <h2>wineries</h2>
                         {playerWineries
                             .filter(
                                 (plrWnr) =>

@@ -1,4 +1,4 @@
-import { Grape } from './Grape.class'
+import { Grape, IGrape } from './Grape.class'
 
 export class Wine {
     id: string
@@ -6,13 +6,13 @@ export class Wine {
     countryOrigin: string
     regionOrigin: string
     appellationOrigin: string
-    grape: Grape
-    grapes: Grape[]
+    // grape: Grape
+    grapes: IGrape[]
 
     constructor(
         title: string,
-        grape: Grape,
-        grapes: Grape[],
+        // grape: Grape,
+        grapes: IGrape[],
         countryOrigin: string,
         regionOrigin: string,
         appellationOrigin: string
@@ -22,7 +22,7 @@ export class Wine {
         this.countryOrigin = countryOrigin
         this.regionOrigin = regionOrigin
         this.appellationOrigin = appellationOrigin
-        this.grape = grape
+        // this.grape = grape
         this.grapes = grapes
     }
 }

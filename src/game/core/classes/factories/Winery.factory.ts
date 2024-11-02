@@ -1,7 +1,7 @@
 // import { IFactory } from "./Factory.class";
 
-import { PlayerPerson } from './Player.class'
-import Winery, { IWinery } from './Winery.class'
+import { PlayerPerson } from '../Player.class'
+import Winery, { IWinery } from '../Winery.class'
 
 export interface IWineryFactory {
     canCreate(player: PlayerPerson): boolean

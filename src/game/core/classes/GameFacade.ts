@@ -34,9 +34,9 @@ import {
     CraftWineFactory,
     IWineFactory,
     VinhoVerdeWineFactory,
-} from './WineFactory'
-import { IWineryFactory, WineryFactory } from './Winery.factory'
-import { VineyardFactory } from './WineyardFactory'
+} from './factories/wine_factories/WineFactory'
+import { IWineryFactory, WineryFactory } from './factories/Winery.factory'
+import { VineyardFactory } from './factories/WineyardFactory'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
