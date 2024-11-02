@@ -4,13 +4,13 @@ export interface IGrape {
     getGrapeName(): string
     getOrigin(): Location
     getAmount(): number
-    rejectAmount(value:number): number;
+    rejectAmount(value: number): number
 }
 
 export class Grape implements IGrape {
     // protected originId: string;
-    protected originLocationId: string;
-    protected id:string
+    protected originLocationId: string
+    protected id: string
     protected grapeName: string
     protected origin: Location
     protected amount: number
@@ -28,29 +28,28 @@ export class Grape implements IGrape {
     }
 
     /**
-     * 
-     * @param value 
+     *
+     * @param value
      * @returns value that is >= this.amount
      */
-    rejectAmount(value:number): number {
-        const result = this.amount - value;
+    rejectAmount(value: number): number {
+        const result = this.amount - value
         if (result >= 0) {
-            this.amount -= value;
-            return value;
-        }
-        else {
-            this.amount = 0;
-            return value - this.amount;
+            this.amount -= value
+            return value
+        } else {
+            this.amount = 0
+            return value - this.amount
         }
     }
 
     constructor(title: string, location: Location) {
-        this.id = '';
+        this.id = ''
         this.origin = location
         this.grapeName = title
-        this.amount = 1000;
+        this.amount = 1000
         // this.locationName = 'no location';
-        this.originLocationId = '';
+        this.originLocationId = ''
     }
 }
 
@@ -61,20 +60,20 @@ export class GarganegaGrape extends Grape {
 }
 
 export class TrebbianoGrape extends Grape {
-    constructor(location:Location) {
-        super('Trebbiano' , location);
+    constructor(location: Location) {
+        super('Trebbiano', location)
     }
 }
 
 export class ChardonnayGrape extends Grape {
-    constructor(location:Location) {
-        super('Chardonnay' , location);
+    constructor(location: Location) {
+        super('Chardonnay', location)
     }
 }
 
 export class PinotBlancGrape extends Grape {
-    constructor(location:Location) {
-        super('Pinot blanc' , location);
+    constructor(location: Location) {
+        super('Pinot blanc', location)
     }
 }
 

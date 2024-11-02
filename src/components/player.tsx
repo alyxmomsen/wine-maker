@@ -74,9 +74,7 @@ const Player = () => {
                 {ctx.application.player.getGrapes().map((grape, i) => (
                     <div>
                         <span>{i + 1 + '. ' + grape.getGrapeName()}</span>
-                        <span>
-                            {' (' + grape.getOrigin().getTitle() + ')'}
-                        </span>
+                        <span>{' (' + grape.getOrigin().getTitle() + ')'}</span>
                     </div>
                 ))}
             </div>

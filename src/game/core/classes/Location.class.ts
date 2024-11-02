@@ -1,25 +1,35 @@
 export interface ILocation {
     getTitle(): string
-    getId():string
+    getId(): string
 }
 
 export abstract class Location implements ILocation {
-    private static iDs: string[] = [];
+    private static iDs: number[] = []
     protected title: string
-    protected id: number;
+    protected id: number
     getTitle() {
-
-        
         return this.title
     }
-    
+
+    getId(): string {
+        const idLikeString = `${this.id}`
+        const idMaxLength = 10
+        const stringOffSet = idMaxLength - idLikeString.length
+
+        return stringOffSet <= 0
+            ? idLikeString
+            : `${'0'.repeat(stringOffSet)}${idLikeString}`
+    }
+
     constructor(title: string) {
-        
-        const lastId:number = Location.iDs.length ? Number.parseInt(Location.iDs[Location.iDs.length - 1]) : 0;
-        const newId: number = lastId + 1;
-        this.id = newId;
+        const lastId: number = Location.iDs.length
+            ? Location.iDs[Location.iDs.length - 1]
+            : 0
+        const newId: number = lastId + 1
+        this.id = newId
+        Location.iDs.push(this.id);
         // console.log();
-        console.log(`location last id: ${lastId} | new Id: ${newId}`);
+        console.log(`location last id: ${lastId} | new Id: ${newId}`)
         this.title = title
     }
 }
@@ -67,15 +77,6 @@ export class Country extends Location implements ICountry {
 
     getAppellation(): Appellation | null {
         return null
-    }
-
-    getId(): string {
-        
-        const idLikeString = `${this.id}`;
-        const idMaxLength = 10;
-        const stringOffSet = idMaxLength - idLikeString.length;
-
-        return stringOffSet <= 0 ? idLikeString : `${'0'.repeat(stringOffSet)}${idLikeString}`;
     }
 
     constructor(title: string) {
