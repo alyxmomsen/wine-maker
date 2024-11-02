@@ -3,6 +3,7 @@ import { PlayerPerson } from '../../game/core/classes/Player.class'
 import { MainContext } from '../../App'
 import { Vineyard } from '../../game/core/classes/Vineyard.class'
 import { randomName } from '../../utils/utils'
+import Winery_UI_prerview from './Winery_UI_prerview'
 
 const CountryUI = ({ player }: { player: PlayerPerson }) => {
     const ctx = useContext(MainContext)
@@ -33,33 +34,9 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                     plrWnr.getLocation() === ctx.modal.location
                             )
                             .map((playerWinery) => (
-                                <div className="flex-box gap flex-dir--col">
-                                    <div>
-                                        <div>{playerWinery.getName()}</div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                    <div className={'flex-box gap flex-wrap'}>
-                                        {ctx.application.wineFactories.map(
-                                            (factory) => {
-                                                const canCreate =
-                                                    factory.canCreateWineForPlayer(
-                                                        ctx.application.player,
-                                                        playerWinery
-                                                    )
-
-                                                return (
-                                                    <button
-                                                        disabled={!canCreate}
-                                                        onClick={() => {}}
-                                                    >
-                                                        {factory.getWineName()}
-                                                    </button>
-                                                )
-                                            }
-                                        )}
-                                    </div>
-                                </div>
+                                <Winery_UI_prerview
+                                    playerWinery={playerWinery}
+                                />
                             ))}
                     </div>
                     <div className="bdr pdg">
