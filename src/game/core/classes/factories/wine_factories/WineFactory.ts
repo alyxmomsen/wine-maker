@@ -31,10 +31,6 @@ export class CraftWineFactory implements IWineFactory {
             return false
         }
 
-        // for (const grape ) {
-
-        // }
-
         let isWineryEqual = false
         for (const playerWinery of playerWineries) {
             if (playerWinery === winery) {
