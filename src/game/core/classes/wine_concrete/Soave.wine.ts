@@ -1,7 +1,9 @@
-import { ChardonnayGrape, GarganegaGrape, IGrape, PinotBlancGrape, TrebbianoGrape } from "../Grape.class"
-import { ItaliaCountry } from "../Location.Country.concrete"
-import { VenetoRegion } from "../Location.Region.concrete"
-import { Wine } from "../Wine.class"
+import { ChardonnayGrape, IGrape, PinotBlancGrape } from '../Grape.class'
+import { GarganegaGrape } from '../Grape_concrete/Garganega.grape'
+import { TrebbianoGrape } from '../Grape_concrete/Trebbiano.grape'
+import { ItaliaCountry } from '../Location.Country.concrete'
+import { VenetoRegion } from '../Location.Region.concrete'
+import { Wine } from '../Wine.class'
 
 export class SoaveWine extends Wine {
     constructor(
@@ -15,7 +17,7 @@ export class SoaveWine extends Wine {
         const countryOriginName = italiaCountry.getTitle()
         const regionName = venetoRegion.getTitle()
 
-        const grapes:IGrape[] = [garganegaGrape]
+        const grapes: IGrape[] = [garganegaGrape]
 
         if (trebbianoGrape) {
             grapes.push(trebbianoGrape)
@@ -32,7 +34,7 @@ export class SoaveWine extends Wine {
             // garganegaGrape,
             [...grapes],
             countryOriginName,
-            regionName, 
+            regionName,
             ''
         )
     }

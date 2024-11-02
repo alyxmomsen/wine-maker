@@ -9,8 +9,8 @@ export class Wine {
     // grape: Grape
     private grapes: IGrape[]
 
-    getName(): string  {
-        return this.title;
+    getName(): string {
+        return this.title
     }
 
     constructor(

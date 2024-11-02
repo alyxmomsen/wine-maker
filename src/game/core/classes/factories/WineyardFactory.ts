@@ -1,6 +1,6 @@
-import { randomName } from "../../../../utils/utils"
-import { PlayerPerson } from "../Player.class"
-import { Vineyard } from "../Vineyard.class"
+import { randomName } from '../../../../utils/utils'
+import { PlayerPerson } from '../Player.class'
+import { Vineyard } from '../Vineyard.class'
 
 export class VineyardFactory {
     canCreateForPlayer(player: PlayerPerson): boolean {

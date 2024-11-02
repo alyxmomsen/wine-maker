@@ -1,11 +1,10 @@
 import {
     ChardonnayGrape,
-    GarganegaGrape,
     Grape,
     MelonDeBourgogneGrape,
     PinotBlancGrape,
-    TrebbianoGrape,
 } from '../Grape.class'
+import { GarganegaGrape } from '../Grape_concrete/Garganega.grape'
 import { ItaliaCountry, PortugalCountry } from '../Location.Country.concrete'
 import { BurgundyRegion, VenetoRegion } from '../Location.Region.concrete'
 import { Wine } from '../Wine.class'

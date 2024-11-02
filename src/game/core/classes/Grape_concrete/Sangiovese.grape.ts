@@ -1,5 +1,3 @@
-import { Grape } from "../Grape.class";
+import { Grape } from '../Grape.class'
 
-export class SangioveseGrape extends Grape {
-    
-}
+export class SangioveseGrape extends Grape {}

@@ -59,7 +59,3 @@ export class CraftWineFactory implements IWineFactory {
         this.name = name
     }
 }
-
-
-
-

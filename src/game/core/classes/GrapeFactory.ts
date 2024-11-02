@@ -1,11 +1,10 @@
 import {
-    GarganegaGrape,
     Grape,
     MelonDeBourgogneGrape,
     MuscadetGrape,
     SovingnonBlanGrape,
 } from './Grape.class'
-import { ItaliaCountry } from './Location.Country.concrete'
+import { GarganegaGrape } from './Grape_concrete/Garganega.grape'
 import { PlayerPerson } from './Player.class'
 import { Vineyard } from './Vineyard.class'
 

@@ -11,7 +11,7 @@ interface IPlayerPerson {
     incrementHealthByValue(value: number): number
     decremenentEffirEnergy(value: number): number
     getWineries(): IWinery[]
-    getGrapes():IGrape[]
+    getGrapes(): IGrape[]
     // decrementMoneyValue(): number;
     // incrementMoneyValue(): number;
 }
@@ -86,7 +86,7 @@ export class PlayerPerson implements IPlayerPerson {
         return this.vineyards
     }
 
-    getGrapes():IGrape[] {
+    getGrapes(): IGrape[] {
         return this.grapes
     }
 

@@ -1,11 +1,11 @@
-import { GarganegaGrape } from "../../Grape.class"
-import { ItaliaCountry } from "../../Location.Country.concrete"
-import { VenetoRegion } from "../../Location.Region.concrete"
-import { PlayerPerson } from "../../Player.class"
-import { Wine } from "../../Wine.class"
-import { SoaveWine } from "../../wine_concrete/Soave.wine"
-import Winery, { IWinery } from "../../Winery.class"
-import { IWineFactory } from "./WineFactory"
+import { GarganegaGrape } from '../../Grape_concrete/Garganega.grape'
+import { ItaliaCountry } from '../../Location.Country.concrete'
+import { VenetoRegion } from '../../Location.Region.concrete'
+import { PlayerPerson } from '../../Player.class'
+import { Wine } from '../../Wine.class'
+import { SoaveWine } from '../../wine_concrete/Soave.wine'
+import Winery, { IWinery } from '../../Winery.class'
+import { IWineFactory } from './WineFactory'
 
 export class SoaveWineFactory implements IWineFactory {
     getTitle(): string {
@@ -93,7 +93,10 @@ export class SoaveWineFactory implements IWineFactory {
 
         for (const playerGrape of playerGrapes) {
             const grapeLocation = playerGrape.getOrigin()
-            if (grapeLocation instanceof ItaliaCountry) {
+            if (
+                playerGrape instanceof GarganegaGrape &&
+                grapeLocation instanceof ItaliaCountry
+            ) {
                 matchedGrapes.push(playerGrape)
             }
         }

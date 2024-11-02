@@ -1,12 +1,12 @@
-import Grape from "../../../../../components/grape"
-import { MelonDeBourgogneGrape } from "../../Grape.class"
-import { PortugalCountry } from "../../Location.Country.concrete"
-import { MinhoRegion } from "../../Location.Region.concrete"
-import { PlayerPerson } from "../../Player.class"
-import { Wine } from "../../Wine.class"
-import { VinhoVerdeWine } from "../../wine_concrete/Wine.concrete"
-import { IWinery } from "../../Winery.class"
-import { IWineFactory } from "./WineFactory"
+import Grape from '../../../../../components/grape'
+import { MelonDeBourgogneGrape } from '../../Grape.class'
+import { PortugalCountry } from '../../Location.Country.concrete'
+import { MinhoRegion } from '../../Location.Region.concrete'
+import { PlayerPerson } from '../../Player.class'
+import { Wine } from '../../Wine.class'
+import { VinhoVerdeWine } from '../../wine_concrete/Wine.concrete'
+import { IWinery } from '../../Winery.class'
+import { IWineFactory } from './WineFactory'
 
 export class VinhoVerdeWineFactory implements IWineFactory {
     private price: number
@@ -75,7 +75,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
     tryCreateFor(player: PlayerPerson, winery: IWinery): Wine | null {
         const decrementedValue = player.decrementMoneyAmountByValue(299)
 
-        const loc = winery.getLocation();
+        const loc = winery.getLocation()
 
         const wine = new VinhoVerdeWine(
             PortugalCountry.Instance(),
