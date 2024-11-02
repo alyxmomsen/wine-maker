@@ -1,11 +1,11 @@
 // import { IFactory } from "./Factory.class";
 
 import { PlayerPerson } from './Player.class'
-import Winery from './Winery.class'
+import Winery, { IWinery } from './Winery.class'
 
 export interface IWineryFactory {
     canCreate(player: PlayerPerson): boolean
-    tryCreate(player: PlayerPerson): Winery | null
+    tryCreate(player: PlayerPerson): IWinery | null
 }
 
 export class WineryFactory implements IWineryFactory {
@@ -26,7 +26,7 @@ export class WineryFactory implements IWineryFactory {
         return true
     }
 
-    tryCreate(player: PlayerPerson): Winery | null {
+    tryCreate(player: PlayerPerson): IWinery | null {
         const location = player.getCurrentLocation()
         const money = player.getMoneyAmount()
 
@@ -38,7 +38,7 @@ export class WineryFactory implements IWineryFactory {
             return null
         }
 
-        const winery = new Winery(location)
+        const winery: IWinery = new Winery(location)
         const playerMoneyRest = player.decrementMoneyAmountByValue(this.price)
         player.addWinery(winery)
 

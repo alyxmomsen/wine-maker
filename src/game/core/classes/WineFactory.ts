@@ -4,10 +4,10 @@ import { MinhoRegion, VenetoRegion } from './Location.Region.concrete'
 import { PlayerPerson } from './Player.class'
 import { Wine } from './Wine.class'
 import { SoaveWine, VinhoVerdeWine } from './Wine.concrete'
-import Winery from './Winery.class'
+import Winery, { IWinery } from './Winery.class'
 
 export interface IWineFactory {
-    canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean
+    canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean
     getWineName(): string
     getTitle(): string
     tryCreateFor(player: PlayerPerson, winery: Winery): Wine | null

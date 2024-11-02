@@ -20,9 +20,30 @@ li {
     padding: 9px;
 }
 
+.pdg-2 {
+    padding: calc(9px * 2);
+}
+.pdg-3 {
+    padding: calc((9px * 2) * 2);
+}
+.pdg-4 {
+    padding: calc(((9px * 2) * 2) * 2);
+}
+
 .bdr {
     border: 1px solid tomato;
     border-color: gray;
+}
+
+.bg {
+    background-color: #283b53;
+}
+
+.bg-2 {
+    background-color: #2d5b93;
+}
+.bg-3 {
+    background-color: #126bd7;
 }
 
 .bdr-red {
@@ -83,11 +104,13 @@ li {
 /* modal */
 
 .modal {
+    --width: 80vw;
+    --height: 90vh;
     /* display: block; */
     position: fixed;
-    top: 10px;
-    left: 50px;
-    /* width: 80%; */
-    /* height: 80%; */
+    top: calc((100vh - var(--height)) / 2);
+    left: calc((100vw - var(--width)) / 2);
+    width: var(--width);
+    height: var(--height);
     background-color: #283b53;
 }

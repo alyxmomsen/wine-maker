@@ -3,13 +3,14 @@ import { Location } from './Location.class'
 import { ITransition } from './Transition.class'
 import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
-import Winery from './Winery.class'
+import Winery, { IWinery } from './Winery.class'
 
 interface IPlayerPerson {
     update(): boolean
     decrementHealth(value: number): number
     incrementHealthByValue(value: number): number
     decremenentEffirEnergy(value: number): number
+    getWineries(): IWinery[]
     // decrementMoneyValue(): number;
     // incrementMoneyValue(): number;
 }
@@ -22,7 +23,7 @@ export class PlayerPerson implements IPlayerPerson {
     private currentLocation: Location | null
     private wine: Wine[]
     private vineyards: Vineyard[]
-    private wineries: Winery[]
+    private wineries: IWinery[]
     private moneyAmount: number
     // private transitions: ITransition[]
     private name: string
@@ -59,11 +60,11 @@ export class PlayerPerson implements IPlayerPerson {
     //     return this.transitions
     // }
 
-    addWinery(winery: Winery) {
+    addWinery(winery: IWinery) {
         this.wineries.push(winery)
     }
 
-    getWineries() {
+    getWineries(): IWinery[] {
         return this.wineries
     }
 
