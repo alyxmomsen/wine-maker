@@ -1,6 +1,7 @@
 export interface ILocation {
     getTitle(): string
-    getId(): string
+    getIdLikeString(): string
+    getId(): number
 }
 
 export abstract class Location implements ILocation {
@@ -11,7 +12,7 @@ export abstract class Location implements ILocation {
         return this.title
     }
 
-    getId(): string {
+    getIdLikeString(): string {
         const idLikeString = `${this.id}`
         const idMaxLength = 10
         const stringOffSet = idMaxLength - idLikeString.length
@@ -21,15 +22,21 @@ export abstract class Location implements ILocation {
             : `${'0'.repeat(stringOffSet)}${idLikeString}`
     }
 
+    getId(): number {
+        return this.id
+    }
+
     constructor(title: string) {
         const lastId: number = Location.iDs.length
             ? Location.iDs[Location.iDs.length - 1]
             : 0
         const newId: number = lastId + 1
         this.id = newId
-        Location.iDs.push(this.id);
+        Location.iDs.push(this.id)
         // console.log();
-        console.log(`location last id: ${lastId} | new Id: ${newId}`)
+        console.log(
+            `location last id: ${lastId} | new Id: ${this.getIdLikeString()}`
+        )
         this.title = title
     }
 }

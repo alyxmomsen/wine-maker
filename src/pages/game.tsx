@@ -49,13 +49,15 @@ const GamePage = () => {
                 </button>
             </div>
             <div className={'flex-item'}>
-                <span>countries: </span>
-                {countries.map((ctr) => (
-                    <CommonCountryPeviewUI
-                        country={ctr}
-                        player={ctx.application.player}
-                    />
-                ))}
+                <h2>countries: </h2>
+                <div className={'flex-box flex-wrap'}>
+                    {countries.map((ctr) => (
+                        <CommonCountryPeviewUI
+                            country={ctr}
+                            player={ctx.application.player}
+                        />
+                    ))}
+                </div>
             </div>
             {ctx.modal.isOpen &&
             ctx.modal.location &&

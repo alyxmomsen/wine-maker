@@ -92,7 +92,6 @@ const Player = () => {
                     )
                 })}
             </div>
-
             <PlayerCountry
                 player={ctx.application.player}
                 transitions={ctx.application.getTransitions()}

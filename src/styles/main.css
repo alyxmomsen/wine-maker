@@ -2,10 +2,14 @@
     box-sizing: border-box;
 }
 
-.btn {
+button {
     padding: 9px;
     width: max-content;
     height: max-content;
+}
+
+.inline-block {
+    display: inline;
 }
 
 li {

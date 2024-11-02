@@ -1,3 +1,4 @@
+import { LogCreator } from '../../../utils/logger.class'
 import { Location } from './Location.class'
 
 export interface IGrape {
@@ -5,15 +6,22 @@ export interface IGrape {
     getOrigin(): Location
     getAmount(): number
     rejectAmount(value: number): number
+    getId(): number
 }
 
 export class Grape implements IGrape {
+    private static iDs: number[] = []
+
     // protected originId: string;
     protected originLocationId: string
-    protected id: string
+    protected id: number
     protected grapeName: string
     protected origin: Location
     protected amount: number
+
+    getId(): number {
+        return this.id
+    }
 
     getAmount(): number {
         return this.amount
@@ -44,12 +52,30 @@ export class Grape implements IGrape {
     }
 
     constructor(title: string, location: Location) {
-        this.id = ''
+        /* create id */
+
+        const allIDsLen = Grape.iDs.length
+        const newId: number = allIDsLen ? Grape.iDs[allIDsLen - 1] : 0
+        this.id = newId
+        Grape.iDs.push(newId)
+
+        /* ========= */
+
         this.origin = location
         this.grapeName = title
         this.amount = 1000
         // this.locationName = 'no location';
         this.originLocationId = ''
+
+        const logCreator = new LogCreator()
+
+        logCreator.addString(`created new Grape: `)
+        logCreator.addString(`new Grape Id: ${newId}`)
+        logCreator.addString(
+            `new Grape Location Id: ${location.getIdLikeString()}`
+        )
+
+        console.log(logCreator.getString())
     }
 }
 
