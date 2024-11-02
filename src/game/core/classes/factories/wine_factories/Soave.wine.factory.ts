@@ -4,7 +4,7 @@ import { VenetoRegion } from '../../Location.Region.concrete'
 import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
 import { SoaveWine } from '../../wine_concrete/Soave.wine'
-import Winery, { IWinery } from '../../Winery.class'
+import { IWinery } from '../../Winery.class'
 import { IWineFactory } from './WineFactory'
 
 export class SoaveWineFactory implements IWineFactory {
