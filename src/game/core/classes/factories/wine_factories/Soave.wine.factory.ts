@@ -95,7 +95,7 @@ export class SoaveWineFactory implements IWineFactory {
             const grapeLocation = playerGrape.getOrigin()
             if (
                 playerGrape instanceof GarganegaGrape &&
-                grapeLocation instanceof ItaliaCountry
+                grapeLocation instanceof ItaliaCountry 
             ) {
                 matchedGrapes.push(playerGrape)
             }
