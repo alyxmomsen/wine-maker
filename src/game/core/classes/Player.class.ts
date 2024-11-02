@@ -1,4 +1,4 @@
-import { Grape } from './Grape.class'
+import { Grape, IGrape } from './Grape.class'
 import { Location } from './Location.class'
 import { ITransition } from './Transition.class'
 import { Vineyard } from './Vineyard.class'
@@ -11,6 +11,7 @@ interface IPlayerPerson {
     incrementHealthByValue(value: number): number
     decremenentEffirEnergy(value: number): number
     getWineries(): IWinery[]
+    getGrapes():IGrape[]
     // decrementMoneyValue(): number;
     // incrementMoneyValue(): number;
 }
@@ -18,7 +19,7 @@ interface IPlayerPerson {
 export class PlayerPerson implements IPlayerPerson {
     private effirEnergy: number
     private health: number
-    private grapes: Grape[]
+    private grapes: IGrape[]
     private availableLocations: Location[]
     private currentLocation: Location | null
     private wine: Wine[]
@@ -45,20 +46,6 @@ export class PlayerPerson implements IPlayerPerson {
     getName() {
         return this.name
     }
-
-    // addTransition(transition: ITransition | null): boolean {
-    //     if (transition) {
-    //         this.transitions.push(transition)
-    //         return true
-    //     }
-
-    //     return false
-    // }
-
-    // getTransitions(): ITransition[] {
-    //     this.transitions
-    //     return this.transitions
-    // }
 
     addWinery(winery: IWinery) {
         this.wineries.push(winery)
@@ -99,7 +86,7 @@ export class PlayerPerson implements IPlayerPerson {
         return this.vineyards
     }
 
-    getGrapes() {
+    getGrapes():IGrape[] {
         return this.grapes
     }
 

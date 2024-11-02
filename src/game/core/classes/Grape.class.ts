@@ -79,18 +79,6 @@ export class Grape implements IGrape {
     }
 }
 
-export class GarganegaGrape extends Grape {
-    constructor(location: Location) {
-        super('Garganega', location)
-    }
-}
-
-export class TrebbianoGrape extends Grape {
-    constructor(location: Location) {
-        super('Trebbiano', location)
-    }
-}
-
 export class ChardonnayGrape extends Grape {
     constructor(location: Location) {
         super('Chardonnay', location)

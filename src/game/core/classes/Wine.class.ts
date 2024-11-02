@@ -1,13 +1,17 @@
 import { Grape, IGrape } from './Grape.class'
 
 export class Wine {
-    id: string
-    title: string
-    countryOrigin: string
-    regionOrigin: string
-    appellationOrigin: string
+    private id: string
+    private title: string
+    private countryOrigin: string
+    private regionOrigin: string
+    private appellationOrigin: string
     // grape: Grape
-    grapes: IGrape[]
+    private grapes: IGrape[]
+
+    getName(): string  {
+        return this.title;
+    }
 
     constructor(
         title: string,

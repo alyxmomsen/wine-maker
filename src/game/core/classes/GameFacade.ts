@@ -30,13 +30,14 @@ import { PlayerPerson } from './Player.class'
 import { ITransition } from './Transition.class'
 import { Vineyard } from './Vineyard.class'
 import {
-    SoaveWineFactory,
     CraftWineFactory,
     IWineFactory,
-    VinhoVerdeWineFactory,
 } from './factories/wine_factories/WineFactory'
 import { IWineryFactory, WineryFactory } from './factories/Winery.factory'
 import { VineyardFactory } from './factories/WineyardFactory'
+import { SoaveWineFactory } from './factories/wine_factories/Soave.wine.factory'
+import { VinhoVerdeWineFactory } from './factories/wine_factories/VinhoVerde.Wine.Factory'
+import { ChiantyWineFactory } from './factories/wine_factories/Chianty.wine.factory'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
@@ -137,6 +138,7 @@ export class GameFacade {
             new SoaveWineFactory(),
             new VinhoVerdeWineFactory(),
             new CraftWineFactory('Craft Wine'),
+            new ChiantyWineFactory(),
         ]
         this.grapeFactories = [
             new GarganegaGrapeFactory(),
