@@ -5,7 +5,7 @@ import { Wine } from './Wine.class'
 
 export class SoaveWine extends Wine {
     constructor(
-        italiaCountry: ItaliaCountry,
+        italiaCountry: ItaliaCountry ,
         venetoRegion: VenetoRegion,
         garganegaGrape: GarganegaGrape, 
         trebbianoGrape: TrebbianoGrape|null = null,
