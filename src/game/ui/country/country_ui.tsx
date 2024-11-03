@@ -50,7 +50,7 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                     ctx.application.update()
                                 }}
                             >
-                                create winery
+                                build a winery
                             </button>
                         ))
 
@@ -71,7 +71,7 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                     }
                                     disabled={!canCreateVineyard}
                                 >
-                                    create vrd
+                                    build a vineyard
                                 </button>
                             }
                         </div>
