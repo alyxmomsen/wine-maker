@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { MainContext } from '../../App'
 import { IWinery } from '../core/classes/Winery.class'
+import { dateStringFromUnixTime } from '../../utils/utils'
 
 const Winery_ui = ({ winery }: { winery: IWinery }) => {
     const ctx = useContext(MainContext)
@@ -28,10 +29,50 @@ const Winery_ui = ({ winery }: { winery: IWinery }) => {
                     </button>
                 </div>
             </div>
-            <div>
-                {winery.getWines().map((wine) => (
-                    <div>{wine.getName()}</div>
-                ))}
+            <div className={'flex-box gap bdr pdg'}>
+                <div className={'bdr pdg'}>
+                    {winery.getWines().map((wine) => (
+                        <div className={'flex-box gap'}>
+                            <div>{wine.getName()}</div>
+                            <div>{dateStringFromUnixTime(wine.getSince())}</div>
+                        </div>
+                    ))}
+                </div>
+                <div className={'bdr pdg'}>
+                    <div className={'flex-box gap flex-wrap'}>
+                        {ctx.application.wineFactories
+                            .filter((factory) => {
+                                const canCreate = factory.canCreateForLocation(
+                                    ctx.application.player,
+                                    playerWinery.getLocation()
+                                )
+
+                                return canCreate
+                            })
+                            .map((factory) => {
+                                const canCreate =
+                                    factory.canCreateWineForPerson(
+                                        ctx.application.player,
+                                        playerWinery
+                                    )
+
+                                return (
+                                    <button
+                                        disabled={!canCreate}
+                                        onClick={() => {
+                                            factory.tryCreate(
+                                                ctx.application.player,
+                                                playerWinery
+                                            )
+                                        }}
+                                    >
+                                        {factory.getWineName()}
+                                    </button>
+                                )
+                            })}
+                    </div>
+                </div>
+                <div className={'bdr pdg'}>3</div>
             </div>
             <div>bottom</div>
         </div>

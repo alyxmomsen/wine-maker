@@ -23,3 +23,13 @@ export function randomName(length: number) {
 
     return str
 }
+
+export function dateStringFromUnixTime(value: number): string {
+    const dateObj = new Date(value)
+
+    const hour = dateObj.getHours()
+    const minutes = dateObj.getMinutes()
+    const seconds = dateObj.getSeconds()
+
+    return `${hour}:${minutes}:${seconds}`
+}

@@ -6,6 +6,7 @@ export class Wine {
     private countryOrigin: string
     private regionOrigin: string
     private appellationOrigin: string
+    private since: number
     // grape: Grape
     private grapes: IGrape[]
 
@@ -15,6 +16,10 @@ export class Wine {
 
     getTitle(): string {
         return this.title
+    }
+
+    getSince(): number {
+        return this.since
     }
 
     constructor(
@@ -32,5 +37,6 @@ export class Wine {
         this.appellationOrigin = appellationOrigin
         // this.grape = grape
         this.grapes = grapes
+        this.since = Date.now()
     }
 }
