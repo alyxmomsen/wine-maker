@@ -68,7 +68,7 @@ export class SoaveWineFactory implements IWineFactory {
     }
 
     canCreateForLocation(player: PlayerPerson, location: Location): boolean {
-        return (location instanceof ItaliaCountryLocation)
+        return location instanceof ItaliaCountryLocation
     }
 
     canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean {

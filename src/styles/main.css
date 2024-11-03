@@ -10,7 +10,7 @@ button {
 
 .inline-block {
     display: inline;
-}             
+}
 
 li {
     list-style: none;
@@ -73,14 +73,14 @@ li {
 
 .gap {
     gap: 9px;
-} 
+}
 
 .gap-2 {
-    gap: calc(9px * 2) ;
+    gap: calc(9px * 2);
 }
 
 .gap-3 {
-    gap: calc(9px * 2) * 2 ;
+    gap: calc(9px * 2) * 2;
 }
 
 .flex-dir--col {
@@ -92,7 +92,7 @@ li {
 }
 
 .justify--end {
-    justify-content: flex-end ;
+    justify-content: flex-end;
 }
 
 .flex__align--start {

@@ -23,10 +23,10 @@ export class SangioveseGrapeFactory implements IGrapeFactory {
     }
 
     create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
-        const vineyardLocation = vineyard.getLocation();
-        const sangioveseGrape = new SangioveseGrape(vineyardLocation);
-        player.addGrape(sangioveseGrape);
-        return sangioveseGrape;
+        const vineyardLocation = vineyard.getLocation()
+        const sangioveseGrape = new SangioveseGrape(vineyardLocation)
+        player.addGrape(sangioveseGrape)
+        return sangioveseGrape
     }
 
     getTitle(): string {

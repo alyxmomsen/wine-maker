@@ -18,9 +18,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
     }
 
     canCreateForLocation(player: PlayerPerson, location: Location): boolean {
-        
-        return (location instanceof PortugalCountryLocation);
-
+        return location instanceof PortugalCountryLocation
     }
 
     canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean {

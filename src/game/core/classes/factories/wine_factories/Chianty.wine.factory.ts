@@ -7,7 +7,6 @@ import Winery, { IWinery } from '../../Winery.class'
 import { IWineFactory } from './WineFactory'
 
 export class ChiantyWineFactory implements IWineFactory {
-    
     calculateCostPrice(): number {
         return 0
     }
@@ -20,26 +19,26 @@ export class ChiantyWineFactory implements IWineFactory {
         const grapes = player.getGrapes()
 
         // const isContainSanjovese:boolean = grapes.filter(grape => grape instanceof Sanjov)
-        const wineryLocation: ILocation = winery.getLocation();
-        
+        const wineryLocation: ILocation = winery.getLocation()
+
         if (!(wineryLocation instanceof ItaliaCountryLocation)) {
-            return false;
+            return false
         }
 
-        let grapePass = false;
+        let grapePass = false
 
         for (const grape of grapes) {
             if (grape instanceof SangioveseGrape) {
-                grapePass = true;
-                break;
+                grapePass = true
+                break
             }
         }
 
         if (!grapePass) {
-            return false;
+            return false
         }
 
-        return true;
+        return true
     }
 
     getTitle(): string {

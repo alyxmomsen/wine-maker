@@ -35,19 +35,24 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                             ? true
                             : false
 
-                    const canCreateWineries = ctx.application.wineryFactories.map(
-                        (wineryFactory) => <button
-                                    disabled={!wineryFactory.canCreate(ctx.application.player)}
-                                    onClick={() => {
-                                        wineryFactory.tryCreate(
-                                            ctx.application.player
-                                        )
-                                        ctx.application.update()
-                                    }}
-                                >
-                                    create winery
-                                </button>
-                    )
+                    const canCreateWineries =
+                        ctx.application.wineryFactories.map((wineryFactory) => (
+                            <button
+                                disabled={
+                                    !wineryFactory.canCreate(
+                                        ctx.application.player
+                                    )
+                                }
+                                onClick={() => {
+                                    wineryFactory.tryCreate(
+                                        ctx.application.player
+                                    )
+                                    ctx.application.update()
+                                }}
+                            >
+                                create winery
+                            </button>
+                        ))
 
                     return (
                         <div className={'flex-box bdr pdg'}>
@@ -69,7 +74,6 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                     create vrd
                                 </button>
                             }
-                            
                         </div>
                     )
                 })()}
@@ -77,11 +81,11 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                     <div className="bdr pdg flex-box flex-dir--col gap">
                         <h3>Wineries</h3>
                         {playerWineries
-                            .filter(
-                                (plrWnr) => {
-                                    return ((plrWnr.getLocation() === ctx.modal.location))
-                                }
-                            )
+                            .filter((plrWnr) => {
+                                return (
+                                    plrWnr.getLocation() === ctx.modal.location
+                                )
+                            })
                             .map((playerWinery) => (
                                 <Winery_UI_prerview
                                     playerWinery={playerWinery}
@@ -91,7 +95,15 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                     <div className={'bdr pdg'}>
                         <h3>Vineyard</h3>
                         <h4>Grapes: </h4>
-                        <Grape_country_ui_preview grapes={player.getGrapes().filter(grape => grape.getOrigin() === player.getCurrentLocation())} />
+                        <Grape_country_ui_preview
+                            grapes={player
+                                .getGrapes()
+                                .filter(
+                                    (grape) =>
+                                        grape.getOrigin() ===
+                                        player.getCurrentLocation()
+                                )}
+                        />
                     </div>
                     <div className="bdr pdg">
                         {playerVineyards
@@ -106,7 +118,11 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                         {ctx.application.grapeFactories.map(
                                             (grapeFactory) => {
                                                 return (
-                                                    <div className={'flex-box gap'}>
+                                                    <div
+                                                        className={
+                                                            'flex-box gap'
+                                                        }
+                                                    >
                                                         <div>
                                                             {grapeFactory.getTitle()}
                                                         </div>
@@ -145,7 +161,6 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                             ))}
                     </div>
                 </div>
-                
             </div>
         </div>
     )
