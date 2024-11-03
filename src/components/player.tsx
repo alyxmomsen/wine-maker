@@ -1,8 +1,6 @@
 import { useContext, useState } from 'react'
 import { MainContext } from '../App'
-import PlayerCountry from './country/player_country_preview_ui'
-import PlayerVineyardPreview from './player_vineyard_preview'
-// import PlayerGrapePreview from './player_grape_preview'
+import PlayerCountry from '../game/ui/country/player_country_preview_ui'
 
 const Player = () => {
     const ctx = useContext(MainContext)
@@ -83,7 +81,7 @@ const Player = () => {
                 {ctx.application.player.getWine().map((wine) => {
                     return (
                         <div>
-                            <span>{wine.title}</span>
+                            <span>{wine.getTitle()}</span>
                             <span>
                                 <> </>
                                 {'wine'}

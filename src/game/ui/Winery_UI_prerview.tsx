@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import { Wine } from '../../game/core/classes/Wine.class'
+import { Wine } from '../core/classes/Wine.class'
 import { MainContext } from '../../App'
-import { IWinery } from '../../game/core/classes/Winery.class'
+import { IWinery } from '../core/classes/Winery.class'
 
 const Winery_UI_prerview = ({
     playerWinery: playerWinery,

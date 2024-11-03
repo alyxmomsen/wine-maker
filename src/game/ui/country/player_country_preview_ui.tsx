@@ -1,9 +1,9 @@
 import React from 'react'
-import { PlayerPerson } from '../../game/core/classes/Player.class'
+import { PlayerPerson } from '../../core/classes/Player.class'
 import {
     ITransition,
     LocationTransition,
-} from '../../game/core/classes/Transition.class'
+} from '../../core/classes/Transition.class'
 
 const PlayerCountry = ({
     player,

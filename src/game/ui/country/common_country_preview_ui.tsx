@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
-import { MainContext } from '../../App'
-import { Location } from '../../game/core/classes/Location.class'
-import { LocationTransition } from '../../game/core/classes/Transition.class'
-import { PlayerPerson } from '../../game/core/classes/Player.class'
+import { MainContext } from '../../../App'
+import { Location } from '../../core/classes/Location.class'
+import { LocationTransition } from '../../core/classes/Transition.class'
+import { PlayerPerson } from '../../core/classes/Player.class'
 
 const CommonCountryPeviewUI = ({
     country,

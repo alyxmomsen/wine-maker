@@ -13,6 +13,10 @@ export class Wine {
         return this.title
     }
 
+    getTitle(): string {
+        return this.title
+    }
+
     constructor(
         title: string,
         // grape: Grape,

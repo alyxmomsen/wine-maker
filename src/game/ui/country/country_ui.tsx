@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { PlayerPerson } from '../../game/core/classes/Player.class'
-import { MainContext } from '../../App'
-import { Vineyard } from '../../game/core/classes/Vineyard.class'
-import { randomName } from '../../utils/utils'
-import Winery_UI_prerview from './Winery_UI_prerview'
+import { PlayerPerson } from '../../core/classes/Player.class'
+import { MainContext } from '../../../App'
+import { Vineyard } from '../../core/classes/Vineyard.class'
+import { randomName } from '../../../utils/utils'
+import Winery_UI_prerview from '../Winery_UI_prerview'
 import Grape_country_ui_preview from './grape_country_ui_preview'
-import { Location } from '../../game/core/classes/Location.class'
+import { Location } from '../../core/classes/Location.class'
 
 const CountryUI = ({ player }: { player: PlayerPerson }) => {
     const ctx = useContext(MainContext)

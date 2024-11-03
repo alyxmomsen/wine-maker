@@ -7,8 +7,8 @@ import { PlayerPerson } from '../game/core/classes/Player.class'
 import { Grape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
 import Player from '../components/player'
-import CommonCountryPeviewUI from '../components/country/common_country_preview_ui'
-import CountryUI from '../components/country/country_ui'
+import CommonCountryPeviewUI from '../game/ui/country/common_country_preview_ui'
+import CountryUI from '../game/ui/country/country_ui'
 
 const GamePage = () => {
     const [globalState, setGlobalState] = useState(0)

@@ -1,5 +1,5 @@
 
-import { IGrape } from '../../game/core/classes/Grape.class'
+import { IGrape } from '../../core/classes/Grape.class'
 
 const Grape_country_ui_preview = ({ grapes }: { grapes: IGrape[] }) => {
     
