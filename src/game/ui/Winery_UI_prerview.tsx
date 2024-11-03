@@ -16,9 +16,13 @@ const Winery_UI_prerview = ({
                 <div>{playerWinery.getName()}</div>
                 <button
                     onClick={() => {
-                        alert()
+                        ctx.modal.component = () => <div>component</div>
+                        ctx.application.update()
+                        // alert('updated');
                     }}
-                ></button>
+                >
+                    enter
+                </button>
             </div>
             <div className={'flex-box gap flex-wrap'}>
                 {ctx.application.wineFactories
