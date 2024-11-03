@@ -78,12 +78,13 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                     )
                 })()}
                 <div className="flex-box bdr pdg">
-                    <div className="bdr pdg">
+                    <div className="bdr pdg flex-box flex-dir--col gap">
                         <h3>wineries</h3>
                         {playerWineries
                             .filter(
-                                (plrWnr) =>
-                                    plrWnr.getLocation() === ctx.modal.location
+                                (plrWnr) => {
+                                    return ((plrWnr.getLocation() === ctx.modal.location))
+                                }
                             )
                             .map((playerWinery) => (
                                 <Winery_UI_prerview

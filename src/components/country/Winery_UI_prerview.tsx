@@ -14,22 +14,29 @@ const Winery_UI_prerview = ({
         <div className="flex-box gap flex-dir--col bdr pdg">
             <div>
                 <div>{playerWinery.getName()}</div>
-                <div></div>
-                <div></div>
             </div>
             <div className={'flex-box gap flex-wrap'}>
-                {ctx.application.wineFactories.map((factory) => {
+                {ctx.application.wineFactories.filter((factory) => {
                     const canCreate = factory.canCreateWineForPlayer(
                         ctx.application.player,
                         playerWinery
                     )
 
-                    return (
-                        <button disabled={!canCreate} onClick={() => {}}>
-                            {factory.getWineName()}
-                        </button>
+                    return canCreate
+                }).map(factory => {
+
+                    const canCreate = factory.canCreateWineForPlayer(
+                        ctx.application.player,
+                        playerWinery
                     )
-                })}
+                    
+                    return (
+                        <button disabled={!canCreate} onClick={() => { }}>
+                            {factory.getWineName()}
+                        </button>)}
+
+                    )
+                        }
             </div>
         </div>
     )

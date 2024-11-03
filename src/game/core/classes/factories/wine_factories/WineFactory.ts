@@ -1,13 +1,12 @@
-import { GarganegaGrape, Grape, MelonDeBourgogneGrape } from '../../Grape.class'
-import { ItaliaCountry, PortugalCountry } from '../../Location.Country.concrete'
-import { MinhoRegion, VenetoRegion } from '../../Location.Region.concrete'
+
+import { Location } from '../../Location.class'
 import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
-import { VinhoVerdeWine } from '../../wine_concrete/Wine.concrete'
 import Winery, { IWinery } from '../../Winery.class'
 
 export interface IWineFactory {
     canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean
+    // canCreateFor(player:PlayerPerson , location:Location):boolean
     getWineName(): string
     getTitle(): string
     tryCreateFor(player: PlayerPerson, winery: Winery): Wine | null
@@ -15,12 +14,15 @@ export interface IWineFactory {
 }
 
 export class CraftWineFactory implements IWineFactory {
+    
     price: number
     name: string
 
     calculateCostPrice(): number {
         return 0
     }
+
+    // canCreateFor(player: PlayerPerson, location: Location): boolean {}
 
     canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean {
         const playerWineries = player.getWineries()
