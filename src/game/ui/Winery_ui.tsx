@@ -38,39 +38,36 @@ const Winery_ui = ({ winery }: { winery: IWinery }) => {
                         </div>
                     ))}
                 </div>
-                <div className={'bdr pdg'}>
-                    <div className={'flex-box gap flex-wrap'}>
-                        {ctx.application.wineFactories
-                            .filter((factory) => {
-                                const canCreate = factory.canCreateForLocation(
-                                    ctx.application.player,
-                                    playerWinery.getLocation()
-                                )
+                <div className={'flex-box gap flex-wrap bdr pdg'}>
+                    {ctx.application.wineFactories
+                        .filter((factory) => {
+                            const canCreate = factory.canCreateForLocation(
+                                ctx.application.player,
+                                winery.getLocation()
+                            )
 
-                                return canCreate
-                            })
-                            .map((factory) => {
-                                const canCreate =
-                                    factory.canCreateWineForPerson(
-                                        ctx.application.player,
-                                        playerWinery
-                                    )
+                            return canCreate
+                        })
+                        .map((factory) => {
+                            const canCreate = factory.canCreateWineForPerson(
+                                ctx.application.player,
+                                winery
+                            )
 
-                                return (
-                                    <button
-                                        disabled={!canCreate}
-                                        onClick={() => {
-                                            factory.tryCreate(
-                                                ctx.application.player,
-                                                playerWinery
-                                            )
-                                        }}
-                                    >
-                                        {factory.getWineName()}
-                                    </button>
-                                )
-                            })}
-                    </div>
+                            return (
+                                <button
+                                    disabled={!canCreate}
+                                    onClick={() => {
+                                        factory.tryCreate(
+                                            ctx.application.player,
+                                            winery
+                                        )
+                                    }}
+                                >
+                                    {factory.getWineName()}
+                                </button>
+                            )
+                        })}
                 </div>
                 <div className={'bdr pdg'}>3</div>
             </div>
