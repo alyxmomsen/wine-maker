@@ -18,9 +18,7 @@ const Winery_UI_prerview = ({
                     onClick={() => {
                         alert()
                     }}
-                >
-                    open
-                </button>
+                ></button>
             </div>
             <div className={'flex-box gap flex-wrap'}>
                 {ctx.application.wineFactories

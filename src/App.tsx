@@ -17,6 +17,7 @@ export type TMainContext = {
     modal: {
         location: Location | null
         isOpen: boolean
+        component: (() => JSX.Element) | null
     }
 }
 
@@ -29,6 +30,7 @@ export const MainContext = createContext<TMainContext>({
     modal: {
         location: null,
         isOpen: false,
+        component: null,
     },
 })
 
@@ -49,7 +51,7 @@ function App() {
                     dispatcher: null,
                     playerFocusedCountry: null,
                     setPlayerFocusedCountry: () => {},
-                    modal: { location: null, isOpen: false },
+                    modal: { location: null, isOpen: false, component: null },
                 }}
             >
                 <GamePage />
