@@ -1,6 +1,7 @@
 import Grape from '../../../../../components/grape'
 import { MelonDeBourgogneGrape } from '../../Grape.class'
-import { PortugalCountry } from '../../Location.Country.concrete'
+import { Location } from '../../Location.class'
+import { PortugalCountry as PortugalCountryLocation } from '../../Location.Country.concrete'
 import { MinhoRegion } from '../../Location.Region.concrete'
 import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
@@ -16,6 +17,12 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         return this.price
     }
 
+    canCreateForLocation(player: PlayerPerson, location: Location): boolean {
+        
+        return (location instanceof PortugalCountryLocation);
+
+    }
+
     canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean {
         const playerGrapes = player.getGrapes()
         const playerCurrentLocation = player.getCurrentLocation()
@@ -24,11 +31,11 @@ export class VinhoVerdeWineFactory implements IWineFactory {
 
         let grapeINeed: MelonDeBourgogneGrape | null = null
 
-        if (!(playerCurrentLocation instanceof PortugalCountry)) {
+        if (!(playerCurrentLocation instanceof PortugalCountryLocation)) {
             return false
         }
 
-        if (!(wineryLocation instanceof PortugalCountry)) {
+        if (!(wineryLocation instanceof PortugalCountryLocation)) {
             return false
         }
 
@@ -51,7 +58,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         for (const grape of playerGrapes) {
             if (grape instanceof MelonDeBourgogneGrape) {
                 const location = grape.getOrigin()
-                if (location instanceof PortugalCountry) {
+                if (location instanceof PortugalCountryLocation) {
                     grapeINeed = grape
                 }
             }
@@ -78,7 +85,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         const loc = winery.getLocation()
 
         const wine = new VinhoVerdeWine(
-            PortugalCountry.Instance(),
+            PortugalCountryLocation.Instance(),
             MinhoRegion.Instance(),
             new MelonDeBourgogneGrape(loc)
         )

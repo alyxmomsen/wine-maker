@@ -1,15 +1,19 @@
 import { SangioveseGrape } from '../../Grape_concrete/Sangiovese.grape'
-import { ILocation } from '../../Location.class'
-import { ItaliaCountry } from '../../Location.Country.concrete'
+import { ILocation, Location } from '../../Location.class'
+import { ItaliaCountry as ItaliaCountryLocation } from '../../Location.Country.concrete'
 import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
-import { ChiantiWine } from '../../wine_concrete/Chianti.wine'
 import Winery, { IWinery } from '../../Winery.class'
 import { IWineFactory } from './WineFactory'
 
 export class ChiantyWineFactory implements IWineFactory {
+    
     calculateCostPrice(): number {
         return 0
+    }
+
+    canCreateForLocation(player: PlayerPerson, location: Location): boolean {
+        return location instanceof ItaliaCountryLocation
     }
 
     canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean {
@@ -18,7 +22,7 @@ export class ChiantyWineFactory implements IWineFactory {
         // const isContainSanjovese:boolean = grapes.filter(grape => grape instanceof Sanjov)
         const wineryLocation: ILocation = winery.getLocation();
         
-        if (!(wineryLocation instanceof ItaliaCountry)) {
+        if (!(wineryLocation instanceof ItaliaCountryLocation)) {
             return false;
         }
 

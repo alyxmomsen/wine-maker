@@ -1,5 +1,6 @@
 import { GarganegaGrape } from '../../Grape_concrete/Garganega.grape'
-import { ItaliaCountry } from '../../Location.Country.concrete'
+import { Location } from '../../Location.class'
+import { ItaliaCountry as ItaliaCountryLocation } from '../../Location.Country.concrete'
 import { VenetoRegion } from '../../Location.Region.concrete'
 import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
@@ -34,7 +35,7 @@ export class SoaveWineFactory implements IWineFactory {
         const currentPlayerLocation = player.getCurrentLocation()
         const playerGrapes = player.getGrapes()
 
-        if (!(currentPlayerLocation instanceof ItaliaCountry)) {
+        if (!(currentPlayerLocation instanceof ItaliaCountryLocation)) {
             return null
         }
 
@@ -66,6 +67,10 @@ export class SoaveWineFactory implements IWineFactory {
         return wine
     }
 
+    canCreateForLocation(player: PlayerPerson, location: Location): boolean {
+        return (location instanceof ItaliaCountryLocation)
+    }
+
     canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean {
         const playerCurrentLocation = player.getCurrentLocation()
         const wineryLocation = winery.getLocation()
@@ -81,7 +86,7 @@ export class SoaveWineFactory implements IWineFactory {
             return false
         }
 
-        if (!(wineryLocation instanceof ItaliaCountry)) {
+        if (!(wineryLocation instanceof ItaliaCountryLocation)) {
             return false
         }
 
@@ -95,7 +100,7 @@ export class SoaveWineFactory implements IWineFactory {
             const grapeLocation = playerGrape.getOrigin()
             if (
                 playerGrape instanceof GarganegaGrape &&
-                grapeLocation instanceof ItaliaCountry
+                grapeLocation instanceof ItaliaCountryLocation
             ) {
                 matchedGrapes.push(playerGrape)
             }

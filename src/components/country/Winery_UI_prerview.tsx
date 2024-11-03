@@ -17,10 +17,7 @@ const Winery_UI_prerview = ({
             </div>
             <div className={'flex-box gap flex-wrap'}>
                 {ctx.application.wineFactories.filter((factory) => {
-                    const canCreate = factory.canCreateWineForPlayer(
-                        ctx.application.player,
-                        playerWinery
-                    )
+                    const canCreate = factory.canCreateForLocation(ctx.application.player , playerWinery.getLocation());
 
                     return canCreate
                 }).map(factory => {

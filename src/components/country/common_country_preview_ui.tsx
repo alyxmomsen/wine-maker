@@ -48,7 +48,7 @@ const CommonCountryPeviewUI = ({
                                       ctx.application.player,
                                       country,
                                       ctx.application.getTransitions(),
-                                      5000
+                                      1000
                                   )
                               )
 
