@@ -38,13 +38,21 @@ const Winery_UI_prerview = ({
                         return canCreate
                     })
                     .map((factory) => {
-                        const canCreate = factory.canCreateWineForPlayer(
+                        const canCreate = factory.canCreateWineForPerson(
                             ctx.application.player,
                             playerWinery
                         )
 
                         return (
-                            <button disabled={!canCreate} onClick={() => {}}>
+                            <button
+                                disabled={!canCreate}
+                                onClick={() => {
+                                    factory.tryCreate(
+                                        ctx.application.player,
+                                        playerWinery
+                                    )
+                                }}
+                            >
                                 {factory.getWineName()}
                             </button>
                         )

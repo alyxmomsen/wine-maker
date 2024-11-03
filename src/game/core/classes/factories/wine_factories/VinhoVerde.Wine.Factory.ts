@@ -21,7 +21,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         return location instanceof PortugalCountryLocation
     }
 
-    canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean {
+    canCreateWineForPerson(player: PlayerPerson, winery: IWinery): boolean {
         const playerGrapes = player.getGrapes()
         const playerCurrentLocation = player.getCurrentLocation()
         const wineryLocation = winery.getLocation()
@@ -77,7 +77,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         return this.name
     }
 
-    tryCreateFor(player: PlayerPerson, winery: IWinery): Wine | null {
+    tryCreate(player: PlayerPerson, winery: IWinery): Wine | null {
         const decrementedValue = player.decrementMoneyAmountByValue(299)
 
         const loc = winery.getLocation()

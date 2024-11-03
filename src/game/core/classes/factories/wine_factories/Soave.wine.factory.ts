@@ -21,14 +21,14 @@ export class SoaveWineFactory implements IWineFactory {
         return 199
     }
 
-    tryCreateFor(player: PlayerPerson, winery: IWinery): Wine | null {
+    tryCreate(player: PlayerPerson, winery: IWinery): Wine | null {
         const playerMoney = player.getMoneyAmount()
         const wineCostPrice = this.calculateCostPrice()
         if (playerMoney < wineCostPrice) {
             return null
         }
 
-        if (!this.canCreateWineForPlayer(player, winery)) {
+        if (!this.canCreateWineForPerson(player, winery)) {
             return null
         }
 
@@ -71,7 +71,7 @@ export class SoaveWineFactory implements IWineFactory {
         return location instanceof ItaliaCountryLocation
     }
 
-    canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean {
+    canCreateWineForPerson(player: PlayerPerson, winery: IWinery): boolean {
         const playerCurrentLocation = player.getCurrentLocation()
         const wineryLocation = winery.getLocation()
         const playerGrapes = player.getGrapes()

@@ -28,7 +28,11 @@ const Winery_ui = ({ winery }: { winery: IWinery }) => {
                     </button>
                 </div>
             </div>
-            <div>{}</div>
+            <div>
+                {winery.getWines().map((wine) => (
+                    <div>{wine.getName()}</div>
+                ))}
+            </div>
             <div>bottom</div>
         </div>
     )

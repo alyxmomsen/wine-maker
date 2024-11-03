@@ -1,14 +1,14 @@
 import { Location } from '../../Location.class'
 import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
-import Winery, { IWinery } from '../../Winery.class'
+import { IWinery } from '../../Winery.class'
 
 export interface IWineFactory {
-    canCreateWineForPlayer(player: PlayerPerson, winery: IWinery): boolean
+    canCreateWineForPerson(player: PlayerPerson, winery: IWinery): boolean
     canCreateForLocation(player: PlayerPerson, location: Location): boolean
     getWineName(): string
     getTitle(): string
-    tryCreateFor(player: PlayerPerson, winery: Winery): Wine | null
+    tryCreate(player: PlayerPerson, winery: IWinery): Wine | null
     calculateCostPrice(): number
 }
 
@@ -24,7 +24,7 @@ export class CraftWineFactory implements IWineFactory {
         return true
     }
 
-    canCreateWineForPlayer(player: PlayerPerson, winery: Winery): boolean {
+    canCreateWineForPerson(player: PlayerPerson, winery: IWinery): boolean {
         const playerWineries = player.getWineries()
 
         const playerGrapes = player.getGrapes()
@@ -44,7 +44,7 @@ export class CraftWineFactory implements IWineFactory {
         return isWineryEqual
     }
 
-    tryCreateFor(player: PlayerPerson): Wine | null {
+    tryCreate(player: PlayerPerson, winery: IWinery): Wine | null {
         return null
     }
 

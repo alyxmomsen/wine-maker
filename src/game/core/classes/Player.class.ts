@@ -5,7 +5,7 @@ import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 import Winery, { IWinery } from './Winery.class'
 
-interface IPlayerPerson {
+interface IPerson {
     update(): boolean
     decrementHealth(value: number): number
     incrementHealthByValue(value: number): number
@@ -16,7 +16,7 @@ interface IPlayerPerson {
     // incrementMoneyValue(): number;
 }
 
-export class PlayerPerson implements IPlayerPerson {
+export class PlayerPerson implements IPerson {
     private effirEnergy: number
     private health: number
     private grapes: IGrape[]
@@ -116,9 +116,7 @@ export class PlayerPerson implements IPlayerPerson {
 
     addWine(wine: Wine) {
         this.wine.push(wine)
-
         // update client
-
         // this.update(() => {})
         this.update()
     }

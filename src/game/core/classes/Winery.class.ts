@@ -1,4 +1,5 @@
 import { randomName } from '../../../utils/utils'
+import { WineryFactory } from './factories/Winery.factory'
 import { Location } from './Location.class'
 import { Wine } from './Wine.class'
 
@@ -8,6 +9,7 @@ export interface IWinery {
     getName(): string
     getId(): number
     getWines(): Wine[]
+    addWine(wine: Wine): Wine | null
 }
 
 export default class Winery implements IWinery {
@@ -16,6 +18,12 @@ export default class Winery implements IWinery {
     private location: Location
     private technologies: any[]
     private wines: Wine[]
+
+    addWine(wine: Wine): Wine | null {
+        this.wines.push(wine)
+
+        return null
+    }
 
     getWines(): Wine[] {
         return this.wines
