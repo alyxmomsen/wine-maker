@@ -62,6 +62,7 @@ const Winery_ui = ({ winery }: { winery: IWinery }) => {
                                             ctx.application.player,
                                             winery
                                         )
+                                        ctx.application.update()
                                     }}
                                 >
                                     {factory.getWineName()}

@@ -79,16 +79,14 @@ export class VinhoVerdeWineFactory implements IWineFactory {
 
     tryCreate(player: PlayerPerson, winery: IWinery): Wine | null {
         const decrementedValue = player.decrementMoneyAmountByValue(299)
-
-        const loc = winery.getLocation()
-
+        const wineryLocation = winery.getLocation()
         const wine = new VinhoVerdeWine(
             PortugalCountryLocation.Instance(),
             MinhoRegion.Instance(),
-            new MelonDeBourgogneGrape(loc)
+            new MelonDeBourgogneGrape(wineryLocation)
         )
 
-        player.addWine(wine)
+        winery.addWine(wine)
 
         return wine
     }

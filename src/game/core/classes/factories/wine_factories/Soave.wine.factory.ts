@@ -62,7 +62,7 @@ export class SoaveWineFactory implements IWineFactory {
             grapeMatches[0]
         )
 
-        player.addWine(wine)
+        winery.addWine(wine)
 
         return wine
     }

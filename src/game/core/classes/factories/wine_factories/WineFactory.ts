@@ -45,6 +45,25 @@ export class CraftWineFactory implements IWineFactory {
     }
 
     tryCreate(player: PlayerPerson, winery: IWinery): Wine | null {
+        let wineryOwnerPass = false
+
+        let grapeMatchesPass = false
+
+        const playerWineries = player.getWineries()
+
+        for (const playerWinery of playerWineries) {
+            if (playerWinery === winery) {
+                wineryOwnerPass = true
+                break
+            }
+        }
+
+        if (!wineryOwnerPass) {
+            return null
+        }
+
+        const playerGrapes = player.getVineyards().map((vineyard) => {})
+
         return null
     }
 
