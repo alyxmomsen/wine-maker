@@ -133,4 +133,5 @@ li {
     width: var(--width);
     height: var(--height);
     background-color: #283b53;
+    z-index: 100;
 }

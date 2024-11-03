@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Wine } from '../core/classes/Wine.class'
 import { MainContext } from '../../App'
 import { IWinery } from '../core/classes/Winery.class'
+import Winery_ui from './Winery_ui'
 
 const Winery_UI_prerview = ({
     playerWinery: playerWinery,
@@ -16,7 +17,7 @@ const Winery_UI_prerview = ({
                 <div>{playerWinery.getName()}</div>
                 <button
                     onClick={() => {
-                        ctx.modal.component = () => <div>component</div>
+                        ctx.modal.component = () => <Winery_ui />
                         ctx.application.update()
                         // alert('updated');
                     }}

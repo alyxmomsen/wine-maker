@@ -9,6 +9,7 @@ import { Vineyard } from '../game/core/classes/Vineyard.class'
 import Player from '../components/player'
 import CommonCountryPeviewUI from '../game/ui/country/common_country_preview_ui'
 import CountryUI from '../game/ui/country/country_ui'
+import Winery_ui from '../game/ui/Winery_ui'
 
 const GamePage = () => {
     const [globalState, setGlobalState] = useState(0)
@@ -65,7 +66,7 @@ const GamePage = () => {
                 ctx.modal.location ? (
                 <CountryUI player={ctx.application.player} />
             ) : null}
-            {ctx.modal.component && ctx.modal.component()}
+            {ctx.modal.component && ctx.modal.component(<Winery_ui />)}
         </div>
     )
 }
