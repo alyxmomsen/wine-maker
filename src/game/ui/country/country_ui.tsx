@@ -6,6 +6,7 @@ import { randomName } from '../../../utils/utils'
 import Winery_UI_prerview from '../Winery_UI_prerview'
 import Grape_country_ui_preview from './grape_country_ui_preview'
 import { Location } from '../../core/classes/Location.class'
+import Vineyard_ui from '../Vineyard_ui'
 
 const CountryUI = ({ player }: { player: PlayerPerson }) => {
     const ctx = useContext(MainContext)
@@ -16,10 +17,10 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
         <div className="modal pdg-2 bdr">
             <div className="bg flex-box flex-dir--col gap pdg-2 bdr">
                 <div className={'flex-box gap bdr pdg'}>
+                    <div>Country UI</div>
                     <div className={'font-bold'}>
                         {player.getCurrentLocation()?.getTitle()}
                     </div>
-                    <div>Country UI</div>
                     <button
                         onClick={() => {
                             ctx.modal.isOpen = false
@@ -95,7 +96,7 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                             ))}
                     </div>
                     <div className={'bdr pdg'}>
-                        <h3>Vineyard</h3>
+                        <h3>All vineyards content</h3>
                         <h4>Grapes: </h4>
                         <Grape_country_ui_preview
                             grapes={player
@@ -108,6 +109,7 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                         />
                     </div>
                     <div className="bdr pdg">
+                        <h3>Vineyards:</h3>
                         {playerVineyards
                             .filter(
                                 (plrVnrd) =>
@@ -117,47 +119,21 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                 <div>
                                     <div>{playerVineyard.getName()}</div>
                                     <div>
-                                        {ctx.application.grapeFactories.map(
-                                            (grapeFactory) => {
-                                                return (
-                                                    <div
-                                                        className={
-                                                            'flex-box gap'
+                                        <button
+                                            onClick={() => {
+                                                ctx.modal.component = () => (
+                                                    <Vineyard_ui
+                                                        person={player}
+                                                        vineyard={
+                                                            playerVineyard
                                                         }
-                                                    >
-                                                        <div>
-                                                            {grapeFactory.getTitle()}
-                                                        </div>
-                                                        <div>
-                                                            <button
-                                                                disabled={
-                                                                    !grapeFactory.canCreateGrape(
-                                                                        ctx
-                                                                            .application
-                                                                            .player,
-                                                                        playerVineyard
-                                                                    )
-                                                                }
-                                                                onClick={() => {
-                                                                    grapeFactory.create(
-                                                                        ctx
-                                                                            .application
-                                                                            .player,
-                                                                        playerVineyard
-                                                                    )
-                                                                    ctx.application.update()
-                                                                }}
-                                                                className={
-                                                                    'inline-block'
-                                                                }
-                                                            >
-                                                                plant
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                                                    />
                                                 )
-                                            }
-                                        )}
+                                                ctx.application.update()
+                                            }}
+                                        >
+                                            click me
+                                        </button>
                                     </div>
                                 </div>
                             ))}

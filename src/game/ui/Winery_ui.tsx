@@ -17,7 +17,8 @@ const Winery_ui = ({ winery }: { winery: IWinery }) => {
             <h2>Winery_ui</h2>
             <div className={'flex-box gap'}>
                 <div>Winery</div>
-                <div>{winery.getName()}</div>
+                <div>name: {winery.getName()}</div>
+                <div>location: {winery.getLocationName()}</div>
                 <div>
                     <button
                         onClick={() => {

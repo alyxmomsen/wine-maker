@@ -1,4 +1,6 @@
+import { MuskadetAppellation } from '../../Location.Appellation.concrete'
 import { Location } from '../../Location.class'
+import { MinhoRegion } from '../../Location.Region.concrete'
 import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
 import { IWinery } from '../../Winery.class'
@@ -62,9 +64,29 @@ export class CraftWineFactory implements IWineFactory {
             return null
         }
 
-        const playerGrapes = player.getVineyards().map((vineyard) => {})
+        const playerGrapes = player.getGrapes()
 
-        return null
+        if (!playerGrapes.length) {
+            return null
+        }
+
+        const playerCurrentLocation = player.getCurrentLocation()
+
+        if (!playerCurrentLocation) {
+            return null
+        }
+
+        const wine = new Wine(
+            'craft wine',
+            [],
+            playerCurrentLocation.getTitle(),
+            '',
+            ''
+        )
+
+        winery.addWine(wine)
+
+        return wine
     }
 
     getTitle(): string {

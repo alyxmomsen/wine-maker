@@ -5,7 +5,7 @@ import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
 import Winery, { IWinery } from './Winery.class'
 
-interface IPerson {
+export interface IPerson {
     update(): boolean
     decrementHealth(value: number): number
     incrementHealthByValue(value: number): number
