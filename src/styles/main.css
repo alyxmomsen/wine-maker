@@ -16,6 +16,14 @@ li {
     list-style: none;
 }
 
+/* - font - */
+
+.font-bold {
+    font-weight: bold;
+}
+
+/* -------- */
+
 .pdg {
     padding: 9px;
 }

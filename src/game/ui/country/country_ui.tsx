@@ -16,7 +16,9 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
         <div className="modal pdg-2 bdr">
             <div className="bg flex-box flex-dir--col gap pdg-2 bdr">
                 <div className={'flex-box gap bdr pdg'}>
-                    <div>{player.getCurrentLocation()?.getTitle()}</div>
+                    <div className={'font-bold'}>
+                        {player.getCurrentLocation()?.getTitle()}
+                    </div>
                     <div>Country UI</div>
                     <button
                         onClick={() => {

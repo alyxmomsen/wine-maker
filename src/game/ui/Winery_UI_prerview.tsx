@@ -12,8 +12,15 @@ const Winery_UI_prerview = ({
 
     return (
         <div className="flex-box gap flex-dir--col bdr pdg">
-            <div>
+            <div className={'flex-box gap'}>
                 <div>{playerWinery.getName()}</div>
+                <button
+                    onClick={() => {
+                        alert()
+                    }}
+                >
+                    open
+                </button>
             </div>
             <div className={'flex-box gap flex-wrap'}>
                 {ctx.application.wineFactories
