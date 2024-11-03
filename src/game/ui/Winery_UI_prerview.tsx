@@ -17,7 +17,9 @@ const Winery_UI_prerview = ({
                 <div>{playerWinery.getName()}</div>
                 <button
                     onClick={() => {
-                        ctx.modal.component = () => <Winery_ui />
+                        ctx.modal.component = () => (
+                            <Winery_ui winery={playerWinery} />
+                        )
                         ctx.application.update()
                         // alert('updated');
                     }}

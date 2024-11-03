@@ -1,11 +1,13 @@
 import { randomName } from '../../../utils/utils'
 import { Location } from './Location.class'
+import { Wine } from './Wine.class'
 
 export interface IWinery {
     getLocationName(): string
     getLocation(): Location
     getName(): string
     getId(): number
+    getWines(): Wine[]
 }
 
 export default class Winery implements IWinery {
@@ -13,6 +15,11 @@ export default class Winery implements IWinery {
     private name: string
     private location: Location
     private technologies: any[]
+    private wines: Wine[]
+
+    getWines(): Wine[] {
+        return this.wines
+    }
 
     getId(): number {
         return this.id
@@ -39,5 +46,6 @@ export default class Winery implements IWinery {
         this.location = location
         this.name = randomName(5)
         this.id = Math.floor(Math.random() * 100000)
+        this.wines = []
     }
 }

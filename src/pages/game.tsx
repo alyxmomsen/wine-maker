@@ -66,7 +66,7 @@ const GamePage = () => {
                 ctx.modal.location ? (
                 <CountryUI player={ctx.application.player} />
             ) : null}
-            {ctx.modal.component && ctx.modal.component(<Winery_ui />)}
+            {ctx.modal.component && ctx.modal.component()}
         </div>
     )
 }

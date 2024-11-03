@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { MainContext } from '../../App'
+import { IWinery } from '../core/classes/Winery.class'
 
-const Winery_ui = () => {
+const Winery_ui = ({ winery }: { winery: IWinery }) => {
     const ctx = useContext(MainContext)
 
     return (
@@ -15,7 +16,7 @@ const Winery_ui = () => {
             <h2>Winery_ui</h2>
             <div className={'flex-box gap'}>
                 <div>Winery</div>
-                <div>header</div>
+                <div>{winery.getName()}</div>
                 <div>
                     <button
                         onClick={() => {
@@ -27,6 +28,7 @@ const Winery_ui = () => {
                     </button>
                 </div>
             </div>
+            <div>{}</div>
             <div>bottom</div>
         </div>
     )

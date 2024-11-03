@@ -17,7 +17,7 @@ export type TMainContext = {
     modal: {
         location: Location | null
         isOpen: boolean
-        component: ((elem: JSX.Element) => JSX.Element) | null
+        component: (() => JSX.Element) | null
     }
 }
 
