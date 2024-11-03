@@ -73,6 +73,14 @@ li {
 
 .gap {
     gap: 9px;
+} 
+
+.gap-2 {
+    gap: calc(9px * 2) ;
+}
+
+.gap-3 {
+    gap: calc(9px * 2) * 2 ;
 }
 
 .flex-dir--col {
@@ -81,6 +89,10 @@ li {
 
 .justify--start {
     justify-content: flex-start;
+}
+
+.justify--end {
+    justify-content: flex-end ;
 }
 
 .flex__align--start {

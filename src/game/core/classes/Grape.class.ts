@@ -11,7 +11,7 @@ export interface IGrape {
 
 export class Grape implements IGrape {
     private static iDs: number[] = []
-
+    private since: number;
     // protected originId: string;
     protected originLocationId: string
     protected id: number
@@ -60,6 +60,9 @@ export class Grape implements IGrape {
         Grape.iDs.push(newId)
 
         /* ========= */
+
+
+        this.since = Date.now();
 
         this.origin = location
         this.grapeName = title

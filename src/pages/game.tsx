@@ -50,7 +50,7 @@ const GamePage = () => {
             </div>
             <div className={'flex-item'}>
                 <h2>countries: </h2>
-                <div className={'flex-box flex-wrap'}>
+                <div className={'flex-box flex-wrap gap-2 justify--end'}>
                     {countries.map((ctr) => (
                         <CommonCountryPeviewUI
                             country={ctr}

@@ -16,6 +16,8 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
         <div className="modal pdg-2 bdr">
             <div className="bg flex-box flex-dir--col gap pdg-2 bdr">
                 <div className={'flex-box gap bdr pdg'}>
+                    <div>{player.getCurrentLocation()?.getTitle()}</div>
+                    <div>Country UI</div>
                     <button
                         onClick={() => {
                             ctx.modal.isOpen = false
@@ -24,8 +26,6 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                     >
                         close
                     </button>
-                    <div>Country UI</div>
-                    <div>{player.getCurrentLocation()?.getTitle()}</div>
                 </div>
                 {(() => {
                     const canCreateVineyard =
@@ -35,10 +35,9 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                             ? true
                             : false
 
-                    const canCreateWinery = ctx.application.wineryFactories.map(
-                        (wineryFactory) =>
-                            wineryFactory.canCreate(ctx.application.player) ? (
-                                <button
+                    const canCreateWineries = ctx.application.wineryFactories.map(
+                        (wineryFactory) => <button
+                                    disabled={!wineryFactory.canCreate(ctx.application.player)}
                                     onClick={() => {
                                         wineryFactory.tryCreate(
                                             ctx.application.player
@@ -48,14 +47,11 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                 >
                                     create winery
                                 </button>
-                            ) : (
-                                <button disabled>you cant</button>
-                            )
                     )
 
                     return (
-                        <div className={'flex-box bdr'}>
-                            {[...canCreateWinery]}
+                        <div className={'flex-box bdr pdg'}>
+                            {[...canCreateWineries]}
                             {
                                 <button
                                     onClick={
@@ -79,7 +75,7 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                 })()}
                 <div className="flex-box bdr pdg">
                     <div className="bdr pdg flex-box flex-dir--col gap">
-                        <h3>wineries</h3>
+                        <h3>Wineries</h3>
                         {playerWineries
                             .filter(
                                 (plrWnr) => {
@@ -93,7 +89,8 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                             ))}
                     </div>
                     <div className={'bdr pdg'}>
-                        <h3>grapes: </h3>
+                        <h3>Vineyard</h3>
+                        <h4>Grapes: </h4>
                         <Grape_country_ui_preview grapes={player.getGrapes().filter(grape => grape.getOrigin() === player.getCurrentLocation())} />
                     </div>
                     <div className="bdr pdg">
@@ -109,7 +106,7 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                         {ctx.application.grapeFactories.map(
                                             (grapeFactory) => {
                                                 return (
-                                                    <div className={'flex-box'}>
+                                                    <div className={'flex-box gap'}>
                                                         <div>
                                                             {grapeFactory.getTitle()}
                                                         </div>

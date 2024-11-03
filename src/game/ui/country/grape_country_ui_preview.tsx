@@ -7,15 +7,15 @@ const Grape_country_ui_preview = ({ grapes }: { grapes: IGrape[] }) => {
     // uniqGrapes.set('' ,'');
     
   return (
-      <div className={'bdr pdg'}>
+      <div className={'bdr pdg flex-box flex-dir--col gap'}>
           {
               grapes.map(grape => (
-                  <div>
+                  <div className={'bdr pdg'}>
                       <span>{grape.getGrapeName()}</span>
                       {
                           ' '
                       }
-                      <span>{grape.getAmount()}</span>
+                      <span>({grape.getAmount()})</span>
                   </div>
               ))
           }
