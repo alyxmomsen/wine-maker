@@ -1,5 +1,5 @@
 import { Updating } from '../updating/upd.class'
-import { Grape } from './Grape.class'
+import { IGrape } from './Grape.class'
 import {
     GarganegaGrapeFactory,
     IGrapeFactory,
@@ -38,14 +38,14 @@ import { VineyardFactory } from './factories/WineyardFactory'
 import { SoaveWineFactory } from './factories/wine_factories/Soave.wine.factory'
 import { VinhoVerdeWineFactory } from './factories/wine_factories/VinhoVerde.Wine.Factory'
 import { ChiantyWineFactory } from './factories/wine_factories/Chianty.wine.factory'
-import { SangioveseGrape } from './Grape_concrete/Sangiovese.grape'
 import { SangioveseGrapeFactory } from './factories/grape_factories/Sangiovese.grape.factory'
+import { OwnerRegistry } from './OnwnerRightsRegister'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
     countries: Country[]
     player: PlayerPerson
-    grapes: Grape[]
+    grapes: IGrape[]
     vineyards: Vineyard[]
     vineyardFactory: VineyardFactory
     wineFactories: IWineFactory[]
@@ -53,9 +53,19 @@ export class GameFacade {
     wineryFactories: IWineryFactory[]
     observer: Observer
 
+    ownerRegistry: OwnerRegistry;
+
     private transitions: ITransition[]
 
     updater: Updating
+
+    addGrape(grape:IGrape) {
+        this.grapes.push(grape);
+    }
+
+    getGrapes():IGrape[] {
+        return this.grapes;
+    }
 
     addTransition(transition: ITransition | null) {
         if (transition) {
@@ -104,6 +114,11 @@ export class GameFacade {
     constructor(
         dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
     ) {
+
+        this.ownerRegistry = new OwnerRegistry();
+
+        this.grapes = [];
+
         this.transitions = []
 
         this.vineyardFactory = new VineyardFactory()

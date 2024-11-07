@@ -3,6 +3,7 @@ import { MainContext } from '../../App'
 import { Vineyard } from '../core/classes/Vineyard.class'
 import { IPerson } from '../core/classes/Player.class'
 import Grape_country_ui_preview from './country/grape_country_ui_preview'
+import { IGrape } from '../core/classes/Grape.class'
 
 const Vineyard_ui = ({
     person,
@@ -35,23 +36,30 @@ const Vineyard_ui = ({
                 <div className={'bdr pdg'}>
                     {ctx.application.grapeFactories.map((grapeFactory) => {
                         return (
-                            <div className={'flex-box gap'}>
+                            <div className={'flex-box gap justify--start'}>
                                 <div>{grapeFactory.getTitle()}</div>
                                 <div>
                                     <button
                                         disabled={
                                             !grapeFactory.canCreateGrape(
                                                 ctx.application.player,
-                                                vineyard
+                                                vineyard,
                                             )
                                         }
+
                                         onClick={() => {
-                                            grapeFactory.create(
-                                                ctx.application.player,
-                                                vineyard
+                                            const maybeGrape = grapeFactory.create(
+                                                ctx.application.player ,
+                                                vineyard ,
+                                                ctx.application.ownerRegistry
                                             )
-                                            ctx.application.update()
+
+                                            if (maybeGrape) {
+                                                ctx.application.addGrape(maybeGrape);
+                                                ctx.application.update()
+                                            }
                                         }}
+
                                         className={'inline-block'}
                                     >
                                         plant
@@ -62,7 +70,7 @@ const Vineyard_ui = ({
                     })}
                 </div>
                 <div className={'bdr pdg'}>
-                    {<Grape_country_ui_preview grapes={person.getGrapes()} />}
+                    {<Grape_country_ui_preview grapes={ctx.application.getGrapes()} person={ctx.application.player} />}
                 </div>
             </div>
         </div>
@@ -70,3 +78,10 @@ const Vineyard_ui = ({
 }
 
 export default Vineyard_ui
+
+
+function foo(grape: IGrape, grapes: IGrape[]): number {
+
+    return 0;
+    
+}

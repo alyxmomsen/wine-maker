@@ -1,7 +1,11 @@
 import { LogCreator } from '../../../utils/logger.class'
 import { Location } from './Location.class'
 
-export interface IGrape {
+export interface IProduct {
+    
+}
+
+export interface IGrape extends IProduct {
     getGrapeName(): string
     getOrigin(): Location
     getAmount(): number
