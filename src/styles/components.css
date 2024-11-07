@@ -1,0 +1,11 @@
+.player__ui {
+    --bkg: #2d2d45;
+    --bkg-2: #3d3d80;
+    --bkg-3: #6464e7;
+    --value: 13px;
+
+    flex-basis: calc(var(--value) * 26);
+    flex-shrink: 0;
+    flex-grow: 0;
+    background-color: var(--bkg-2);
+}

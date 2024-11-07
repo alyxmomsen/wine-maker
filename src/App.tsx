@@ -2,9 +2,9 @@ import { createContext, useEffect, useState } from 'react'
 
 import './App.css'
 
-import GamePage from './pages/game'
 import { GameFacade } from './game/core/classes/GameFacade'
 import { Location } from './game/core/classes/Location.class'
+import GamePage from './pages/game_page'
 
 const gameFacade = new GameFacade(null)
 
@@ -36,11 +36,6 @@ export const MainContext = createContext<TMainContext>({
 
 function App() {
     console.log('root updated')
-
-    // const [state, setState] = useState(0)
-    // useEffect(() => {
-    //     gameFacade.setUIRefresher(setState)
-    // }, [])
 
     return (
         <>

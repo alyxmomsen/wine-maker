@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { MainContext } from '../App'
 import PlayerCountry from '../game/ui/country/player_country_preview_ui'
 
-const Player = () => {
+const PlayerUI = () => {
     const ctx = useContext(MainContext)
     const [playerMoneyInput, setPlayerMoneyInput] = useState(0)
 
@@ -10,7 +10,7 @@ const Player = () => {
     const [isMoneyInputVisible, setIsMoneyInputVisible] = useState(false)
 
     return (
-        <div className="bdr pdg flex-box flex-dir--col gap flex-item">
+        <div className="player__ui bdr pdg flex-box flex-dir--col gap">
             <h3>Player:{'  ' + ctx.application.player.getName()}</h3>
             <div className={'bdr pdg'}>
                 <span>effir: </span>
@@ -116,4 +116,4 @@ const Player = () => {
     )
 }
 
-export default Player
+export default PlayerUI

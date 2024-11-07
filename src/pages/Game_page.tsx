@@ -2,18 +2,18 @@ import { useContext, useEffect, useState } from 'react'
 import { MainContext } from '../App'
 
 import './../styles/main.css'
+import './../styles/components.css'
+
 import { Country, Location } from '../game/core/classes/Location.class'
 import { PlayerPerson } from '../game/core/classes/Player.class'
 import { Grape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
-import Player from '../components/player'
-import CommonCountryPeviewUI from '../game/ui/country/common_country_preview_ui'
+import PlayerUI from '../components/player_ui'
 import CountryUI from '../game/ui/country/country_ui'
-import Winery_ui from '../game/ui/Winery_ui'
+import CountriesUI from '../game/ui/Countries_ui'
 
 const GamePage = () => {
     const [globalState, setGlobalState] = useState(0)
-
     const ctx = useContext(MainContext)
     const [countries, setCountries] = useState<Country[]>(
         ctx.application.countries
@@ -43,23 +43,8 @@ const GamePage = () => {
 
     return (
         <div className={'flex-box gap bdr pdg width-max'}>
-            <Player />
-            <div className={'flex-item'}>
-                <button onClick={() => ctx.application.update()}>
-                    upd --force
-                </button>
-            </div>
-            <div className={'flex-item'}>
-                <h2>countries: </h2>
-                <div className={'flex-box flex-wrap gap-2 justify--end'}>
-                    {countries.map((ctr) => (
-                        <CommonCountryPeviewUI
-                            country={ctr}
-                            player={ctx.application.player}
-                        />
-                    ))}
-                </div>
-            </div>
+            <PlayerUI />
+            <CountriesUI />
             {ctx.modal.isOpen &&
             ctx.modal.location &&
             ctx.application.player.getCurrentLocation() ===
