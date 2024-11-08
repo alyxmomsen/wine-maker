@@ -7,18 +7,8 @@ const Grape_country_ui_preview = ({person ,grapesInventory}:{ grapesInventory:II
     
     return (
         <div className={'bdr pdg flex-box flex-dir--col gap'}>
-            {/* {grapes.filter(grape => {
-                
-                return true;
-            }).map((grape) => (
-                null
-            ))} */}
-
             {
-                !!person
-            }
-            {
-                !!grapesInventory
+                grapesInventory.getItems().map(item => <div>{item.getGrapeName()}</div>)
             }
         </div>
     )

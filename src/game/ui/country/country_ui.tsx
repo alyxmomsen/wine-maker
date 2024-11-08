@@ -97,14 +97,6 @@ const CountryUI = ({ player , vineyardsInventory }: { player: PlayerPerson , vin
                                 />
                             ))}
                     </div>
-                    {/* <div className={'bdr pdg'}>
-                        <h3>All vineyards content</h3>
-                        <h4>Grapes: </h4>
-                        <Grape_country_ui_preview
-                            person={player}
-                            grapesInventory={}
-                        />
-                    </div> */}
                     <div className="bdr pdg">
                         <h3>Vineyards:</h3>
                         {vineyardsInventory.getItems()

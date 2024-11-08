@@ -45,7 +45,8 @@ const Vineyard_ui = ({
                                         disabled={
                                             !grapeFactory.canCreateGrape(
                                                 ctx.application.player,
-                                                vineyard ,
+                                                vineyard,
+                                                ctx.application.vineyardInventory
                                             )
                                         }
 
