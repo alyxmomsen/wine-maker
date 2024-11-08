@@ -7,32 +7,35 @@ import {
     SovingnonBlanGrape,
 } from './Grape.class'
 import { GarganegaGrape } from './Grape_concrete/Garganega.grape'
-import { OwnerRegistry } from './OnwnerRightsRegister'
+import { IInventory } from './Inventory-registry'
 import { PlayerPerson } from './Player.class'
-import { Vineyard } from './Vineyard.class'
+import { IVineyard } from './Vineyard.class'
 
 export interface IGrapeFactory {
-    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean
-    create(player: PlayerPerson, vineyard: Vineyard , ownerRegistry:OwnerRegistry): IGrape | null
+    canCreateGrape(player: PlayerPerson, vineyard: IVineyard): boolean;
+    create(player: PlayerPerson, vineyard: IVineyard , grapeInventory:IInventory<IGrape>): IGrape | null
     getTitle(): string
 }
 
+
+
 export abstract class GrapeFactory implements IGrapeFactory {
     protected uniqIdRegistry: UniqIdRegisty;
+    
     //override
-    abstract canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean;
+    abstract canCreateGrape(player: PlayerPerson, vineyard: IVineyard): boolean;
     //override
     abstract getTitle(): string;
     //override
-    abstract create(player: PlayerPerson, vineyard: Vineyard, ownerRegistry: OwnerRegistry): IGrape | null;
+    abstract create(player: PlayerPerson, vineyard: IVineyard , grapeInventory:IInventory<IGrape>): IGrape | null;
 
-    constructor(uniqIdRegistry:UniqIdRegisty) {
+    constructor(uniqIdRegistry: UniqIdRegisty , ) {
         this.uniqIdRegistry = uniqIdRegistry;
     }
 }
 
 export class GarganegaGrapeFactory extends GrapeFactory {
-    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: IVineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -44,7 +47,7 @@ export class GarganegaGrapeFactory extends GrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: PlayerPerson, vineyard: Vineyard , ownerRegistry:OwnerRegistry): Grape | null {
+    create(player: PlayerPerson, vineyard: IVineyard , grapeInventory:IInventory<IGrape>): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
@@ -60,7 +63,8 @@ export class GarganegaGrapeFactory extends GrapeFactory {
         if (isEqual) {
 
             const newId = this.uniqIdRegistry.gen();
-            const grape = new GarganegaGrape(newId , vineyard.getLocation())
+            const grape = new GarganegaGrape(newId, vineyard.getLocation())
+            grapeInventory.addItem(grape);
             player.decrementMoneyAmountByValue(100)
             return grape
         }
@@ -72,13 +76,10 @@ export class GarganegaGrapeFactory extends GrapeFactory {
         return 'Garganega'
     }
 
-    constructor(uniqIdRegistry:UniqIdRegisty) {
-        super(uniqIdRegistry);
-    }
 }
 
 export class MuscadetGrapeFactory extends GrapeFactory {
-    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: IVineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -90,7 +91,7 @@ export class MuscadetGrapeFactory extends GrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
+    create(player: PlayerPerson, vineyard: IVineyard , grapeInventory:IInventory<IGrape>): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
@@ -105,8 +106,7 @@ export class MuscadetGrapeFactory extends GrapeFactory {
         if (isEqual) {
             const newId = this.uniqIdRegistry.gen();
             const grape = new MuscadetGrape(newId, vineyard.getLocation())
-            
-
+            grapeInventory.addItem(grape);
             player.decrementMoneyAmountByValue(100)
             return grape
         }
@@ -120,7 +120,7 @@ export class MuscadetGrapeFactory extends GrapeFactory {
 }
 
 export class SovingnonBlanGrapeFactory extends GrapeFactory {
-    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: IVineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -132,7 +132,7 @@ export class SovingnonBlanGrapeFactory extends GrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: PlayerPerson, vineyard: Vineyard): IGrape | null {
+    create(player: PlayerPerson, vineyard: IVineyard , grapeInventory:IInventory<IGrape>): IGrape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
@@ -146,7 +146,8 @@ export class SovingnonBlanGrapeFactory extends GrapeFactory {
 
         if (isEqual) {
             const newId = this.uniqIdRegistry.gen();
-            const grape = new SovingnonBlanGrape(newId , vineyard.getLocation())
+            const grape = new SovingnonBlanGrape(newId, vineyard.getLocation())
+            grapeInventory.addItem(grape);
             player.decrementMoneyAmountByValue(100)
             return grape
         }
@@ -160,7 +161,7 @@ export class SovingnonBlanGrapeFactory extends GrapeFactory {
 }
 
 export class MelonDeBourgogneGrapeFactory extends GrapeFactory {
-    canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
+    canCreateGrape(player: PlayerPerson, vineyard: IVineyard): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
             if (playerVineyard === vineyard) {
@@ -172,7 +173,7 @@ export class MelonDeBourgogneGrapeFactory extends GrapeFactory {
         return isEqual && player.getMoneyAmount() >= 100
     }
 
-    create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
+    create(player: PlayerPerson, vineyard: IVineyard ,grapeInventory:IInventory<IGrape>): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
         }
@@ -186,7 +187,8 @@ export class MelonDeBourgogneGrapeFactory extends GrapeFactory {
 
         if (isEqual) {
             const newId = this.uniqIdRegistry.gen();
-            const grape = new MelonDeBourgogneGrape(newId , vineyard.getLocation())
+            const grape = new MelonDeBourgogneGrape(newId, vineyard.getLocation())
+            grapeInventory.addItem(grape);
             player.decrementMoneyAmountByValue(100)
             return grape
         }

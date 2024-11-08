@@ -1,14 +1,15 @@
 import React, { useContext } from 'react'
 import { PlayerPerson } from '../../core/classes/Player.class'
 import { MainContext } from '../../../App'
-import { Vineyard } from '../../core/classes/Vineyard.class'
+import { IVineyard, Vineyard } from '../../core/classes/Vineyard.class'
 import { randomName } from '../../../utils/utils'
 import Winery_UI_prerview from '../Winery_UI_prerview'
 import Grape_country_ui_preview from './grape_country_ui_preview'
 import { Location } from '../../core/classes/Location.class'
 import Vineyard_ui from '../Vineyard_ui'
+import { Inventory } from '../../core/classes/Inventory-registry'
 
-const CountryUI = ({ player }: { player: PlayerPerson }) => {
+const CountryUI = ({ player , vineyardsInventory }: { player: PlayerPerson , vineyardsInventory:Inventory<IVineyard> }) => {
     const ctx = useContext(MainContext)
     const playerWineries = player.getWineries()
     const playerVineyards = player.getVineyards()
@@ -65,8 +66,9 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                     onClick={
                                         canCreateVineyard
                                             ? () => {
-                                                  ctx.application.vineyardFactory.createForPlayer(
-                                                      ctx.application.player
+                                                ctx.application.vineyardFactory.createForPlayer(
+                                                    ctx.application.player ,
+                                                    ctx.application.vineyardInventory ,
                                                   )
                                                   ctx.application.update()
                                               }
@@ -95,25 +97,20 @@ const CountryUI = ({ player }: { player: PlayerPerson }) => {
                                 />
                             ))}
                     </div>
-                    <div className={'bdr pdg'}>
+                    {/* <div className={'bdr pdg'}>
                         <h3>All vineyards content</h3>
                         <h4>Grapes: </h4>
                         <Grape_country_ui_preview
-                            grapes={player
-                                .getGrapes()
-                                .filter(
-                                    (grape) =>
-                                        grape.getOrigin() ===
-                                        player.getCurrentLocation()
-                                )}
+                            person={player}
+                            grapesInventory={}
                         />
-                    </div>
+                    </div> */}
                     <div className="bdr pdg">
                         <h3>Vineyards:</h3>
-                        {playerVineyards
+                        {vineyardsInventory.getItems()
                             .filter(
-                                (plrVnrd) =>
-                                    plrVnrd.getLocation() === ctx.modal.location
+                                (vineyard) =>
+                                    vineyard.getLocation() === ctx.modal.location
                             )
                             .map((playerVineyard) => (
                                 <div>

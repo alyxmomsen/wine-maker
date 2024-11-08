@@ -1,16 +1,17 @@
 import React, { useContext } from 'react'
 import { MainContext } from '../../App'
-import { Vineyard } from '../core/classes/Vineyard.class'
+import { IVineyard } from '../core/classes/Vineyard.class'
 import { IPerson } from '../core/classes/Player.class'
 import Grape_country_ui_preview from './country/grape_country_ui_preview'
 import { IGrape } from '../core/classes/Grape.class'
+import { VenetoRegion } from '../core/classes/Location.Region.concrete'
 
 const Vineyard_ui = ({
     person,
     vineyard,
 }: {
     person: IPerson
-    vineyard: Vineyard
+    vineyard: IVineyard
     }) => {
     
     const ctx = useContext(MainContext)
@@ -44,19 +45,19 @@ const Vineyard_ui = ({
                                         disabled={
                                             !grapeFactory.canCreateGrape(
                                                 ctx.application.player,
-                                                vineyard,
+                                                vineyard ,
                                             )
                                         }
 
                                         onClick={() => {
                                             const maybeGrape = grapeFactory.create(
                                                 ctx.application.player ,
-                                                vineyard ,
-                                                ctx.application.ownerRegistry
+                                                vineyard, 
+                                                vineyard.getGrapeInventory()
                                             )
 
                                             if (maybeGrape) {
-                                                ctx.application.addGrape(maybeGrape);
+                                                vineyard.addGrape(maybeGrape , null);
                                                 ctx.application.update()
                                             }
                                         }}
@@ -71,7 +72,7 @@ const Vineyard_ui = ({
                     })}
                 </div>
                 <div className={'bdr pdg'}>
-                    {<Grape_country_ui_preview grapes={ctx.application.getGrapes()} person={ctx.application.player} />}
+                    {<Grape_country_ui_preview grapesInventory={vineyard.getGrapeInventory()} person={ctx.application.player} />}
                 </div>
             </div>
         </div>

@@ -7,74 +7,74 @@ import {
 
 export class Medok extends RegionLocation {
     private static instance: Medok | null = null
-    static Instance(): Medok {
+    static Instance(id:number): Medok {
         if (Medok.instance === null) {
-            Medok.instance = new Medok()
+            Medok.instance = new Medok(id)
         }
 
         return Medok.instance
     }
 
-    private constructor() {
-        super(FranceCountry.Instance(), 'Medok')
+    private constructor(id:number) {
+        super(id , FranceCountry.Instance(id), 'Medok')
     }
 }
 
 export class VenetoRegion extends RegionLocation {
     private static instance: VenetoRegion | null = null
-    static Instance(): VenetoRegion {
+    static Instance(id:number): VenetoRegion {
         if (VenetoRegion.instance === null) {
-            VenetoRegion.instance = new VenetoRegion()
+            VenetoRegion.instance = new VenetoRegion(id)
         }
 
         return VenetoRegion.instance
     }
 
-    private constructor() {
-        super(ItaliaCountry.Instance(), 'Veneto')
+    private constructor(id:number) {
+        super(id , ItaliaCountry.Instance(id), 'Veneto')
     }
 }
 
 export class LoireValleyRegion extends RegionLocation {
     private static instance: LoireValleyRegion | null = null
-    static Instance(): LoireValleyRegion {
+    static Instance(id:number): LoireValleyRegion {
         if (LoireValleyRegion.instance === null) {
-            LoireValleyRegion.instance = new LoireValleyRegion()
+            LoireValleyRegion.instance = new LoireValleyRegion(id)
         }
 
         return LoireValleyRegion.instance
     }
 
-    private constructor() {
-        super(FranceCountry.Instance(), 'Loire Valley')
+    private constructor(id:number) {
+        super(id , FranceCountry.Instance(id), 'Loire Valley')
     }
 }
 
 export class BurgundyRegion extends RegionLocation {
     static instance: BurgundyRegion | null = null
-    static Instance(): BurgundyRegion {
+    static Instance(id:number): BurgundyRegion {
         if (BurgundyRegion.instance === null) {
-            BurgundyRegion.instance = new BurgundyRegion()
+            BurgundyRegion.instance = new BurgundyRegion(id)
         }
         return BurgundyRegion.instance
     }
 
-    private constructor() {
-        super(FranceCountry.Instance(), 'Burgundy')
+    private constructor(id:number) {
+        super(id , FranceCountry.Instance(id), 'Burgundy')
     }
 }
 
 export class MinhoRegion extends RegionLocation {
     static instance: MinhoRegion | null = null
-    static Instance(): MinhoRegion {
+    static Instance(id:number): MinhoRegion {
         if (MinhoRegion.instance === null) {
-            MinhoRegion.instance = new MinhoRegion()
+            MinhoRegion.instance = new MinhoRegion(id)
         }
 
         return MinhoRegion.instance
     }
 
-    private constructor() {
-        super(PortugalCountry.Instance(), 'Minho')
+    private constructor(id:number) {
+        super(id , PortugalCountry.Instance(id), 'Minho')
     }
 }

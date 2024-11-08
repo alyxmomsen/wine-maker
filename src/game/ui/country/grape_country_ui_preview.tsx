@@ -1,18 +1,25 @@
 import { IGrape } from '../../core/classes/Grape.class'
+import { IInventory } from '../../core/classes/Inventory-registry';
 import { IPerson } from '../../core/classes/Player.class'
+import { IVineyard } from '../../core/classes/Vineyard.class';
 
-const Grape_country_ui_preview = ({ grapes , person = null} : { grapes: IGrape[] , person:IPerson|null }) => {
-    const uniqGrapes: Map<string, string> = new Map<string, string>()
-    // uniqGrapes.set('' ,'');
-
+const Grape_country_ui_preview = ({person ,grapesInventory}:{ grapesInventory:IInventory<IGrape> , person:IPerson|null }) => {
+    
     return (
         <div className={'bdr pdg flex-box flex-dir--col gap'}>
-            {grapes.filter(grape => {
+            {/* {grapes.filter(grape => {
                 
                 return true;
             }).map((grape) => (
                 null
-            ))}
+            ))} */}
+
+            {
+                !!person
+            }
+            {
+                !!grapesInventory
+            }
         </div>
     )
 }
