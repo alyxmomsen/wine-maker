@@ -33,7 +33,6 @@ export class PlayerPerson implements IPerson {
         if (this.health < 100) {
             if (this.getEffirEnergyValue() > 0) {
                 const returnedValue = this.decremenentEffirEnergy(2)
-                console.log({ returnedValue })
                 this.incrementHealthByValue(returnedValue)
             }
         }
@@ -58,8 +57,7 @@ export class PlayerPerson implements IPerson {
     incrementHealthByValue(value: number): number {
         const before = this.health
         this.health = this.health + Math.abs(value)
-
-        console.log(before, this.health, value)
+        // console.log(before, this.health, value)
         return this.health - before
     }
 

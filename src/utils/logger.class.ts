@@ -1,7 +1,7 @@
 export class LogCreator {
     cntStr: string
 
-    getString() {
+    getLogStr() {
         return this.cntStr
     }
 

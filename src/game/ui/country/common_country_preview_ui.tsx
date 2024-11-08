@@ -16,15 +16,15 @@ const CommonCountryPeviewUI = ({
     const currentUserLocation = ctx.application.player.getCurrentLocation()
 
     useEffect(() => {
-        console.log('country', ctx.modal)
+        // console.log('country', ctx.modal)
     })
 
-    console.log(
-        'current',
-        currentUserLocation,
-        country,
-        currentUserLocation === country
-    )
+    // console.log(
+    //     'current',
+    //     currentUserLocation,
+    //     country,
+    //     currentUserLocation === country
+    // )
 
     return (
         <div

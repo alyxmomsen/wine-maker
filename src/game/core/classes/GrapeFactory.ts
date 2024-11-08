@@ -60,7 +60,6 @@ export class GarganegaGrapeFactory extends GrapeFactory {
         if (isEqual) {
 
             const newId = this.uniqIdRegistry.gen();
-
             const grape = new GarganegaGrape(newId , vineyard.getLocation())
             player.decrementMoneyAmountByValue(100)
             return grape

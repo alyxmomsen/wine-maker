@@ -1,10 +1,9 @@
-import { createContext, useEffect, useState } from 'react'
 
+import { createContext } from 'react'
 import './App.css'
-
-import { GameFacade } from './game/core/classes/GameFacade'
-import { Location } from './game/core/classes/Location.class'
-import GamePage from './pages/game_page'
+import { GameFacade } from './game/core/classes/GameFacade';
+import { Location } from './game/core/classes/Location.class';
+import GamePage from './pages/Game_page';
 
 const gameFacade = new GameFacade(null)
 

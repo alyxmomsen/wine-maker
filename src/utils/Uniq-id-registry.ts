@@ -16,7 +16,7 @@ export class UniqIdRegisty {
             }
 
         }
-
+        this.ids.push(1);
         return 1; 
     }
 

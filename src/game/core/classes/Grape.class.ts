@@ -14,7 +14,6 @@ export interface IGrape extends IProduct {
 }
 
 export class Grape implements IGrape {
-    private static iDs: number[] = []
     private since: number
     // protected originId: string;
     protected originLocationId: string
@@ -78,7 +77,7 @@ export class Grape implements IGrape {
             `new Grape Location Id: ${location.getIdLikeString()}`
         )
 
-        console.log(logCreator.getString())
+        console.log(logCreator.getLogStr())
     }
 }
 

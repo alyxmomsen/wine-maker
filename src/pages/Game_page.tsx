@@ -6,7 +6,7 @@ import './../styles/components.css'
 
 import { Country, Location } from '../game/core/classes/Location.class'
 import { PlayerPerson } from '../game/core/classes/Player.class'
-import { Grape } from '../game/core/classes/Grape.class'
+import { Grape, IGrape } from '../game/core/classes/Grape.class'
 import { Vineyard } from '../game/core/classes/Vineyard.class'
 import PlayerUI from '../components/player_ui'
 import CountryUI from '../game/ui/country/country_ui'
@@ -25,7 +25,7 @@ const GamePage = () => {
     const [vineyards, setVineyard] = useState<Vineyard[]>(
         ctx.application.vineyards
     )
-    const [grapes, setGrape] = useState<Grape[]>(ctx.application.grapes)
+    const [grapes, setGrape] = useState<IGrape[]>(ctx.application.grapes)
     const [player, setPlayer] = useState<PlayerPerson>(ctx.application.player)
 
     const [focusedCountry, setFocusedCountry] = useState<Location | null>(null)
@@ -38,7 +38,7 @@ const GamePage = () => {
     }, [])
 
     useEffect(() => {
-        console.log({ modal: ctx.modal })
+        // console.log({ modal: ctx.modal })
     })
 
     return (
