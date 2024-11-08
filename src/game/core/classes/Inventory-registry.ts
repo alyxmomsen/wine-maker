@@ -1,40 +1,60 @@
 import { IGrape } from './Grape.class'
+import { IPerson } from './Player.class';
 import { IVineyard } from './Vineyard.class'
 
-export interface IInventory<T> {
+export interface IInventory<S,T> {
     addItem(item: T): boolean
-    getItems(): T[]
+    // getItems(): T[]
+    getItems(): MapIterator<[number, T]>
+    getOwnerSubject(): S;
+
 }
 
-export abstract class Inventory<T> implements IInventory<T> {
-    protected items: T[]
+export abstract class Inventory<S,T> implements IInventory<S,T> {
+    // protected items: T[]
+
+    ownerSubject: S;
+
+    protected items: Map<number, T>;
+
     abstract addItem(item: T): boolean
-    abstract getItems(): T[]
+    // abstract getItems(): T[]
+    abstract getItems(): MapIterator<[number, T]>
+    abstract getOwnerSubject(): S;
 
-    constructor() {
-        this.items = []
+    constructor(ownerSubject:S) {
+        this.ownerSubject = ownerSubject;
+        this.items = new Map();
     }
 }
 
-export class GrapeInventory extends Inventory<IGrape> {
+export class GrapeInventory extends Inventory<IVineyard,  IGrape> {
     addItem(item: IGrape): boolean {
-        this.items.push(item)
+        // this.items.push(item)
+        this.items.set(item.getId() , item);
         return true
     }
 
-    getItems(): IGrape[] {
-        return this.items
+    getItems(): /* IGrape[] */MapIterator<[number ,IGrape]> {
+        return this.items.entries()
+    }
+
+    getOwnerSubject(): IVineyard {
+        return this.ownerSubject;
     }
 }
 
-export class VineyardInventory extends Inventory<IVineyard> {
+export class VineyardInventory extends Inventory<IPerson, IVineyard> {
     addItem(item: IVineyard): boolean {
-        this.items.push(item)
+        this.items.set(item.getId() , item);
         return true
     }
 
-    getItems(): IVineyard[] {
+    getItems(): MapIterator<[number,IVineyard]> {
         const items = this.items
-        return items
+        return items.entries()
+    }
+    getOwnerSubject(): IPerson {
+        return this.ownerSubject;
     }
 }

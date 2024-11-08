@@ -14,9 +14,7 @@ const Vineyard_ui = ({
     vineyard: IVineyard
 }) => {
     const ctx = useContext(MainContext)
-
-    // console.log(ctx.application.vineyards.forEach(vineyard  => vineyard.getGrapeInventory().getItems().length));
-
+    
     return (
         <div className={'modal bdr pdg'}>
             <div className={'bdr pdg'}>
@@ -60,10 +58,7 @@ const Vineyard_ui = ({
                                                 )
 
                                             if (maybeGrape) {
-                                                vineyard.addGrape(
-                                                    maybeGrape,
-                                                    null
-                                                )
+                                                
                                                 ctx.application.update()
                                             }
                                         }}

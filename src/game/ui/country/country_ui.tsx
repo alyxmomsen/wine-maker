@@ -14,7 +14,7 @@ const CountryUI = ({
     vineyardsInventory,
 }: {
     player: PlayerPerson
-    vineyardsInventory: Inventory<IVineyard>
+    vineyardsInventory: Inventory<number,IVineyard>
 }) => {
     const ctx = useContext(MainContext)
     const playerWineries = player.getWineries()
@@ -106,16 +106,19 @@ const CountryUI = ({
                     </div>
                     <div className="bdr pdg">
                         <h3>Vineyards:</h3>
-                        {vineyardsInventory
-                            .getItems()
+                        {
+                            // [...vineyardsInventory.getItems()].map(elem => <div></div>)
+                        }
+                        {[...vineyardsInventory
+                            .getItems()]
                             .filter(
                                 (vineyard) =>
-                                    vineyard.getLocation() ===
+                                    vineyard[1].getLocation() ===
                                     ctx.modal.location
                             )
                             .map((playerVineyard) => (
                                 <div>
-                                    <div>{playerVineyard.getName()}</div>
+                                    <div>{playerVineyard[1].getName()}</div>
                                     <div>
                                         <button
                                             onClick={() => {
@@ -123,8 +126,8 @@ const CountryUI = ({
                                                     <Vineyard_ui
                                                         person={player}
                                                         vineyard={
-                                                            playerVineyard
-                                                        }
+                                                            playerVineyard[1]
+                                                            }
                                                     />
                                                 )
                                                 ctx.application.update()
