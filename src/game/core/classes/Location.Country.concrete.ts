@@ -2,7 +2,7 @@ import { Country } from './Location.class'
 
 export class PortugalCountry extends Country {
     private static instance: PortugalCountry | null = null
-    static Instance(id:number): PortugalCountry {
+    static Instance(id: number): PortugalCountry {
         if (PortugalCountry.instance === null) {
             PortugalCountry.instance = new PortugalCountry(id)
         }
@@ -10,14 +10,14 @@ export class PortugalCountry extends Country {
         return PortugalCountry.instance
     }
 
-    private constructor(id:number) {
-        super(id , 'Portugal')
+    private constructor(id: number) {
+        super(id, 'Portugal')
     }
 }
 
 export class GermanyCountry extends Country {
     private static instance: GermanyCountry | null = null
-    static Instance(id:number): GermanyCountry {
+    static Instance(id: number): GermanyCountry {
         if (GermanyCountry.instance === null) {
             GermanyCountry.instance = new GermanyCountry(id)
         }
@@ -25,14 +25,14 @@ export class GermanyCountry extends Country {
         return GermanyCountry.instance
     }
 
-    private constructor(id:number) {
-        super(id , 'Germany')
+    private constructor(id: number) {
+        super(id, 'Germany')
     }
 }
 
 export class ItaliaCountry extends Country {
     private static instance: ItaliaCountry | null = null
-    static Instance(id:number): PortugalCountry {
+    static Instance(id: number): PortugalCountry {
         if (ItaliaCountry.instance === null) {
             ItaliaCountry.instance = new ItaliaCountry(id)
         }
@@ -40,14 +40,14 @@ export class ItaliaCountry extends Country {
         return ItaliaCountry.instance
     }
 
-    private constructor(id:number) {
-        super(id , 'Italia')
+    private constructor(id: number) {
+        super(id, 'Italia')
     }
 }
 
 export class FranceCountry extends Country {
     private static instance: FranceCountry | null = null
-    static Instance(id:number): FranceCountry {
+    static Instance(id: number): FranceCountry {
         if (FranceCountry.instance === null) {
             FranceCountry.instance = new FranceCountry(id)
         }
@@ -55,7 +55,7 @@ export class FranceCountry extends Country {
         return FranceCountry.instance
     }
 
-    private constructor(id:number) {
-        super(id , 'France')
+    private constructor(id: number) {
+        super(id, 'France')
     }
 }

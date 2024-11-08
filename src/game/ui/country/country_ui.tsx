@@ -9,7 +9,13 @@ import { Location } from '../../core/classes/Location.class'
 import Vineyard_ui from '../Vineyard_ui'
 import { Inventory } from '../../core/classes/Inventory-registry'
 
-const CountryUI = ({ player , vineyardsInventory }: { player: PlayerPerson , vineyardsInventory:Inventory<IVineyard> }) => {
+const CountryUI = ({
+    player,
+    vineyardsInventory,
+}: {
+    player: PlayerPerson
+    vineyardsInventory: Inventory<IVineyard>
+}) => {
     const ctx = useContext(MainContext)
     const playerWineries = player.getWineries()
     const playerVineyards = player.getVineyards()
@@ -66,9 +72,10 @@ const CountryUI = ({ player , vineyardsInventory }: { player: PlayerPerson , vin
                                     onClick={
                                         canCreateVineyard
                                             ? () => {
-                                                ctx.application.vineyardFactory.createForPlayer(
-                                                    ctx.application.player ,
-                                                    ctx.application.vineyardInventory ,
+                                                  ctx.application.vineyardFactory.createForPlayer(
+                                                      ctx.application.player,
+                                                      ctx.application
+                                                          .vineyardInventory
                                                   )
                                                   ctx.application.update()
                                               }
@@ -99,10 +106,12 @@ const CountryUI = ({ player , vineyardsInventory }: { player: PlayerPerson , vin
                     </div>
                     <div className="bdr pdg">
                         <h3>Vineyards:</h3>
-                        {vineyardsInventory.getItems()
+                        {vineyardsInventory
+                            .getItems()
                             .filter(
                                 (vineyard) =>
-                                    vineyard.getLocation() === ctx.modal.location
+                                    vineyard.getLocation() ===
+                                    ctx.modal.location
                             )
                             .map((playerVineyard) => (
                                 <div>

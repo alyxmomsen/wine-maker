@@ -49,7 +49,10 @@ const GamePage = () => {
             ctx.modal.location &&
             ctx.application.player.getCurrentLocation() ===
                 ctx.modal.location ? (
-                <CountryUI player={ctx.application.player} vineyardsInventory={ctx.application.vineyardInventory} />
+                <CountryUI
+                    player={ctx.application.player}
+                    vineyardsInventory={ctx.application.vineyardInventory}
+                />
             ) : null}
             {ctx.modal.component && ctx.modal.component()}
         </div>

@@ -12,9 +12,10 @@ const Vineyard_ui = ({
 }: {
     person: IPerson
     vineyard: IVineyard
-    }) => {
-    
+}) => {
     const ctx = useContext(MainContext)
+
+    // console.log(ctx.application.vineyards.forEach(vineyard  => vineyard.getGrapeInventory().getItems().length));
 
     return (
         <div className={'modal bdr pdg'}>
@@ -46,23 +47,26 @@ const Vineyard_ui = ({
                                             !grapeFactory.canCreateGrape(
                                                 ctx.application.player,
                                                 vineyard,
-                                                ctx.application.vineyardInventory
+                                                ctx.application
+                                                    .vineyardInventory
                                             )
                                         }
-
                                         onClick={() => {
-                                            const maybeGrape = grapeFactory.create(
-                                                ctx.application.player ,
-                                                vineyard, 
-                                                vineyard.getGrapeInventory()
-                                            )
+                                            const maybeGrape =
+                                                grapeFactory.create(
+                                                    ctx.application.player,
+                                                    vineyard,
+                                                    vineyard.getGrapeInventory()
+                                                )
 
                                             if (maybeGrape) {
-                                                vineyard.addGrape(maybeGrape , null);
+                                                vineyard.addGrape(
+                                                    maybeGrape,
+                                                    null
+                                                )
                                                 ctx.application.update()
                                             }
                                         }}
-
                                         className={'inline-block'}
                                     >
                                         plant
@@ -73,7 +77,12 @@ const Vineyard_ui = ({
                     })}
                 </div>
                 <div className={'bdr pdg'}>
-                    {<Grape_country_ui_preview grapesInventory={vineyard.getGrapeInventory()} person={ctx.application.player} />}
+                    {
+                        <Grape_country_ui_preview
+                            grapesInventory={vineyard.getGrapeInventory()}
+                            person={ctx.application.player}
+                        />
+                    }
                 </div>
             </div>
         </div>
@@ -82,9 +91,6 @@ const Vineyard_ui = ({
 
 export default Vineyard_ui
 
-
 function foo(grape: IGrape, grapes: IGrape[]): number {
-
-    return 0;
-    
+    return 0
 }

@@ -55,11 +55,11 @@ export class GameFacade {
     wineryFactories: IWineryFactory[]
     observer: Observer
 
-    uniqIdRegistry: UniqIdRegisty;
+    uniqIdRegistry: UniqIdRegisty
 
-    vineyardInventory: Inventory<IVineyard>;
+    vineyardInventory: Inventory<IVineyard>
 
-    ownerRegistry: OwnerRegistry;
+    ownerRegistry: OwnerRegistry
 
     private transitions: ITransition[]
 
@@ -120,22 +120,24 @@ export class GameFacade {
     constructor(
         dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
     ) {
+        this.uniqIdRegistry = new UniqIdRegisty()
 
-        this.uniqIdRegistry = new UniqIdRegisty();
+        this.vineyardInventory = new VineyardInventory()
 
-        this.vineyardInventory = new VineyardInventory();
+        this.ownerRegistry = new OwnerRegistry()
 
-        this.ownerRegistry = new OwnerRegistry();
-
-        this.grapes = [];
+        this.grapes = []
 
         this.transitions = []
 
-        this.vineyardFactory = new VineyardFactory(this.uniqIdRegistry);
+        this.vineyardFactory = new VineyardFactory(this.uniqIdRegistry)
         this.observer = new Observer()
         this.refresher = dispatcher
         const franceCountry = FranceCountry.Instance(this.uniqIdRegistry.gen())
-        franceCountry.addRegions([Medok.Instance(this.uniqIdRegistry.gen()), BurgundyRegion.Instance(this.uniqIdRegistry.gen())])
+        franceCountry.addRegions([
+            Medok.Instance(this.uniqIdRegistry.gen()),
+            BurgundyRegion.Instance(this.uniqIdRegistry.gen()),
+        ])
         const italyCountry = ItaliaCountry.Instance(this.uniqIdRegistry.gen())
 
         italyCountry.addRegions([
@@ -143,14 +145,24 @@ export class GameFacade {
             LoireValleyRegion.Instance(this.uniqIdRegistry.gen()),
         ])
 
-        italyCountry.addAppellations([MuskadetAppellation.Instance(this.uniqIdRegistry.gen())])
+        italyCountry.addAppellations([
+            MuskadetAppellation.Instance(this.uniqIdRegistry.gen()),
+        ])
 
-        const portugalCountry = PortugalCountry.Instance(this.uniqIdRegistry.gen())
+        const portugalCountry = PortugalCountry.Instance(
+            this.uniqIdRegistry.gen()
+        )
 
-        portugalCountry.addRegions([MinhoRegion.Instance(this.uniqIdRegistry.gen())])
+        portugalCountry.addRegions([
+            MinhoRegion.Instance(this.uniqIdRegistry.gen()),
+        ])
 
-        portugalCountry.addAppellations([VinhoVerdeAppellation.Instance(this.uniqIdRegistry.gen())])
-        const germanyCountry = GermanyCountry.Instance(this.uniqIdRegistry.gen())
+        portugalCountry.addAppellations([
+            VinhoVerdeAppellation.Instance(this.uniqIdRegistry.gen()),
+        ])
+        const germanyCountry = GermanyCountry.Instance(
+            this.uniqIdRegistry.gen()
+        )
 
         this.countries = [
             franceCountry,

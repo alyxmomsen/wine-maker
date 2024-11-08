@@ -26,9 +26,8 @@ export abstract class Location implements ILocation {
     }
 
     constructor(id: number, title: string) {
-        
-        this.id = id ;
-        
+        this.id = id
+
         console.log(
             `location last id: ${id} | new Id: ${this.getIdLikeString()}`
         )
@@ -81,8 +80,8 @@ export class Country extends Location implements ICountry {
         return null
     }
 
-    constructor(id:number , title: string) {
-        super(id , title)
+    constructor(id: number, title: string) {
+        super(id, title)
         this.reginons = []
         this.appellations = []
     }
@@ -121,8 +120,8 @@ export class RegionLocation extends Location implements IRegion {
         return this.country
     }
 
-    constructor(id:number , country: Country, title: string) {
-        super(id , title)
+    constructor(id: number, country: Country, title: string) {
+        super(id, title)
         this.country = country
         this.appellations = []
     }
@@ -162,12 +161,12 @@ export class Appellation extends Location implements IAppellation {
     }
 
     constructor(
-        id:number , 
+        id: number,
         region: RegionLocation | null,
         country: Country,
         title: string
     ) {
-        super(id , title)
+        super(id, title)
         this.region = region
         this.country = country
     }

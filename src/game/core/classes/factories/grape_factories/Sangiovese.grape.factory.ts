@@ -6,7 +6,11 @@ import { PlayerPerson } from '../../Player.class'
 import { IVineyard } from '../../Vineyard.class'
 
 export class SangioveseGrapeFactory extends GrapeFactory {
-    canCreateGrape(player: PlayerPerson, vineyard: IVineyard, vineyardsInventory:IInventory<IVineyard>): boolean {
+    canCreateGrape(
+        player: PlayerPerson,
+        vineyard: IVineyard,
+        vineyardsInventory: IInventory<IVineyard>
+    ): boolean {
         const playerVineyards = player.getVineyards()
         const currentVineyard = vineyard
 
@@ -20,18 +24,20 @@ export class SangioveseGrapeFactory extends GrapeFactory {
             }
         }
 
-        return true;
+        return true
     }
 
-
-
-    create(player: PlayerPerson, vineyard: IVineyard , grapeInventory:IInventory<IGrape>): Grape | null {
+    create(
+        player: PlayerPerson,
+        vineyard: IVineyard,
+        grapeInventory: IInventory<IGrape>
+    ): Grape | null {
         const vineyardLocation = vineyard.getLocation()
 
-        const newId = this.uniqIdRegistry.gen();
+        const newId = this.uniqIdRegistry.gen()
 
         const sangioveseGrape = new SangioveseGrape(newId, vineyardLocation)
-        vineyard.getGrapeInventory().addItem(sangioveseGrape);
+        vineyard.getGrapeInventory().addItem(sangioveseGrape)
         // player.addGrape(sangioveseGrape)
         return sangioveseGrape
     }

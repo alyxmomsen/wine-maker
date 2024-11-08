@@ -40,8 +40,8 @@ const PlayerVineyardPreview = ({ vrd }: { vrd: Vineyard }) => {
                                   onClick={() => {
                                       grpFactory.create(
                                           ctx.application.player,
-                                          vrd, 
-                                          vrd.getGrapeInventory(),
+                                          vrd,
+                                          vrd.getGrapeInventory()
                                       ),
                                           ctx.application.update()
                                   }}

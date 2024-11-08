@@ -1,9 +1,7 @@
 import { LogCreator } from '../../../utils/logger.class'
 import { Location } from './Location.class'
 
-export interface IProduct {
-    
-}
+export interface IProduct {}
 
 export interface IGrape extends IProduct {
     getGrapeName(): string
@@ -54,10 +52,10 @@ export class Grape implements IGrape {
         }
     }
 
-    constructor(id: number , title: string, location: Location) {
+    constructor(id: number, title: string, location: Location) {
         /* create id */
 
-        this.id = id;
+        this.id = id
 
         /* ========= */
 
@@ -82,31 +80,31 @@ export class Grape implements IGrape {
 }
 
 export class ChardonnayGrape extends Grape {
-    constructor(id:number ,location: Location) {
-        super(id , 'Chardonnay', location)
+    constructor(id: number, location: Location) {
+        super(id, 'Chardonnay', location)
     }
 }
 
 export class PinotBlancGrape extends Grape {
-    constructor(id:number ,location: Location) {
-        super(id , 'Pinot blanc', location)
+    constructor(id: number, location: Location) {
+        super(id, 'Pinot blanc', location)
     }
 }
 
 export class MuscadetGrape extends Grape {
-    constructor(id:number , location: Location) {
-        super(id , 'Muskadet', location)
+    constructor(id: number, location: Location) {
+        super(id, 'Muskadet', location)
     }
 }
 
 export class SovingnonBlanGrape extends Grape {
-    constructor(id:number , location: Location) {
-        super(id , 'Sovignon Blan', location)
+    constructor(id: number, location: Location) {
+        super(id, 'Sovignon Blan', location)
     }
 }
 
 export class MelonDeBourgogneGrape extends Grape {
-    constructor(id:number , location: Location) {
-        super(id , 'Melon de Bourgogne', location)
+    constructor(id: number, location: Location) {
+        super(id, 'Melon de Bourgogne', location)
     }
 }
