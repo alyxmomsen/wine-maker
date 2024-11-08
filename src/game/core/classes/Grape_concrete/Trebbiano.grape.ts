@@ -2,7 +2,7 @@ import { Grape } from '../Grape.class'
 import { Location } from '../Location.class'
 
 export class TrebbianoGrape extends Grape {
-    constructor(location: Location) {
-        super('Trebbiano', location)
+    constructor(id:number ,location: Location) {
+        super(id , 'Trebbiano', location)
     }
 }

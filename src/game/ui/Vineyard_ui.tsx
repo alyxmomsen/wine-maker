@@ -11,7 +11,8 @@ const Vineyard_ui = ({
 }: {
     person: IPerson
     vineyard: Vineyard
-}) => {
+    }) => {
+    
     const ctx = useContext(MainContext)
 
     return (

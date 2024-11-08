@@ -3,7 +3,7 @@ import { IGrape } from './Grape.class'
 import {
     GarganegaGrapeFactory,
     IGrapeFactory,
-    MelonDeBourgogneFactory,
+    MelonDeBourgogneGrapeFactory,
     MuscadetGrapeFactory,
     SovingnonBlanGrapeFactory,
 } from './GrapeFactory'
@@ -40,6 +40,7 @@ import { VinhoVerdeWineFactory } from './factories/wine_factories/VinhoVerde.Win
 import { ChiantyWineFactory } from './factories/wine_factories/Chianty.wine.factory'
 import { SangioveseGrapeFactory } from './factories/grape_factories/Sangiovese.grape.factory'
 import { OwnerRegistry } from './OnwnerRightsRegister'
+import { UniqIdRegisty } from '../../../utils/Uniq-id-registry'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
@@ -52,6 +53,8 @@ export class GameFacade {
     grapeFactories: IGrapeFactory[]
     wineryFactories: IWineryFactory[]
     observer: Observer
+
+    uniqIdRegistry: UniqIdRegisty;
 
     ownerRegistry: OwnerRegistry;
 
@@ -115,6 +118,8 @@ export class GameFacade {
         dispatcher: React.Dispatch<React.SetStateAction<number>> | null = null
     ) {
 
+        this.uniqIdRegistry = new UniqIdRegisty();
+
         this.ownerRegistry = new OwnerRegistry();
 
         this.grapes = [];
@@ -158,11 +163,11 @@ export class GameFacade {
             new ChiantyWineFactory(),
         ]
         this.grapeFactories = [
-            new GarganegaGrapeFactory(),
-            new MuscadetGrapeFactory(),
-            new SovingnonBlanGrapeFactory(),
-            new MelonDeBourgogneFactory(),
-            new SangioveseGrapeFactory(),
+            new GarganegaGrapeFactory(this.uniqIdRegistry),
+            new MuscadetGrapeFactory(this.uniqIdRegistry),
+            new SovingnonBlanGrapeFactory(this.uniqIdRegistry),
+            new MelonDeBourgogneGrapeFactory(this.uniqIdRegistry),
+            new SangioveseGrapeFactory(this.uniqIdRegistry),
         ]
 
         this.wineryFactories = [new WineryFactory()]

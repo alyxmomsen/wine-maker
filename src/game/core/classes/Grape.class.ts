@@ -55,13 +55,10 @@ export class Grape implements IGrape {
         }
     }
 
-    constructor(title: string, location: Location) {
+    constructor(id: number , title: string, location: Location) {
         /* create id */
 
-        const allIDsLen = Grape.iDs.length
-        const newId: number = allIDsLen ? Grape.iDs[allIDsLen - 1] : 0
-        this.id = newId
-        Grape.iDs.push(newId)
+        this.id = id;
 
         /* ========= */
 
@@ -76,7 +73,7 @@ export class Grape implements IGrape {
         const logCreator = new LogCreator()
 
         logCreator.addString(`created new Grape: `)
-        logCreator.addString(`new Grape Id: ${newId}`)
+        logCreator.addString(`new Grape Id: ${this.id}`)
         logCreator.addString(
             `new Grape Location Id: ${location.getIdLikeString()}`
         )
@@ -86,31 +83,31 @@ export class Grape implements IGrape {
 }
 
 export class ChardonnayGrape extends Grape {
-    constructor(location: Location) {
-        super('Chardonnay', location)
+    constructor(id:number ,location: Location) {
+        super(id , 'Chardonnay', location)
     }
 }
 
 export class PinotBlancGrape extends Grape {
-    constructor(location: Location) {
-        super('Pinot blanc', location)
+    constructor(id:number ,location: Location) {
+        super(id , 'Pinot blanc', location)
     }
 }
 
 export class MuscadetGrape extends Grape {
-    constructor(location: Location) {
-        super('Muskadet', location)
+    constructor(id:number , location: Location) {
+        super(id , 'Muskadet', location)
     }
 }
 
 export class SovingnonBlanGrape extends Grape {
-    constructor(location: Location) {
-        super('Sovignon Blan', location)
+    constructor(id:number , location: Location) {
+        super(id , 'Sovignon Blan', location)
     }
 }
 
 export class MelonDeBourgogneGrape extends Grape {
-    constructor(location: Location) {
-        super('Melon de Bourgogne', location)
+    constructor(id:number , location: Location) {
+        super(id , 'Melon de Bourgogne', location)
     }
 }

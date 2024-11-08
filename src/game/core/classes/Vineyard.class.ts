@@ -1,8 +1,14 @@
-import { Grape } from './Grape.class'
+import { Grape, IGrape } from './Grape.class'
 import { Location } from './Location.class'
 import { PlayerPerson } from './Player.class'
 
-export class Vineyard {
+export interface IVineyard {
+    getLocation(): Location;
+    getName(): string;
+    addGrape(grape:IGrape , vallet:null): void;
+}
+
+export class Vineyard implements IVineyard {
     protected name: string
     protected location: Location
     protected grape: Grape[]

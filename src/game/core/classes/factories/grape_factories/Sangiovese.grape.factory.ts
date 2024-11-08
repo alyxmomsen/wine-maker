@@ -1,10 +1,10 @@
 import { Grape } from '../../Grape.class'
 import { SangioveseGrape } from '../../Grape_concrete/Sangiovese.grape'
-import { IGrapeFactory } from '../../GrapeFactory'
+import { GrapeFactory, IGrapeFactory } from '../../GrapeFactory'
 import { PlayerPerson } from '../../Player.class'
 import { Vineyard } from '../../Vineyard.class'
 
-export class SangioveseGrapeFactory implements IGrapeFactory {
+export class SangioveseGrapeFactory extends GrapeFactory {
     canCreateGrape(player: PlayerPerson, vineyard: Vineyard): boolean {
         const playerVineyards = player.getVineyards()
         const currentVineyard = vineyard
@@ -24,7 +24,10 @@ export class SangioveseGrapeFactory implements IGrapeFactory {
 
     create(player: PlayerPerson, vineyard: Vineyard): Grape | null {
         const vineyardLocation = vineyard.getLocation()
-        const sangioveseGrape = new SangioveseGrape(vineyardLocation)
+
+        const newId = this.uniqIdRegistry.gen();
+
+        const sangioveseGrape = new SangioveseGrape(newId , vineyardLocation)
         player.addGrape(sangioveseGrape)
         return sangioveseGrape
     }
