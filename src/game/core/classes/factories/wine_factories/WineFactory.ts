@@ -16,28 +16,31 @@ export interface IWineFactory {
 }
 
 export abstract class WineFactory implements IWineFactory {
+    protected uniqIdRegistry: UniqIdRegisty
 
-    protected uniqIdRegistry: UniqIdRegisty;
-
-    abstract calculateCostPrice(): number;
-    abstract canCreateForLocation(player: PlayerPerson, location: Location): boolean;
-    abstract canCreateWineForPerson(player: PlayerPerson, winery: IWinery): boolean;
-    abstract getTitle(): string;
-    abstract getWineName(): string;
-    abstract tryCreate(player: PlayerPerson, winery: IWinery): Wine | null;
+    abstract calculateCostPrice(): number
+    abstract canCreateForLocation(
+        player: PlayerPerson,
+        location: Location
+    ): boolean
+    abstract canCreateWineForPerson(
+        player: PlayerPerson,
+        winery: IWinery
+    ): boolean
+    abstract getTitle(): string
+    abstract getWineName(): string
+    abstract tryCreate(player: PlayerPerson, winery: IWinery): Wine | null
 
     constructor() {
-        
-        this.uniqIdRegistry = new UniqIdRegisty;
+        this.uniqIdRegistry = new UniqIdRegisty()
     }
 }
 
 export class CraftWineFactory extends WineFactory {
-    
     // this.price = price;
     // this.name = name;
-    price: number;
-    name: string;
+    price: number
+    name: string
 
     calculateCostPrice(): number {
         return 0
@@ -118,9 +121,9 @@ export class CraftWineFactory extends WineFactory {
         return this.name
     }
 
-    constructor(name:string,price:number) {
-        super();
-        this.name = name;
-        this.price = price;
+    constructor(name: string, price: number) {
+        super()
+        this.name = name
+        this.price = price
     }
 }

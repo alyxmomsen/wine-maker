@@ -9,18 +9,21 @@ import {
 import { GarganegaGrape } from './Grape_concrete/Garganega.grape'
 import { GrapeInventory, VineyardInventory } from './Inventory'
 import { IPerson, PlayerPerson } from './Player.class'
+import { VineyardRegistry } from './registry'
 import { IVineyard } from './Vineyard.class'
 
 export interface IGrapeFactory {
     canCreateGrape(
         player: IPerson,
         vineyard: IVineyard,
-        vineyardsInventory: VineyardInventory
+        vineyardsInventory: VineyardInventory,
+        vineyardRegistry: VineyardRegistry
     ): boolean
     create(
         player: IPerson,
         vineyard: IVineyard,
         grapeInventory: GrapeInventory
+        // grape
     ): IGrape | null
     getTitle(): string
 }
@@ -32,7 +35,8 @@ export abstract class GrapeFactory implements IGrapeFactory {
     abstract canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: VineyardInventory
+        vineyardsInventory: VineyardInventory,
+        vineyardRegistry: VineyardRegistry
     ): boolean
     //override
     abstract getTitle(): string
@@ -52,17 +56,21 @@ export class GarganegaGrapeFactory extends GrapeFactory {
     canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: VineyardInventory
+        vineyardsInventory: VineyardInventory,
+        veineyardRegistry: VineyardRegistry
     ): boolean {
-        let isEqual = false
-        for (const playerVineyard of player.getVineyards()) {
-            if (playerVineyard === vineyard) {
-                isEqual = true
-                break
-            }
+        let vineyardOwnerPass = false
+        const playerCurrentLocation = player.getCurrentLocation()
+
+        if (vineyard.getLocation() !== playerCurrentLocation) {
+            return false
         }
-        return true
-        return isEqual && player.getMoneyAmount() >= 100
+
+        for (const inventoryVineyard of vineyardsInventory.getItems()) {
+            const inventoryVineyardId = inventoryVineyard.getId()
+        }
+        return vineyardOwnerPass
+        return vineyardOwnerPass && player.getMoneyAmount() >= 100
     }
 
     create(

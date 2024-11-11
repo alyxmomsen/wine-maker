@@ -41,6 +41,7 @@ import { UniqIdRegisty } from '../../../utils/Uniq-id-registry'
 import { PlayerPerson } from './Player.class'
 import { IVineyard, Vineyard } from './Vineyard.class'
 import { VineyardInventory } from './Inventory'
+import { VineyardRegistry } from './registry'
 
 // import { Inventory, VineyardInventory } from './Inventory-registry'
 
@@ -58,8 +59,8 @@ export class GameFacade {
 
     uniqIdRegistry: UniqIdRegisty
 
-    vineyardInventory: VineyardInventory;
-
+    vineyardInventory: VineyardInventory
+    vineyardRegistry: VineyardRegistry
     // ownerRegistry: OwnerRegistry
 
     private transitions: ITransition[]
@@ -123,13 +124,12 @@ export class GameFacade {
     ) {
         this.uniqIdRegistry = new UniqIdRegisty()
 
-        
         // this.ownerRegistry = new OwnerRegistry()
-        
+
         this.grapes = []
-        
+
         this.transitions = []
-        
+
         this.vineyardFactory = new VineyardFactory(this.uniqIdRegistry)
         this.observer = new Observer()
         this.refresher = dispatcher
@@ -139,45 +139,46 @@ export class GameFacade {
             BurgundyRegion.Instance(this.uniqIdRegistry.gen()),
         ])
         const italyCountry = ItaliaCountry.Instance(this.uniqIdRegistry.gen())
-        
+
         italyCountry.addRegions([
             VenetoRegion.Instance(this.uniqIdRegistry.gen()),
             LoireValleyRegion.Instance(this.uniqIdRegistry.gen()),
         ])
-        
+
         italyCountry.addAppellations([
             MuskadetAppellation.Instance(this.uniqIdRegistry.gen()),
         ])
-        
+
         const portugalCountry = PortugalCountry.Instance(
             this.uniqIdRegistry.gen()
         )
-        
+
         portugalCountry.addRegions([
             MinhoRegion.Instance(this.uniqIdRegistry.gen()),
         ])
-        
+
         portugalCountry.addAppellations([
             VinhoVerdeAppellation.Instance(this.uniqIdRegistry.gen()),
         ])
         const germanyCountry = GermanyCountry.Instance(
             this.uniqIdRegistry.gen()
         )
-        
+
         this.countries = [
             franceCountry,
             italyCountry,
             portugalCountry,
             germanyCountry,
         ]
-        // this.vineyards = new 
+        // this.vineyards = new
         this.grapes = []
-        this.player = new PlayerPerson()
-        this.vineyardInventory = new VineyardInventory();
+        this.player = new PlayerPerson(this.uniqIdRegistry)
+        this.vineyardInventory = new VineyardInventory()
+        this.vineyardRegistry = new VineyardRegistry()
         this.wineFactories = [
             new SoaveWineFactory(),
             new VinhoVerdeWineFactory(),
-            new CraftWineFactory('Craft Wine',100),
+            new CraftWineFactory('Craft Wine', 100),
             new ChiantyWineFactory(),
         ]
         this.grapeFactories = [
@@ -195,7 +196,7 @@ export class GameFacade {
 
         const upd = () => {
             if (this.updater.try()) {
-                console.log('updated');
+                console.log('updated')
                 this.update()
             }
 

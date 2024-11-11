@@ -14,7 +14,7 @@ const Vineyard_ui = ({
     vineyard: IVineyard
 }) => {
     const ctx = useContext(MainContext)
-    
+
     return (
         <div className={'modal bdr pdg'}>
             <div className={'bdr pdg'}>
@@ -46,7 +46,8 @@ const Vineyard_ui = ({
                                                 ctx.application.player,
                                                 vineyard,
                                                 ctx.application
-                                                    .vineyardInventory
+                                                    .vineyardInventory,
+                                                ctx.application.vineyardRegistry
                                             )
                                         }
                                         onClick={() => {
@@ -58,7 +59,6 @@ const Vineyard_ui = ({
                                                 )
 
                                             if (maybeGrape) {
-                                                
                                                 ctx.application.update()
                                             }
                                         }}

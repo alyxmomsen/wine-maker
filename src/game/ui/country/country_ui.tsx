@@ -8,7 +8,6 @@ import Winery_UI_prerview from '../Winery_UI_prerview'
 import Vineyard_ui from '../Vineyard_ui'
 import { VineyardInventory } from '../../core/classes/Inventory'
 
-
 const CountryUI = ({
     player,
     vineyardsInventory,
@@ -72,7 +71,6 @@ const CountryUI = ({
                                     onClick={
                                         canCreateVineyard
                                             ? () => {
-                                                
                                                   ctx.application.vineyardFactory.createForPlayer(
                                                       ctx.application.player,
                                                       ctx.application
@@ -110,7 +108,8 @@ const CountryUI = ({
                         {
                             // [...vineyardsInventory.getItems()].map(elem => <div></div>)
                         }
-                        {vineyardsInventory.getItems()
+                        {vineyardsInventory
+                            .getItems()
                             .filter(
                                 (vineyard) =>
                                     vineyard.getLocation() ===
@@ -127,7 +126,7 @@ const CountryUI = ({
                                                         person={player}
                                                         vineyard={
                                                             playerVineyard
-                                                            }
+                                                        }
                                                     />
                                                 )
                                                 ctx.application.update()

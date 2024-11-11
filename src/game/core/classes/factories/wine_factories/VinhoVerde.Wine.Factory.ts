@@ -83,7 +83,7 @@ export class VinhoVerdeWineFactory extends WineFactory {
         const wine = new VinhoVerdeWine(
             PortugalCountryLocation.Instance(this.uniqIdRegistry.gen()),
             MinhoRegion.Instance(this.uniqIdRegistry.gen()),
-            new MelonDeBourgogneGrape(this.uniqIdRegistry.gen(),wineryLocation)
+            new MelonDeBourgogneGrape(this.uniqIdRegistry.gen(), wineryLocation)
         )
 
         winery.addWine(wine)
@@ -92,7 +92,7 @@ export class VinhoVerdeWineFactory extends WineFactory {
     }
 
     constructor() {
-        super();
+        super()
         this.price = 299
         this.name = 'Vinho Verde'
     }

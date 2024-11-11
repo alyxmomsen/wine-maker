@@ -9,7 +9,7 @@ export class SangioveseGrapeFactory extends GrapeFactory {
     canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: VineyardInventory,
+        vineyardsInventory: VineyardInventory
     ): boolean {
         const playerVineyards = player.getVineyards()
         const currentVineyard = vineyard

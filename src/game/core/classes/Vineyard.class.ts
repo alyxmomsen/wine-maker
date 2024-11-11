@@ -1,29 +1,26 @@
 import { IGrape } from './Grape.class'
 import { GrapeInventory } from './Inventory'
-
 import { Location } from './Location.class'
-import { PlayerPerson } from './Player.class'
+import { IPerson, PlayerPerson } from './Player.class'
 
 export interface IVineyard {
-
     getLocation(): Location
     getName(): string
     addGrape(grape: IGrape, vallet: null): void
     getGrape(): IGrape[]
     getGrapeInventory(): GrapeInventory
-    getId(): number;
+    getId(): number
 }
 
 export class Vineyard implements IVineyard {
     protected name: string
     protected location: Location
     protected grapeInventory: GrapeInventory
-    protected owner: PlayerPerson | null
+    protected owner: IPerson | null
     protected id: number
 
     getLocation() {
         return this.location
-        
     }
 
     getName() {
@@ -34,16 +31,16 @@ export class Vineyard implements IVineyard {
         this.grapeInventory.addItem(grape)
     }
 
-    getGrape():IGrape[] {
+    getGrape(): IGrape[] {
         return this.grapeInventory.getItems()
     }
 
     getGrapeInventory(): GrapeInventory {
-        return this.grapeInventory;
+        return this.grapeInventory
     }
 
     getId(): number {
-        return this.id;
+        return this.id
     }
 
     constructor(

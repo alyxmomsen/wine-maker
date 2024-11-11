@@ -1,11 +1,10 @@
-
 // export
-    /* abstract class IAdapter<T> {
+/* abstract class IAdapter<T> {
     abstract getAdaptee(): T
 } */
 
 // export
-    /* class VineyardRegistrySubjectAdapter
+/* class VineyardRegistrySubjectAdapter
     extends IAdapter<Vineyard>
     implements IVineyard
 {

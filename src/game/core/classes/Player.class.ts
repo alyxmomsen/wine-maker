@@ -1,9 +1,9 @@
+import { UniqIdRegisty } from '../../../utils/Uniq-id-registry'
 import { Grape, IGrape } from './Grape.class'
 import { Location } from './Location.class'
-import { ITransition } from './Transition.class'
 import { Vineyard } from './Vineyard.class'
 import { Wine } from './Wine.class'
-import Winery, { IWinery } from './Winery.class'
+import { IWinery } from './Winery.class'
 
 export interface IPerson {
     update(): boolean
@@ -12,6 +12,7 @@ export interface IPerson {
     decremenentEffirEnergy(value: number): number
     getWineries(): IWinery[]
     getGrapes(): IGrape[]
+    getId(): number
     // decrementMoneyValue(): number;
     // incrementMoneyValue(): number;
 }
@@ -28,6 +29,7 @@ export class PlayerPerson implements IPerson {
     private moneyAmount: number
     // private transitions: ITransition[]
     private name: string
+    private id: number
 
     private restoreHealth() {
         if (this.health < 100) {
@@ -36,6 +38,10 @@ export class PlayerPerson implements IPerson {
                 this.incrementHealthByValue(returnedValue)
             }
         }
+    }
+
+    getId(): number {
+        return this.id
     }
 
     setName(value: string) {
@@ -173,7 +179,7 @@ export class PlayerPerson implements IPerson {
         return true
     }
 
-    constructor(name: string = 'no name') {
+    constructor(uniqIdReg: UniqIdRegisty, name: string = 'no name') {
         this.grapes = []
         this.availableLocations = []
         this.wine = []
@@ -185,5 +191,6 @@ export class PlayerPerson implements IPerson {
         this.effirEnergy = 1000000
         // this.transitions = []
         this.name = name
+        this.id = uniqIdReg.gen()
     }
 }
