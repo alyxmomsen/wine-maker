@@ -21,7 +21,9 @@ const Grape_country_ui_preview = ({
             {[...grapesInventory.getItems()].map((item) => (
                 <div>
                     <div>{item[1].getGrapeName()}</div>
-                    <div>{}</div>
+                    <div>{
+                        'hello world'
+                    }</div>
                 </div>
             ))}
         </div>
