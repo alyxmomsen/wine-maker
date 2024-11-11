@@ -1,8 +1,6 @@
 import { IGrape } from './Grape.class'
-import {
-    GrapeInventory as GrapeInventory,
-    IInventory,
-} from './Inventory-registry'
+import { GrapeInventory } from './Inventory'
+
 import { Location } from './Location.class'
 import { PlayerPerson } from './Player.class'
 
@@ -11,15 +9,15 @@ export interface IVineyard {
     getLocation(): Location
     getName(): string
     addGrape(grape: IGrape, vallet: null): void
-    getGrape(): IInventory<IVineyard,IGrape>
-    getGrapeInventory(): IInventory<IVineyard,IGrape>
+    getGrape(): IGrape[]
+    getGrapeInventory(): GrapeInventory
     getId(): number;
 }
 
 export class Vineyard implements IVineyard {
     protected name: string
     protected location: Location
-    protected grapeInventory: IInventory<IVineyard,IGrape>
+    protected grapeInventory: GrapeInventory
     protected owner: PlayerPerson | null
     protected id: number
 
@@ -36,11 +34,11 @@ export class Vineyard implements IVineyard {
         this.grapeInventory.addItem(grape)
     }
 
-    getGrape():IInventory<IVineyard,IGrape> {
-        return this.grapeInventory
+    getGrape():IGrape[] {
+        return this.grapeInventory.getItems()
     }
 
-    getGrapeInventory(): IInventory<IVineyard , IGrape> {
+    getGrapeInventory(): GrapeInventory {
         return this.grapeInventory;
     }
 
@@ -54,7 +52,7 @@ export class Vineyard implements IVineyard {
         location: Location,
         owner: PlayerPerson | null = null
     ) {
-        this.grapeInventory = new GrapeInventory(this)
+        this.grapeInventory = new GrapeInventory()
 
         this.id = id
         this.name = name

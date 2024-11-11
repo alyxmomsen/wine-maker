@@ -7,20 +7,20 @@ import {
     SovingnonBlanGrape,
 } from './Grape.class'
 import { GarganegaGrape } from './Grape_concrete/Garganega.grape'
-import { IInventory } from './Inventory-registry'
+import { GrapeInventory, VineyardInventory } from './Inventory'
 import { IPerson, PlayerPerson } from './Player.class'
 import { IVineyard } from './Vineyard.class'
 
 export interface IGrapeFactory {
     canCreateGrape(
-        player: PlayerPerson,
+        player: IPerson,
         vineyard: IVineyard,
-        vineyardsInventory: IInventory<IPerson ,IVineyard>
+        vineyardsInventory: VineyardInventory
     ): boolean
     create(
-        player: PlayerPerson,
+        player: IPerson,
         vineyard: IVineyard,
-        grapeInventory: IInventory<IVineyard, IGrape>
+        grapeInventory: GrapeInventory
     ): IGrape | null
     getTitle(): string
 }
@@ -32,7 +32,7 @@ export abstract class GrapeFactory implements IGrapeFactory {
     abstract canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: IInventory<IPerson, IVineyard>
+        vineyardsInventory: VineyardInventory
     ): boolean
     //override
     abstract getTitle(): string
@@ -40,7 +40,7 @@ export abstract class GrapeFactory implements IGrapeFactory {
     abstract create(
         player: PlayerPerson,
         vineyard: IVineyard,
-        grapeInventory: IInventory<IVineyard, IGrape>
+        grapeInventory: GrapeInventory
     ): IGrape | null
 
     constructor(uniqIdRegistry: UniqIdRegisty) {
@@ -52,7 +52,7 @@ export class GarganegaGrapeFactory extends GrapeFactory {
     canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: IInventory<IPerson, IVineyard>
+        vineyardsInventory: VineyardInventory
     ): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
@@ -68,7 +68,7 @@ export class GarganegaGrapeFactory extends GrapeFactory {
     create(
         player: PlayerPerson,
         vineyard: IVineyard,
-        grapeInventory: IInventory<IVineyard, IGrape>
+        grapeInventory: GrapeInventory
     ): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
@@ -102,7 +102,7 @@ export class MuscadetGrapeFactory extends GrapeFactory {
     canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: IInventory<IPerson, IVineyard>
+        vineyardsInventory: VineyardInventory
     ): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
@@ -118,7 +118,7 @@ export class MuscadetGrapeFactory extends GrapeFactory {
     create(
         player: PlayerPerson,
         vineyard: IVineyard,
-        grapeInventory: IInventory<IVineyard, IGrape>
+        grapeInventory: GrapeInventory
     ): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null
@@ -151,7 +151,7 @@ export class SovingnonBlanGrapeFactory extends GrapeFactory {
     canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: IInventory<IPerson, IVineyard>
+        vineyardsInventory: VineyardInventory
     ): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
@@ -167,7 +167,7 @@ export class SovingnonBlanGrapeFactory extends GrapeFactory {
     create(
         player: PlayerPerson,
         vineyard: IVineyard,
-        grapeInventory: IInventory<IVineyard, IGrape>
+        grapeInventory: GrapeInventory
     ): IGrape | null {
         if (player.getMoneyAmount() < 100) {
             return null
@@ -200,7 +200,7 @@ export class MelonDeBourgogneGrapeFactory extends GrapeFactory {
     canCreateGrape(
         player: PlayerPerson,
         vineyard: IVineyard,
-        vineyardsInventory: IInventory<IPerson, IVineyard>
+        vineyardsInventory: VineyardInventory
     ): boolean {
         let isEqual = false
         for (const playerVineyard of player.getVineyards()) {
@@ -218,7 +218,7 @@ export class MelonDeBourgogneGrapeFactory extends GrapeFactory {
     create(
         player: PlayerPerson,
         vineyard: IVineyard,
-        grapeInventory: IInventory<IVineyard, IGrape>
+        grapeInventory: GrapeInventory
     ): Grape | null {
         if (player.getMoneyAmount() < 100) {
             return null

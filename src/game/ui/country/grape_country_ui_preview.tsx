@@ -1,15 +1,13 @@
 import { useEffect } from 'react'
-import { IGrape } from '../../core/classes/Grape.class'
-import { IInventory } from '../../core/classes/Inventory-registry'
 import { IPerson } from '../../core/classes/Player.class'
-import { IVineyard } from '../../core/classes/Vineyard.class'
+import { VineyardInventory } from '../../core/classes/Inventory'
 
 const Grape_country_ui_preview = ({
     person,
     grapesInventory,
 }: {
-    grapesInventory: IInventory<IVineyard ,IGrape>
-    person: IPerson | null
+        grapesInventory: VineyardInventory;
+        person: IPerson | null
     }) => {
     
     
@@ -18,14 +16,9 @@ const Grape_country_ui_preview = ({
     });
     return (
         <div className={'bdr pdg flex-box flex-dir--col gap'}>
-            {[...grapesInventory.getItems()].map((item) => (
-                <div>
-                    <div>{item[1].getGrapeName()}</div>
-                    <div>{
-                        'hello world'
-                    }</div>
-                </div>
-            ))}
+            {
+                grapesInventory.getItems().map(elem  => <div>hello  world</div>)
+            }
         </div>
     )
 }

@@ -2,7 +2,8 @@ import { IGrape } from './Grape.class'
 import { IPerson } from './Player.class';
 import { IVineyard } from './Vineyard.class'
 
-export interface IInventory<S,T> {
+// export 
+interface IInventory<S,T> {
     addItem(item: T): boolean
     // getItems(): T[]
     getItems(): MapIterator<[number, T]>
@@ -10,7 +11,8 @@ export interface IInventory<S,T> {
 
 }
 
-export abstract class Inventory<S,T> implements IInventory<S,T> {
+// export 
+abstract class Inventory<S,T> implements IInventory<S,T> {
     // protected items: T[]
 
     ownerSubject: S;
@@ -28,7 +30,8 @@ export abstract class Inventory<S,T> implements IInventory<S,T> {
     }
 }
 
-export class GrapeInventory extends Inventory<IVineyard,  IGrape> {
+// export
+    class GrapeInventory extends Inventory<IVineyard, IGrape> {
     addItem(item: IGrape): boolean {
         // this.items.push(item)
         this.items.set(item.getId() , item);
@@ -44,7 +47,8 @@ export class GrapeInventory extends Inventory<IVineyard,  IGrape> {
     }
 }
 
-export class VineyardInventory extends Inventory<IPerson, IVineyard> {
+// export
+    class VineyardInventory extends Inventory<IPerson, IVineyard> {
     addItem(item: IVineyard): boolean {
         this.items.set(item.getId() , item);
         return true

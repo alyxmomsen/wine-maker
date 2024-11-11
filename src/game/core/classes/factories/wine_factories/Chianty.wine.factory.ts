@@ -5,9 +5,9 @@ import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
 import { ChiantiWine } from '../../wine_concrete/Chianti.wine'
 import Winery, { IWinery } from '../../Winery.class'
-import { IWineFactory } from './WineFactory'
+import { IWineFactory, WineFactory } from './WineFactory'
 
-export class ChiantyWineFactory implements IWineFactory {
+export class ChiantyWineFactory extends WineFactory {
     calculateCostPrice(): number {
         return 0
     }

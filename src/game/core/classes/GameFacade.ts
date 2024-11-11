@@ -26,9 +26,7 @@ import {
     MinhoRegion,
 } from './Location.Region.concrete'
 import { Observer } from './Observer.class'
-import { PlayerPerson } from './Player.class'
 import { ITransition } from './Transition.class'
-import { IVineyard, Vineyard } from './Vineyard.class'
 import {
     CraftWineFactory,
     IWineFactory,
@@ -39,16 +37,19 @@ import { SoaveWineFactory } from './factories/wine_factories/Soave.wine.factory'
 import { VinhoVerdeWineFactory } from './factories/wine_factories/VinhoVerde.Wine.Factory'
 import { ChiantyWineFactory } from './factories/wine_factories/Chianty.wine.factory'
 import { SangioveseGrapeFactory } from './factories/grape_factories/Sangiovese.grape.factory'
-import { OwnerRegistry } from './OnwnerRightsRegister'
 import { UniqIdRegisty } from '../../../utils/Uniq-id-registry'
-import { Inventory, VineyardInventory } from './Inventory-registry'
+import { PlayerPerson } from './Player.class'
+import { IVineyard, Vineyard } from './Vineyard.class'
+import { VineyardInventory } from './Inventory'
+
+// import { Inventory, VineyardInventory } from './Inventory-registry'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
     countries: Country[]
     player: PlayerPerson
     grapes: IGrape[]
-    vineyards: Vineyard[]
+    // vineyards: VineyardInventory;
     vineyardFactory: VineyardFactory
     wineFactories: IWineFactory[]
     grapeFactories: IGrapeFactory[]
@@ -57,9 +58,9 @@ export class GameFacade {
 
     uniqIdRegistry: UniqIdRegisty
 
-    vineyardInventory: Inventory<IVineyard>
+    vineyardInventory: VineyardInventory;
 
-    ownerRegistry: OwnerRegistry
+    // ownerRegistry: OwnerRegistry
 
     private transitions: ITransition[]
 
@@ -122,14 +123,13 @@ export class GameFacade {
     ) {
         this.uniqIdRegistry = new UniqIdRegisty()
 
-        this.vineyardInventory = new VineyardInventory()
-
-        this.ownerRegistry = new OwnerRegistry()
-
+        
+        // this.ownerRegistry = new OwnerRegistry()
+        
         this.grapes = []
-
+        
         this.transitions = []
-
+        
         this.vineyardFactory = new VineyardFactory(this.uniqIdRegistry)
         this.observer = new Observer()
         this.refresher = dispatcher
@@ -139,44 +139,45 @@ export class GameFacade {
             BurgundyRegion.Instance(this.uniqIdRegistry.gen()),
         ])
         const italyCountry = ItaliaCountry.Instance(this.uniqIdRegistry.gen())
-
+        
         italyCountry.addRegions([
             VenetoRegion.Instance(this.uniqIdRegistry.gen()),
             LoireValleyRegion.Instance(this.uniqIdRegistry.gen()),
         ])
-
+        
         italyCountry.addAppellations([
             MuskadetAppellation.Instance(this.uniqIdRegistry.gen()),
         ])
-
+        
         const portugalCountry = PortugalCountry.Instance(
             this.uniqIdRegistry.gen()
         )
-
+        
         portugalCountry.addRegions([
             MinhoRegion.Instance(this.uniqIdRegistry.gen()),
         ])
-
+        
         portugalCountry.addAppellations([
             VinhoVerdeAppellation.Instance(this.uniqIdRegistry.gen()),
         ])
         const germanyCountry = GermanyCountry.Instance(
             this.uniqIdRegistry.gen()
         )
-
+        
         this.countries = [
             franceCountry,
             italyCountry,
             portugalCountry,
             germanyCountry,
         ]
-        this.vineyards = []
+        // this.vineyards = new 
         this.grapes = []
         this.player = new PlayerPerson()
+        this.vineyardInventory = new VineyardInventory();
         this.wineFactories = [
             new SoaveWineFactory(),
             new VinhoVerdeWineFactory(),
-            new CraftWineFactory('Craft Wine'),
+            new CraftWineFactory('Craft Wine',100),
             new ChiantyWineFactory(),
         ]
         this.grapeFactories = [
@@ -194,6 +195,7 @@ export class GameFacade {
 
         const upd = () => {
             if (this.updater.try()) {
+                console.log('updated');
                 this.update()
             }
 

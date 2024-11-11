@@ -7,9 +7,9 @@ import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
 import { VinhoVerdeWine } from '../../wine_concrete/Wine.concrete'
 import { IWinery } from '../../Winery.class'
-import { IWineFactory } from './WineFactory'
+import { IWineFactory, WineFactory } from './WineFactory'
 
-export class VinhoVerdeWineFactory implements IWineFactory {
+export class VinhoVerdeWineFactory extends WineFactory {
     private price: number
     private name: string
 
@@ -81,9 +81,9 @@ export class VinhoVerdeWineFactory implements IWineFactory {
         const decrementedValue = player.decrementMoneyAmountByValue(299)
         const wineryLocation = winery.getLocation()
         const wine = new VinhoVerdeWine(
-            PortugalCountryLocation.Instance(),
-            MinhoRegion.Instance(),
-            new MelonDeBourgogneGrape(wineryLocation)
+            PortugalCountryLocation.Instance(this.uniqIdRegistry.gen()),
+            MinhoRegion.Instance(this.uniqIdRegistry.gen()),
+            new MelonDeBourgogneGrape(this.uniqIdRegistry.gen(),wineryLocation)
         )
 
         winery.addWine(wine)
@@ -92,6 +92,7 @@ export class VinhoVerdeWineFactory implements IWineFactory {
     }
 
     constructor() {
+        super();
         this.price = 299
         this.name = 'Vinho Verde'
     }

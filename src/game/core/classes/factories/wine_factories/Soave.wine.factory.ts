@@ -6,9 +6,9 @@ import { PlayerPerson } from '../../Player.class'
 import { Wine } from '../../Wine.class'
 import { SoaveWine } from '../../wine_concrete/Soave.wine'
 import { IWinery } from '../../Winery.class'
-import { IWineFactory } from './WineFactory'
+import { WineFactory } from './WineFactory'
 
-export class SoaveWineFactory implements IWineFactory {
+export class SoaveWineFactory extends WineFactory {
     getTitle(): string {
         return ''
     }
@@ -58,7 +58,7 @@ export class SoaveWineFactory implements IWineFactory {
 
         const wine = new SoaveWine(
             currentPlayerLocation,
-            VenetoRegion.Instance(),
+            VenetoRegion.Instance(this.uniqIdRegistry.gen()),
             grapeMatches[0]
         )
 
@@ -115,5 +115,7 @@ export class SoaveWineFactory implements IWineFactory {
         return true
     }
 
-    constructor() {}
+    constructor() {
+        super()
+    }
 }

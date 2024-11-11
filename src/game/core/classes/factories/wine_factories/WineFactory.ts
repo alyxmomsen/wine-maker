@@ -1,3 +1,4 @@
+import { UniqIdRegisty } from '../../../../../utils/Uniq-id-registry'
 import { MuskadetAppellation } from '../../Location.Appellation.concrete'
 import { Location } from '../../Location.class'
 import { MinhoRegion } from '../../Location.Region.concrete'
@@ -14,9 +15,29 @@ export interface IWineFactory {
     calculateCostPrice(): number
 }
 
-export class CraftWineFactory implements IWineFactory {
-    price: number
-    name: string
+export abstract class WineFactory implements IWineFactory {
+
+    protected uniqIdRegistry: UniqIdRegisty;
+
+    abstract calculateCostPrice(): number;
+    abstract canCreateForLocation(player: PlayerPerson, location: Location): boolean;
+    abstract canCreateWineForPerson(player: PlayerPerson, winery: IWinery): boolean;
+    abstract getTitle(): string;
+    abstract getWineName(): string;
+    abstract tryCreate(player: PlayerPerson, winery: IWinery): Wine | null;
+
+    constructor() {
+        
+        this.uniqIdRegistry = new UniqIdRegisty;
+    }
+}
+
+export class CraftWineFactory extends WineFactory {
+    
+    // this.price = price;
+    // this.name = name;
+    price: number;
+    name: string;
 
     calculateCostPrice(): number {
         return 0
@@ -97,8 +118,9 @@ export class CraftWineFactory implements IWineFactory {
         return this.name
     }
 
-    constructor(name: string) {
-        this.price = 100
-        this.name = name
+    constructor(name:string,price:number) {
+        super();
+        this.name = name;
+        this.price = price;
     }
 }

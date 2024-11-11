@@ -1,13 +1,11 @@
-import { Grape, IProduct } from './Grape.class'
-import { Location } from './Location.class'
-import { IPerson } from './Player.class'
-import { IVineyard, Vineyard } from './Vineyard.class'
 
-export abstract class IAdapter<T> {
+// export
+    /* abstract class IAdapter<T> {
     abstract getAdaptee(): T
-}
+} */
 
-export class VineyardRegistrySubjectAdapter
+// export
+    /* class VineyardRegistrySubjectAdapter
     extends IAdapter<Vineyard>
     implements IVineyard
 {
@@ -67,4 +65,4 @@ export class OwnerRegistry {
     constructor() {
         this.items = []
     }
-}
+} */

@@ -1,20 +1,20 @@
 import React, { useContext } from 'react'
 import { PlayerPerson } from '../../core/classes/Player.class'
 import { MainContext } from '../../../App'
-import { IVineyard, Vineyard } from '../../core/classes/Vineyard.class'
-import { randomName } from '../../../utils/utils'
+import { IVineyard } from '../../core/classes/Vineyard.class'
+
 import Winery_UI_prerview from '../Winery_UI_prerview'
-import Grape_country_ui_preview from './grape_country_ui_preview'
-import { Location } from '../../core/classes/Location.class'
+
 import Vineyard_ui from '../Vineyard_ui'
-import { Inventory } from '../../core/classes/Inventory-registry'
+import { VineyardInventory } from '../../core/classes/Inventory'
+
 
 const CountryUI = ({
     player,
     vineyardsInventory,
 }: {
     player: PlayerPerson
-    vineyardsInventory: Inventory<number,IVineyard>
+    vineyardsInventory: VineyardInventory
 }) => {
     const ctx = useContext(MainContext)
     const playerWineries = player.getWineries()
@@ -72,6 +72,7 @@ const CountryUI = ({
                                     onClick={
                                         canCreateVineyard
                                             ? () => {
+                                                
                                                   ctx.application.vineyardFactory.createForPlayer(
                                                       ctx.application.player,
                                                       ctx.application
@@ -109,16 +110,15 @@ const CountryUI = ({
                         {
                             // [...vineyardsInventory.getItems()].map(elem => <div></div>)
                         }
-                        {[...vineyardsInventory
-                            .getItems()]
+                        {vineyardsInventory.getItems()
                             .filter(
                                 (vineyard) =>
-                                    vineyard[1].getLocation() ===
+                                    vineyard.getLocation() ===
                                     ctx.modal.location
                             )
                             .map((playerVineyard) => (
                                 <div>
-                                    <div>{playerVineyard[1].getName()}</div>
+                                    <div>{playerVineyard.getName()}</div>
                                     <div>
                                         <button
                                             onClick={() => {
@@ -126,7 +126,7 @@ const CountryUI = ({
                                                     <Vineyard_ui
                                                         person={player}
                                                         vineyard={
-                                                            playerVineyard[1]
+                                                            playerVineyard
                                                             }
                                                     />
                                                 )

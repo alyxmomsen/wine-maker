@@ -1,6 +1,6 @@
 import { UniqIdRegisty } from '../../../../utils/Uniq-id-registry'
 import { randomName } from '../../../../utils/utils'
-import { IInventory, VineyardInventory } from '../Inventory-registry'
+import { VineyardInventory } from '../Inventory'
 import { PlayerPerson } from '../Player.class'
 import { IVineyard, Vineyard } from '../Vineyard.class'
 
@@ -20,7 +20,7 @@ export class VineyardFactory {
 
     createForPlayer(
         player: PlayerPerson,
-        vineyardInventory: IInventory<IVineyard>
+        vineyardInventory: VineyardInventory
     ): boolean {
         const playerCurrentLocation = player.getCurrentLocation()
         if (!playerCurrentLocation) {
@@ -34,6 +34,7 @@ export class VineyardFactory {
             player
         )
         vineyardInventory.addItem(newVineyard)
+        // alert(vineyardInventory.getItems().lensgth);
         player.decrementMoneyAmountByValue(1000)
         return true
     }
