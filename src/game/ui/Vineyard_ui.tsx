@@ -16,7 +16,7 @@ const Vineyard_ui = ({
     const ctx = useContext(MainContext)
 
     return (
-        <div className={'modal bdr pdg'}>
+        <div className={''}>
             <div className={'bdr pdg'}>
                 <div className={'bdr pdg flex-box gap'}>
                     <div>Vineyard</div>

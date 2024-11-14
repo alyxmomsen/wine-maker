@@ -34,7 +34,7 @@ const GamePage = () => {
                     vineyardsInventory={ctx.application.vineyardInventory}
                 />
             ) : null}
-            {ctx.modal.component && ctx.modal.component()}
+            {ctx.modal.component && <div className={'modal bdr pdg'}>{ctx.modal.component()}</div>}
         </div>
     )
 }
