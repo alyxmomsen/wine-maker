@@ -1,6 +1,6 @@
 import { Grape, IGrape } from '../../Grape.class'
 import { SangioveseGrape } from '../../Grape_concrete/Sangiovese.grape'
-import { GrapeFactory } from '../../GrapeFactory'
+import { GrapeFactory } from './GrapeFactory'
 import { GrapeInventory, VineyardInventory } from '../../Inventory'
 import { PlayerPerson } from '../../Player.class'
 import { IVineyard } from '../../Vineyard.class'

@@ -1,12 +1,8 @@
 import { Updating } from '../updating/upd.class'
 import { IGrape } from './Grape.class'
 import {
-    GarganegaGrapeFactory,
     IGrapeFactory,
-    MelonDeBourgogneGrapeFactory,
-    MuscadetGrapeFactory,
-    SovingnonBlanGrapeFactory,
-} from './GrapeFactory'
+} from './factories/grape_factories/GrapeFactory'
 import {
     MuskadetAppellation,
     VinhoVerdeAppellation,
@@ -39,11 +35,12 @@ import { ChiantyWineFactory } from './factories/wine_factories/Chianty.wine.fact
 import { SangioveseGrapeFactory } from './factories/grape_factories/Sangiovese.grape.factory'
 import { UniqIdRegisty } from '../../../utils/Uniq-id-registry'
 import { PlayerPerson } from './Player.class'
-import { IVineyard, Vineyard } from './Vineyard.class'
 import { VineyardInventory } from './Inventory'
 import { VineyardRegistry } from './registry'
-
-// import { Inventory, VineyardInventory } from './Inventory-registry'
+import { GarganegaGrapeFactory } from './factories/grape_factories/GarganegaGrapeFactory'
+import { MuscadetGrapeFactory } from './factories/grape_factories/MuskadetGrapeFactory'
+import { SovingnonBlanGrapeFactory } from './factories/grape_factories/SovingonBlanGrapeFactory'
+import { MelonDeBourgogneGrapeFactory } from './factories/grape_factories/MelonDeBourgogneGrapeFactory'
 
 export class GameFacade {
     private refresher: React.Dispatch<React.SetStateAction<number>> | null
@@ -66,14 +63,6 @@ export class GameFacade {
     private transitions: ITransition[]
 
     updater: Updating
-
-    // addGrape(grape:IGrape) {
-    //     this.grapes.push(grape);
-    // }
-
-    // getGrapes():IGrape[] {
-    //     return this.grapes;
-    // }
 
     addTransition(transition: ITransition | null) {
         if (transition) {
